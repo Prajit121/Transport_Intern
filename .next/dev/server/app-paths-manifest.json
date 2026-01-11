@@ -1,0 +1,8 @@
+{
+  "/maintenance/page": "app/maintenance/page.js",
+  "/page": "app/page.js",
+  "/public-transport/page": "app/public-transport/page.js",
+  "/sustainability/page": "app/sustainability/page.js",
+  "/traffic/page": "app/traffic/page.js",
+  "/vehicles/page": "app/vehicles/page.js"
+}
