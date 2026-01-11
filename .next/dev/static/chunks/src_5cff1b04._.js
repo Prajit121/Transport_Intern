@@ -269,7 +269,12 @@ var Maintenance = function() {
             })
         }
     });
-    var isDarkMode = document.documentElement.classList.contains('dark');
+    var _useState1 = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_sliced_to_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])((0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false), 2), isDarkMode = _useState1[0], setIsDarkMode = _useState1[1];
+    (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])({
+        "Maintenance.useEffect": function() {
+            setIsDarkMode(document.documentElement.classList.contains('dark'));
+        }
+    }["Maintenance.useEffect"], []);
     var currentChartOptions = isDarkMode ? darkChartOptions : chartOptions;
     var stats = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useMemo"])({
         "Maintenance.useMemo[stats]": function() {
@@ -325,7 +330,7 @@ var Maintenance = function() {
                         children: "Filter by Month"
                     }, void 0, false, {
                         fileName: "[project]/src/components/Maintenance.js",
-                        lineNumber: 169,
+                        lineNumber: 174,
                         columnNumber: 9
                     }, _this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -339,19 +344,19 @@ var Maintenance = function() {
                                 children: month
                             }, month, false, {
                                 fileName: "[project]/src/components/Maintenance.js",
-                                lineNumber: 172,
+                                lineNumber: 177,
                                 columnNumber: 13
                             }, _this);
                         })
                     }, void 0, false, {
                         fileName: "[project]/src/components/Maintenance.js",
-                        lineNumber: 170,
+                        lineNumber: 175,
                         columnNumber: 9
                     }, _this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/components/Maintenance.js",
-                lineNumber: 168,
+                lineNumber: 173,
                 columnNumber: 7
             }, _this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -365,7 +370,7 @@ var Maintenance = function() {
                                 children: "Avg. Completion Rate"
                             }, void 0, false, {
                                 fileName: "[project]/src/components/Maintenance.js",
-                                lineNumber: 189,
+                                lineNumber: 194,
                                 columnNumber: 11
                             }, _this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -376,13 +381,13 @@ var Maintenance = function() {
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/components/Maintenance.js",
-                                lineNumber: 190,
+                                lineNumber: 195,
                                 columnNumber: 11
                             }, _this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/components/Maintenance.js",
-                        lineNumber: 188,
+                        lineNumber: 193,
                         columnNumber: 9
                     }, _this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -393,7 +398,7 @@ var Maintenance = function() {
                                 children: "Total Scheduled"
                             }, void 0, false, {
                                 fileName: "[project]/src/components/Maintenance.js",
-                                lineNumber: 193,
+                                lineNumber: 198,
                                 columnNumber: 11
                             }, _this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -401,13 +406,13 @@ var Maintenance = function() {
                                 children: stats.totalScheduled
                             }, void 0, false, {
                                 fileName: "[project]/src/components/Maintenance.js",
-                                lineNumber: 194,
+                                lineNumber: 199,
                                 columnNumber: 11
                             }, _this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/components/Maintenance.js",
-                        lineNumber: 192,
+                        lineNumber: 197,
                         columnNumber: 9
                     }, _this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -418,7 +423,7 @@ var Maintenance = function() {
                                 children: "Total Completed"
                             }, void 0, false, {
                                 fileName: "[project]/src/components/Maintenance.js",
-                                lineNumber: 197,
+                                lineNumber: 202,
                                 columnNumber: 11
                             }, _this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -426,13 +431,13 @@ var Maintenance = function() {
                                 children: stats.totalCompleted
                             }, void 0, false, {
                                 fileName: "[project]/src/components/Maintenance.js",
-                                lineNumber: 198,
+                                lineNumber: 203,
                                 columnNumber: 11
                             }, _this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/components/Maintenance.js",
-                        lineNumber: 196,
+                        lineNumber: 201,
                         columnNumber: 9
                     }, _this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -443,7 +448,7 @@ var Maintenance = function() {
                                 children: "Best Month"
                             }, void 0, false, {
                                 fileName: "[project]/src/components/Maintenance.js",
-                                lineNumber: 201,
+                                lineNumber: 206,
                                 columnNumber: 11
                             }, _this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -454,19 +459,19 @@ var Maintenance = function() {
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/components/Maintenance.js",
-                                lineNumber: 202,
+                                lineNumber: 207,
                                 columnNumber: 11
                             }, _this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/components/Maintenance.js",
-                        lineNumber: 200,
+                        lineNumber: 205,
                         columnNumber: 9
                     }, _this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/components/Maintenance.js",
-                lineNumber: 187,
+                lineNumber: 192,
                 columnNumber: 7
             }, _this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -480,7 +485,7 @@ var Maintenance = function() {
                                 children: "Completion Rate Trend"
                             }, void 0, false, {
                                 fileName: "[project]/src/components/Maintenance.js",
-                                lineNumber: 209,
+                                lineNumber: 214,
                                 columnNumber: 11
                             }, _this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -497,18 +502,18 @@ var Maintenance = function() {
                                     })
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/Maintenance.js",
-                                    lineNumber: 211,
+                                    lineNumber: 216,
                                     columnNumber: 13
                                 }, _this)
                             }, void 0, false, {
                                 fileName: "[project]/src/components/Maintenance.js",
-                                lineNumber: 210,
+                                lineNumber: 215,
                                 columnNumber: 11
                             }, _this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/components/Maintenance.js",
-                        lineNumber: 208,
+                        lineNumber: 213,
                         columnNumber: 9
                     }, _this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -519,7 +524,7 @@ var Maintenance = function() {
                                 children: "Projects Status"
                             }, void 0, false, {
                                 fileName: "[project]/src/components/Maintenance.js",
-                                lineNumber: 225,
+                                lineNumber: 230,
                                 columnNumber: 11
                             }, _this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -529,24 +534,24 @@ var Maintenance = function() {
                                     options: currentChartOptions
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/Maintenance.js",
-                                    lineNumber: 227,
+                                    lineNumber: 232,
                                     columnNumber: 13
                                 }, _this)
                             }, void 0, false, {
                                 fileName: "[project]/src/components/Maintenance.js",
-                                lineNumber: 226,
+                                lineNumber: 231,
                                 columnNumber: 11
                             }, _this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/components/Maintenance.js",
-                        lineNumber: 224,
+                        lineNumber: 229,
                         columnNumber: 9
                     }, _this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/components/Maintenance.js",
-                lineNumber: 207,
+                lineNumber: 212,
                 columnNumber: 7
             }, _this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -559,12 +564,12 @@ var Maintenance = function() {
                             children: "Monthly Maintenance Data"
                         }, void 0, false, {
                             fileName: "[project]/src/components/Maintenance.js",
-                            lineNumber: 235,
+                            lineNumber: 240,
                             columnNumber: 11
                         }, _this)
                     }, void 0, false, {
                         fileName: "[project]/src/components/Maintenance.js",
-                        lineNumber: 234,
+                        lineNumber: 239,
                         columnNumber: 9
                     }, _this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -581,7 +586,7 @@ var Maintenance = function() {
                                                 children: "Month"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/components/Maintenance.js",
-                                                lineNumber: 241,
+                                                lineNumber: 246,
                                                 columnNumber: 17
                                             }, _this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
@@ -589,7 +594,7 @@ var Maintenance = function() {
                                                 children: "Completion Rate"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/components/Maintenance.js",
-                                                lineNumber: 242,
+                                                lineNumber: 247,
                                                 columnNumber: 17
                                             }, _this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
@@ -597,7 +602,7 @@ var Maintenance = function() {
                                                 children: "Scheduled"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/components/Maintenance.js",
-                                                lineNumber: 243,
+                                                lineNumber: 248,
                                                 columnNumber: 17
                                             }, _this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
@@ -605,18 +610,18 @@ var Maintenance = function() {
                                                 children: "Completed"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/components/Maintenance.js",
-                                                lineNumber: 244,
+                                                lineNumber: 249,
                                                 columnNumber: 17
                                             }, _this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/src/components/Maintenance.js",
-                                        lineNumber: 240,
+                                        lineNumber: 245,
                                         columnNumber: 15
                                     }, _this)
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/Maintenance.js",
-                                    lineNumber: 239,
+                                    lineNumber: 244,
                                     columnNumber: 13
                                 }, _this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("tbody", {
@@ -630,7 +635,7 @@ var Maintenance = function() {
                                                     children: row.month
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/components/Maintenance.js",
-                                                    lineNumber: 250,
+                                                    lineNumber: 255,
                                                     columnNumber: 19
                                                 }, _this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
@@ -643,12 +648,12 @@ var Maintenance = function() {
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/src/components/Maintenance.js",
-                                                        lineNumber: 252,
+                                                        lineNumber: 257,
                                                         columnNumber: 21
                                                     }, _this)
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/components/Maintenance.js",
-                                                    lineNumber: 251,
+                                                    lineNumber: 256,
                                                     columnNumber: 19
                                                 }, _this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
@@ -656,7 +661,7 @@ var Maintenance = function() {
                                                     children: row.scheduledProjects
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/components/Maintenance.js",
-                                                    lineNumber: 259,
+                                                    lineNumber: 264,
                                                     columnNumber: 19
                                                 }, _this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
@@ -664,46 +669,46 @@ var Maintenance = function() {
                                                     children: row.completedProjects
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/components/Maintenance.js",
-                                                    lineNumber: 260,
+                                                    lineNumber: 265,
                                                     columnNumber: 19
                                                 }, _this)
                                             ]
                                         }, row.month, true, {
                                             fileName: "[project]/src/components/Maintenance.js",
-                                            lineNumber: 249,
+                                            lineNumber: 254,
                                             columnNumber: 17
                                         }, _this);
                                     })
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/Maintenance.js",
-                                    lineNumber: 247,
+                                    lineNumber: 252,
                                     columnNumber: 13
                                 }, _this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/components/Maintenance.js",
-                            lineNumber: 238,
+                            lineNumber: 243,
                             columnNumber: 11
                         }, _this)
                     }, void 0, false, {
                         fileName: "[project]/src/components/Maintenance.js",
-                        lineNumber: 237,
+                        lineNumber: 242,
                         columnNumber: 9
                     }, _this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/components/Maintenance.js",
-                lineNumber: 233,
+                lineNumber: 238,
                 columnNumber: 7
             }, _this)
         ]
     }, void 0, true, {
         fileName: "[project]/src/components/Maintenance.js",
-        lineNumber: 166,
+        lineNumber: 171,
         columnNumber: 5
     }, _this);
 };
-_s(Maintenance, "o+mvjSSNMMpwxx0hZNGaqIANfcw=");
+_s(Maintenance, "1h5XY68Hdjn5mRzgffFHTaO8Vp4=");
 _c = Maintenance;
 const __TURBOPACK__default__export__ = Maintenance;
 var _c;

@@ -282,7 +282,10 @@ const Traffic = ()=>{
             }
         }
     };
-    const isDarkMode = document.documentElement.classList.contains('dark');
+    const [isDarkMode, setIsDarkMode] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(false);
+    (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useEffect"])(()=>{
+        setIsDarkMode(document.documentElement.classList.contains('dark'));
+    }, []);
     const currentChartOptions = isDarkMode ? darkChartOptions : chartOptions;
     const handleMonthToggle = (month)=>{
         setSelectedMonths((prev)=>prev.includes(month) ? prev.filter((m)=>m !== month) : [
@@ -301,7 +304,7 @@ const Traffic = ()=>{
                         children: "Filter by Month"
                     }, void 0, false, {
                         fileName: "[project]/src/components/Traffic.js",
-                        lineNumber: 192,
+                        lineNumber: 197,
                         columnNumber: 9
                     }, ("TURBOPACK compile-time value", void 0)),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -312,18 +315,18 @@ const Traffic = ()=>{
                                 children: month
                             }, month, false, {
                                 fileName: "[project]/src/components/Traffic.js",
-                                lineNumber: 195,
+                                lineNumber: 200,
                                 columnNumber: 13
                             }, ("TURBOPACK compile-time value", void 0)))
                     }, void 0, false, {
                         fileName: "[project]/src/components/Traffic.js",
-                        lineNumber: 193,
+                        lineNumber: 198,
                         columnNumber: 9
                     }, ("TURBOPACK compile-time value", void 0))
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/components/Traffic.js",
-                lineNumber: 191,
+                lineNumber: 196,
                 columnNumber: 7
             }, ("TURBOPACK compile-time value", void 0)),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -337,7 +340,7 @@ const Traffic = ()=>{
                                 children: "Accidents"
                             }, void 0, false, {
                                 fileName: "[project]/src/components/Traffic.js",
-                                lineNumber: 212,
+                                lineNumber: 217,
                                 columnNumber: 11
                             }, ("TURBOPACK compile-time value", void 0)),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -345,13 +348,13 @@ const Traffic = ()=>{
                                 children: totals.accidents.toLocaleString()
                             }, void 0, false, {
                                 fileName: "[project]/src/components/Traffic.js",
-                                lineNumber: 213,
+                                lineNumber: 218,
                                 columnNumber: 11
                             }, ("TURBOPACK compile-time value", void 0))
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/components/Traffic.js",
-                        lineNumber: 211,
+                        lineNumber: 216,
                         columnNumber: 9
                     }, ("TURBOPACK compile-time value", void 0)),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -362,7 +365,7 @@ const Traffic = ()=>{
                                 children: "Violations"
                             }, void 0, false, {
                                 fileName: "[project]/src/components/Traffic.js",
-                                lineNumber: 216,
+                                lineNumber: 221,
                                 columnNumber: 11
                             }, ("TURBOPACK compile-time value", void 0)),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -370,13 +373,13 @@ const Traffic = ()=>{
                                 children: totals.violations.toLocaleString()
                             }, void 0, false, {
                                 fileName: "[project]/src/components/Traffic.js",
-                                lineNumber: 217,
+                                lineNumber: 222,
                                 columnNumber: 11
                             }, ("TURBOPACK compile-time value", void 0))
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/components/Traffic.js",
-                        lineNumber: 215,
+                        lineNumber: 220,
                         columnNumber: 9
                     }, ("TURBOPACK compile-time value", void 0)),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -387,7 +390,7 @@ const Traffic = ()=>{
                                 children: "Breakdowns"
                             }, void 0, false, {
                                 fileName: "[project]/src/components/Traffic.js",
-                                lineNumber: 220,
+                                lineNumber: 225,
                                 columnNumber: 11
                             }, ("TURBOPACK compile-time value", void 0)),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -395,13 +398,13 @@ const Traffic = ()=>{
                                 children: totals.breakdowns.toLocaleString()
                             }, void 0, false, {
                                 fileName: "[project]/src/components/Traffic.js",
-                                lineNumber: 221,
+                                lineNumber: 226,
                                 columnNumber: 11
                             }, ("TURBOPACK compile-time value", void 0))
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/components/Traffic.js",
-                        lineNumber: 219,
+                        lineNumber: 224,
                         columnNumber: 9
                     }, ("TURBOPACK compile-time value", void 0)),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -412,7 +415,7 @@ const Traffic = ()=>{
                                 children: "Total Incidents"
                             }, void 0, false, {
                                 fileName: "[project]/src/components/Traffic.js",
-                                lineNumber: 224,
+                                lineNumber: 229,
                                 columnNumber: 11
                             }, ("TURBOPACK compile-time value", void 0)),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -420,19 +423,19 @@ const Traffic = ()=>{
                                 children: (totals.accidents + totals.violations + totals.breakdowns).toLocaleString()
                             }, void 0, false, {
                                 fileName: "[project]/src/components/Traffic.js",
-                                lineNumber: 225,
+                                lineNumber: 230,
                                 columnNumber: 11
                             }, ("TURBOPACK compile-time value", void 0))
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/components/Traffic.js",
-                        lineNumber: 223,
+                        lineNumber: 228,
                         columnNumber: 9
                     }, ("TURBOPACK compile-time value", void 0))
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/components/Traffic.js",
-                lineNumber: 210,
+                lineNumber: 215,
                 columnNumber: 7
             }, ("TURBOPACK compile-time value", void 0)),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -446,7 +449,7 @@ const Traffic = ()=>{
                                 children: "Incidents by Type"
                             }, void 0, false, {
                                 fileName: "[project]/src/components/Traffic.js",
-                                lineNumber: 234,
+                                lineNumber: 239,
                                 columnNumber: 11
                             }, ("TURBOPACK compile-time value", void 0)),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -456,18 +459,18 @@ const Traffic = ()=>{
                                     options: currentChartOptions
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/Traffic.js",
-                                    lineNumber: 236,
+                                    lineNumber: 241,
                                     columnNumber: 13
                                 }, ("TURBOPACK compile-time value", void 0))
                             }, void 0, false, {
                                 fileName: "[project]/src/components/Traffic.js",
-                                lineNumber: 235,
+                                lineNumber: 240,
                                 columnNumber: 11
                             }, ("TURBOPACK compile-time value", void 0))
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/components/Traffic.js",
-                        lineNumber: 233,
+                        lineNumber: 238,
                         columnNumber: 9
                     }, ("TURBOPACK compile-time value", void 0)),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -478,7 +481,7 @@ const Traffic = ()=>{
                                 children: "Incident Distribution"
                             }, void 0, false, {
                                 fileName: "[project]/src/components/Traffic.js",
-                                lineNumber: 240,
+                                lineNumber: 245,
                                 columnNumber: 11
                             }, ("TURBOPACK compile-time value", void 0)),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -488,18 +491,18 @@ const Traffic = ()=>{
                                     options: currentChartOptions
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/Traffic.js",
-                                    lineNumber: 242,
+                                    lineNumber: 247,
                                     columnNumber: 13
                                 }, ("TURBOPACK compile-time value", void 0))
                             }, void 0, false, {
                                 fileName: "[project]/src/components/Traffic.js",
-                                lineNumber: 241,
+                                lineNumber: 246,
                                 columnNumber: 11
                             }, ("TURBOPACK compile-time value", void 0))
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/components/Traffic.js",
-                        lineNumber: 239,
+                        lineNumber: 244,
                         columnNumber: 9
                     }, ("TURBOPACK compile-time value", void 0)),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -510,7 +513,7 @@ const Traffic = ()=>{
                                 children: "Total Incidents Trend"
                             }, void 0, false, {
                                 fileName: "[project]/src/components/Traffic.js",
-                                lineNumber: 246,
+                                lineNumber: 251,
                                 columnNumber: 11
                             }, ("TURBOPACK compile-time value", void 0)),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -520,24 +523,24 @@ const Traffic = ()=>{
                                     options: currentChartOptions
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/Traffic.js",
-                                    lineNumber: 248,
+                                    lineNumber: 253,
                                     columnNumber: 13
                                 }, ("TURBOPACK compile-time value", void 0))
                             }, void 0, false, {
                                 fileName: "[project]/src/components/Traffic.js",
-                                lineNumber: 247,
+                                lineNumber: 252,
                                 columnNumber: 11
                             }, ("TURBOPACK compile-time value", void 0))
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/components/Traffic.js",
-                        lineNumber: 245,
+                        lineNumber: 250,
                         columnNumber: 9
                     }, ("TURBOPACK compile-time value", void 0))
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/components/Traffic.js",
-                lineNumber: 232,
+                lineNumber: 237,
                 columnNumber: 7
             }, ("TURBOPACK compile-time value", void 0)),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -550,12 +553,12 @@ const Traffic = ()=>{
                             children: "Monthly Incident Data"
                         }, void 0, false, {
                             fileName: "[project]/src/components/Traffic.js",
-                            lineNumber: 256,
+                            lineNumber: 261,
                             columnNumber: 11
                         }, ("TURBOPACK compile-time value", void 0))
                     }, void 0, false, {
                         fileName: "[project]/src/components/Traffic.js",
-                        lineNumber: 255,
+                        lineNumber: 260,
                         columnNumber: 9
                     }, ("TURBOPACK compile-time value", void 0)),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -572,7 +575,7 @@ const Traffic = ()=>{
                                                 children: "Month"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/components/Traffic.js",
-                                                lineNumber: 262,
+                                                lineNumber: 267,
                                                 columnNumber: 17
                                             }, ("TURBOPACK compile-time value", void 0)),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
@@ -580,7 +583,7 @@ const Traffic = ()=>{
                                                 children: "Accidents"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/components/Traffic.js",
-                                                lineNumber: 263,
+                                                lineNumber: 268,
                                                 columnNumber: 17
                                             }, ("TURBOPACK compile-time value", void 0)),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
@@ -588,7 +591,7 @@ const Traffic = ()=>{
                                                 children: "Violations"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/components/Traffic.js",
-                                                lineNumber: 264,
+                                                lineNumber: 269,
                                                 columnNumber: 17
                                             }, ("TURBOPACK compile-time value", void 0)),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
@@ -596,7 +599,7 @@ const Traffic = ()=>{
                                                 children: "Breakdowns"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/components/Traffic.js",
-                                                lineNumber: 265,
+                                                lineNumber: 270,
                                                 columnNumber: 17
                                             }, ("TURBOPACK compile-time value", void 0)),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
@@ -604,18 +607,18 @@ const Traffic = ()=>{
                                                 children: "Total"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/components/Traffic.js",
-                                                lineNumber: 266,
+                                                lineNumber: 271,
                                                 columnNumber: 17
                                             }, ("TURBOPACK compile-time value", void 0))
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/src/components/Traffic.js",
-                                        lineNumber: 261,
+                                        lineNumber: 266,
                                         columnNumber: 15
                                     }, ("TURBOPACK compile-time value", void 0))
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/Traffic.js",
-                                    lineNumber: 260,
+                                    lineNumber: 265,
                                     columnNumber: 13
                                 }, ("TURBOPACK compile-time value", void 0)),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("tbody", {
@@ -628,7 +631,7 @@ const Traffic = ()=>{
                                                     children: row.month
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/components/Traffic.js",
-                                                    lineNumber: 272,
+                                                    lineNumber: 277,
                                                     columnNumber: 19
                                                 }, ("TURBOPACK compile-time value", void 0)),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
@@ -636,7 +639,7 @@ const Traffic = ()=>{
                                                     children: row.accidents.toLocaleString()
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/components/Traffic.js",
-                                                    lineNumber: 273,
+                                                    lineNumber: 278,
                                                     columnNumber: 19
                                                 }, ("TURBOPACK compile-time value", void 0)),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
@@ -644,7 +647,7 @@ const Traffic = ()=>{
                                                     children: row.violations.toLocaleString()
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/components/Traffic.js",
-                                                    lineNumber: 274,
+                                                    lineNumber: 279,
                                                     columnNumber: 19
                                                 }, ("TURBOPACK compile-time value", void 0)),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
@@ -652,7 +655,7 @@ const Traffic = ()=>{
                                                     children: row.breakdowns.toLocaleString()
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/components/Traffic.js",
-                                                    lineNumber: 275,
+                                                    lineNumber: 280,
                                                     columnNumber: 19
                                                 }, ("TURBOPACK compile-time value", void 0)),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
@@ -660,41 +663,41 @@ const Traffic = ()=>{
                                                     children: (row.accidents + row.violations + row.breakdowns).toLocaleString()
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/components/Traffic.js",
-                                                    lineNumber: 276,
+                                                    lineNumber: 281,
                                                     columnNumber: 19
                                                 }, ("TURBOPACK compile-time value", void 0))
                                             ]
                                         }, row.month, true, {
                                             fileName: "[project]/src/components/Traffic.js",
-                                            lineNumber: 271,
+                                            lineNumber: 276,
                                             columnNumber: 17
                                         }, ("TURBOPACK compile-time value", void 0)))
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/Traffic.js",
-                                    lineNumber: 269,
+                                    lineNumber: 274,
                                     columnNumber: 13
                                 }, ("TURBOPACK compile-time value", void 0))
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/components/Traffic.js",
-                            lineNumber: 259,
+                            lineNumber: 264,
                             columnNumber: 11
                         }, ("TURBOPACK compile-time value", void 0))
                     }, void 0, false, {
                         fileName: "[project]/src/components/Traffic.js",
-                        lineNumber: 258,
+                        lineNumber: 263,
                         columnNumber: 9
                     }, ("TURBOPACK compile-time value", void 0))
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/components/Traffic.js",
-                lineNumber: 254,
+                lineNumber: 259,
                 columnNumber: 7
             }, ("TURBOPACK compile-time value", void 0))
         ]
     }, void 0, true, {
         fileName: "[project]/src/components/Traffic.js",
-        lineNumber: 189,
+        lineNumber: 194,
         columnNumber: 5
     }, ("TURBOPACK compile-time value", void 0));
 };

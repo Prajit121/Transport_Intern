@@ -278,7 +278,12 @@ var Vehicles = function() {
             })
         }
     });
-    var isDarkMode = document.documentElement.classList.contains('dark');
+    var _useState1 = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_sliced_to_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])((0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false), 2), isDarkMode = _useState1[0], setIsDarkMode = _useState1[1];
+    (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])({
+        "Vehicles.useEffect": function() {
+            setIsDarkMode(document.documentElement.classList.contains('dark'));
+        }
+    }["Vehicles.useEffect"], []);
     var currentChartOptions = isDarkMode ? darkChartOptions : chartOptions;
     var totals = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useMemo"])({
         "Vehicles.useMemo[totals]": function() {
@@ -328,7 +333,7 @@ var Vehicles = function() {
                         children: "Filter by Month"
                     }, void 0, false, {
                         fileName: "[project]/src/components/Vehicles.js",
-                        lineNumber: 170,
+                        lineNumber: 175,
                         columnNumber: 9
                     }, _this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -342,19 +347,19 @@ var Vehicles = function() {
                                 children: month
                             }, month, false, {
                                 fileName: "[project]/src/components/Vehicles.js",
-                                lineNumber: 173,
+                                lineNumber: 178,
                                 columnNumber: 13
                             }, _this);
                         })
                     }, void 0, false, {
                         fileName: "[project]/src/components/Vehicles.js",
-                        lineNumber: 171,
+                        lineNumber: 176,
                         columnNumber: 9
                     }, _this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/components/Vehicles.js",
-                lineNumber: 169,
+                lineNumber: 174,
                 columnNumber: 7
             }, _this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -368,7 +373,7 @@ var Vehicles = function() {
                                 children: "Total Cars"
                             }, void 0, false, {
                                 fileName: "[project]/src/components/Vehicles.js",
-                                lineNumber: 190,
+                                lineNumber: 195,
                                 columnNumber: 11
                             }, _this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -376,13 +381,13 @@ var Vehicles = function() {
                                 children: totals.cars.toLocaleString()
                             }, void 0, false, {
                                 fileName: "[project]/src/components/Vehicles.js",
-                                lineNumber: 191,
+                                lineNumber: 196,
                                 columnNumber: 11
                             }, _this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/components/Vehicles.js",
-                        lineNumber: 189,
+                        lineNumber: 194,
                         columnNumber: 9
                     }, _this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -393,7 +398,7 @@ var Vehicles = function() {
                                 children: "Total Bikes"
                             }, void 0, false, {
                                 fileName: "[project]/src/components/Vehicles.js",
-                                lineNumber: 194,
+                                lineNumber: 199,
                                 columnNumber: 11
                             }, _this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -401,13 +406,13 @@ var Vehicles = function() {
                                 children: totals.bikes.toLocaleString()
                             }, void 0, false, {
                                 fileName: "[project]/src/components/Vehicles.js",
-                                lineNumber: 195,
+                                lineNumber: 200,
                                 columnNumber: 11
                             }, _this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/components/Vehicles.js",
-                        lineNumber: 193,
+                        lineNumber: 198,
                         columnNumber: 9
                     }, _this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -418,7 +423,7 @@ var Vehicles = function() {
                                 children: "Total Trucks"
                             }, void 0, false, {
                                 fileName: "[project]/src/components/Vehicles.js",
-                                lineNumber: 198,
+                                lineNumber: 203,
                                 columnNumber: 11
                             }, _this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -426,13 +431,13 @@ var Vehicles = function() {
                                 children: totals.trucks.toLocaleString()
                             }, void 0, false, {
                                 fileName: "[project]/src/components/Vehicles.js",
-                                lineNumber: 199,
+                                lineNumber: 204,
                                 columnNumber: 11
                             }, _this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/components/Vehicles.js",
-                        lineNumber: 197,
+                        lineNumber: 202,
                         columnNumber: 9
                     }, _this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -443,7 +448,7 @@ var Vehicles = function() {
                                 children: "Grand Total"
                             }, void 0, false, {
                                 fileName: "[project]/src/components/Vehicles.js",
-                                lineNumber: 202,
+                                lineNumber: 207,
                                 columnNumber: 11
                             }, _this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -451,19 +456,19 @@ var Vehicles = function() {
                                 children: totals.total.toLocaleString()
                             }, void 0, false, {
                                 fileName: "[project]/src/components/Vehicles.js",
-                                lineNumber: 203,
+                                lineNumber: 208,
                                 columnNumber: 11
                             }, _this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/components/Vehicles.js",
-                        lineNumber: 201,
+                        lineNumber: 206,
                         columnNumber: 9
                     }, _this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/components/Vehicles.js",
-                lineNumber: 188,
+                lineNumber: 193,
                 columnNumber: 7
             }, _this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -477,7 +482,7 @@ var Vehicles = function() {
                                 children: "Registrations by Type"
                             }, void 0, false, {
                                 fileName: "[project]/src/components/Vehicles.js",
-                                lineNumber: 210,
+                                lineNumber: 215,
                                 columnNumber: 11
                             }, _this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -487,18 +492,18 @@ var Vehicles = function() {
                                     options: currentChartOptions
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/Vehicles.js",
-                                    lineNumber: 212,
+                                    lineNumber: 217,
                                     columnNumber: 13
                                 }, _this)
                             }, void 0, false, {
                                 fileName: "[project]/src/components/Vehicles.js",
-                                lineNumber: 211,
+                                lineNumber: 216,
                                 columnNumber: 11
                             }, _this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/components/Vehicles.js",
-                        lineNumber: 209,
+                        lineNumber: 214,
                         columnNumber: 9
                     }, _this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -509,7 +514,7 @@ var Vehicles = function() {
                                 children: "Total Registration Trend"
                             }, void 0, false, {
                                 fileName: "[project]/src/components/Vehicles.js",
-                                lineNumber: 216,
+                                lineNumber: 221,
                                 columnNumber: 11
                             }, _this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -519,24 +524,24 @@ var Vehicles = function() {
                                     options: currentChartOptions
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/Vehicles.js",
-                                    lineNumber: 218,
+                                    lineNumber: 223,
                                     columnNumber: 13
                                 }, _this)
                             }, void 0, false, {
                                 fileName: "[project]/src/components/Vehicles.js",
-                                lineNumber: 217,
+                                lineNumber: 222,
                                 columnNumber: 11
                             }, _this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/components/Vehicles.js",
-                        lineNumber: 215,
+                        lineNumber: 220,
                         columnNumber: 9
                     }, _this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/components/Vehicles.js",
-                lineNumber: 208,
+                lineNumber: 213,
                 columnNumber: 7
             }, _this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -549,12 +554,12 @@ var Vehicles = function() {
                             children: "Monthly Registration Data"
                         }, void 0, false, {
                             fileName: "[project]/src/components/Vehicles.js",
-                            lineNumber: 226,
+                            lineNumber: 231,
                             columnNumber: 11
                         }, _this)
                     }, void 0, false, {
                         fileName: "[project]/src/components/Vehicles.js",
-                        lineNumber: 225,
+                        lineNumber: 230,
                         columnNumber: 9
                     }, _this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -571,7 +576,7 @@ var Vehicles = function() {
                                                 children: "Month"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/components/Vehicles.js",
-                                                lineNumber: 232,
+                                                lineNumber: 237,
                                                 columnNumber: 17
                                             }, _this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
@@ -579,7 +584,7 @@ var Vehicles = function() {
                                                 children: "Cars"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/components/Vehicles.js",
-                                                lineNumber: 233,
+                                                lineNumber: 238,
                                                 columnNumber: 17
                                             }, _this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
@@ -587,7 +592,7 @@ var Vehicles = function() {
                                                 children: "Bikes"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/components/Vehicles.js",
-                                                lineNumber: 234,
+                                                lineNumber: 239,
                                                 columnNumber: 17
                                             }, _this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
@@ -595,7 +600,7 @@ var Vehicles = function() {
                                                 children: "Trucks"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/components/Vehicles.js",
-                                                lineNumber: 235,
+                                                lineNumber: 240,
                                                 columnNumber: 17
                                             }, _this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
@@ -603,18 +608,18 @@ var Vehicles = function() {
                                                 children: "Total"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/components/Vehicles.js",
-                                                lineNumber: 236,
+                                                lineNumber: 241,
                                                 columnNumber: 17
                                             }, _this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/src/components/Vehicles.js",
-                                        lineNumber: 231,
+                                        lineNumber: 236,
                                         columnNumber: 15
                                     }, _this)
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/Vehicles.js",
-                                    lineNumber: 230,
+                                    lineNumber: 235,
                                     columnNumber: 13
                                 }, _this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("tbody", {
@@ -628,7 +633,7 @@ var Vehicles = function() {
                                                     children: row.month
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/components/Vehicles.js",
-                                                    lineNumber: 242,
+                                                    lineNumber: 247,
                                                     columnNumber: 19
                                                 }, _this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
@@ -636,7 +641,7 @@ var Vehicles = function() {
                                                     children: row.cars.toLocaleString()
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/components/Vehicles.js",
-                                                    lineNumber: 243,
+                                                    lineNumber: 248,
                                                     columnNumber: 19
                                                 }, _this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
@@ -644,7 +649,7 @@ var Vehicles = function() {
                                                     children: row.bikes.toLocaleString()
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/components/Vehicles.js",
-                                                    lineNumber: 244,
+                                                    lineNumber: 249,
                                                     columnNumber: 19
                                                 }, _this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
@@ -652,7 +657,7 @@ var Vehicles = function() {
                                                     children: row.trucks.toLocaleString()
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/components/Vehicles.js",
-                                                    lineNumber: 245,
+                                                    lineNumber: 250,
                                                     columnNumber: 19
                                                 }, _this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
@@ -660,46 +665,46 @@ var Vehicles = function() {
                                                     children: (row.cars + row.bikes + row.trucks).toLocaleString()
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/components/Vehicles.js",
-                                                    lineNumber: 246,
+                                                    lineNumber: 251,
                                                     columnNumber: 19
                                                 }, _this)
                                             ]
                                         }, row.month, true, {
                                             fileName: "[project]/src/components/Vehicles.js",
-                                            lineNumber: 241,
+                                            lineNumber: 246,
                                             columnNumber: 17
                                         }, _this);
                                     })
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/Vehicles.js",
-                                    lineNumber: 239,
+                                    lineNumber: 244,
                                     columnNumber: 13
                                 }, _this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/components/Vehicles.js",
-                            lineNumber: 229,
+                            lineNumber: 234,
                             columnNumber: 11
                         }, _this)
                     }, void 0, false, {
                         fileName: "[project]/src/components/Vehicles.js",
-                        lineNumber: 228,
+                        lineNumber: 233,
                         columnNumber: 9
                     }, _this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/components/Vehicles.js",
-                lineNumber: 224,
+                lineNumber: 229,
                 columnNumber: 7
             }, _this)
         ]
     }, void 0, true, {
         fileName: "[project]/src/components/Vehicles.js",
-        lineNumber: 167,
+        lineNumber: 172,
         columnNumber: 5
     }, _this);
 };
-_s(Vehicles, "djZAMvjs711MwNKurXs6gTV0/F0=");
+_s(Vehicles, "/mG9uXDkPFChD7Ia9k374jU82bI=");
 _c = Vehicles;
 const __TURBOPACK__default__export__ = Vehicles;
 var _c;

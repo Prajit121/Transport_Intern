@@ -1,0 +1,10 @@
+{
+  "/_global-error/page": "/_global-error",
+  "/_not-found/page": "/_not-found",
+  "/maintenance/page": "/maintenance",
+  "/page": "/",
+  "/public-transport/page": "/public-transport",
+  "/sustainability/page": "/sustainability",
+  "/traffic/page": "/traffic",
+  "/vehicles/page": "/vehicles"
+}

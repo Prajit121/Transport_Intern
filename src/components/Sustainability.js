@@ -1,5 +1,5 @@
 'use client';
-import React, { useState, useMemo } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -130,7 +130,12 @@ const Sustainability = () => {
     },
   };
 
-  const isDarkMode = document.documentElement.classList.contains('dark');
+  const [isDarkMode, setIsDarkMode] = useState(false);
+
+  useEffect(() => {
+    setIsDarkMode(document.documentElement.classList.contains('dark'));
+  }, []);
+
   const currentChartOptions = isDarkMode ? darkChartOptions : chartOptions;
 
   const stats = useMemo(() => {
@@ -166,8 +171,8 @@ const Sustainability = () => {
               key={month}
               onClick={() => handleMonthToggle(month)}
               className={`px-3 py-1 rounded-md text-sm font-medium transition-colors ${selectedMonths.includes(month)
-                  ? 'bg-blue-500 text-white'
-                  : 'bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-600'
+                ? 'bg-blue-500 text-white'
+                : 'bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-600'
                 }`}
             >
               {month}

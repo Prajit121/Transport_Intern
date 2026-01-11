@@ -260,7 +260,12 @@ var PublicTransport = function() {
             })
         }
     });
-    var isDarkMode = document.documentElement.classList.contains('dark');
+    var _useState1 = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_sliced_to_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])((0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false), 2), isDarkMode = _useState1[0], setIsDarkMode = _useState1[1];
+    (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])({
+        "PublicTransport.useEffect": function() {
+            setIsDarkMode(document.documentElement.classList.contains('dark'));
+        }
+    }["PublicTransport.useEffect"], []);
     var currentChartOptions = isDarkMode ? darkChartOptions : chartOptions;
     var stats = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useMemo"])({
         "PublicTransport.useMemo[stats]": function() {
@@ -315,7 +320,7 @@ var PublicTransport = function() {
                         children: "Filter by Month"
                     }, void 0, false, {
                         fileName: "[project]/src/components/PublicTransport.js",
-                        lineNumber: 161,
+                        lineNumber: 166,
                         columnNumber: 9
                     }, _this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -329,19 +334,19 @@ var PublicTransport = function() {
                                 children: month
                             }, month, false, {
                                 fileName: "[project]/src/components/PublicTransport.js",
-                                lineNumber: 164,
+                                lineNumber: 169,
                                 columnNumber: 13
                             }, _this);
                         })
                     }, void 0, false, {
                         fileName: "[project]/src/components/PublicTransport.js",
-                        lineNumber: 162,
+                        lineNumber: 167,
                         columnNumber: 9
                     }, _this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/components/PublicTransport.js",
-                lineNumber: 160,
+                lineNumber: 165,
                 columnNumber: 7
             }, _this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -355,7 +360,7 @@ var PublicTransport = function() {
                                 children: "Total Passengers"
                             }, void 0, false, {
                                 fileName: "[project]/src/components/PublicTransport.js",
-                                lineNumber: 181,
+                                lineNumber: 186,
                                 columnNumber: 11
                             }, _this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -366,13 +371,13 @@ var PublicTransport = function() {
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/components/PublicTransport.js",
-                                lineNumber: 182,
+                                lineNumber: 187,
                                 columnNumber: 11
                             }, _this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/components/PublicTransport.js",
-                        lineNumber: 180,
+                        lineNumber: 185,
                         columnNumber: 9
                     }, _this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -383,7 +388,7 @@ var PublicTransport = function() {
                                 children: "Avg. On-Time Performance"
                             }, void 0, false, {
                                 fileName: "[project]/src/components/PublicTransport.js",
-                                lineNumber: 187,
+                                lineNumber: 192,
                                 columnNumber: 11
                             }, _this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -394,13 +399,13 @@ var PublicTransport = function() {
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/components/PublicTransport.js",
-                                lineNumber: 188,
+                                lineNumber: 193,
                                 columnNumber: 11
                             }, _this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/components/PublicTransport.js",
-                        lineNumber: 186,
+                        lineNumber: 191,
                         columnNumber: 9
                     }, _this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -411,7 +416,7 @@ var PublicTransport = function() {
                                 children: "Peak Month"
                             }, void 0, false, {
                                 fileName: "[project]/src/components/PublicTransport.js",
-                                lineNumber: 191,
+                                lineNumber: 196,
                                 columnNumber: 11
                             }, _this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -422,13 +427,13 @@ var PublicTransport = function() {
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/components/PublicTransport.js",
-                                lineNumber: 192,
+                                lineNumber: 197,
                                 columnNumber: 11
                             }, _this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/components/PublicTransport.js",
-                        lineNumber: 190,
+                        lineNumber: 195,
                         columnNumber: 9
                     }, _this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -439,7 +444,7 @@ var PublicTransport = function() {
                                 children: "Lowest Month"
                             }, void 0, false, {
                                 fileName: "[project]/src/components/PublicTransport.js",
-                                lineNumber: 197,
+                                lineNumber: 202,
                                 columnNumber: 11
                             }, _this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -450,19 +455,19 @@ var PublicTransport = function() {
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/components/PublicTransport.js",
-                                lineNumber: 198,
+                                lineNumber: 203,
                                 columnNumber: 11
                             }, _this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/components/PublicTransport.js",
-                        lineNumber: 196,
+                        lineNumber: 201,
                         columnNumber: 9
                     }, _this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/components/PublicTransport.js",
-                lineNumber: 179,
+                lineNumber: 184,
                 columnNumber: 7
             }, _this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -476,7 +481,7 @@ var PublicTransport = function() {
                                 children: "Passenger Count"
                             }, void 0, false, {
                                 fileName: "[project]/src/components/PublicTransport.js",
-                                lineNumber: 207,
+                                lineNumber: 212,
                                 columnNumber: 11
                             }, _this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -486,18 +491,18 @@ var PublicTransport = function() {
                                     options: currentChartOptions
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/PublicTransport.js",
-                                    lineNumber: 209,
+                                    lineNumber: 214,
                                     columnNumber: 13
                                 }, _this)
                             }, void 0, false, {
                                 fileName: "[project]/src/components/PublicTransport.js",
-                                lineNumber: 208,
+                                lineNumber: 213,
                                 columnNumber: 11
                             }, _this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/components/PublicTransport.js",
-                        lineNumber: 206,
+                        lineNumber: 211,
                         columnNumber: 9
                     }, _this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -508,7 +513,7 @@ var PublicTransport = function() {
                                 children: "On-Time Performance"
                             }, void 0, false, {
                                 fileName: "[project]/src/components/PublicTransport.js",
-                                lineNumber: 213,
+                                lineNumber: 218,
                                 columnNumber: 11
                             }, _this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -525,24 +530,24 @@ var PublicTransport = function() {
                                     })
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/PublicTransport.js",
-                                    lineNumber: 215,
+                                    lineNumber: 220,
                                     columnNumber: 13
                                 }, _this)
                             }, void 0, false, {
                                 fileName: "[project]/src/components/PublicTransport.js",
-                                lineNumber: 214,
+                                lineNumber: 219,
                                 columnNumber: 11
                             }, _this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/components/PublicTransport.js",
-                        lineNumber: 212,
+                        lineNumber: 217,
                         columnNumber: 9
                     }, _this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/components/PublicTransport.js",
-                lineNumber: 205,
+                lineNumber: 210,
                 columnNumber: 7
             }, _this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -555,12 +560,12 @@ var PublicTransport = function() {
                             children: "Monthly Ridership Data"
                         }, void 0, false, {
                             fileName: "[project]/src/components/PublicTransport.js",
-                            lineNumber: 233,
+                            lineNumber: 238,
                             columnNumber: 11
                         }, _this)
                     }, void 0, false, {
                         fileName: "[project]/src/components/PublicTransport.js",
-                        lineNumber: 232,
+                        lineNumber: 237,
                         columnNumber: 9
                     }, _this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -577,7 +582,7 @@ var PublicTransport = function() {
                                                 children: "Month"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/components/PublicTransport.js",
-                                                lineNumber: 239,
+                                                lineNumber: 244,
                                                 columnNumber: 17
                                             }, _this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
@@ -585,7 +590,7 @@ var PublicTransport = function() {
                                                 children: "Passenger Count"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/components/PublicTransport.js",
-                                                lineNumber: 240,
+                                                lineNumber: 245,
                                                 columnNumber: 17
                                             }, _this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
@@ -593,18 +598,18 @@ var PublicTransport = function() {
                                                 children: "On-Time %"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/components/PublicTransport.js",
-                                                lineNumber: 241,
+                                                lineNumber: 246,
                                                 columnNumber: 17
                                             }, _this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/src/components/PublicTransport.js",
-                                        lineNumber: 238,
+                                        lineNumber: 243,
                                         columnNumber: 15
                                     }, _this)
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/PublicTransport.js",
-                                    lineNumber: 237,
+                                    lineNumber: 242,
                                     columnNumber: 13
                                 }, _this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("tbody", {
@@ -618,7 +623,7 @@ var PublicTransport = function() {
                                                     children: row.month
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/components/PublicTransport.js",
-                                                    lineNumber: 247,
+                                                    lineNumber: 252,
                                                     columnNumber: 19
                                                 }, _this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
@@ -626,7 +631,7 @@ var PublicTransport = function() {
                                                     children: row.passengerCount.toLocaleString()
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/components/PublicTransport.js",
-                                                    lineNumber: 248,
+                                                    lineNumber: 253,
                                                     columnNumber: 19
                                                 }, _this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
@@ -639,51 +644,51 @@ var PublicTransport = function() {
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/src/components/PublicTransport.js",
-                                                        lineNumber: 252,
+                                                        lineNumber: 257,
                                                         columnNumber: 21
                                                     }, _this)
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/components/PublicTransport.js",
-                                                    lineNumber: 251,
+                                                    lineNumber: 256,
                                                     columnNumber: 19
                                                 }, _this)
                                             ]
                                         }, row.month, true, {
                                             fileName: "[project]/src/components/PublicTransport.js",
-                                            lineNumber: 246,
+                                            lineNumber: 251,
                                             columnNumber: 17
                                         }, _this);
                                     })
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/PublicTransport.js",
-                                    lineNumber: 244,
+                                    lineNumber: 249,
                                     columnNumber: 13
                                 }, _this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/components/PublicTransport.js",
-                            lineNumber: 236,
+                            lineNumber: 241,
                             columnNumber: 11
                         }, _this)
                     }, void 0, false, {
                         fileName: "[project]/src/components/PublicTransport.js",
-                        lineNumber: 235,
+                        lineNumber: 240,
                         columnNumber: 9
                     }, _this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/components/PublicTransport.js",
-                lineNumber: 231,
+                lineNumber: 236,
                 columnNumber: 7
             }, _this)
         ]
     }, void 0, true, {
         fileName: "[project]/src/components/PublicTransport.js",
-        lineNumber: 158,
+        lineNumber: 163,
         columnNumber: 5
     }, _this);
 };
-_s(PublicTransport, "5c7M/ojeTG4f6x4NdkxiBAqPm2k=");
+_s(PublicTransport, "3IyxfcDEpET3X5v75vpK/ZCyO1k=");
 _c = PublicTransport;
 const __TURBOPACK__default__export__ = PublicTransport;
 var _c;

@@ -263,7 +263,12 @@ var Sustainability = function() {
             })
         }
     });
-    var isDarkMode = document.documentElement.classList.contains('dark');
+    var _useState1 = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_sliced_to_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])((0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false), 2), isDarkMode = _useState1[0], setIsDarkMode = _useState1[1];
+    (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])({
+        "Sustainability.useEffect": function() {
+            setIsDarkMode(document.documentElement.classList.contains('dark'));
+        }
+    }["Sustainability.useEffect"], []);
     var currentChartOptions = isDarkMode ? darkChartOptions : chartOptions;
     var stats = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useMemo"])({
         "Sustainability.useMemo[stats]": function() {
@@ -319,7 +324,7 @@ var Sustainability = function() {
                         children: "Filter by Month"
                     }, void 0, false, {
                         fileName: "[project]/src/components/Sustainability.js",
-                        lineNumber: 162,
+                        lineNumber: 167,
                         columnNumber: 9
                     }, _this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -333,19 +338,19 @@ var Sustainability = function() {
                                 children: month
                             }, month, false, {
                                 fileName: "[project]/src/components/Sustainability.js",
-                                lineNumber: 165,
+                                lineNumber: 170,
                                 columnNumber: 13
                             }, _this);
                         })
                     }, void 0, false, {
                         fileName: "[project]/src/components/Sustainability.js",
-                        lineNumber: 163,
+                        lineNumber: 168,
                         columnNumber: 9
                     }, _this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/components/Sustainability.js",
-                lineNumber: 161,
+                lineNumber: 166,
                 columnNumber: 7
             }, _this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -359,7 +364,7 @@ var Sustainability = function() {
                                 children: "Avg. Fuel Efficiency"
                             }, void 0, false, {
                                 fileName: "[project]/src/components/Sustainability.js",
-                                lineNumber: 182,
+                                lineNumber: 187,
                                 columnNumber: 11
                             }, _this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -370,13 +375,13 @@ var Sustainability = function() {
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/components/Sustainability.js",
-                                lineNumber: 183,
+                                lineNumber: 188,
                                 columnNumber: 11
                             }, _this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/components/Sustainability.js",
-                        lineNumber: 181,
+                        lineNumber: 186,
                         columnNumber: 9
                     }, _this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -387,7 +392,7 @@ var Sustainability = function() {
                                 children: "Best MPG"
                             }, void 0, false, {
                                 fileName: "[project]/src/components/Sustainability.js",
-                                lineNumber: 186,
+                                lineNumber: 191,
                                 columnNumber: 11
                             }, _this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -398,13 +403,13 @@ var Sustainability = function() {
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/components/Sustainability.js",
-                                lineNumber: 187,
+                                lineNumber: 192,
                                 columnNumber: 11
                             }, _this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/components/Sustainability.js",
-                        lineNumber: 185,
+                        lineNumber: 190,
                         columnNumber: 9
                     }, _this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -415,7 +420,7 @@ var Sustainability = function() {
                                 children: "Avg. Congestion Delay"
                             }, void 0, false, {
                                 fileName: "[project]/src/components/Sustainability.js",
-                                lineNumber: 190,
+                                lineNumber: 195,
                                 columnNumber: 11
                             }, _this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -426,13 +431,13 @@ var Sustainability = function() {
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/components/Sustainability.js",
-                                lineNumber: 191,
+                                lineNumber: 196,
                                 columnNumber: 11
                             }, _this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/components/Sustainability.js",
-                        lineNumber: 189,
+                        lineNumber: 194,
                         columnNumber: 9
                     }, _this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -443,7 +448,7 @@ var Sustainability = function() {
                                 children: "Worst Delay"
                             }, void 0, false, {
                                 fileName: "[project]/src/components/Sustainability.js",
-                                lineNumber: 194,
+                                lineNumber: 199,
                                 columnNumber: 11
                             }, _this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -454,19 +459,19 @@ var Sustainability = function() {
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/components/Sustainability.js",
-                                lineNumber: 195,
+                                lineNumber: 200,
                                 columnNumber: 11
                             }, _this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/components/Sustainability.js",
-                        lineNumber: 193,
+                        lineNumber: 198,
                         columnNumber: 9
                     }, _this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/components/Sustainability.js",
-                lineNumber: 180,
+                lineNumber: 185,
                 columnNumber: 7
             }, _this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -480,7 +485,7 @@ var Sustainability = function() {
                                 children: "Fuel Efficiency Trends"
                             }, void 0, false, {
                                 fileName: "[project]/src/components/Sustainability.js",
-                                lineNumber: 202,
+                                lineNumber: 207,
                                 columnNumber: 11
                             }, _this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -490,18 +495,18 @@ var Sustainability = function() {
                                     options: currentChartOptions
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/Sustainability.js",
-                                    lineNumber: 204,
+                                    lineNumber: 209,
                                     columnNumber: 13
                                 }, _this)
                             }, void 0, false, {
                                 fileName: "[project]/src/components/Sustainability.js",
-                                lineNumber: 203,
+                                lineNumber: 208,
                                 columnNumber: 11
                             }, _this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/components/Sustainability.js",
-                        lineNumber: 201,
+                        lineNumber: 206,
                         columnNumber: 9
                     }, _this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -512,7 +517,7 @@ var Sustainability = function() {
                                 children: "Congestion Levels"
                             }, void 0, false, {
                                 fileName: "[project]/src/components/Sustainability.js",
-                                lineNumber: 208,
+                                lineNumber: 213,
                                 columnNumber: 11
                             }, _this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -522,24 +527,24 @@ var Sustainability = function() {
                                     options: currentChartOptions
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/Sustainability.js",
-                                    lineNumber: 210,
+                                    lineNumber: 215,
                                     columnNumber: 13
                                 }, _this)
                             }, void 0, false, {
                                 fileName: "[project]/src/components/Sustainability.js",
-                                lineNumber: 209,
+                                lineNumber: 214,
                                 columnNumber: 11
                             }, _this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/components/Sustainability.js",
-                        lineNumber: 207,
+                        lineNumber: 212,
                         columnNumber: 9
                     }, _this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/components/Sustainability.js",
-                lineNumber: 200,
+                lineNumber: 205,
                 columnNumber: 7
             }, _this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -555,12 +560,12 @@ var Sustainability = function() {
                                     children: "Fuel Efficiency Data"
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/Sustainability.js",
-                                    lineNumber: 219,
+                                    lineNumber: 224,
                                     columnNumber: 13
                                 }, _this)
                             }, void 0, false, {
                                 fileName: "[project]/src/components/Sustainability.js",
-                                lineNumber: 218,
+                                lineNumber: 223,
                                 columnNumber: 11
                             }, _this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -577,7 +582,7 @@ var Sustainability = function() {
                                                         children: "Month"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/components/Sustainability.js",
-                                                        lineNumber: 225,
+                                                        lineNumber: 230,
                                                         columnNumber: 19
                                                     }, _this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
@@ -585,18 +590,18 @@ var Sustainability = function() {
                                                         children: "Avg. MPG"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/components/Sustainability.js",
-                                                        lineNumber: 226,
+                                                        lineNumber: 231,
                                                         columnNumber: 19
                                                     }, _this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/src/components/Sustainability.js",
-                                                lineNumber: 224,
+                                                lineNumber: 229,
                                                 columnNumber: 17
                                             }, _this)
                                         }, void 0, false, {
                                             fileName: "[project]/src/components/Sustainability.js",
-                                            lineNumber: 223,
+                                            lineNumber: 228,
                                             columnNumber: 15
                                         }, _this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("tbody", {
@@ -610,7 +615,7 @@ var Sustainability = function() {
                                                             children: row.month
                                                         }, void 0, false, {
                                                             fileName: "[project]/src/components/Sustainability.js",
-                                                            lineNumber: 232,
+                                                            lineNumber: 237,
                                                             columnNumber: 21
                                                         }, _this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
@@ -621,36 +626,36 @@ var Sustainability = function() {
                                                             ]
                                                         }, void 0, true, {
                                                             fileName: "[project]/src/components/Sustainability.js",
-                                                            lineNumber: 233,
+                                                            lineNumber: 238,
                                                             columnNumber: 21
                                                         }, _this)
                                                     ]
                                                 }, row.month, true, {
                                                     fileName: "[project]/src/components/Sustainability.js",
-                                                    lineNumber: 231,
+                                                    lineNumber: 236,
                                                     columnNumber: 19
                                                 }, _this);
                                             })
                                         }, void 0, false, {
                                             fileName: "[project]/src/components/Sustainability.js",
-                                            lineNumber: 229,
+                                            lineNumber: 234,
                                             columnNumber: 15
                                         }, _this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/src/components/Sustainability.js",
-                                    lineNumber: 222,
+                                    lineNumber: 227,
                                     columnNumber: 13
                                 }, _this)
                             }, void 0, false, {
                                 fileName: "[project]/src/components/Sustainability.js",
-                                lineNumber: 221,
+                                lineNumber: 226,
                                 columnNumber: 11
                             }, _this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/components/Sustainability.js",
-                        lineNumber: 217,
+                        lineNumber: 222,
                         columnNumber: 9
                     }, _this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -663,12 +668,12 @@ var Sustainability = function() {
                                     children: "Congestion Data"
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/Sustainability.js",
-                                    lineNumber: 244,
+                                    lineNumber: 249,
                                     columnNumber: 13
                                 }, _this)
                             }, void 0, false, {
                                 fileName: "[project]/src/components/Sustainability.js",
-                                lineNumber: 243,
+                                lineNumber: 248,
                                 columnNumber: 11
                             }, _this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -685,7 +690,7 @@ var Sustainability = function() {
                                                         children: "Month"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/components/Sustainability.js",
-                                                        lineNumber: 250,
+                                                        lineNumber: 255,
                                                         columnNumber: 19
                                                     }, _this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
@@ -693,18 +698,18 @@ var Sustainability = function() {
                                                         children: "Avg. Delay"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/components/Sustainability.js",
-                                                        lineNumber: 251,
+                                                        lineNumber: 256,
                                                         columnNumber: 19
                                                     }, _this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/src/components/Sustainability.js",
-                                                lineNumber: 249,
+                                                lineNumber: 254,
                                                 columnNumber: 17
                                             }, _this)
                                         }, void 0, false, {
                                             fileName: "[project]/src/components/Sustainability.js",
-                                            lineNumber: 248,
+                                            lineNumber: 253,
                                             columnNumber: 15
                                         }, _this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("tbody", {
@@ -718,7 +723,7 @@ var Sustainability = function() {
                                                             children: row.month
                                                         }, void 0, false, {
                                                             fileName: "[project]/src/components/Sustainability.js",
-                                                            lineNumber: 257,
+                                                            lineNumber: 262,
                                                             columnNumber: 21
                                                         }, _this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
@@ -729,52 +734,52 @@ var Sustainability = function() {
                                                             ]
                                                         }, void 0, true, {
                                                             fileName: "[project]/src/components/Sustainability.js",
-                                                            lineNumber: 258,
+                                                            lineNumber: 263,
                                                             columnNumber: 21
                                                         }, _this)
                                                     ]
                                                 }, row.month, true, {
                                                     fileName: "[project]/src/components/Sustainability.js",
-                                                    lineNumber: 256,
+                                                    lineNumber: 261,
                                                     columnNumber: 19
                                                 }, _this);
                                             })
                                         }, void 0, false, {
                                             fileName: "[project]/src/components/Sustainability.js",
-                                            lineNumber: 254,
+                                            lineNumber: 259,
                                             columnNumber: 15
                                         }, _this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/src/components/Sustainability.js",
-                                    lineNumber: 247,
+                                    lineNumber: 252,
                                     columnNumber: 13
                                 }, _this)
                             }, void 0, false, {
                                 fileName: "[project]/src/components/Sustainability.js",
-                                lineNumber: 246,
+                                lineNumber: 251,
                                 columnNumber: 11
                             }, _this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/components/Sustainability.js",
-                        lineNumber: 242,
+                        lineNumber: 247,
                         columnNumber: 9
                     }, _this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/components/Sustainability.js",
-                lineNumber: 216,
+                lineNumber: 221,
                 columnNumber: 7
             }, _this)
         ]
     }, void 0, true, {
         fileName: "[project]/src/components/Sustainability.js",
-        lineNumber: 159,
+        lineNumber: 164,
         columnNumber: 5
     }, _this);
 };
-_s(Sustainability, "+Eh0gjN8DSkQlqV37obEviWaGmY=");
+_s(Sustainability, "NVtfK3eCWZZ9l7A/P4ZA1o1DqWc=");
 _c = Sustainability;
 const __TURBOPACK__default__export__ = Sustainability;
 var _c;

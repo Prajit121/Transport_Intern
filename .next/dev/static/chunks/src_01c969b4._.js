@@ -409,7 +409,12 @@ var Overview = function() {
             })
         }
     });
-    var isDarkMode = document.documentElement.classList.contains('dark');
+    var _useState1 = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_sliced_to_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])((0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false), 2), isDarkMode = _useState1[0], setIsDarkMode = _useState1[1];
+    (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])({
+        "Overview.useEffect": function() {
+            setIsDarkMode(document.documentElement.classList.contains('dark'));
+        }
+    }["Overview.useEffect"], []);
     var currentChartOptions = isDarkMode ? darkChartOptions : chartOptions;
     var handleMonthToggle = function(month) {
         setSelectedMonths(function(prev) {
@@ -431,7 +436,7 @@ var Overview = function() {
                         children: "Filter by Month"
                     }, void 0, false, {
                         fileName: "[project]/src/components/Overview.js",
-                        lineNumber: 231,
+                        lineNumber: 236,
                         columnNumber: 9
                     }, _this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -445,19 +450,19 @@ var Overview = function() {
                                 children: month
                             }, month, false, {
                                 fileName: "[project]/src/components/Overview.js",
-                                lineNumber: 234,
+                                lineNumber: 239,
                                 columnNumber: 13
                             }, _this);
                         })
                     }, void 0, false, {
                         fileName: "[project]/src/components/Overview.js",
-                        lineNumber: 232,
+                        lineNumber: 237,
                         columnNumber: 9
                     }, _this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/components/Overview.js",
-                lineNumber: 230,
+                lineNumber: 235,
                 columnNumber: 7
             }, _this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -471,7 +476,7 @@ var Overview = function() {
                                 children: "Total Vehicle Registrations"
                             }, void 0, false, {
                                 fileName: "[project]/src/components/Overview.js",
-                                lineNumber: 251,
+                                lineNumber: 256,
                                 columnNumber: 11
                             }, _this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -479,13 +484,13 @@ var Overview = function() {
                                 children: stats.totalVehicles.toLocaleString()
                             }, void 0, false, {
                                 fileName: "[project]/src/components/Overview.js",
-                                lineNumber: 252,
+                                lineNumber: 257,
                                 columnNumber: 11
                             }, _this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/components/Overview.js",
-                        lineNumber: 250,
+                        lineNumber: 255,
                         columnNumber: 9
                     }, _this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -496,7 +501,7 @@ var Overview = function() {
                                 children: "Total Traffic Incidents"
                             }, void 0, false, {
                                 fileName: "[project]/src/components/Overview.js",
-                                lineNumber: 255,
+                                lineNumber: 260,
                                 columnNumber: 11
                             }, _this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -504,13 +509,13 @@ var Overview = function() {
                                 children: stats.totalIncidents.toLocaleString()
                             }, void 0, false, {
                                 fileName: "[project]/src/components/Overview.js",
-                                lineNumber: 256,
+                                lineNumber: 261,
                                 columnNumber: 11
                             }, _this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/components/Overview.js",
-                        lineNumber: 254,
+                        lineNumber: 259,
                         columnNumber: 9
                     }, _this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -521,7 +526,7 @@ var Overview = function() {
                                 children: "Avg. On-Time Performance"
                             }, void 0, false, {
                                 fileName: "[project]/src/components/Overview.js",
-                                lineNumber: 259,
+                                lineNumber: 264,
                                 columnNumber: 11
                             }, _this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -532,13 +537,13 @@ var Overview = function() {
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/components/Overview.js",
-                                lineNumber: 260,
+                                lineNumber: 265,
                                 columnNumber: 11
                             }, _this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/components/Overview.js",
-                        lineNumber: 258,
+                        lineNumber: 263,
                         columnNumber: 9
                     }, _this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -549,7 +554,7 @@ var Overview = function() {
                                 children: "Avg. Congestion Delay"
                             }, void 0, false, {
                                 fileName: "[project]/src/components/Overview.js",
-                                lineNumber: 263,
+                                lineNumber: 268,
                                 columnNumber: 11
                             }, _this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -560,13 +565,13 @@ var Overview = function() {
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/components/Overview.js",
-                                lineNumber: 264,
+                                lineNumber: 269,
                                 columnNumber: 11
                             }, _this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/components/Overview.js",
-                        lineNumber: 262,
+                        lineNumber: 267,
                         columnNumber: 9
                     }, _this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -577,7 +582,7 @@ var Overview = function() {
                                 children: "Avg. Fuel Efficiency"
                             }, void 0, false, {
                                 fileName: "[project]/src/components/Overview.js",
-                                lineNumber: 267,
+                                lineNumber: 272,
                                 columnNumber: 11
                             }, _this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -588,13 +593,13 @@ var Overview = function() {
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/components/Overview.js",
-                                lineNumber: 268,
+                                lineNumber: 273,
                                 columnNumber: 11
                             }, _this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/components/Overview.js",
-                        lineNumber: 266,
+                        lineNumber: 271,
                         columnNumber: 9
                     }, _this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -605,7 +610,7 @@ var Overview = function() {
                                 children: "Avg. Maintenance Rate"
                             }, void 0, false, {
                                 fileName: "[project]/src/components/Overview.js",
-                                lineNumber: 271,
+                                lineNumber: 276,
                                 columnNumber: 11
                             }, _this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -616,19 +621,19 @@ var Overview = function() {
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/components/Overview.js",
-                                lineNumber: 272,
+                                lineNumber: 277,
                                 columnNumber: 11
                             }, _this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/components/Overview.js",
-                        lineNumber: 270,
+                        lineNumber: 275,
                         columnNumber: 9
                     }, _this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/components/Overview.js",
-                lineNumber: 249,
+                lineNumber: 254,
                 columnNumber: 7
             }, _this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -642,7 +647,7 @@ var Overview = function() {
                                 children: "Vehicle Registrations"
                             }, void 0, false, {
                                 fileName: "[project]/src/components/Overview.js",
-                                lineNumber: 279,
+                                lineNumber: 284,
                                 columnNumber: 11
                             }, _this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -652,18 +657,18 @@ var Overview = function() {
                                     options: currentChartOptions
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/Overview.js",
-                                    lineNumber: 281,
+                                    lineNumber: 286,
                                     columnNumber: 13
                                 }, _this)
                             }, void 0, false, {
                                 fileName: "[project]/src/components/Overview.js",
-                                lineNumber: 280,
+                                lineNumber: 285,
                                 columnNumber: 11
                             }, _this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/components/Overview.js",
-                        lineNumber: 278,
+                        lineNumber: 283,
                         columnNumber: 9
                     }, _this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -674,7 +679,7 @@ var Overview = function() {
                                 children: "Traffic Incidents Distribution"
                             }, void 0, false, {
                                 fileName: "[project]/src/components/Overview.js",
-                                lineNumber: 285,
+                                lineNumber: 290,
                                 columnNumber: 11
                             }, _this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -684,18 +689,18 @@ var Overview = function() {
                                     options: currentChartOptions
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/Overview.js",
-                                    lineNumber: 287,
+                                    lineNumber: 292,
                                     columnNumber: 13
                                 }, _this)
                             }, void 0, false, {
                                 fileName: "[project]/src/components/Overview.js",
-                                lineNumber: 286,
+                                lineNumber: 291,
                                 columnNumber: 11
                             }, _this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/components/Overview.js",
-                        lineNumber: 284,
+                        lineNumber: 289,
                         columnNumber: 9
                     }, _this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -706,7 +711,7 @@ var Overview = function() {
                                 children: "Congestion Trends"
                             }, void 0, false, {
                                 fileName: "[project]/src/components/Overview.js",
-                                lineNumber: 291,
+                                lineNumber: 296,
                                 columnNumber: 11
                             }, _this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -716,34 +721,34 @@ var Overview = function() {
                                     options: currentChartOptions
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/Overview.js",
-                                    lineNumber: 293,
+                                    lineNumber: 298,
                                     columnNumber: 13
                                 }, _this)
                             }, void 0, false, {
                                 fileName: "[project]/src/components/Overview.js",
-                                lineNumber: 292,
+                                lineNumber: 297,
                                 columnNumber: 11
                             }, _this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/components/Overview.js",
-                        lineNumber: 290,
+                        lineNumber: 295,
                         columnNumber: 9
                     }, _this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/components/Overview.js",
-                lineNumber: 277,
+                lineNumber: 282,
                 columnNumber: 7
             }, _this)
         ]
     }, void 0, true, {
         fileName: "[project]/src/components/Overview.js",
-        lineNumber: 228,
+        lineNumber: 233,
         columnNumber: 5
     }, _this);
 };
-_s(Overview, "nk3nJxD+1uKP6AXtyYYlnYX5db8=");
+_s(Overview, "MilMBP2R4ssWanCpBpbxQBMquhw=");
 _c = Overview;
 const __TURBOPACK__default__export__ = Overview;
 var _c;
