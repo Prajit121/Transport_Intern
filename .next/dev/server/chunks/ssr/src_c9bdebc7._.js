@@ -11,6 +11,8 @@ __turbopack_context__.s([
     ()=>fuelEfficiency,
     "publicTransportRidership",
     ()=>publicTransportRidership,
+    "revenueCollection",
+    ()=>revenueCollection,
     "roadMaintenance",
     ()=>roadMaintenance,
     "trafficIncidents",
@@ -89,13 +91,45 @@ const roadMaintenance = months.map((month, index)=>{
         completedProjects: Math.floor((15 + Math.random() * 10) * maintenanceFactor * 0.8)
     };
 });
+const revenueCollection = months.map((month, index)=>{
+    // Higher revenue in registration-heavy months
+    const revenueFactor = index > 2 && index < 6 ? 1.2 : index > 8 ? 0.9 : 1.0;
+    return {
+        month,
+        // MV Tax
+        mvTaxNonTransport: Math.floor((450000 + Math.random() * 100000) * revenueFactor),
+        mvTaxTransport: Math.floor((280000 + Math.random() * 60000) * revenueFactor),
+        mvTaxNewRegistration: Math.floor((320000 + Math.random() * 80000) * revenueFactor),
+        mvTaxFromRegistered: Math.floor((180000 + Math.random() * 40000) * revenueFactor),
+        // MV Fees
+        mvFeesSarathi: Math.floor((45000 + Math.random() * 10000) * revenueFactor),
+        mvFeesVahan: Math.floor((65000 + Math.random() * 15000) * revenueFactor),
+        mvFeesPUCC: Math.floor((35000 + Math.random() * 8000) * revenueFactor),
+        // Road Safety Cess
+        roadSafetyCessNonTransport: Math.floor((120000 + Math.random() * 30000) * revenueFactor),
+        roadSafetyCessTransport: Math.floor((85000 + Math.random() * 20000) * revenueFactor),
+        // Green Tax
+        greenTaxNonTransport: Math.floor((95000 + Math.random() * 20000) * revenueFactor),
+        greenTaxTransport: Math.floor((72000 + Math.random() * 15000) * revenueFactor),
+        // Compounding Fees
+        cfOffence: Math.floor((42000 + Math.random() * 10000) * revenueFactor),
+        cfDelayFine: Math.floor((28000 + Math.random() * 7000) * revenueFactor),
+        fitnessCF: Math.floor((18000 + Math.random() * 5000) * revenueFactor),
+        // Other Fees
+        puccLateFine: Math.floor((15000 + Math.random() * 4000) * revenueFactor),
+        otherLateFees: Math.floor((22000 + Math.random() * 6000) * revenueFactor),
+        apgt: Math.floor((38000 + Math.random() * 9000) * revenueFactor),
+        hsrp: Math.floor((52000 + Math.random() * 12000) * revenueFactor)
+    };
+});
 const __TURBOPACK__default__export__ = {
     vehicleRegistrations,
     trafficIncidents,
     publicTransportRidership,
     congestionLevels,
     fuelEfficiency,
-    roadMaintenance
+    roadMaintenance,
+    revenueCollection
 };
  // Future CSV import function (commented out for now)
  // import Papa from 'papaparse';

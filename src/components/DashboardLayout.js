@@ -37,8 +37,8 @@ export default function DashboardLayout({ children }) {
     const getLinkClasses = (path) => {
         const active = isActive(path);
         return `px-4 py-3 text-sm font-medium whitespace-nowrap border-b-2 transition-colors ${active
-                ? 'border-blue-500 text-blue-600 dark:text-blue-400'
-                : 'border-transparent text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 hover:border-gray-300'
+            ? 'border-blue-500 text-blue-600 dark:text-blue-400'
+            : 'border-transparent text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 hover:border-gray-300'
             }`;
     };
 
@@ -69,14 +69,14 @@ export default function DashboardLayout({ children }) {
                         <Link href="/" className={getLinkClasses('/')}>
                             Overview
                         </Link>
+                        <Link href="/revenue" className={getLinkClasses('/revenue')}>
+                            Revenue
+                        </Link>
                         <Link href="/vehicles" className={getLinkClasses('/vehicles')}>
                             Vehicles
                         </Link>
                         <Link href="/traffic" className={getLinkClasses('/traffic')}>
                             Traffic
-                        </Link>
-                        <Link href="/public-transport" className={getLinkClasses('/public-transport')}>
-                            Public Transport
                         </Link>
                         <Link href="/sustainability" className={getLinkClasses('/sustainability')}>
                             Sustainability
