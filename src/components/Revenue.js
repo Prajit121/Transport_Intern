@@ -12,7 +12,7 @@ import {
     Tooltip,
     Legend,
 } from 'chart.js';
-import { Bar, Line } from 'react-chartjs-2';
+import { Bar, Line, Pie } from 'react-chartjs-2';
 import dummyData from '../data/dummyData';
 
 ChartJS.register(
@@ -75,39 +75,36 @@ const Revenue = () => {
         };
     }, [filteredData]);
 
-    // Revenue breakdown by category (stacked bar chart)
-    const revenueBreakdownData = {
-        labels: filteredData.map(d => d.month),
+    // Revenue breakdown by category (Pie chart)
+    const revenuePieData = {
+        labels: ['MV Tax', 'MV Fees', 'Road Safety Cess', 'Green Tax', 'Compounding Fees', 'Other Fees'],
         datasets: [
             {
-                label: 'MV Tax',
-                data: filteredData.map(d => d.mvTaxNonTransport + d.mvTaxTransport + d.mvTaxNewRegistration + d.mvTaxFromRegistered),
-                backgroundColor: 'rgba(59, 130, 246, 0.8)',
-            },
-            {
-                label: 'MV Fees',
-                data: filteredData.map(d => d.mvFeesSarathi + d.mvFeesVahan + d.mvFeesPUCC),
-                backgroundColor: 'rgba(16, 185, 129, 0.8)',
-            },
-            {
-                label: 'Road Safety Cess',
-                data: filteredData.map(d => d.roadSafetyCessNonTransport + d.roadSafetyCessTransport),
-                backgroundColor: 'rgba(245, 158, 11, 0.8)',
-            },
-            {
-                label: 'Green Tax',
-                data: filteredData.map(d => d.greenTaxNonTransport + d.greenTaxTransport),
-                backgroundColor: 'rgba(34, 197, 94, 0.8)',
-            },
-            {
-                label: 'Compounding Fees',
-                data: filteredData.map(d => d.cfOffence + d.cfDelayFine + d.fitnessCF),
-                backgroundColor: 'rgba(239, 68, 68, 0.8)',
-            },
-            {
-                label: 'Other Fees',
-                data: filteredData.map(d => d.puccLateFine + d.otherLateFees + d.apgt + d.hsrp),
-                backgroundColor: 'rgba(168, 85, 247, 0.8)',
+                data: [
+                    stats.totalMVTax,
+                    stats.totalMVFees,
+                    stats.totalRoadSafetyCess,
+                    stats.totalGreenTax,
+                    stats.totalCF,
+                    stats.totalOther
+                ],
+                backgroundColor: [
+                    'rgba(59, 130, 246, 0.8)', // Blue
+                    'rgba(16, 185, 129, 0.8)', // Green
+                    'rgba(245, 158, 11, 0.8)', // Yellow
+                    'rgba(34, 197, 94, 0.8)',  // Emerald
+                    'rgba(239, 68, 68, 0.8)',  // Red
+                    'rgba(168, 85, 247, 0.8)', // Purple
+                ],
+                borderColor: [
+                    'rgba(59, 130, 246, 1)',
+                    'rgba(16, 185, 129, 1)',
+                    'rgba(245, 158, 11, 1)',
+                    'rgba(34, 197, 94, 1)',
+                    'rgba(239, 68, 68, 1)',
+                    'rgba(168, 85, 247, 1)',
+                ],
+                borderWidth: 1,
             },
         ],
     };
@@ -132,6 +129,34 @@ const Revenue = () => {
                 fill: true,
             },
         ],
+    };
+
+    const pieChartOptions = {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+            legend: {
+                position: 'right',
+                labels: {
+                    color: isDarkMode ? 'rgba(255, 255, 255, 0.7)' : 'rgba(0, 0, 0, 0.7)',
+                },
+            },
+            tooltip: {
+                callbacks: {
+                    label: function (context) {
+                        let label = context.label || '';
+                        if (label) {
+                            label += ': ';
+                        }
+                        const value = context.parsed;
+                        const total = context.dataset.data.reduce((a, b) => a + b, 0);
+                        const percentage = ((value / total) * 100).toFixed(1) + '%';
+                        label += '₹' + value.toLocaleString('en-IN') + ' (' + percentage + ')';
+                        return label;
+                    }
+                }
+            },
+        },
     };
 
     const chartOptions = {
@@ -337,11 +362,11 @@ const Revenue = () => {
             </div>
 
             {/* Charts */}
-            <div className="grid grid-cols-1 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
                     <h2 className="text-xl font-semibold mb-4 text-gray-900 dark:text-white">Revenue Breakdown by Category</h2>
-                    <div className="h-96">
-                        <Bar data={revenueBreakdownData} options={currentChartOptions} />
+                    <div className="h-80">
+                        <Pie data={revenuePieData} options={pieChartOptions} />
                     </div>
                 </div>
                 <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
