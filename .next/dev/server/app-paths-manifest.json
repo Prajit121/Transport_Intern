@@ -1,6 +1,9 @@
 {
+  "/_not-found/page": "app/_not-found/page.js",
+  "/maintenance/page": "app/maintenance/page.js",
   "/page": "app/page.js",
   "/revenue/page": "app/revenue/page.js",
   "/sustainability/page": "app/sustainability/page.js",
-  "/traffic/page": "app/traffic/page.js"
+  "/traffic/page": "app/traffic/page.js",
+  "/vehicles/page": "app/vehicles/page.js"
 }

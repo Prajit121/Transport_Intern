@@ -9,8 +9,22 @@ __turbopack_context__.s([
     ()=>__TURBOPACK__default__export__,
     "fuelEfficiency",
     ()=>fuelEfficiency,
+    "greenTaxRevenue",
+    ()=>greenTaxRevenue,
+    "newReg4WheelerSplit",
+    ()=>newReg4WheelerSplit,
+    "newRegistrationRevenue",
+    ()=>newRegistrationRevenue,
+    "newRegistrationTransportRevenue",
+    ()=>newRegistrationTransportRevenue,
     "publicTransportRidership",
     ()=>publicTransportRidership,
+    "reassignmentRevenue",
+    ()=>reassignmentRevenue,
+    "renewalRevenue",
+    ()=>renewalRevenue,
+    "revenueCollection",
+    ()=>revenueCollection,
     "roadMaintenance",
     ()=>roadMaintenance,
     "trafficIncidents",
@@ -18,7 +32,9 @@ __turbopack_context__.s([
     "vehicleRegistrations",
     ()=>vehicleRegistrations
 ]);
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_define_property$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/@swc/helpers/esm/_define_property.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/@swc/helpers/esm/_type_of.js [app-client] (ecmascript)");
+;
 ;
 // Dummy data for Transport Department Statistics Dashboard
 // Monthly data for Jan-Dec 2025
@@ -91,13 +107,396 @@ var roadMaintenance = months.map(function(month, index) {
         completedProjects: Math.floor((15 + Math.random() * 10) * maintenanceFactor * 0.8)
     };
 });
+var revenueCollection = months.map(function(month, index) {
+    // Higher revenue in registration-heavy months
+    var revenueFactor = index > 2 && index < 6 ? 1.2 : index > 8 ? 0.9 : 1.0;
+    return {
+        month: month,
+        // MV Tax
+        mvTaxNonTransport: Math.floor((450000 + Math.random() * 100000) * revenueFactor),
+        mvTaxTransport: Math.floor((280000 + Math.random() * 60000) * revenueFactor),
+        mvTaxNewRegistration: Math.floor((320000 + Math.random() * 80000) * revenueFactor),
+        mvTaxFromRegistered: Math.floor((180000 + Math.random() * 40000) * revenueFactor),
+        // MV Fees
+        mvFeesSarathi: Math.floor((45000 + Math.random() * 10000) * revenueFactor),
+        mvFeesVahan: Math.floor((65000 + Math.random() * 15000) * revenueFactor),
+        mvFeesPUCC: Math.floor((35000 + Math.random() * 8000) * revenueFactor),
+        // Road Safety Cess
+        roadSafetyCessNonTransport: Math.floor((120000 + Math.random() * 30000) * revenueFactor),
+        roadSafetyCessTransport: Math.floor((85000 + Math.random() * 20000) * revenueFactor),
+        // Green Tax
+        greenTaxNonTransport: Math.floor((95000 + Math.random() * 20000) * revenueFactor),
+        greenTaxTransport: Math.floor((72000 + Math.random() * 15000) * revenueFactor),
+        // Compounding Fees
+        cfOffence: Math.floor((42000 + Math.random() * 10000) * revenueFactor),
+        cfDelayFine: Math.floor((28000 + Math.random() * 7000) * revenueFactor),
+        fitnessCF: Math.floor((18000 + Math.random() * 5000) * revenueFactor),
+        // Other Fees
+        puccLateFine: Math.floor((15000 + Math.random() * 4000) * revenueFactor),
+        otherLateFees: Math.floor((22000 + Math.random() * 6000) * revenueFactor),
+        apgt: Math.floor((38000 + Math.random() * 9000) * revenueFactor),
+        hsrp: Math.floor((52000 + Math.random() * 12000) * revenueFactor)
+    };
+});
+// List of Districts in Assam
+var assamDistricts = [
+    "Bajali",
+    "Baksa",
+    "Barpeta",
+    "Biswanath",
+    "Bongaigaon",
+    "Cachar",
+    "Charaideo",
+    "Chirang",
+    "Darrang",
+    "Dhemaji",
+    "Dhubri",
+    "Dibrugarh",
+    "Dima Hasao",
+    "Goalpara",
+    "Golaghat",
+    "Hailakandi",
+    "Hojai",
+    "Jorhat",
+    "Kamrup",
+    "Kamrup Metropolitan",
+    "Karbi Anglong",
+    "Karimganj",
+    "Kokrajhar",
+    "Lakhimpur",
+    "Majuli",
+    "Morigaon",
+    "Nagaon",
+    "Nalbari",
+    "Sivasagar",
+    "Sonitpur",
+    "South Salmara-Mankachar",
+    "Tamulpur",
+    "Tinsukia",
+    "Udalguri",
+    "West Karbi Anglong"
+];
+var newRegistrationRevenue = {
+    twoWheeler: assamDistricts.map(function(district) {
+        return {
+            district: district,
+            totalVehicles: Math.floor(500 + Math.random() * 2000),
+            mvTaxNonTransport: "One-time",
+            category: "Two-wheeler",
+            weight: "Below 65kg",
+            mvTaxRealised: Math.floor(500000 + Math.random() * 2000000),
+            mvFeesRealised: Math.floor(50000 + Math.random() * 200000),
+            roadSafetyCess: Math.floor(10000 + Math.random() * 50000),
+            cfPenalty: Math.floor(Math.random() * 10000)
+        };
+    }),
+    threeWheeler: assamDistricts.map(function(district) {
+        return {
+            district: district,
+            totalVehicles: Math.floor(100 + Math.random() * 500),
+            mvTaxNonTransport: "One-time",
+            category: "Three-wheeler",
+            weight: "N/A",
+            mvTaxRealised: Math.floor(200000 + Math.random() * 800000),
+            mvFeesRealised: Math.floor(20000 + Math.random() * 80000),
+            roadSafetyCess: Math.floor(5000 + Math.random() * 20000),
+            cfPenalty: Math.floor(Math.random() * 5000)
+        };
+    }),
+    fourWheeler: assamDistricts.map(function(district) {
+        return {
+            district: district,
+            totalVehicles: Math.floor(50 + Math.random() * 300),
+            mvTaxNonTransport: "One-time",
+            category: "Four-wheeler",
+            originalCost: "VARIES",
+            mvTaxRealised: Math.floor(1500000 + Math.random() * 5000000),
+            mvFeesRealised: Math.floor(100000 + Math.random() * 300000),
+            roadSafetyCess: Math.floor(30000 + Math.random() * 100000),
+            cfPenalty: Math.floor(Math.random() * 20000)
+        };
+    }),
+    otherVehicles: assamDistricts.map(function(district) {
+        return {
+            district: district,
+            totalVehicles: Math.floor(20 + Math.random() * 100),
+            mvTaxNonTransport: "Annual",
+            category: "LMV/MMV/HMV",
+            otherParams: "2% annual tax",
+            mvTaxRealised: Math.floor(800000 + Math.random() * 3000000),
+            mvFeesRealised: Math.floor(50000 + Math.random() * 150000),
+            roadSafetyCess: Math.floor(20000 + Math.random() * 60000),
+            cfPenalty: Math.floor(Math.random() * 15000)
+        };
+    })
+};
+var newRegistrationTransportRevenue = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_define_property$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])({
+    twoWheeler: assamDistricts.map(function(district) {
+        return {
+            district: district,
+            totalVehicles: Math.floor(100 + Math.random() * 500),
+            mvTaxTransport: "Quarterly",
+            category: "Two-wheeler",
+            param: "Below 65kg",
+            mvTaxRealised: Math.floor(100000 + Math.random() * 500000),
+            mvFeesRealised: Math.floor(10000 + Math.random() * 50000),
+            roadSafetyCess: Math.floor(5000 + Math.random() * 20000),
+            cfPerDay: Math.floor(Math.random() * 2000)
+        };
+    }),
+    threeWheelerPassenger: assamDistricts.map(function(district) {
+        return {
+            district: district,
+            totalVehicles: Math.floor(200 + Math.random() * 800),
+            mvTaxTransport: "Quarterly",
+            category: "Three-wheeler (Passenger)",
+            param: "3+1",
+            mvTaxRealised: Math.floor(300000 + Math.random() * 1000000),
+            mvFeesRealised: Math.floor(30000 + Math.random() * 100000),
+            roadSafetyCess: Math.floor(10000 + Math.random() * 40000),
+            cfPerDay: Math.floor(Math.random() * 5000)
+        };
+    }),
+    threeWheelerGoods: assamDistricts.map(function(district) {
+        return {
+            district: district,
+            totalVehicles: Math.floor(150 + Math.random() * 600),
+            mvTaxTransport: "Quarterly",
+            category: "Three-wheeler (Goods)",
+            param: "500kg",
+            mvTaxRealised: Math.floor(250000 + Math.random() * 900000),
+            mvFeesRealised: Math.floor(25000 + Math.random() * 90000),
+            roadSafetyCess: Math.floor(8000 + Math.random() * 30000),
+            cfPerDay: Math.floor(Math.random() * 4000)
+        };
+    }),
+    lmvPassenger: assamDistricts.map(function(district) {
+        return {
+            district: district,
+            totalVehicles: Math.floor(100 + Math.random() * 400),
+            mvTaxTransport: "Quarterly",
+            category: "Four-wheeler (LMV) Passenger",
+            param: "4+1",
+            mvTaxRealised: Math.floor(500000 + Math.random() * 2000000),
+            mvFeesRealised: Math.floor(50000 + Math.random() * 200000),
+            roadSafetyCess: Math.floor(15000 + Math.random() * 60000),
+            cfPerDay: Math.floor(Math.random() * 8000)
+        };
+    }),
+    lmvGoods: assamDistricts.map(function(district) {
+        return {
+            district: district,
+            totalVehicles: Math.floor(80 + Math.random() * 350),
+            mvTaxTransport: "Quarterly",
+            category: "Four-wheeler (LMV) Goods",
+            param: "1500kg",
+            mvTaxRealised: Math.floor(450000 + Math.random() * 1800000),
+            mvFeesRealised: Math.floor(45000 + Math.random() * 180000),
+            roadSafetyCess: Math.floor(12000 + Math.random() * 50000),
+            cfPerDay: Math.floor(Math.random() * 7000)
+        };
+    }),
+    mmvPassenger: assamDistricts.map(function(district) {
+        return {
+            district: district,
+            totalVehicles: Math.floor(50 + Math.random() * 200),
+            mvTaxTransport: "Quarterly",
+            category: "MMV (Passenger)",
+            param: "12+1",
+            mvTaxRealised: Math.floor(600000 + Math.random() * 2500000),
+            mvFeesRealised: Math.floor(60000 + Math.random() * 250000),
+            roadSafetyCess: Math.floor(20000 + Math.random() * 80000),
+            cfPerDay: Math.floor(Math.random() * 10000)
+        };
+    }),
+    mmvGoods: assamDistricts.map(function(district) {
+        return {
+            district: district,
+            totalVehicles: Math.floor(40 + Math.random() * 180),
+            mvTaxTransport: "Quarterly",
+            category: "MMV (Goods)",
+            param: "5000kg",
+            mvTaxRealised: Math.floor(700000 + Math.random() * 3000000),
+            mvFeesRealised: Math.floor(70000 + Math.random() * 300000),
+            roadSafetyCess: Math.floor(25000 + Math.random() * 90000),
+            cfPerDay: Math.floor(Math.random() * 12000)
+        };
+    }),
+    hmvPassenger: assamDistricts.map(function(district) {
+        return {
+            district: district,
+            totalVehicles: Math.floor(30 + Math.random() * 150),
+            mvTaxTransport: "Quarterly",
+            category: "HMV (Passenger)",
+            param: "32+1",
+            mvTaxRealised: Math.floor(1000000 + Math.random() * 4000000),
+            mvFeesRealised: Math.floor(100000 + Math.random() * 400000),
+            roadSafetyCess: Math.floor(40000 + Math.random() * 120000),
+            cfPerDay: Math.floor(Math.random() * 15000)
+        };
+    }),
+    hmvGoods: assamDistricts.map(function(district) {
+        return {
+            district: district,
+            totalVehicles: Math.floor(60 + Math.random() * 250),
+            mvTaxTransport: "Quarterly",
+            category: "HMV (Goods)",
+            param: "12000kg",
+            mvTaxRealised: Math.floor(1200000 + Math.random() * 5000000),
+            mvFeesRealised: Math.floor(120000 + Math.random() * 500000),
+            roadSafetyCess: Math.floor(50000 + Math.random() * 150000),
+            cfPerDay: Math.floor(Math.random() * 18000)
+        };
+    })
+}, "hmvGoods", assamDistricts.map(function(district) {
+    return {
+        district: district,
+        totalVehicles: Math.floor(60 + Math.random() * 250),
+        mvTaxTransport: "Quarterly",
+        category: "HMV (Goods)",
+        param: "12000kg",
+        mvTaxRealised: Math.floor(1200000 + Math.random() * 5000000),
+        mvFeesRealised: Math.floor(120000 + Math.random() * 500000),
+        roadSafetyCess: Math.floor(50000 + Math.random() * 150000),
+        cfPerDay: Math.floor(Math.random() * 18000)
+    };
+}));
+var newReg4WheelerSplit = {
+    fiveYear: assamDistricts.map(function(district) {
+        return {
+            district: district,
+            totalVehicles: Math.floor(20 + Math.random() * 100),
+            mvTaxNonTransport: "5-Year",
+            category: "Four-wheeler",
+            originalCost: "VARIES",
+            mvTaxRealised: Math.floor(500000 + Math.random() * 1500000),
+            mvFeesRealised: Math.floor(20000 + Math.random() * 80000),
+            roadSafetyCess: Math.floor(10000 + Math.random() * 30000),
+            cfPenalty: Math.floor(Math.random() * 5000)
+        };
+    }),
+    fifteenYear: assamDistricts.map(function(district) {
+        return {
+            district: district,
+            totalVehicles: Math.floor(30 + Math.random() * 200),
+            mvTaxNonTransport: "Lifetime (15Y)",
+            category: "Four-wheeler",
+            originalCost: "VARIES",
+            mvTaxRealised: Math.floor(1000000 + Math.random() * 3500000),
+            mvFeesRealised: Math.floor(80000 + Math.random() * 220000),
+            roadSafetyCess: Math.floor(20000 + Math.random() * 70000),
+            cfPenalty: Math.floor(Math.random() * 15000)
+        };
+    })
+};
+var reassignmentRevenue = {
+    twoWheeler: assamDistricts.map(function(district) {
+        return {
+            district: district,
+            totalVehicles: Math.floor(50 + Math.random() * 200),
+            mvTaxNonTransport: "Re-assign",
+            category: "Two-wheeler",
+            weight: "Below 65kg",
+            mvTaxRealised: Math.floor(100000 + Math.random() * 500000),
+            mvFeesRealised: Math.floor(10000 + Math.random() * 50000),
+            roadSafetyCess: Math.floor(5000 + Math.random() * 15000),
+            cfPenalty: Math.floor(Math.random() * 2000)
+        };
+    }),
+    threeWheeler: assamDistricts.map(function(district) {
+        return {
+            district: district,
+            totalVehicles: Math.floor(20 + Math.random() * 80),
+            mvTaxNonTransport: "Re-assign",
+            category: "Three-wheeler",
+            weight: "N/A",
+            mvTaxRealised: Math.floor(50000 + Math.random() * 200000),
+            mvFeesRealised: Math.floor(5000 + Math.random() * 20000),
+            roadSafetyCess: Math.floor(2000 + Math.random() * 8000),
+            cfPenalty: Math.floor(Math.random() * 1000)
+        };
+    }),
+    fourWheeler: assamDistricts.map(function(district) {
+        return {
+            district: district,
+            totalVehicles: Math.floor(30 + Math.random() * 150),
+            mvTaxNonTransport: "Re-assign",
+            category: "Four-wheeler",
+            originalCost: "VARIES",
+            mvTaxRealised: Math.floor(300000 + Math.random() * 1000000),
+            mvFeesRealised: Math.floor(30000 + Math.random() * 100000),
+            roadSafetyCess: Math.floor(10000 + Math.random() * 30000),
+            cfPenalty: Math.floor(Math.random() * 5000)
+        };
+    }),
+    otherVehicles: assamDistricts.map(function(district) {
+        return {
+            district: district,
+            totalVehicles: Math.floor(10 + Math.random() * 50),
+            mvTaxNonTransport: "Re-assign",
+            category: "LMV/MMV/HMV",
+            otherParams: "N/A",
+            mvTaxRealised: Math.floor(200000 + Math.random() * 800000),
+            mvFeesRealised: Math.floor(20000 + Math.random() * 60000),
+            roadSafetyCess: Math.floor(8000 + Math.random() * 20000),
+            cfPenalty: Math.floor(Math.random() * 4000)
+        };
+    })
+};
+var greenTaxRevenue = {
+    nonTransport: assamDistricts.map(function(district) {
+        return {
+            district: district,
+            totalVehicles: Math.floor(100 + Math.random() * 600),
+            period: "5 Years",
+            category: "Non-Transport",
+            mvFeesRealised: Math.floor(15000 + Math.random() * 60000),
+            roadSafetyCess: Math.floor(5000 + Math.random() * 20000),
+            cfPerDay: Math.floor(Math.random() * 3000),
+            taxRealised: Math.floor(200000 + Math.random() * 800000)
+        };
+    }),
+    transport: assamDistricts.map(function(district) {
+        return {
+            district: district,
+            totalVehicles: Math.floor(150 + Math.random() * 800),
+            period: "Annual",
+            category: "Transport",
+            mvFeesRealised: Math.floor(25000 + Math.random() * 90000),
+            roadSafetyCess: Math.floor(8000 + Math.random() * 35000),
+            cfPerDay: Math.floor(Math.random() * 5000),
+            taxRealised: Math.floor(400000 + Math.random() * 1500000)
+        };
+    })
+};
+var renewalRevenue = {
+    nonTransport: assamDistricts.map(function(district) {
+        return {
+            district: district,
+            totalVehicles: Math.floor(80 + Math.random() * 400),
+            mvTaxNonTransport: "10-Year (Post 5Y)",
+            category: "Non-Transport",
+            mvTaxRealised: Math.floor(600000 + Math.random() * 2000000),
+            mvFeesRealised: Math.floor(60000 + Math.random() * 200000),
+            roadSafetyCess: Math.floor(20000 + Math.random() * 60000),
+            cfPenalty: Math.floor(Math.random() * 10000)
+        };
+    })
+};
 const __TURBOPACK__default__export__ = {
     vehicleRegistrations: vehicleRegistrations,
     trafficIncidents: trafficIncidents,
     publicTransportRidership: publicTransportRidership,
     congestionLevels: congestionLevels,
     fuelEfficiency: fuelEfficiency,
-    roadMaintenance: roadMaintenance
+    roadMaintenance: roadMaintenance,
+    revenueCollection: revenueCollection,
+    newRegistrationRevenue: newRegistrationRevenue,
+    newRegistrationTransportRevenue: newRegistrationTransportRevenue,
+    newReg4WheelerSplit: newReg4WheelerSplit,
+    reassignmentRevenue: reassignmentRevenue,
+    greenTaxRevenue: greenTaxRevenue,
+    renewalRevenue: renewalRevenue
 };
 if ((0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(globalThis.$RefreshHelpers$) === 'object' && globalThis.$RefreshHelpers !== null) {
     __turbopack_context__.k.registerExports(__turbopack_context__.m, globalThis.$RefreshHelpers$);

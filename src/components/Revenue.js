@@ -30,6 +30,10 @@ ChartJS.register(
 const Revenue = () => {
     const [selectedMonths, setSelectedMonths] = useState(dummyData.revenueCollection.map(d => d.month));
     const [isDarkMode, setIsDarkMode] = useState(false);
+    const [activeTab, setActiveTab] = useState('twoWheeler');
+    const [activeTransportTab, setActiveTransportTab] = useState('twoWheeler');
+    const [viewMode, setViewMode] = useState('new');
+    const [taxTenure, setTaxTenure] = useState('all');
 
     useEffect(() => {
         setIsDarkMode(document.documentElement.classList.contains('dark'));
@@ -601,6 +605,284 @@ const Revenue = () => {
                     </table>
                 </div>
             </div>
+
+            {/* Top Level View Selector */}
+            <div className="bg-white dark:bg-gray-800 rounded-lg shadow mb-6 p-2">
+                <div className="flex flex-wrap gap-2">
+                    {[
+                        { id: 'new', name: 'New Registration' },
+                        { id: 'reassign', name: 'Re-assignment' },
+                        { id: 'green', name: 'Green Tax' },
+                        { id: 'renewal', name: 'Old / Renewals' }
+                    ].map(mode => (
+                        <button
+                            key={mode.id}
+                            onClick={() => setViewMode(mode.id)}
+                            className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${viewMode === mode.id
+                                ? 'bg-blue-600 text-white'
+                                : 'bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
+                                }`}
+                        >
+                            {mode.name}
+                        </button>
+                    ))}
+                </div>
+            </div>
+
+            {/* View Title & Description */}
+            <div className="bg-white dark:bg-gray-800 rounded-lg shadow overflow-hidden">
+                <div className="px-6 py-4 border-b border-gray-200 dark:border-gray-700 flex justify-between items-center flex-wrap gap-4">
+                    <div>
+                        <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
+                            {viewMode === 'new' ? 'For New Registration (Non-Transport)' :
+                                viewMode === 'reassign' ? 'Re-assignment Revenue' :
+                                    viewMode === 'green' ? 'Green Tax Revenue' :
+                                        'Old Non-Transport / Renewals'}
+                        </h2>
+                    </div>
+
+                    {/* Tax Tenure Toggle for 4-Wheelers in New Registration */}
+                    {viewMode === 'new' && activeTab === 'fourWheeler' && (
+                        <div className="flex items-center space-x-2 bg-gray-100 dark:bg-gray-700 p-1 rounded-lg">
+                            <button
+                                onClick={() => setTaxTenure('all')}
+                                className={`px-3 py-1 text-xs font-medium rounded ${taxTenure === 'all' ? 'bg-white dark:bg-gray-600 shadow text-blue-600 dark:text-blue-400' : 'text-gray-500 dark:text-gray-400'}`}
+                            >
+                                All
+                            </button>
+                            <button
+                                onClick={() => setTaxTenure('fiveYear')}
+                                className={`px-3 py-1 text-xs font-medium rounded ${taxTenure === 'fiveYear' ? 'bg-white dark:bg-gray-600 shadow text-blue-600 dark:text-blue-400' : 'text-gray-500 dark:text-gray-400'}`}
+                            >
+                                5-Year Tax
+                            </button>
+                            <button
+                                onClick={() => setTaxTenure('fifteenYear')}
+                                className={`px-3 py-1 text-xs font-medium rounded ${taxTenure === 'fifteenYear' ? 'bg-white dark:bg-gray-600 shadow text-blue-600 dark:text-blue-400' : 'text-gray-500 dark:text-gray-400'}`}
+                            >
+                                Lifetime (15Y)
+                            </button>
+                        </div>
+                    )}
+                </div>
+
+                {/* Main Content Tabs (Only for New & Re-assign) */}
+                {(viewMode === 'new' || viewMode === 'reassign') && (
+                    <div className="border-b border-gray-200 dark:border-gray-700">
+                        <nav className="-mb-px flex px-6" aria-label="Tabs">
+                            {[
+                                { id: 'twoWheeler', name: 'Two-wheeler' },
+                                { id: 'threeWheeler', name: 'Three-wheeler' },
+                                { id: 'fourWheeler', name: 'Four-wheeler' },
+                                { id: 'otherVehicles', name: 'Other Vehicles' }
+                            ].map((tab) => (
+                                <button
+                                    key={tab.id}
+                                    onClick={() => setActiveTab(tab.id)}
+                                    className={`whitespace-nowrap py-4 px-6 border-b-2 font-medium text-sm transition-colors ${activeTab === tab.id
+                                        ? 'border-blue-500 text-blue-600 dark:text-blue-400'
+                                        : 'border-transparent text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 hover:border-gray-300'
+                                        }`}
+                                >
+                                    {tab.name}
+                                </button>
+                            ))}
+                        </nav>
+                    </div>
+                )}
+
+                {/* Table Content */}
+                <div className="overflow-x-auto">
+                    <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+                        <thead className="bg-gray-50 dark:bg-gray-700">
+                            <tr>
+                                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Name of District</th>
+                                <th scope="col" className="px-6 py-3 text-right text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Total Vehicles</th>
+                                {viewMode !== 'green' && (
+                                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                                        {viewMode === 'reassign' ? 'Transaction Type' : 'MV Tax'}
+                                    </th>
+                                )}
+
+                                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                                    {(activeTab === 'fourWheeler' && viewMode === 'new') ? 'Original Cost Price' :
+                                        (activeTab === 'otherVehicles' || viewMode === 'green') ? 'Tax Basis/Period' : 'Weight of Vehicle'}
+                                </th>
+
+                                <th scope="col" className="px-6 py-3 text-right text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                                    {viewMode === 'green' ? 'Green Tax Realised' : 'MV Tax Realised'}
+                                </th>
+                                <th scope="col" className="px-6 py-3 text-right text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">MV Fees Realized</th>
+                                <th scope="col" className="px-6 py-3 text-right text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Road Safety Cess</th>
+                                <th scope="col" className="px-6 py-3 text-right text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">CF (Delay Fine)</th>
+                            </tr>
+                        </thead>
+                        <tbody className="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
+                            {(() => {
+                                let dataToRender = [];
+
+                                if (viewMode === 'new') {
+                                    if (activeTab === 'fourWheeler' && taxTenure !== 'all') {
+                                        dataToRender = dummyData.newReg4WheelerSplit[taxTenure];
+                                    } else {
+                                        dataToRender = dummyData.newRegistrationRevenue ? dummyData.newRegistrationRevenue[activeTab] : [];
+                                    }
+                                } else if (viewMode === 'reassign') {
+                                    dataToRender = dummyData.reassignmentRevenue ? dummyData.reassignmentRevenue[activeTab] : [];
+                                } else if (viewMode === 'green') {
+                                    dataToRender = dummyData.greenTaxRevenue ? dummyData.greenTaxRevenue.nonTransport : []; // Using non-transport as default for green view
+                                } else if (viewMode === 'renewal') {
+                                    dataToRender = dummyData.renewalRevenue ? dummyData.renewalRevenue.nonTransport : [];
+                                }
+
+                                if (dataToRender && dataToRender.length > 0) {
+                                    return dataToRender.map((row, idx) => (
+                                        <tr key={row.district} className={`hover:bg-gray-50 dark:hover:bg-gray-700 ${idx % 2 === 0 ? 'bg-white dark:bg-gray-800' : 'bg-gray-50 dark:bg-gray-800/50'}`}>
+                                            <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-white">{row.district}</td>
+                                            <td className="px-6 py-4 whitespace-nowrap text-sm text-right text-gray-900 dark:text-gray-300">{row.totalVehicles.toLocaleString()}</td>
+                                            {viewMode !== 'green' && (
+                                                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">{row.mvTaxNonTransport}</td>
+                                            )}
+                                            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">
+                                                {(activeTab === 'fourWheeler' && viewMode === 'new') ? row.originalCost :
+                                                    viewMode === 'green' ? row.period :
+                                                        (activeTab === 'otherVehicles' || viewMode === 'renewal') ? (row.otherParams || 'N/A') : row.weight}
+                                            </td>
+                                            <td className="px-6 py-4 whitespace-nowrap text-sm text-right text-blue-600 dark:text-blue-400 font-medium">
+                                                {formatCurrency(viewMode === 'green' ? row.taxRealised : row.mvTaxRealised)}
+                                            </td>
+                                            <td className="px-6 py-4 whitespace-nowrap text-sm text-right text-green-600 dark:text-green-400 font-medium">{formatCurrency(row.mvFeesRealised)}</td>
+                                            <td className="px-6 py-4 whitespace-nowrap text-sm text-right text-yellow-600 dark:text-yellow-400">{formatCurrency(row.roadSafetyCess)}</td>
+                                            <td className="px-6 py-4 whitespace-nowrap text-sm text-right text-red-600 dark:text-red-400">
+                                                {(row.cfPenalty || row.cfPerDay) > 0 ? formatCurrency(row.cfPenalty || row.cfPerDay) : '-'}
+                                            </td>
+                                        </tr>
+                                    ));
+                                } else {
+                                    return (
+                                        <tr>
+                                            <td colSpan="8" className="px-6 py-8 text-center text-sm text-gray-500 dark:text-gray-400">No data available for this category</td>
+                                        </tr>
+                                    );
+                                }
+                            })()}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            {/* New Registration (Transport) Revenue Section */}
+            {(viewMode === 'new' || viewMode === 'green') && (
+                <div className="bg-white dark:bg-gray-800 rounded-lg shadow overflow-hidden mt-8">
+                    <div className="px-6 py-4 border-b border-gray-200 dark:border-gray-700">
+                        <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
+                            For New Registration (Transport) - Revenue by District
+                        </h2>
+                    </div>
+
+                    {/* Tabs */}
+                    <div className="border-b border-gray-200 dark:border-gray-700 overflow-x-auto">
+                        <nav className="-mb-px flex px-6" aria-label="Tabs">
+                            {[
+                                { id: 'twoWheeler', name: 'Two-wheeler' },
+                                { id: 'threeWheelerPassenger', name: '3-W (Pass)' },
+                                { id: 'threeWheelerGoods', name: '3-W (Goods)' },
+                                { id: 'lmvPassenger', name: '4-W (LMV) Pass' },
+                                { id: 'lmvGoods', name: '4-W (LMV) Goods' },
+                                { id: 'mmvPassenger', name: 'MMV (Pass)' },
+                                { id: 'mmvGoods', name: 'MMV (Goods)' },
+                                { id: 'hmvPassenger', name: 'HMV (Pass)' },
+                                { id: 'hmvGoods', name: 'HMV (Goods)' },
+                            ].map((tab) => (
+                                <button
+                                    key={tab.id}
+                                    onClick={() => setActiveTransportTab(tab.id)}
+                                    className={`whitespace-nowrap py-4 px-4 border-b-2 font-medium text-sm transition-colors ${activeTransportTab === tab.id
+                                        ? 'border-blue-500 text-blue-600 dark:text-blue-400'
+                                        : 'border-transparent text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 hover:border-gray-300'
+                                        }`}
+                                >
+                                    {tab.name}
+                                </button>
+                            ))}
+                        </nav>
+                    </div>
+
+                    {/* Table Content */}
+                    <div className="overflow-x-auto">
+                        <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+                            <thead className="bg-gray-50 dark:bg-gray-700">
+                                <tr>
+                                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                                        Name of District
+                                    </th>
+                                    <th scope="col" className="px-6 py-3 text-right text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                                        Total Vehicles
+                                    </th>
+                                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                                        MV Tax (Transport)
+                                    </th>
+                                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                                        {['twoWheeler', 'threeWheelerGoods', 'lmvGoods', 'mmvGoods', 'hmvGoods'].includes(activeTransportTab)
+                                            ? 'Weight of Vehicle'
+                                            : 'Seating Capacity'}
+                                    </th>
+                                    <th scope="col" className="px-6 py-3 text-right text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                                        MV Tax Realised
+                                    </th>
+                                    <th scope="col" className="px-6 py-3 text-right text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                                        MV Fees Realized
+                                    </th>
+                                    <th scope="col" className="px-6 py-3 text-right text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                                        Road Safety Cess
+                                    </th>
+                                    <th scope="col" className="px-6 py-3 text-right text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                                        CF (Delay Fine)
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody className="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
+                                {dummyData.newRegistrationTransportRevenue && dummyData.newRegistrationTransportRevenue[activeTransportTab] ? (
+                                    dummyData.newRegistrationTransportRevenue[activeTransportTab].map((row, idx) => (
+                                        <tr key={row.district} className={`hover:bg-gray-50 dark:hover:bg-gray-700 ${idx % 2 === 0 ? 'bg-white dark:bg-gray-800' : 'bg-gray-50 dark:bg-gray-800/50'}`}>
+                                            <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-white">
+                                                {row.district}
+                                            </td>
+                                            <td className="px-6 py-4 whitespace-nowrap text-sm text-right text-gray-900 dark:text-gray-300">
+                                                {row.totalVehicles.toLocaleString()}
+                                            </td>
+                                            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">
+                                                {row.mvTaxTransport}
+                                            </td>
+                                            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">
+                                                {row.param}
+                                            </td>
+                                            <td className="px-6 py-4 whitespace-nowrap text-sm text-right text-blue-600 dark:text-blue-400 font-medium">
+                                                {formatCurrency(row.mvTaxRealised)}
+                                            </td>
+                                            <td className="px-6 py-4 whitespace-nowrap text-sm text-right text-green-600 dark:text-green-400 font-medium">
+                                                {formatCurrency(row.mvFeesRealised)}
+                                            </td>
+                                            <td className="px-6 py-4 whitespace-nowrap text-sm text-right text-yellow-600 dark:text-yellow-400">
+                                                {formatCurrency(row.roadSafetyCess)}
+                                            </td>
+                                            <td className="px-6 py-4 whitespace-nowrap text-sm text-right text-red-600 dark:text-red-400">
+                                                {row.cfPerDay > 0 ? formatCurrency(row.cfPerDay) : '-'}
+                                            </td>
+                                        </tr>
+                                    ))
+                                ) : (
+                                    <tr>
+                                        <td colSpan="8" className="px-6 py-8 text-center text-sm text-gray-500 dark:text-gray-400">
+                                            No data available for this category
+                                        </td>
+                                    </tr>
+                                )}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            )}
         </div>
     );
 };

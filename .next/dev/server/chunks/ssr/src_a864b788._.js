@@ -9,8 +9,20 @@ __turbopack_context__.s([
     ()=>__TURBOPACK__default__export__,
     "fuelEfficiency",
     ()=>fuelEfficiency,
+    "greenTaxRevenue",
+    ()=>greenTaxRevenue,
+    "newReg4WheelerSplit",
+    ()=>newReg4WheelerSplit,
+    "newRegistrationRevenue",
+    ()=>newRegistrationRevenue,
+    "newRegistrationTransportRevenue",
+    ()=>newRegistrationTransportRevenue,
     "publicTransportRidership",
     ()=>publicTransportRidership,
+    "reassignmentRevenue",
+    ()=>reassignmentRevenue,
+    "renewalRevenue",
+    ()=>renewalRevenue,
     "revenueCollection",
     ()=>revenueCollection,
     "roadMaintenance",
@@ -122,6 +134,306 @@ const revenueCollection = months.map((month, index)=>{
         hsrp: Math.floor((52000 + Math.random() * 12000) * revenueFactor)
     };
 });
+// List of Districts in Assam
+const assamDistricts = [
+    "Bajali",
+    "Baksa",
+    "Barpeta",
+    "Biswanath",
+    "Bongaigaon",
+    "Cachar",
+    "Charaideo",
+    "Chirang",
+    "Darrang",
+    "Dhemaji",
+    "Dhubri",
+    "Dibrugarh",
+    "Dima Hasao",
+    "Goalpara",
+    "Golaghat",
+    "Hailakandi",
+    "Hojai",
+    "Jorhat",
+    "Kamrup",
+    "Kamrup Metropolitan",
+    "Karbi Anglong",
+    "Karimganj",
+    "Kokrajhar",
+    "Lakhimpur",
+    "Majuli",
+    "Morigaon",
+    "Nagaon",
+    "Nalbari",
+    "Sivasagar",
+    "Sonitpur",
+    "South Salmara-Mankachar",
+    "Tamulpur",
+    "Tinsukia",
+    "Udalguri",
+    "West Karbi Anglong"
+];
+const newRegistrationRevenue = {
+    twoWheeler: assamDistricts.map((district)=>({
+            district,
+            totalVehicles: Math.floor(500 + Math.random() * 2000),
+            mvTaxNonTransport: "One-time",
+            category: "Two-wheeler",
+            weight: "Below 65kg",
+            mvTaxRealised: Math.floor(500000 + Math.random() * 2000000),
+            mvFeesRealised: Math.floor(50000 + Math.random() * 200000),
+            roadSafetyCess: Math.floor(10000 + Math.random() * 50000),
+            cfPenalty: Math.floor(Math.random() * 10000)
+        })),
+    threeWheeler: assamDistricts.map((district)=>({
+            district,
+            totalVehicles: Math.floor(100 + Math.random() * 500),
+            mvTaxNonTransport: "One-time",
+            category: "Three-wheeler",
+            weight: "N/A",
+            mvTaxRealised: Math.floor(200000 + Math.random() * 800000),
+            mvFeesRealised: Math.floor(20000 + Math.random() * 80000),
+            roadSafetyCess: Math.floor(5000 + Math.random() * 20000),
+            cfPenalty: Math.floor(Math.random() * 5000)
+        })),
+    fourWheeler: assamDistricts.map((district)=>({
+            district,
+            totalVehicles: Math.floor(50 + Math.random() * 300),
+            mvTaxNonTransport: "One-time",
+            category: "Four-wheeler",
+            originalCost: "VARIES",
+            mvTaxRealised: Math.floor(1500000 + Math.random() * 5000000),
+            mvFeesRealised: Math.floor(100000 + Math.random() * 300000),
+            roadSafetyCess: Math.floor(30000 + Math.random() * 100000),
+            cfPenalty: Math.floor(Math.random() * 20000)
+        })),
+    otherVehicles: assamDistricts.map((district)=>({
+            district,
+            totalVehicles: Math.floor(20 + Math.random() * 100),
+            mvTaxNonTransport: "Annual",
+            category: "LMV/MMV/HMV",
+            otherParams: "2% annual tax",
+            mvTaxRealised: Math.floor(800000 + Math.random() * 3000000),
+            mvFeesRealised: Math.floor(50000 + Math.random() * 150000),
+            roadSafetyCess: Math.floor(20000 + Math.random() * 60000),
+            cfPenalty: Math.floor(Math.random() * 15000)
+        }))
+};
+const newRegistrationTransportRevenue = {
+    twoWheeler: assamDistricts.map((district)=>({
+            district,
+            totalVehicles: Math.floor(100 + Math.random() * 500),
+            mvTaxTransport: "Quarterly",
+            category: "Two-wheeler",
+            param: "Below 65kg",
+            mvTaxRealised: Math.floor(100000 + Math.random() * 500000),
+            mvFeesRealised: Math.floor(10000 + Math.random() * 50000),
+            roadSafetyCess: Math.floor(5000 + Math.random() * 20000),
+            cfPerDay: Math.floor(Math.random() * 2000)
+        })),
+    threeWheelerPassenger: assamDistricts.map((district)=>({
+            district,
+            totalVehicles: Math.floor(200 + Math.random() * 800),
+            mvTaxTransport: "Quarterly",
+            category: "Three-wheeler (Passenger)",
+            param: "3+1",
+            mvTaxRealised: Math.floor(300000 + Math.random() * 1000000),
+            mvFeesRealised: Math.floor(30000 + Math.random() * 100000),
+            roadSafetyCess: Math.floor(10000 + Math.random() * 40000),
+            cfPerDay: Math.floor(Math.random() * 5000)
+        })),
+    threeWheelerGoods: assamDistricts.map((district)=>({
+            district,
+            totalVehicles: Math.floor(150 + Math.random() * 600),
+            mvTaxTransport: "Quarterly",
+            category: "Three-wheeler (Goods)",
+            param: "500kg",
+            mvTaxRealised: Math.floor(250000 + Math.random() * 900000),
+            mvFeesRealised: Math.floor(25000 + Math.random() * 90000),
+            roadSafetyCess: Math.floor(8000 + Math.random() * 30000),
+            cfPerDay: Math.floor(Math.random() * 4000)
+        })),
+    lmvPassenger: assamDistricts.map((district)=>({
+            district,
+            totalVehicles: Math.floor(100 + Math.random() * 400),
+            mvTaxTransport: "Quarterly",
+            category: "Four-wheeler (LMV) Passenger",
+            param: "4+1",
+            mvTaxRealised: Math.floor(500000 + Math.random() * 2000000),
+            mvFeesRealised: Math.floor(50000 + Math.random() * 200000),
+            roadSafetyCess: Math.floor(15000 + Math.random() * 60000),
+            cfPerDay: Math.floor(Math.random() * 8000)
+        })),
+    lmvGoods: assamDistricts.map((district)=>({
+            district,
+            totalVehicles: Math.floor(80 + Math.random() * 350),
+            mvTaxTransport: "Quarterly",
+            category: "Four-wheeler (LMV) Goods",
+            param: "1500kg",
+            mvTaxRealised: Math.floor(450000 + Math.random() * 1800000),
+            mvFeesRealised: Math.floor(45000 + Math.random() * 180000),
+            roadSafetyCess: Math.floor(12000 + Math.random() * 50000),
+            cfPerDay: Math.floor(Math.random() * 7000)
+        })),
+    mmvPassenger: assamDistricts.map((district)=>({
+            district,
+            totalVehicles: Math.floor(50 + Math.random() * 200),
+            mvTaxTransport: "Quarterly",
+            category: "MMV (Passenger)",
+            param: "12+1",
+            mvTaxRealised: Math.floor(600000 + Math.random() * 2500000),
+            mvFeesRealised: Math.floor(60000 + Math.random() * 250000),
+            roadSafetyCess: Math.floor(20000 + Math.random() * 80000),
+            cfPerDay: Math.floor(Math.random() * 10000)
+        })),
+    mmvGoods: assamDistricts.map((district)=>({
+            district,
+            totalVehicles: Math.floor(40 + Math.random() * 180),
+            mvTaxTransport: "Quarterly",
+            category: "MMV (Goods)",
+            param: "5000kg",
+            mvTaxRealised: Math.floor(700000 + Math.random() * 3000000),
+            mvFeesRealised: Math.floor(70000 + Math.random() * 300000),
+            roadSafetyCess: Math.floor(25000 + Math.random() * 90000),
+            cfPerDay: Math.floor(Math.random() * 12000)
+        })),
+    hmvPassenger: assamDistricts.map((district)=>({
+            district,
+            totalVehicles: Math.floor(30 + Math.random() * 150),
+            mvTaxTransport: "Quarterly",
+            category: "HMV (Passenger)",
+            param: "32+1",
+            mvTaxRealised: Math.floor(1000000 + Math.random() * 4000000),
+            mvFeesRealised: Math.floor(100000 + Math.random() * 400000),
+            roadSafetyCess: Math.floor(40000 + Math.random() * 120000),
+            cfPerDay: Math.floor(Math.random() * 15000)
+        })),
+    hmvGoods: assamDistricts.map((district)=>({
+            district,
+            totalVehicles: Math.floor(60 + Math.random() * 250),
+            mvTaxTransport: "Quarterly",
+            category: "HMV (Goods)",
+            param: "12000kg",
+            mvTaxRealised: Math.floor(1200000 + Math.random() * 5000000),
+            mvFeesRealised: Math.floor(120000 + Math.random() * 500000),
+            roadSafetyCess: Math.floor(50000 + Math.random() * 150000),
+            cfPerDay: Math.floor(Math.random() * 18000)
+        })),
+    hmvGoods: assamDistricts.map((district)=>({
+            district,
+            totalVehicles: Math.floor(60 + Math.random() * 250),
+            mvTaxTransport: "Quarterly",
+            category: "HMV (Goods)",
+            param: "12000kg",
+            mvTaxRealised: Math.floor(1200000 + Math.random() * 5000000),
+            mvFeesRealised: Math.floor(120000 + Math.random() * 500000),
+            roadSafetyCess: Math.floor(50000 + Math.random() * 150000),
+            cfPerDay: Math.floor(Math.random() * 18000)
+        }))
+};
+const newReg4WheelerSplit = {
+    fiveYear: assamDistricts.map((district)=>({
+            district,
+            totalVehicles: Math.floor(20 + Math.random() * 100),
+            mvTaxNonTransport: "5-Year",
+            category: "Four-wheeler",
+            originalCost: "VARIES",
+            mvTaxRealised: Math.floor(500000 + Math.random() * 1500000),
+            mvFeesRealised: Math.floor(20000 + Math.random() * 80000),
+            roadSafetyCess: Math.floor(10000 + Math.random() * 30000),
+            cfPenalty: Math.floor(Math.random() * 5000)
+        })),
+    fifteenYear: assamDistricts.map((district)=>({
+            district,
+            totalVehicles: Math.floor(30 + Math.random() * 200),
+            mvTaxNonTransport: "Lifetime (15Y)",
+            category: "Four-wheeler",
+            originalCost: "VARIES",
+            mvTaxRealised: Math.floor(1000000 + Math.random() * 3500000),
+            mvFeesRealised: Math.floor(80000 + Math.random() * 220000),
+            roadSafetyCess: Math.floor(20000 + Math.random() * 70000),
+            cfPenalty: Math.floor(Math.random() * 15000)
+        }))
+};
+const reassignmentRevenue = {
+    twoWheeler: assamDistricts.map((district)=>({
+            district,
+            totalVehicles: Math.floor(50 + Math.random() * 200),
+            mvTaxNonTransport: "Re-assign",
+            category: "Two-wheeler",
+            weight: "Below 65kg",
+            mvTaxRealised: Math.floor(100000 + Math.random() * 500000),
+            mvFeesRealised: Math.floor(10000 + Math.random() * 50000),
+            roadSafetyCess: Math.floor(5000 + Math.random() * 15000),
+            cfPenalty: Math.floor(Math.random() * 2000)
+        })),
+    threeWheeler: assamDistricts.map((district)=>({
+            district,
+            totalVehicles: Math.floor(20 + Math.random() * 80),
+            mvTaxNonTransport: "Re-assign",
+            category: "Three-wheeler",
+            weight: "N/A",
+            mvTaxRealised: Math.floor(50000 + Math.random() * 200000),
+            mvFeesRealised: Math.floor(5000 + Math.random() * 20000),
+            roadSafetyCess: Math.floor(2000 + Math.random() * 8000),
+            cfPenalty: Math.floor(Math.random() * 1000)
+        })),
+    fourWheeler: assamDistricts.map((district)=>({
+            district,
+            totalVehicles: Math.floor(30 + Math.random() * 150),
+            mvTaxNonTransport: "Re-assign",
+            category: "Four-wheeler",
+            originalCost: "VARIES",
+            mvTaxRealised: Math.floor(300000 + Math.random() * 1000000),
+            mvFeesRealised: Math.floor(30000 + Math.random() * 100000),
+            roadSafetyCess: Math.floor(10000 + Math.random() * 30000),
+            cfPenalty: Math.floor(Math.random() * 5000)
+        })),
+    otherVehicles: assamDistricts.map((district)=>({
+            district,
+            totalVehicles: Math.floor(10 + Math.random() * 50),
+            mvTaxNonTransport: "Re-assign",
+            category: "LMV/MMV/HMV",
+            otherParams: "N/A",
+            mvTaxRealised: Math.floor(200000 + Math.random() * 800000),
+            mvFeesRealised: Math.floor(20000 + Math.random() * 60000),
+            roadSafetyCess: Math.floor(8000 + Math.random() * 20000),
+            cfPenalty: Math.floor(Math.random() * 4000)
+        }))
+};
+const greenTaxRevenue = {
+    nonTransport: assamDistricts.map((district)=>({
+            district,
+            totalVehicles: Math.floor(100 + Math.random() * 600),
+            period: "5 Years",
+            category: "Non-Transport",
+            mvFeesRealised: Math.floor(15000 + Math.random() * 60000),
+            roadSafetyCess: Math.floor(5000 + Math.random() * 20000),
+            cfPerDay: Math.floor(Math.random() * 3000),
+            taxRealised: Math.floor(200000 + Math.random() * 800000)
+        })),
+    transport: assamDistricts.map((district)=>({
+            district,
+            totalVehicles: Math.floor(150 + Math.random() * 800),
+            period: "Annual",
+            category: "Transport",
+            mvFeesRealised: Math.floor(25000 + Math.random() * 90000),
+            roadSafetyCess: Math.floor(8000 + Math.random() * 35000),
+            cfPerDay: Math.floor(Math.random() * 5000),
+            taxRealised: Math.floor(400000 + Math.random() * 1500000)
+        }))
+};
+const renewalRevenue = {
+    nonTransport: assamDistricts.map((district)=>({
+            district,
+            totalVehicles: Math.floor(80 + Math.random() * 400),
+            mvTaxNonTransport: "10-Year (Post 5Y)",
+            category: "Non-Transport",
+            mvTaxRealised: Math.floor(600000 + Math.random() * 2000000),
+            mvFeesRealised: Math.floor(60000 + Math.random() * 200000),
+            roadSafetyCess: Math.floor(20000 + Math.random() * 60000),
+            cfPenalty: Math.floor(Math.random() * 10000)
+        }))
+};
 const __TURBOPACK__default__export__ = {
     vehicleRegistrations,
     trafficIncidents,
@@ -129,7 +441,13 @@ const __TURBOPACK__default__export__ = {
     congestionLevels,
     fuelEfficiency,
     roadMaintenance,
-    revenueCollection
+    revenueCollection,
+    newRegistrationRevenue,
+    newRegistrationTransportRevenue,
+    newReg4WheelerSplit,
+    reassignmentRevenue,
+    greenTaxRevenue,
+    renewalRevenue
 };
  // Future CSV import function (commented out for now)
  // import Papa from 'papaparse';
@@ -170,6 +488,10 @@ __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$chart$2e$js$2f$d
 const Revenue = ()=>{
     const [selectedMonths, setSelectedMonths] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$data$2f$dummyData$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"].revenueCollection.map((d)=>d.month));
     const [isDarkMode, setIsDarkMode] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(false);
+    const [activeTab, setActiveTab] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])('twoWheeler');
+    const [activeTransportTab, setActiveTransportTab] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])('twoWheeler');
+    const [viewMode, setViewMode] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])('new');
+    const [taxTenure, setTaxTenure] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])('all');
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useEffect"])(()=>{
         setIsDarkMode(document.documentElement.classList.contains('dark'));
     }, []);
@@ -398,7 +720,7 @@ const Revenue = ()=>{
                         children: "Filter by Month"
                     }, void 0, false, {
                         fileName: "[project]/src/components/Revenue.js",
-                        lineNumber: 286,
+                        lineNumber: 290,
                         columnNumber: 17
                     }, ("TURBOPACK compile-time value", void 0)),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -409,18 +731,18 @@ const Revenue = ()=>{
                                 children: month
                             }, month, false, {
                                 fileName: "[project]/src/components/Revenue.js",
-                                lineNumber: 289,
+                                lineNumber: 293,
                                 columnNumber: 25
                             }, ("TURBOPACK compile-time value", void 0)))
                     }, void 0, false, {
                         fileName: "[project]/src/components/Revenue.js",
-                        lineNumber: 287,
+                        lineNumber: 291,
                         columnNumber: 17
                     }, ("TURBOPACK compile-time value", void 0))
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/components/Revenue.js",
-                lineNumber: 285,
+                lineNumber: 289,
                 columnNumber: 13
             }, ("TURBOPACK compile-time value", void 0)),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -434,37 +756,12 @@ const Revenue = ()=>{
                                 children: "Total MV Tax"
                             }, void 0, false, {
                                 fileName: "[project]/src/components/Revenue.js",
-                                lineNumber: 306,
+                                lineNumber: 310,
                                 columnNumber: 21
                             }, ("TURBOPACK compile-time value", void 0)),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                                 className: "text-2xl font-bold text-blue-600 dark:text-blue-400 mt-2",
                                 children: formatCurrency(stats.totalMVTax)
-                            }, void 0, false, {
-                                fileName: "[project]/src/components/Revenue.js",
-                                lineNumber: 307,
-                                columnNumber: 21
-                            }, ("TURBOPACK compile-time value", void 0))
-                        ]
-                    }, void 0, true, {
-                        fileName: "[project]/src/components/Revenue.js",
-                        lineNumber: 305,
-                        columnNumber: 17
-                    }, ("TURBOPACK compile-time value", void 0)),
-                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                        className: "bg-white dark:bg-gray-800 rounded-lg shadow p-6",
-                        children: [
-                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
-                                className: "text-sm font-medium text-gray-500 dark:text-gray-400",
-                                children: "Total MV Fees"
-                            }, void 0, false, {
-                                fileName: "[project]/src/components/Revenue.js",
-                                lineNumber: 310,
-                                columnNumber: 21
-                            }, ("TURBOPACK compile-time value", void 0)),
-                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                className: "text-2xl font-bold text-green-600 dark:text-green-400 mt-2",
-                                children: formatCurrency(stats.totalMVFees)
                             }, void 0, false, {
                                 fileName: "[project]/src/components/Revenue.js",
                                 lineNumber: 311,
@@ -481,15 +778,15 @@ const Revenue = ()=>{
                         children: [
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
                                 className: "text-sm font-medium text-gray-500 dark:text-gray-400",
-                                children: "Road Safety Cess"
+                                children: "Total MV Fees"
                             }, void 0, false, {
                                 fileName: "[project]/src/components/Revenue.js",
                                 lineNumber: 314,
                                 columnNumber: 21
                             }, ("TURBOPACK compile-time value", void 0)),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                className: "text-2xl font-bold text-yellow-600 dark:text-yellow-400 mt-2",
-                                children: formatCurrency(stats.totalRoadSafetyCess)
+                                className: "text-2xl font-bold text-green-600 dark:text-green-400 mt-2",
+                                children: formatCurrency(stats.totalMVFees)
                             }, void 0, false, {
                                 fileName: "[project]/src/components/Revenue.js",
                                 lineNumber: 315,
@@ -506,15 +803,15 @@ const Revenue = ()=>{
                         children: [
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
                                 className: "text-sm font-medium text-gray-500 dark:text-gray-400",
-                                children: "Green Tax"
+                                children: "Road Safety Cess"
                             }, void 0, false, {
                                 fileName: "[project]/src/components/Revenue.js",
                                 lineNumber: 318,
                                 columnNumber: 21
                             }, ("TURBOPACK compile-time value", void 0)),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                className: "text-2xl font-bold text-emerald-600 dark:text-emerald-400 mt-2",
-                                children: formatCurrency(stats.totalGreenTax)
+                                className: "text-2xl font-bold text-yellow-600 dark:text-yellow-400 mt-2",
+                                children: formatCurrency(stats.totalRoadSafetyCess)
                             }, void 0, false, {
                                 fileName: "[project]/src/components/Revenue.js",
                                 lineNumber: 319,
@@ -531,15 +828,15 @@ const Revenue = ()=>{
                         children: [
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
                                 className: "text-sm font-medium text-gray-500 dark:text-gray-400",
-                                children: "Compounding Fees"
+                                children: "Green Tax"
                             }, void 0, false, {
                                 fileName: "[project]/src/components/Revenue.js",
                                 lineNumber: 322,
                                 columnNumber: 21
                             }, ("TURBOPACK compile-time value", void 0)),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                className: "text-2xl font-bold text-red-600 dark:text-red-400 mt-2",
-                                children: formatCurrency(stats.totalCF)
+                                className: "text-2xl font-bold text-emerald-600 dark:text-emerald-400 mt-2",
+                                children: formatCurrency(stats.totalGreenTax)
                             }, void 0, false, {
                                 fileName: "[project]/src/components/Revenue.js",
                                 lineNumber: 323,
@@ -556,15 +853,15 @@ const Revenue = ()=>{
                         children: [
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
                                 className: "text-sm font-medium text-gray-500 dark:text-gray-400",
-                                children: "Other Fees"
+                                children: "Compounding Fees"
                             }, void 0, false, {
                                 fileName: "[project]/src/components/Revenue.js",
                                 lineNumber: 326,
                                 columnNumber: 21
                             }, ("TURBOPACK compile-time value", void 0)),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                className: "text-2xl font-bold text-purple-600 dark:text-purple-400 mt-2",
-                                children: formatCurrency(stats.totalOther)
+                                className: "text-2xl font-bold text-red-600 dark:text-red-400 mt-2",
+                                children: formatCurrency(stats.totalCF)
                             }, void 0, false, {
                                 fileName: "[project]/src/components/Revenue.js",
                                 lineNumber: 327,
@@ -577,19 +874,19 @@ const Revenue = ()=>{
                         columnNumber: 17
                     }, ("TURBOPACK compile-time value", void 0)),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                        className: "bg-gradient-to-br from-blue-500 to-blue-600 dark:from-blue-600 dark:to-blue-700 rounded-lg shadow p-6 md:col-span-2",
+                        className: "bg-white dark:bg-gray-800 rounded-lg shadow p-6",
                         children: [
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
-                                className: "text-sm font-medium text-blue-100",
-                                children: "Grand Total Revenue"
+                                className: "text-sm font-medium text-gray-500 dark:text-gray-400",
+                                children: "Other Fees"
                             }, void 0, false, {
                                 fileName: "[project]/src/components/Revenue.js",
                                 lineNumber: 330,
                                 columnNumber: 21
                             }, ("TURBOPACK compile-time value", void 0)),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                className: "text-3xl font-bold text-white mt-2",
-                                children: formatCurrency(stats.grandTotal)
+                                className: "text-2xl font-bold text-purple-600 dark:text-purple-400 mt-2",
+                                children: formatCurrency(stats.totalOther)
                             }, void 0, false, {
                                 fileName: "[project]/src/components/Revenue.js",
                                 lineNumber: 331,
@@ -600,11 +897,36 @@ const Revenue = ()=>{
                         fileName: "[project]/src/components/Revenue.js",
                         lineNumber: 329,
                         columnNumber: 17
+                    }, ("TURBOPACK compile-time value", void 0)),
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                        className: "bg-gradient-to-br from-blue-500 to-blue-600 dark:from-blue-600 dark:to-blue-700 rounded-lg shadow p-6 md:col-span-2",
+                        children: [
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
+                                className: "text-sm font-medium text-blue-100",
+                                children: "Grand Total Revenue"
+                            }, void 0, false, {
+                                fileName: "[project]/src/components/Revenue.js",
+                                lineNumber: 334,
+                                columnNumber: 21
+                            }, ("TURBOPACK compile-time value", void 0)),
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                                className: "text-3xl font-bold text-white mt-2",
+                                children: formatCurrency(stats.grandTotal)
+                            }, void 0, false, {
+                                fileName: "[project]/src/components/Revenue.js",
+                                lineNumber: 335,
+                                columnNumber: 21
+                            }, ("TURBOPACK compile-time value", void 0))
+                        ]
+                    }, void 0, true, {
+                        fileName: "[project]/src/components/Revenue.js",
+                        lineNumber: 333,
+                        columnNumber: 17
                     }, ("TURBOPACK compile-time value", void 0))
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/components/Revenue.js",
-                lineNumber: 304,
+                lineNumber: 308,
                 columnNumber: 13
             }, ("TURBOPACK compile-time value", void 0)),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -618,7 +940,7 @@ const Revenue = ()=>{
                                 children: "Revenue Breakdown by Category"
                             }, void 0, false, {
                                 fileName: "[project]/src/components/Revenue.js",
-                                lineNumber: 338,
+                                lineNumber: 342,
                                 columnNumber: 21
                             }, ("TURBOPACK compile-time value", void 0)),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -628,18 +950,18 @@ const Revenue = ()=>{
                                     options: currentChartOptions
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/Revenue.js",
-                                    lineNumber: 340,
+                                    lineNumber: 344,
                                     columnNumber: 25
                                 }, ("TURBOPACK compile-time value", void 0))
                             }, void 0, false, {
                                 fileName: "[project]/src/components/Revenue.js",
-                                lineNumber: 339,
+                                lineNumber: 343,
                                 columnNumber: 21
                             }, ("TURBOPACK compile-time value", void 0))
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/components/Revenue.js",
-                        lineNumber: 337,
+                        lineNumber: 341,
                         columnNumber: 17
                     }, ("TURBOPACK compile-time value", void 0)),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -650,7 +972,7 @@ const Revenue = ()=>{
                                 children: "Total Revenue Trend"
                             }, void 0, false, {
                                 fileName: "[project]/src/components/Revenue.js",
-                                lineNumber: 344,
+                                lineNumber: 348,
                                 columnNumber: 21
                             }, ("TURBOPACK compile-time value", void 0)),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -660,24 +982,24 @@ const Revenue = ()=>{
                                     options: currentLineChartOptions
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/Revenue.js",
-                                    lineNumber: 346,
+                                    lineNumber: 350,
                                     columnNumber: 25
                                 }, ("TURBOPACK compile-time value", void 0))
                             }, void 0, false, {
                                 fileName: "[project]/src/components/Revenue.js",
-                                lineNumber: 345,
+                                lineNumber: 349,
                                 columnNumber: 21
                             }, ("TURBOPACK compile-time value", void 0))
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/components/Revenue.js",
-                        lineNumber: 343,
+                        lineNumber: 347,
                         columnNumber: 17
                     }, ("TURBOPACK compile-time value", void 0))
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/components/Revenue.js",
-                lineNumber: 336,
+                lineNumber: 340,
                 columnNumber: 13
             }, ("TURBOPACK compile-time value", void 0)),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -690,12 +1012,12 @@ const Revenue = ()=>{
                             children: "Revenue Collection Statement"
                         }, void 0, false, {
                             fileName: "[project]/src/components/Revenue.js",
-                            lineNumber: 354,
+                            lineNumber: 358,
                             columnNumber: 21
                         }, ("TURBOPACK compile-time value", void 0))
                     }, void 0, false, {
                         fileName: "[project]/src/components/Revenue.js",
-                        lineNumber: 353,
+                        lineNumber: 357,
                         columnNumber: 17
                     }, ("TURBOPACK compile-time value", void 0)),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -712,7 +1034,7 @@ const Revenue = ()=>{
                                                 children: "Revenue Category"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/components/Revenue.js",
-                                                lineNumber: 360,
+                                                lineNumber: 364,
                                                 columnNumber: 33
                                             }, ("TURBOPACK compile-time value", void 0)),
                                             filteredData.map((row)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
@@ -720,7 +1042,7 @@ const Revenue = ()=>{
                                                     children: row.month
                                                 }, row.month, false, {
                                                     fileName: "[project]/src/components/Revenue.js",
-                                                    lineNumber: 362,
+                                                    lineNumber: 366,
                                                     columnNumber: 37
                                                 }, ("TURBOPACK compile-time value", void 0))),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
@@ -728,18 +1050,18 @@ const Revenue = ()=>{
                                                 children: "Total"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/components/Revenue.js",
-                                                lineNumber: 364,
+                                                lineNumber: 368,
                                                 columnNumber: 33
                                             }, ("TURBOPACK compile-time value", void 0))
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/src/components/Revenue.js",
-                                        lineNumber: 359,
+                                        lineNumber: 363,
                                         columnNumber: 29
                                     }, ("TURBOPACK compile-time value", void 0))
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/Revenue.js",
-                                    lineNumber: 358,
+                                    lineNumber: 362,
                                     columnNumber: 25
                                 }, ("TURBOPACK compile-time value", void 0)),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("tbody", {
@@ -753,12 +1075,12 @@ const Revenue = ()=>{
                                                 children: "MV Tax (Motor Vehicle Tax)"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/components/Revenue.js",
-                                                lineNumber: 370,
+                                                lineNumber: 374,
                                                 columnNumber: 33
                                             }, ("TURBOPACK compile-time value", void 0))
                                         }, void 0, false, {
                                             fileName: "[project]/src/components/Revenue.js",
-                                            lineNumber: 369,
+                                            lineNumber: 373,
                                             columnNumber: 29
                                         }, ("TURBOPACK compile-time value", void 0)),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("tr", {
@@ -769,7 +1091,7 @@ const Revenue = ()=>{
                                                     children: "Non-Transport"
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/components/Revenue.js",
-                                                    lineNumber: 375,
+                                                    lineNumber: 379,
                                                     columnNumber: 33
                                                 }, ("TURBOPACK compile-time value", void 0)),
                                                 filteredData.map((row)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
@@ -777,7 +1099,7 @@ const Revenue = ()=>{
                                                         children: formatCurrency(row.mvTaxNonTransport)
                                                     }, row.month, false, {
                                                         fileName: "[project]/src/components/Revenue.js",
-                                                        lineNumber: 377,
+                                                        lineNumber: 381,
                                                         columnNumber: 37
                                                     }, ("TURBOPACK compile-time value", void 0))),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
@@ -785,13 +1107,13 @@ const Revenue = ()=>{
                                                     children: formatCurrency(filteredData.reduce((sum, d)=>sum + d.mvTaxNonTransport, 0))
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/components/Revenue.js",
-                                                    lineNumber: 379,
+                                                    lineNumber: 383,
                                                     columnNumber: 33
                                                 }, ("TURBOPACK compile-time value", void 0))
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/src/components/Revenue.js",
-                                            lineNumber: 374,
+                                            lineNumber: 378,
                                             columnNumber: 29
                                         }, ("TURBOPACK compile-time value", void 0)),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("tr", {
@@ -802,7 +1124,7 @@ const Revenue = ()=>{
                                                     children: "Transport"
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/components/Revenue.js",
-                                                    lineNumber: 384,
+                                                    lineNumber: 388,
                                                     columnNumber: 33
                                                 }, ("TURBOPACK compile-time value", void 0)),
                                                 filteredData.map((row)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
@@ -810,7 +1132,7 @@ const Revenue = ()=>{
                                                         children: formatCurrency(row.mvTaxTransport)
                                                     }, row.month, false, {
                                                         fileName: "[project]/src/components/Revenue.js",
-                                                        lineNumber: 386,
+                                                        lineNumber: 390,
                                                         columnNumber: 37
                                                     }, ("TURBOPACK compile-time value", void 0))),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
@@ -818,13 +1140,13 @@ const Revenue = ()=>{
                                                     children: formatCurrency(filteredData.reduce((sum, d)=>sum + d.mvTaxTransport, 0))
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/components/Revenue.js",
-                                                    lineNumber: 388,
+                                                    lineNumber: 392,
                                                     columnNumber: 33
                                                 }, ("TURBOPACK compile-time value", void 0))
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/src/components/Revenue.js",
-                                            lineNumber: 383,
+                                            lineNumber: 387,
                                             columnNumber: 29
                                         }, ("TURBOPACK compile-time value", void 0)),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("tr", {
@@ -835,7 +1157,7 @@ const Revenue = ()=>{
                                                     children: "New Registration of Vehicle"
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/components/Revenue.js",
-                                                    lineNumber: 393,
+                                                    lineNumber: 397,
                                                     columnNumber: 33
                                                 }, ("TURBOPACK compile-time value", void 0)),
                                                 filteredData.map((row)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
@@ -843,7 +1165,7 @@ const Revenue = ()=>{
                                                         children: formatCurrency(row.mvTaxNewRegistration)
                                                     }, row.month, false, {
                                                         fileName: "[project]/src/components/Revenue.js",
-                                                        lineNumber: 395,
+                                                        lineNumber: 399,
                                                         columnNumber: 37
                                                     }, ("TURBOPACK compile-time value", void 0))),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
@@ -851,13 +1173,13 @@ const Revenue = ()=>{
                                                     children: formatCurrency(filteredData.reduce((sum, d)=>sum + d.mvTaxNewRegistration, 0))
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/components/Revenue.js",
-                                                    lineNumber: 397,
+                                                    lineNumber: 401,
                                                     columnNumber: 33
                                                 }, ("TURBOPACK compile-time value", void 0))
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/src/components/Revenue.js",
-                                            lineNumber: 392,
+                                            lineNumber: 396,
                                             columnNumber: 29
                                         }, ("TURBOPACK compile-time value", void 0)),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("tr", {
@@ -868,7 +1190,7 @@ const Revenue = ()=>{
                                                     children: "M.V. Tax from already registered vehicle"
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/components/Revenue.js",
-                                                    lineNumber: 402,
+                                                    lineNumber: 406,
                                                     columnNumber: 33
                                                 }, ("TURBOPACK compile-time value", void 0)),
                                                 filteredData.map((row)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
@@ -876,7 +1198,7 @@ const Revenue = ()=>{
                                                         children: formatCurrency(row.mvTaxFromRegistered)
                                                     }, row.month, false, {
                                                         fileName: "[project]/src/components/Revenue.js",
-                                                        lineNumber: 404,
+                                                        lineNumber: 408,
                                                         columnNumber: 37
                                                     }, ("TURBOPACK compile-time value", void 0))),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
@@ -884,13 +1206,13 @@ const Revenue = ()=>{
                                                     children: formatCurrency(filteredData.reduce((sum, d)=>sum + d.mvTaxFromRegistered, 0))
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/components/Revenue.js",
-                                                    lineNumber: 406,
+                                                    lineNumber: 410,
                                                     columnNumber: 33
                                                 }, ("TURBOPACK compile-time value", void 0))
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/src/components/Revenue.js",
-                                            lineNumber: 401,
+                                            lineNumber: 405,
                                             columnNumber: 29
                                         }, ("TURBOPACK compile-time value", void 0)),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("tr", {
@@ -901,12 +1223,12 @@ const Revenue = ()=>{
                                                 children: "MV Fees"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/components/Revenue.js",
-                                                lineNumber: 413,
+                                                lineNumber: 417,
                                                 columnNumber: 33
                                             }, ("TURBOPACK compile-time value", void 0))
                                         }, void 0, false, {
                                             fileName: "[project]/src/components/Revenue.js",
-                                            lineNumber: 412,
+                                            lineNumber: 416,
                                             columnNumber: 29
                                         }, ("TURBOPACK compile-time value", void 0)),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("tr", {
@@ -921,13 +1243,13 @@ const Revenue = ()=>{
                                                             children: "(Driving Licence related services)"
                                                         }, void 0, false, {
                                                             fileName: "[project]/src/components/Revenue.js",
-                                                            lineNumber: 418,
+                                                            lineNumber: 422,
                                                             columnNumber: 114
                                                         }, ("TURBOPACK compile-time value", void 0))
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/src/components/Revenue.js",
-                                                    lineNumber: 418,
+                                                    lineNumber: 422,
                                                     columnNumber: 33
                                                 }, ("TURBOPACK compile-time value", void 0)),
                                                 filteredData.map((row)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
@@ -935,7 +1257,7 @@ const Revenue = ()=>{
                                                         children: formatCurrency(row.mvFeesSarathi)
                                                     }, row.month, false, {
                                                         fileName: "[project]/src/components/Revenue.js",
-                                                        lineNumber: 420,
+                                                        lineNumber: 424,
                                                         columnNumber: 37
                                                     }, ("TURBOPACK compile-time value", void 0))),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
@@ -943,13 +1265,13 @@ const Revenue = ()=>{
                                                     children: formatCurrency(filteredData.reduce((sum, d)=>sum + d.mvFeesSarathi, 0))
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/components/Revenue.js",
-                                                    lineNumber: 422,
+                                                    lineNumber: 426,
                                                     columnNumber: 33
                                                 }, ("TURBOPACK compile-time value", void 0))
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/src/components/Revenue.js",
-                                            lineNumber: 417,
+                                            lineNumber: 421,
                                             columnNumber: 29
                                         }, ("TURBOPACK compile-time value", void 0)),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("tr", {
@@ -964,13 +1286,13 @@ const Revenue = ()=>{
                                                             children: "(Vehicle related services)"
                                                         }, void 0, false, {
                                                             fileName: "[project]/src/components/Revenue.js",
-                                                            lineNumber: 427,
+                                                            lineNumber: 431,
                                                             columnNumber: 112
                                                         }, ("TURBOPACK compile-time value", void 0))
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/src/components/Revenue.js",
-                                                    lineNumber: 427,
+                                                    lineNumber: 431,
                                                     columnNumber: 33
                                                 }, ("TURBOPACK compile-time value", void 0)),
                                                 filteredData.map((row)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
@@ -978,7 +1300,7 @@ const Revenue = ()=>{
                                                         children: formatCurrency(row.mvFeesVahan)
                                                     }, row.month, false, {
                                                         fileName: "[project]/src/components/Revenue.js",
-                                                        lineNumber: 429,
+                                                        lineNumber: 433,
                                                         columnNumber: 37
                                                     }, ("TURBOPACK compile-time value", void 0))),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
@@ -986,13 +1308,13 @@ const Revenue = ()=>{
                                                     children: formatCurrency(filteredData.reduce((sum, d)=>sum + d.mvFeesVahan, 0))
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/components/Revenue.js",
-                                                    lineNumber: 431,
+                                                    lineNumber: 435,
                                                     columnNumber: 33
                                                 }, ("TURBOPACK compile-time value", void 0))
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/src/components/Revenue.js",
-                                            lineNumber: 426,
+                                            lineNumber: 430,
                                             columnNumber: 29
                                         }, ("TURBOPACK compile-time value", void 0)),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("tr", {
@@ -1007,13 +1329,13 @@ const Revenue = ()=>{
                                                             children: "(Pollution Under Control Certificate fees)"
                                                         }, void 0, false, {
                                                             fileName: "[project]/src/components/Revenue.js",
-                                                            lineNumber: 436,
+                                                            lineNumber: 440,
                                                             columnNumber: 111
                                                         }, ("TURBOPACK compile-time value", void 0))
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/src/components/Revenue.js",
-                                                    lineNumber: 436,
+                                                    lineNumber: 440,
                                                     columnNumber: 33
                                                 }, ("TURBOPACK compile-time value", void 0)),
                                                 filteredData.map((row)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
@@ -1021,7 +1343,7 @@ const Revenue = ()=>{
                                                         children: formatCurrency(row.mvFeesPUCC)
                                                     }, row.month, false, {
                                                         fileName: "[project]/src/components/Revenue.js",
-                                                        lineNumber: 438,
+                                                        lineNumber: 442,
                                                         columnNumber: 37
                                                     }, ("TURBOPACK compile-time value", void 0))),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
@@ -1029,13 +1351,13 @@ const Revenue = ()=>{
                                                     children: formatCurrency(filteredData.reduce((sum, d)=>sum + d.mvFeesPUCC, 0))
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/components/Revenue.js",
-                                                    lineNumber: 440,
+                                                    lineNumber: 444,
                                                     columnNumber: 33
                                                 }, ("TURBOPACK compile-time value", void 0))
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/src/components/Revenue.js",
-                                            lineNumber: 435,
+                                            lineNumber: 439,
                                             columnNumber: 29
                                         }, ("TURBOPACK compile-time value", void 0)),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("tr", {
@@ -1046,12 +1368,12 @@ const Revenue = ()=>{
                                                 children: "Road Safety Cess"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/components/Revenue.js",
-                                                lineNumber: 447,
+                                                lineNumber: 451,
                                                 columnNumber: 33
                                             }, ("TURBOPACK compile-time value", void 0))
                                         }, void 0, false, {
                                             fileName: "[project]/src/components/Revenue.js",
-                                            lineNumber: 446,
+                                            lineNumber: 450,
                                             columnNumber: 29
                                         }, ("TURBOPACK compile-time value", void 0)),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("tr", {
@@ -1062,7 +1384,7 @@ const Revenue = ()=>{
                                                     children: "Non-Transport"
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/components/Revenue.js",
-                                                    lineNumber: 452,
+                                                    lineNumber: 456,
                                                     columnNumber: 33
                                                 }, ("TURBOPACK compile-time value", void 0)),
                                                 filteredData.map((row)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
@@ -1070,7 +1392,7 @@ const Revenue = ()=>{
                                                         children: formatCurrency(row.roadSafetyCessNonTransport)
                                                     }, row.month, false, {
                                                         fileName: "[project]/src/components/Revenue.js",
-                                                        lineNumber: 454,
+                                                        lineNumber: 458,
                                                         columnNumber: 37
                                                     }, ("TURBOPACK compile-time value", void 0))),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
@@ -1078,13 +1400,13 @@ const Revenue = ()=>{
                                                     children: formatCurrency(filteredData.reduce((sum, d)=>sum + d.roadSafetyCessNonTransport, 0))
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/components/Revenue.js",
-                                                    lineNumber: 456,
+                                                    lineNumber: 460,
                                                     columnNumber: 33
                                                 }, ("TURBOPACK compile-time value", void 0))
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/src/components/Revenue.js",
-                                            lineNumber: 451,
+                                            lineNumber: 455,
                                             columnNumber: 29
                                         }, ("TURBOPACK compile-time value", void 0)),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("tr", {
@@ -1095,7 +1417,7 @@ const Revenue = ()=>{
                                                     children: "Transport"
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/components/Revenue.js",
-                                                    lineNumber: 461,
+                                                    lineNumber: 465,
                                                     columnNumber: 33
                                                 }, ("TURBOPACK compile-time value", void 0)),
                                                 filteredData.map((row)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
@@ -1103,7 +1425,7 @@ const Revenue = ()=>{
                                                         children: formatCurrency(row.roadSafetyCessTransport)
                                                     }, row.month, false, {
                                                         fileName: "[project]/src/components/Revenue.js",
-                                                        lineNumber: 463,
+                                                        lineNumber: 467,
                                                         columnNumber: 37
                                                     }, ("TURBOPACK compile-time value", void 0))),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
@@ -1111,13 +1433,13 @@ const Revenue = ()=>{
                                                     children: formatCurrency(filteredData.reduce((sum, d)=>sum + d.roadSafetyCessTransport, 0))
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/components/Revenue.js",
-                                                    lineNumber: 465,
+                                                    lineNumber: 469,
                                                     columnNumber: 33
                                                 }, ("TURBOPACK compile-time value", void 0))
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/src/components/Revenue.js",
-                                            lineNumber: 460,
+                                            lineNumber: 464,
                                             columnNumber: 29
                                         }, ("TURBOPACK compile-time value", void 0)),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("tr", {
@@ -1128,12 +1450,12 @@ const Revenue = ()=>{
                                                 children: "Green Tax"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/components/Revenue.js",
-                                                lineNumber: 472,
+                                                lineNumber: 476,
                                                 columnNumber: 33
                                             }, ("TURBOPACK compile-time value", void 0))
                                         }, void 0, false, {
                                             fileName: "[project]/src/components/Revenue.js",
-                                            lineNumber: 471,
+                                            lineNumber: 475,
                                             columnNumber: 29
                                         }, ("TURBOPACK compile-time value", void 0)),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("tr", {
@@ -1144,7 +1466,7 @@ const Revenue = ()=>{
                                                     children: "Non-Transport"
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/components/Revenue.js",
-                                                    lineNumber: 477,
+                                                    lineNumber: 481,
                                                     columnNumber: 33
                                                 }, ("TURBOPACK compile-time value", void 0)),
                                                 filteredData.map((row)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
@@ -1152,7 +1474,7 @@ const Revenue = ()=>{
                                                         children: formatCurrency(row.greenTaxNonTransport)
                                                     }, row.month, false, {
                                                         fileName: "[project]/src/components/Revenue.js",
-                                                        lineNumber: 479,
+                                                        lineNumber: 483,
                                                         columnNumber: 37
                                                     }, ("TURBOPACK compile-time value", void 0))),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
@@ -1160,13 +1482,13 @@ const Revenue = ()=>{
                                                     children: formatCurrency(filteredData.reduce((sum, d)=>sum + d.greenTaxNonTransport, 0))
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/components/Revenue.js",
-                                                    lineNumber: 481,
+                                                    lineNumber: 485,
                                                     columnNumber: 33
                                                 }, ("TURBOPACK compile-time value", void 0))
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/src/components/Revenue.js",
-                                            lineNumber: 476,
+                                            lineNumber: 480,
                                             columnNumber: 29
                                         }, ("TURBOPACK compile-time value", void 0)),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("tr", {
@@ -1177,7 +1499,7 @@ const Revenue = ()=>{
                                                     children: "Transport"
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/components/Revenue.js",
-                                                    lineNumber: 486,
+                                                    lineNumber: 490,
                                                     columnNumber: 33
                                                 }, ("TURBOPACK compile-time value", void 0)),
                                                 filteredData.map((row)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
@@ -1185,7 +1507,7 @@ const Revenue = ()=>{
                                                         children: formatCurrency(row.greenTaxTransport)
                                                     }, row.month, false, {
                                                         fileName: "[project]/src/components/Revenue.js",
-                                                        lineNumber: 488,
+                                                        lineNumber: 492,
                                                         columnNumber: 37
                                                     }, ("TURBOPACK compile-time value", void 0))),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
@@ -1193,13 +1515,13 @@ const Revenue = ()=>{
                                                     children: formatCurrency(filteredData.reduce((sum, d)=>sum + d.greenTaxTransport, 0))
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/components/Revenue.js",
-                                                    lineNumber: 490,
+                                                    lineNumber: 494,
                                                     columnNumber: 33
                                                 }, ("TURBOPACK compile-time value", void 0))
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/src/components/Revenue.js",
-                                            lineNumber: 485,
+                                            lineNumber: 489,
                                             columnNumber: 29
                                         }, ("TURBOPACK compile-time value", void 0)),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("tr", {
@@ -1210,12 +1532,12 @@ const Revenue = ()=>{
                                                 children: "C.F. (Compounding Fee)"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/components/Revenue.js",
-                                                lineNumber: 497,
+                                                lineNumber: 501,
                                                 columnNumber: 33
                                             }, ("TURBOPACK compile-time value", void 0))
                                         }, void 0, false, {
                                             fileName: "[project]/src/components/Revenue.js",
-                                            lineNumber: 496,
+                                            lineNumber: 500,
                                             columnNumber: 29
                                         }, ("TURBOPACK compile-time value", void 0)),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("tr", {
@@ -1226,7 +1548,7 @@ const Revenue = ()=>{
                                                     children: "Offence CF"
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/components/Revenue.js",
-                                                    lineNumber: 502,
+                                                    lineNumber: 506,
                                                     columnNumber: 33
                                                 }, ("TURBOPACK compile-time value", void 0)),
                                                 filteredData.map((row)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
@@ -1234,7 +1556,7 @@ const Revenue = ()=>{
                                                         children: formatCurrency(row.cfOffence)
                                                     }, row.month, false, {
                                                         fileName: "[project]/src/components/Revenue.js",
-                                                        lineNumber: 504,
+                                                        lineNumber: 508,
                                                         columnNumber: 37
                                                     }, ("TURBOPACK compile-time value", void 0))),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
@@ -1242,13 +1564,13 @@ const Revenue = ()=>{
                                                     children: formatCurrency(filteredData.reduce((sum, d)=>sum + d.cfOffence, 0))
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/components/Revenue.js",
-                                                    lineNumber: 506,
+                                                    lineNumber: 510,
                                                     columnNumber: 33
                                                 }, ("TURBOPACK compile-time value", void 0))
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/src/components/Revenue.js",
-                                            lineNumber: 501,
+                                            lineNumber: 505,
                                             columnNumber: 29
                                         }, ("TURBOPACK compile-time value", void 0)),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("tr", {
@@ -1259,7 +1581,7 @@ const Revenue = ()=>{
                                                     children: "CF @ ₹5 per day (delay fine)"
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/components/Revenue.js",
-                                                    lineNumber: 511,
+                                                    lineNumber: 515,
                                                     columnNumber: 33
                                                 }, ("TURBOPACK compile-time value", void 0)),
                                                 filteredData.map((row)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
@@ -1267,7 +1589,7 @@ const Revenue = ()=>{
                                                         children: formatCurrency(row.cfDelayFine)
                                                     }, row.month, false, {
                                                         fileName: "[project]/src/components/Revenue.js",
-                                                        lineNumber: 513,
+                                                        lineNumber: 517,
                                                         columnNumber: 37
                                                     }, ("TURBOPACK compile-time value", void 0))),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
@@ -1275,13 +1597,13 @@ const Revenue = ()=>{
                                                     children: formatCurrency(filteredData.reduce((sum, d)=>sum + d.cfDelayFine, 0))
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/components/Revenue.js",
-                                                    lineNumber: 515,
+                                                    lineNumber: 519,
                                                     columnNumber: 33
                                                 }, ("TURBOPACK compile-time value", void 0))
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/src/components/Revenue.js",
-                                            lineNumber: 510,
+                                            lineNumber: 514,
                                             columnNumber: 29
                                         }, ("TURBOPACK compile-time value", void 0)),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("tr", {
@@ -1292,7 +1614,7 @@ const Revenue = ()=>{
                                                     children: "Fitness CF @ ₹50 per day delay"
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/components/Revenue.js",
-                                                    lineNumber: 520,
+                                                    lineNumber: 524,
                                                     columnNumber: 33
                                                 }, ("TURBOPACK compile-time value", void 0)),
                                                 filteredData.map((row)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
@@ -1300,7 +1622,7 @@ const Revenue = ()=>{
                                                         children: formatCurrency(row.fitnessCF)
                                                     }, row.month, false, {
                                                         fileName: "[project]/src/components/Revenue.js",
-                                                        lineNumber: 522,
+                                                        lineNumber: 526,
                                                         columnNumber: 37
                                                     }, ("TURBOPACK compile-time value", void 0))),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
@@ -1308,13 +1630,13 @@ const Revenue = ()=>{
                                                     children: formatCurrency(filteredData.reduce((sum, d)=>sum + d.fitnessCF, 0))
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/components/Revenue.js",
-                                                    lineNumber: 524,
+                                                    lineNumber: 528,
                                                     columnNumber: 33
                                                 }, ("TURBOPACK compile-time value", void 0))
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/src/components/Revenue.js",
-                                            lineNumber: 519,
+                                            lineNumber: 523,
                                             columnNumber: 29
                                         }, ("TURBOPACK compile-time value", void 0)),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("tr", {
@@ -1325,7 +1647,7 @@ const Revenue = ()=>{
                                                     children: "PUCC Late fine @ ₹500"
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/components/Revenue.js",
-                                                    lineNumber: 529,
+                                                    lineNumber: 533,
                                                     columnNumber: 33
                                                 }, ("TURBOPACK compile-time value", void 0)),
                                                 filteredData.map((row)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
@@ -1333,7 +1655,7 @@ const Revenue = ()=>{
                                                         children: formatCurrency(row.puccLateFine)
                                                     }, row.month, false, {
                                                         fileName: "[project]/src/components/Revenue.js",
-                                                        lineNumber: 531,
+                                                        lineNumber: 535,
                                                         columnNumber: 37
                                                     }, ("TURBOPACK compile-time value", void 0))),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
@@ -1341,13 +1663,13 @@ const Revenue = ()=>{
                                                     children: formatCurrency(filteredData.reduce((sum, d)=>sum + d.puccLateFine, 0))
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/components/Revenue.js",
-                                                    lineNumber: 533,
+                                                    lineNumber: 537,
                                                     columnNumber: 33
                                                 }, ("TURBOPACK compile-time value", void 0))
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/src/components/Revenue.js",
-                                            lineNumber: 528,
+                                            lineNumber: 532,
                                             columnNumber: 29
                                         }, ("TURBOPACK compile-time value", void 0)),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("tr", {
@@ -1358,7 +1680,7 @@ const Revenue = ()=>{
                                                     children: "Other late fee / fine / etc."
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/components/Revenue.js",
-                                                    lineNumber: 538,
+                                                    lineNumber: 542,
                                                     columnNumber: 33
                                                 }, ("TURBOPACK compile-time value", void 0)),
                                                 filteredData.map((row)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
@@ -1366,7 +1688,7 @@ const Revenue = ()=>{
                                                         children: formatCurrency(row.otherLateFees)
                                                     }, row.month, false, {
                                                         fileName: "[project]/src/components/Revenue.js",
-                                                        lineNumber: 540,
+                                                        lineNumber: 544,
                                                         columnNumber: 37
                                                     }, ("TURBOPACK compile-time value", void 0))),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
@@ -1374,13 +1696,13 @@ const Revenue = ()=>{
                                                     children: formatCurrency(filteredData.reduce((sum, d)=>sum + d.otherLateFees, 0))
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/components/Revenue.js",
-                                                    lineNumber: 542,
+                                                    lineNumber: 546,
                                                     columnNumber: 33
                                                 }, ("TURBOPACK compile-time value", void 0))
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/src/components/Revenue.js",
-                                            lineNumber: 537,
+                                            lineNumber: 541,
                                             columnNumber: 29
                                         }, ("TURBOPACK compile-time value", void 0)),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("tr", {
@@ -1391,12 +1713,12 @@ const Revenue = ()=>{
                                                 children: "APGT"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/components/Revenue.js",
-                                                lineNumber: 549,
+                                                lineNumber: 553,
                                                 columnNumber: 33
                                             }, ("TURBOPACK compile-time value", void 0))
                                         }, void 0, false, {
                                             fileName: "[project]/src/components/Revenue.js",
-                                            lineNumber: 548,
+                                            lineNumber: 552,
                                             columnNumber: 29
                                         }, ("TURBOPACK compile-time value", void 0)),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("tr", {
@@ -1407,7 +1729,7 @@ const Revenue = ()=>{
                                                     children: "APGT Fees"
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/components/Revenue.js",
-                                                    lineNumber: 554,
+                                                    lineNumber: 558,
                                                     columnNumber: 33
                                                 }, ("TURBOPACK compile-time value", void 0)),
                                                 filteredData.map((row)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
@@ -1415,7 +1737,7 @@ const Revenue = ()=>{
                                                         children: formatCurrency(row.apgt)
                                                     }, row.month, false, {
                                                         fileName: "[project]/src/components/Revenue.js",
-                                                        lineNumber: 556,
+                                                        lineNumber: 560,
                                                         columnNumber: 37
                                                     }, ("TURBOPACK compile-time value", void 0))),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
@@ -1423,13 +1745,13 @@ const Revenue = ()=>{
                                                     children: formatCurrency(filteredData.reduce((sum, d)=>sum + d.apgt, 0))
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/components/Revenue.js",
-                                                    lineNumber: 558,
+                                                    lineNumber: 562,
                                                     columnNumber: 33
                                                 }, ("TURBOPACK compile-time value", void 0))
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/src/components/Revenue.js",
-                                            lineNumber: 553,
+                                            lineNumber: 557,
                                             columnNumber: 29
                                         }, ("TURBOPACK compile-time value", void 0)),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("tr", {
@@ -1440,12 +1762,12 @@ const Revenue = ()=>{
                                                 children: "HSRP"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/components/Revenue.js",
-                                                lineNumber: 565,
+                                                lineNumber: 569,
                                                 columnNumber: 33
                                             }, ("TURBOPACK compile-time value", void 0))
                                         }, void 0, false, {
                                             fileName: "[project]/src/components/Revenue.js",
-                                            lineNumber: 564,
+                                            lineNumber: 568,
                                             columnNumber: 29
                                         }, ("TURBOPACK compile-time value", void 0)),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("tr", {
@@ -1460,13 +1782,13 @@ const Revenue = ()=>{
                                                             children: "(High Security Registration Plate)"
                                                         }, void 0, false, {
                                                             fileName: "[project]/src/components/Revenue.js",
-                                                            lineNumber: 570,
+                                                            lineNumber: 574,
                                                             columnNumber: 116
                                                         }, ("TURBOPACK compile-time value", void 0))
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/src/components/Revenue.js",
-                                                    lineNumber: 570,
+                                                    lineNumber: 574,
                                                     columnNumber: 33
                                                 }, ("TURBOPACK compile-time value", void 0)),
                                                 filteredData.map((row)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
@@ -1474,7 +1796,7 @@ const Revenue = ()=>{
                                                         children: formatCurrency(row.hsrp)
                                                     }, row.month, false, {
                                                         fileName: "[project]/src/components/Revenue.js",
-                                                        lineNumber: 572,
+                                                        lineNumber: 576,
                                                         columnNumber: 37
                                                     }, ("TURBOPACK compile-time value", void 0))),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
@@ -1482,13 +1804,13 @@ const Revenue = ()=>{
                                                     children: formatCurrency(filteredData.reduce((sum, d)=>sum + d.hsrp, 0))
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/components/Revenue.js",
-                                                    lineNumber: 574,
+                                                    lineNumber: 578,
                                                     columnNumber: 33
                                                 }, ("TURBOPACK compile-time value", void 0))
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/src/components/Revenue.js",
-                                            lineNumber: 569,
+                                            lineNumber: 573,
                                             columnNumber: 29
                                         }, ("TURBOPACK compile-time value", void 0)),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("tr", {
@@ -1499,7 +1821,7 @@ const Revenue = ()=>{
                                                     children: "Grand Total"
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/components/Revenue.js",
-                                                    lineNumber: 581,
+                                                    lineNumber: 585,
                                                     columnNumber: 33
                                                 }, ("TURBOPACK compile-time value", void 0)),
                                                 filteredData.map((row)=>{
@@ -1509,7 +1831,7 @@ const Revenue = ()=>{
                                                         children: formatCurrency(monthTotal)
                                                     }, row.month, false, {
                                                         fileName: "[project]/src/components/Revenue.js",
-                                                        lineNumber: 591,
+                                                        lineNumber: 595,
                                                         columnNumber: 41
                                                     }, ("TURBOPACK compile-time value", void 0));
                                                 }),
@@ -1518,42 +1840,696 @@ const Revenue = ()=>{
                                                     children: formatCurrency(stats.grandTotal)
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/components/Revenue.js",
-                                                    lineNumber: 596,
+                                                    lineNumber: 600,
                                                     columnNumber: 33
                                                 }, ("TURBOPACK compile-time value", void 0))
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/src/components/Revenue.js",
-                                            lineNumber: 580,
+                                            lineNumber: 584,
                                             columnNumber: 29
                                         }, ("TURBOPACK compile-time value", void 0))
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/src/components/Revenue.js",
-                                    lineNumber: 367,
+                                    lineNumber: 371,
                                     columnNumber: 25
                                 }, ("TURBOPACK compile-time value", void 0))
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/components/Revenue.js",
-                            lineNumber: 357,
+                            lineNumber: 361,
                             columnNumber: 21
                         }, ("TURBOPACK compile-time value", void 0))
                     }, void 0, false, {
                         fileName: "[project]/src/components/Revenue.js",
-                        lineNumber: 356,
+                        lineNumber: 360,
                         columnNumber: 17
                     }, ("TURBOPACK compile-time value", void 0))
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/components/Revenue.js",
-                lineNumber: 352,
+                lineNumber: 356,
                 columnNumber: 13
+            }, ("TURBOPACK compile-time value", void 0)),
+            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                className: "bg-white dark:bg-gray-800 rounded-lg shadow mb-6 p-2",
+                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                    className: "flex flex-wrap gap-2",
+                    children: [
+                        {
+                            id: 'new',
+                            name: 'New Registration'
+                        },
+                        {
+                            id: 'reassign',
+                            name: 'Re-assignment'
+                        },
+                        {
+                            id: 'green',
+                            name: 'Green Tax'
+                        },
+                        {
+                            id: 'renewal',
+                            name: 'Old / Renewals'
+                        }
+                    ].map((mode)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                            onClick: ()=>setViewMode(mode.id),
+                            className: `px-4 py-2 rounded-md text-sm font-medium transition-colors ${viewMode === mode.id ? 'bg-blue-600 text-white' : 'bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'}`,
+                            children: mode.name
+                        }, mode.id, false, {
+                            fileName: "[project]/src/components/Revenue.js",
+                            lineNumber: 618,
+                            columnNumber: 25
+                        }, ("TURBOPACK compile-time value", void 0)))
+                }, void 0, false, {
+                    fileName: "[project]/src/components/Revenue.js",
+                    lineNumber: 611,
+                    columnNumber: 17
+                }, ("TURBOPACK compile-time value", void 0))
+            }, void 0, false, {
+                fileName: "[project]/src/components/Revenue.js",
+                lineNumber: 610,
+                columnNumber: 13
+            }, ("TURBOPACK compile-time value", void 0)),
+            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                className: "bg-white dark:bg-gray-800 rounded-lg shadow overflow-hidden",
+                children: [
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                        className: "px-6 py-4 border-b border-gray-200 dark:border-gray-700 flex justify-between items-center flex-wrap gap-4",
+                        children: [
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
+                                    className: "text-xl font-semibold text-gray-900 dark:text-white",
+                                    children: viewMode === 'new' ? 'For New Registration (Non-Transport)' : viewMode === 'reassign' ? 'Re-assignment Revenue' : viewMode === 'green' ? 'Green Tax Revenue' : 'Old Non-Transport / Renewals'
+                                }, void 0, false, {
+                                    fileName: "[project]/src/components/Revenue.js",
+                                    lineNumber: 636,
+                                    columnNumber: 25
+                                }, ("TURBOPACK compile-time value", void 0))
+                            }, void 0, false, {
+                                fileName: "[project]/src/components/Revenue.js",
+                                lineNumber: 635,
+                                columnNumber: 21
+                            }, ("TURBOPACK compile-time value", void 0)),
+                            viewMode === 'new' && activeTab === 'fourWheeler' && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                className: "flex items-center space-x-2 bg-gray-100 dark:bg-gray-700 p-1 rounded-lg",
+                                children: [
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                                        onClick: ()=>setTaxTenure('all'),
+                                        className: `px-3 py-1 text-xs font-medium rounded ${taxTenure === 'all' ? 'bg-white dark:bg-gray-600 shadow text-blue-600 dark:text-blue-400' : 'text-gray-500 dark:text-gray-400'}`,
+                                        children: "All"
+                                    }, void 0, false, {
+                                        fileName: "[project]/src/components/Revenue.js",
+                                        lineNumber: 647,
+                                        columnNumber: 29
+                                    }, ("TURBOPACK compile-time value", void 0)),
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                                        onClick: ()=>setTaxTenure('fiveYear'),
+                                        className: `px-3 py-1 text-xs font-medium rounded ${taxTenure === 'fiveYear' ? 'bg-white dark:bg-gray-600 shadow text-blue-600 dark:text-blue-400' : 'text-gray-500 dark:text-gray-400'}`,
+                                        children: "5-Year Tax"
+                                    }, void 0, false, {
+                                        fileName: "[project]/src/components/Revenue.js",
+                                        lineNumber: 653,
+                                        columnNumber: 29
+                                    }, ("TURBOPACK compile-time value", void 0)),
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                                        onClick: ()=>setTaxTenure('fifteenYear'),
+                                        className: `px-3 py-1 text-xs font-medium rounded ${taxTenure === 'fifteenYear' ? 'bg-white dark:bg-gray-600 shadow text-blue-600 dark:text-blue-400' : 'text-gray-500 dark:text-gray-400'}`,
+                                        children: "Lifetime (15Y)"
+                                    }, void 0, false, {
+                                        fileName: "[project]/src/components/Revenue.js",
+                                        lineNumber: 659,
+                                        columnNumber: 29
+                                    }, ("TURBOPACK compile-time value", void 0))
+                                ]
+                            }, void 0, true, {
+                                fileName: "[project]/src/components/Revenue.js",
+                                lineNumber: 646,
+                                columnNumber: 25
+                            }, ("TURBOPACK compile-time value", void 0))
+                        ]
+                    }, void 0, true, {
+                        fileName: "[project]/src/components/Revenue.js",
+                        lineNumber: 634,
+                        columnNumber: 17
+                    }, ("TURBOPACK compile-time value", void 0)),
+                    (viewMode === 'new' || viewMode === 'reassign') && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                        className: "border-b border-gray-200 dark:border-gray-700",
+                        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("nav", {
+                            className: "-mb-px flex px-6",
+                            "aria-label": "Tabs",
+                            children: [
+                                {
+                                    id: 'twoWheeler',
+                                    name: 'Two-wheeler'
+                                },
+                                {
+                                    id: 'threeWheeler',
+                                    name: 'Three-wheeler'
+                                },
+                                {
+                                    id: 'fourWheeler',
+                                    name: 'Four-wheeler'
+                                },
+                                {
+                                    id: 'otherVehicles',
+                                    name: 'Other Vehicles'
+                                }
+                            ].map((tab)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                                    onClick: ()=>setActiveTab(tab.id),
+                                    className: `whitespace-nowrap py-4 px-6 border-b-2 font-medium text-sm transition-colors ${activeTab === tab.id ? 'border-blue-500 text-blue-600 dark:text-blue-400' : 'border-transparent text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 hover:border-gray-300'}`,
+                                    children: tab.name
+                                }, tab.id, false, {
+                                    fileName: "[project]/src/components/Revenue.js",
+                                    lineNumber: 679,
+                                    columnNumber: 33
+                                }, ("TURBOPACK compile-time value", void 0)))
+                        }, void 0, false, {
+                            fileName: "[project]/src/components/Revenue.js",
+                            lineNumber: 672,
+                            columnNumber: 25
+                        }, ("TURBOPACK compile-time value", void 0))
+                    }, void 0, false, {
+                        fileName: "[project]/src/components/Revenue.js",
+                        lineNumber: 671,
+                        columnNumber: 21
+                    }, ("TURBOPACK compile-time value", void 0)),
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                        className: "overflow-x-auto",
+                        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("table", {
+                            className: "min-w-full divide-y divide-gray-200 dark:divide-gray-700",
+                            children: [
+                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("thead", {
+                                    className: "bg-gray-50 dark:bg-gray-700",
+                                    children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("tr", {
+                                        children: [
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
+                                                scope: "col",
+                                                className: "px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider",
+                                                children: "Name of District"
+                                            }, void 0, false, {
+                                                fileName: "[project]/src/components/Revenue.js",
+                                                lineNumber: 699,
+                                                columnNumber: 33
+                                            }, ("TURBOPACK compile-time value", void 0)),
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
+                                                scope: "col",
+                                                className: "px-6 py-3 text-right text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider",
+                                                children: "Total Vehicles"
+                                            }, void 0, false, {
+                                                fileName: "[project]/src/components/Revenue.js",
+                                                lineNumber: 700,
+                                                columnNumber: 33
+                                            }, ("TURBOPACK compile-time value", void 0)),
+                                            viewMode !== 'green' && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
+                                                scope: "col",
+                                                className: "px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider",
+                                                children: viewMode === 'reassign' ? 'Transaction Type' : 'MV Tax'
+                                            }, void 0, false, {
+                                                fileName: "[project]/src/components/Revenue.js",
+                                                lineNumber: 702,
+                                                columnNumber: 37
+                                            }, ("TURBOPACK compile-time value", void 0)),
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
+                                                scope: "col",
+                                                className: "px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider",
+                                                children: activeTab === 'fourWheeler' && viewMode === 'new' ? 'Original Cost Price' : activeTab === 'otherVehicles' || viewMode === 'green' ? 'Tax Basis/Period' : 'Weight of Vehicle'
+                                            }, void 0, false, {
+                                                fileName: "[project]/src/components/Revenue.js",
+                                                lineNumber: 707,
+                                                columnNumber: 33
+                                            }, ("TURBOPACK compile-time value", void 0)),
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
+                                                scope: "col",
+                                                className: "px-6 py-3 text-right text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider",
+                                                children: viewMode === 'green' ? 'Green Tax Realised' : 'MV Tax Realised'
+                                            }, void 0, false, {
+                                                fileName: "[project]/src/components/Revenue.js",
+                                                lineNumber: 712,
+                                                columnNumber: 33
+                                            }, ("TURBOPACK compile-time value", void 0)),
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
+                                                scope: "col",
+                                                className: "px-6 py-3 text-right text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider",
+                                                children: "MV Fees Realized"
+                                            }, void 0, false, {
+                                                fileName: "[project]/src/components/Revenue.js",
+                                                lineNumber: 715,
+                                                columnNumber: 33
+                                            }, ("TURBOPACK compile-time value", void 0)),
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
+                                                scope: "col",
+                                                className: "px-6 py-3 text-right text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider",
+                                                children: "Road Safety Cess"
+                                            }, void 0, false, {
+                                                fileName: "[project]/src/components/Revenue.js",
+                                                lineNumber: 716,
+                                                columnNumber: 33
+                                            }, ("TURBOPACK compile-time value", void 0)),
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
+                                                scope: "col",
+                                                className: "px-6 py-3 text-right text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider",
+                                                children: "CF (Delay Fine)"
+                                            }, void 0, false, {
+                                                fileName: "[project]/src/components/Revenue.js",
+                                                lineNumber: 717,
+                                                columnNumber: 33
+                                            }, ("TURBOPACK compile-time value", void 0))
+                                        ]
+                                    }, void 0, true, {
+                                        fileName: "[project]/src/components/Revenue.js",
+                                        lineNumber: 698,
+                                        columnNumber: 29
+                                    }, ("TURBOPACK compile-time value", void 0))
+                                }, void 0, false, {
+                                    fileName: "[project]/src/components/Revenue.js",
+                                    lineNumber: 697,
+                                    columnNumber: 25
+                                }, ("TURBOPACK compile-time value", void 0)),
+                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("tbody", {
+                                    className: "bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700",
+                                    children: (()=>{
+                                        let dataToRender = [];
+                                        if (viewMode === 'new') {
+                                            if (activeTab === 'fourWheeler' && taxTenure !== 'all') {
+                                                dataToRender = __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$data$2f$dummyData$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"].newReg4WheelerSplit[taxTenure];
+                                            } else {
+                                                dataToRender = __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$data$2f$dummyData$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"].newRegistrationRevenue ? __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$data$2f$dummyData$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"].newRegistrationRevenue[activeTab] : [];
+                                            }
+                                        } else if (viewMode === 'reassign') {
+                                            dataToRender = __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$data$2f$dummyData$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"].reassignmentRevenue ? __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$data$2f$dummyData$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"].reassignmentRevenue[activeTab] : [];
+                                        } else if (viewMode === 'green') {
+                                            dataToRender = __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$data$2f$dummyData$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"].greenTaxRevenue ? __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$data$2f$dummyData$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"].greenTaxRevenue.nonTransport : []; // Using non-transport as default for green view
+                                        } else if (viewMode === 'renewal') {
+                                            dataToRender = __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$data$2f$dummyData$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"].renewalRevenue ? __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$data$2f$dummyData$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"].renewalRevenue.nonTransport : [];
+                                        }
+                                        if (dataToRender && dataToRender.length > 0) {
+                                            return dataToRender.map((row, idx)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("tr", {
+                                                    className: `hover:bg-gray-50 dark:hover:bg-gray-700 ${idx % 2 === 0 ? 'bg-white dark:bg-gray-800' : 'bg-gray-50 dark:bg-gray-800/50'}`,
+                                                    children: [
+                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
+                                                            className: "px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-white",
+                                                            children: row.district
+                                                        }, void 0, false, {
+                                                            fileName: "[project]/src/components/Revenue.js",
+                                                            lineNumber: 741,
+                                                            columnNumber: 45
+                                                        }, ("TURBOPACK compile-time value", void 0)),
+                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
+                                                            className: "px-6 py-4 whitespace-nowrap text-sm text-right text-gray-900 dark:text-gray-300",
+                                                            children: row.totalVehicles.toLocaleString()
+                                                        }, void 0, false, {
+                                                            fileName: "[project]/src/components/Revenue.js",
+                                                            lineNumber: 742,
+                                                            columnNumber: 45
+                                                        }, ("TURBOPACK compile-time value", void 0)),
+                                                        viewMode !== 'green' && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
+                                                            className: "px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400",
+                                                            children: row.mvTaxNonTransport
+                                                        }, void 0, false, {
+                                                            fileName: "[project]/src/components/Revenue.js",
+                                                            lineNumber: 744,
+                                                            columnNumber: 49
+                                                        }, ("TURBOPACK compile-time value", void 0)),
+                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
+                                                            className: "px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400",
+                                                            children: activeTab === 'fourWheeler' && viewMode === 'new' ? row.originalCost : viewMode === 'green' ? row.period : activeTab === 'otherVehicles' || viewMode === 'renewal' ? row.otherParams || 'N/A' : row.weight
+                                                        }, void 0, false, {
+                                                            fileName: "[project]/src/components/Revenue.js",
+                                                            lineNumber: 746,
+                                                            columnNumber: 45
+                                                        }, ("TURBOPACK compile-time value", void 0)),
+                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
+                                                            className: "px-6 py-4 whitespace-nowrap text-sm text-right text-blue-600 dark:text-blue-400 font-medium",
+                                                            children: formatCurrency(viewMode === 'green' ? row.taxRealised : row.mvTaxRealised)
+                                                        }, void 0, false, {
+                                                            fileName: "[project]/src/components/Revenue.js",
+                                                            lineNumber: 751,
+                                                            columnNumber: 45
+                                                        }, ("TURBOPACK compile-time value", void 0)),
+                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
+                                                            className: "px-6 py-4 whitespace-nowrap text-sm text-right text-green-600 dark:text-green-400 font-medium",
+                                                            children: formatCurrency(row.mvFeesRealised)
+                                                        }, void 0, false, {
+                                                            fileName: "[project]/src/components/Revenue.js",
+                                                            lineNumber: 754,
+                                                            columnNumber: 45
+                                                        }, ("TURBOPACK compile-time value", void 0)),
+                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
+                                                            className: "px-6 py-4 whitespace-nowrap text-sm text-right text-yellow-600 dark:text-yellow-400",
+                                                            children: formatCurrency(row.roadSafetyCess)
+                                                        }, void 0, false, {
+                                                            fileName: "[project]/src/components/Revenue.js",
+                                                            lineNumber: 755,
+                                                            columnNumber: 45
+                                                        }, ("TURBOPACK compile-time value", void 0)),
+                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
+                                                            className: "px-6 py-4 whitespace-nowrap text-sm text-right text-red-600 dark:text-red-400",
+                                                            children: (row.cfPenalty || row.cfPerDay) > 0 ? formatCurrency(row.cfPenalty || row.cfPerDay) : '-'
+                                                        }, void 0, false, {
+                                                            fileName: "[project]/src/components/Revenue.js",
+                                                            lineNumber: 756,
+                                                            columnNumber: 45
+                                                        }, ("TURBOPACK compile-time value", void 0))
+                                                    ]
+                                                }, row.district, true, {
+                                                    fileName: "[project]/src/components/Revenue.js",
+                                                    lineNumber: 740,
+                                                    columnNumber: 41
+                                                }, ("TURBOPACK compile-time value", void 0)));
+                                        } else {
+                                            return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("tr", {
+                                                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
+                                                    colSpan: "8",
+                                                    className: "px-6 py-8 text-center text-sm text-gray-500 dark:text-gray-400",
+                                                    children: "No data available for this category"
+                                                }, void 0, false, {
+                                                    fileName: "[project]/src/components/Revenue.js",
+                                                    lineNumber: 764,
+                                                    columnNumber: 45
+                                                }, ("TURBOPACK compile-time value", void 0))
+                                            }, void 0, false, {
+                                                fileName: "[project]/src/components/Revenue.js",
+                                                lineNumber: 763,
+                                                columnNumber: 41
+                                            }, ("TURBOPACK compile-time value", void 0));
+                                        }
+                                    })()
+                                }, void 0, false, {
+                                    fileName: "[project]/src/components/Revenue.js",
+                                    lineNumber: 720,
+                                    columnNumber: 25
+                                }, ("TURBOPACK compile-time value", void 0))
+                            ]
+                        }, void 0, true, {
+                            fileName: "[project]/src/components/Revenue.js",
+                            lineNumber: 696,
+                            columnNumber: 21
+                        }, ("TURBOPACK compile-time value", void 0))
+                    }, void 0, false, {
+                        fileName: "[project]/src/components/Revenue.js",
+                        lineNumber: 695,
+                        columnNumber: 17
+                    }, ("TURBOPACK compile-time value", void 0))
+                ]
+            }, void 0, true, {
+                fileName: "[project]/src/components/Revenue.js",
+                lineNumber: 633,
+                columnNumber: 13
+            }, ("TURBOPACK compile-time value", void 0)),
+            (viewMode === 'new' || viewMode === 'green') && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                className: "bg-white dark:bg-gray-800 rounded-lg shadow overflow-hidden mt-8",
+                children: [
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                        className: "px-6 py-4 border-b border-gray-200 dark:border-gray-700",
+                        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
+                            className: "text-xl font-semibold text-gray-900 dark:text-white",
+                            children: "For New Registration (Transport) - Revenue by District"
+                        }, void 0, false, {
+                            fileName: "[project]/src/components/Revenue.js",
+                            lineNumber: 778,
+                            columnNumber: 25
+                        }, ("TURBOPACK compile-time value", void 0))
+                    }, void 0, false, {
+                        fileName: "[project]/src/components/Revenue.js",
+                        lineNumber: 777,
+                        columnNumber: 21
+                    }, ("TURBOPACK compile-time value", void 0)),
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                        className: "border-b border-gray-200 dark:border-gray-700 overflow-x-auto",
+                        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("nav", {
+                            className: "-mb-px flex px-6",
+                            "aria-label": "Tabs",
+                            children: [
+                                {
+                                    id: 'twoWheeler',
+                                    name: 'Two-wheeler'
+                                },
+                                {
+                                    id: 'threeWheelerPassenger',
+                                    name: '3-W (Pass)'
+                                },
+                                {
+                                    id: 'threeWheelerGoods',
+                                    name: '3-W (Goods)'
+                                },
+                                {
+                                    id: 'lmvPassenger',
+                                    name: '4-W (LMV) Pass'
+                                },
+                                {
+                                    id: 'lmvGoods',
+                                    name: '4-W (LMV) Goods'
+                                },
+                                {
+                                    id: 'mmvPassenger',
+                                    name: 'MMV (Pass)'
+                                },
+                                {
+                                    id: 'mmvGoods',
+                                    name: 'MMV (Goods)'
+                                },
+                                {
+                                    id: 'hmvPassenger',
+                                    name: 'HMV (Pass)'
+                                },
+                                {
+                                    id: 'hmvGoods',
+                                    name: 'HMV (Goods)'
+                                }
+                            ].map((tab)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                                    onClick: ()=>setActiveTransportTab(tab.id),
+                                    className: `whitespace-nowrap py-4 px-4 border-b-2 font-medium text-sm transition-colors ${activeTransportTab === tab.id ? 'border-blue-500 text-blue-600 dark:text-blue-400' : 'border-transparent text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 hover:border-gray-300'}`,
+                                    children: tab.name
+                                }, tab.id, false, {
+                                    fileName: "[project]/src/components/Revenue.js",
+                                    lineNumber: 797,
+                                    columnNumber: 33
+                                }, ("TURBOPACK compile-time value", void 0)))
+                        }, void 0, false, {
+                            fileName: "[project]/src/components/Revenue.js",
+                            lineNumber: 785,
+                            columnNumber: 25
+                        }, ("TURBOPACK compile-time value", void 0))
+                    }, void 0, false, {
+                        fileName: "[project]/src/components/Revenue.js",
+                        lineNumber: 784,
+                        columnNumber: 21
+                    }, ("TURBOPACK compile-time value", void 0)),
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                        className: "overflow-x-auto",
+                        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("table", {
+                            className: "min-w-full divide-y divide-gray-200 dark:divide-gray-700",
+                            children: [
+                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("thead", {
+                                    className: "bg-gray-50 dark:bg-gray-700",
+                                    children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("tr", {
+                                        children: [
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
+                                                scope: "col",
+                                                className: "px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider",
+                                                children: "Name of District"
+                                            }, void 0, false, {
+                                                fileName: "[project]/src/components/Revenue.js",
+                                                lineNumber: 816,
+                                                columnNumber: 37
+                                            }, ("TURBOPACK compile-time value", void 0)),
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
+                                                scope: "col",
+                                                className: "px-6 py-3 text-right text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider",
+                                                children: "Total Vehicles"
+                                            }, void 0, false, {
+                                                fileName: "[project]/src/components/Revenue.js",
+                                                lineNumber: 819,
+                                                columnNumber: 37
+                                            }, ("TURBOPACK compile-time value", void 0)),
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
+                                                scope: "col",
+                                                className: "px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider",
+                                                children: "MV Tax (Transport)"
+                                            }, void 0, false, {
+                                                fileName: "[project]/src/components/Revenue.js",
+                                                lineNumber: 822,
+                                                columnNumber: 37
+                                            }, ("TURBOPACK compile-time value", void 0)),
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
+                                                scope: "col",
+                                                className: "px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider",
+                                                children: [
+                                                    'twoWheeler',
+                                                    'threeWheelerGoods',
+                                                    'lmvGoods',
+                                                    'mmvGoods',
+                                                    'hmvGoods'
+                                                ].includes(activeTransportTab) ? 'Weight of Vehicle' : 'Seating Capacity'
+                                            }, void 0, false, {
+                                                fileName: "[project]/src/components/Revenue.js",
+                                                lineNumber: 825,
+                                                columnNumber: 37
+                                            }, ("TURBOPACK compile-time value", void 0)),
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
+                                                scope: "col",
+                                                className: "px-6 py-3 text-right text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider",
+                                                children: "MV Tax Realised"
+                                            }, void 0, false, {
+                                                fileName: "[project]/src/components/Revenue.js",
+                                                lineNumber: 830,
+                                                columnNumber: 37
+                                            }, ("TURBOPACK compile-time value", void 0)),
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
+                                                scope: "col",
+                                                className: "px-6 py-3 text-right text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider",
+                                                children: "MV Fees Realized"
+                                            }, void 0, false, {
+                                                fileName: "[project]/src/components/Revenue.js",
+                                                lineNumber: 833,
+                                                columnNumber: 37
+                                            }, ("TURBOPACK compile-time value", void 0)),
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
+                                                scope: "col",
+                                                className: "px-6 py-3 text-right text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider",
+                                                children: "Road Safety Cess"
+                                            }, void 0, false, {
+                                                fileName: "[project]/src/components/Revenue.js",
+                                                lineNumber: 836,
+                                                columnNumber: 37
+                                            }, ("TURBOPACK compile-time value", void 0)),
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
+                                                scope: "col",
+                                                className: "px-6 py-3 text-right text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider",
+                                                children: "CF (Delay Fine)"
+                                            }, void 0, false, {
+                                                fileName: "[project]/src/components/Revenue.js",
+                                                lineNumber: 839,
+                                                columnNumber: 37
+                                            }, ("TURBOPACK compile-time value", void 0))
+                                        ]
+                                    }, void 0, true, {
+                                        fileName: "[project]/src/components/Revenue.js",
+                                        lineNumber: 815,
+                                        columnNumber: 33
+                                    }, ("TURBOPACK compile-time value", void 0))
+                                }, void 0, false, {
+                                    fileName: "[project]/src/components/Revenue.js",
+                                    lineNumber: 814,
+                                    columnNumber: 29
+                                }, ("TURBOPACK compile-time value", void 0)),
+                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("tbody", {
+                                    className: "bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700",
+                                    children: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$data$2f$dummyData$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"].newRegistrationTransportRevenue && __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$data$2f$dummyData$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"].newRegistrationTransportRevenue[activeTransportTab] ? __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$data$2f$dummyData$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"].newRegistrationTransportRevenue[activeTransportTab].map((row, idx)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("tr", {
+                                            className: `hover:bg-gray-50 dark:hover:bg-gray-700 ${idx % 2 === 0 ? 'bg-white dark:bg-gray-800' : 'bg-gray-50 dark:bg-gray-800/50'}`,
+                                            children: [
+                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
+                                                    className: "px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-white",
+                                                    children: row.district
+                                                }, void 0, false, {
+                                                    fileName: "[project]/src/components/Revenue.js",
+                                                    lineNumber: 848,
+                                                    columnNumber: 45
+                                                }, ("TURBOPACK compile-time value", void 0)),
+                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
+                                                    className: "px-6 py-4 whitespace-nowrap text-sm text-right text-gray-900 dark:text-gray-300",
+                                                    children: row.totalVehicles.toLocaleString()
+                                                }, void 0, false, {
+                                                    fileName: "[project]/src/components/Revenue.js",
+                                                    lineNumber: 851,
+                                                    columnNumber: 45
+                                                }, ("TURBOPACK compile-time value", void 0)),
+                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
+                                                    className: "px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400",
+                                                    children: row.mvTaxTransport
+                                                }, void 0, false, {
+                                                    fileName: "[project]/src/components/Revenue.js",
+                                                    lineNumber: 854,
+                                                    columnNumber: 45
+                                                }, ("TURBOPACK compile-time value", void 0)),
+                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
+                                                    className: "px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400",
+                                                    children: row.param
+                                                }, void 0, false, {
+                                                    fileName: "[project]/src/components/Revenue.js",
+                                                    lineNumber: 857,
+                                                    columnNumber: 45
+                                                }, ("TURBOPACK compile-time value", void 0)),
+                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
+                                                    className: "px-6 py-4 whitespace-nowrap text-sm text-right text-blue-600 dark:text-blue-400 font-medium",
+                                                    children: formatCurrency(row.mvTaxRealised)
+                                                }, void 0, false, {
+                                                    fileName: "[project]/src/components/Revenue.js",
+                                                    lineNumber: 860,
+                                                    columnNumber: 45
+                                                }, ("TURBOPACK compile-time value", void 0)),
+                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
+                                                    className: "px-6 py-4 whitespace-nowrap text-sm text-right text-green-600 dark:text-green-400 font-medium",
+                                                    children: formatCurrency(row.mvFeesRealised)
+                                                }, void 0, false, {
+                                                    fileName: "[project]/src/components/Revenue.js",
+                                                    lineNumber: 863,
+                                                    columnNumber: 45
+                                                }, ("TURBOPACK compile-time value", void 0)),
+                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
+                                                    className: "px-6 py-4 whitespace-nowrap text-sm text-right text-yellow-600 dark:text-yellow-400",
+                                                    children: formatCurrency(row.roadSafetyCess)
+                                                }, void 0, false, {
+                                                    fileName: "[project]/src/components/Revenue.js",
+                                                    lineNumber: 866,
+                                                    columnNumber: 45
+                                                }, ("TURBOPACK compile-time value", void 0)),
+                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
+                                                    className: "px-6 py-4 whitespace-nowrap text-sm text-right text-red-600 dark:text-red-400",
+                                                    children: row.cfPerDay > 0 ? formatCurrency(row.cfPerDay) : '-'
+                                                }, void 0, false, {
+                                                    fileName: "[project]/src/components/Revenue.js",
+                                                    lineNumber: 869,
+                                                    columnNumber: 45
+                                                }, ("TURBOPACK compile-time value", void 0))
+                                            ]
+                                        }, row.district, true, {
+                                            fileName: "[project]/src/components/Revenue.js",
+                                            lineNumber: 847,
+                                            columnNumber: 41
+                                        }, ("TURBOPACK compile-time value", void 0))) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("tr", {
+                                        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
+                                            colSpan: "8",
+                                            className: "px-6 py-8 text-center text-sm text-gray-500 dark:text-gray-400",
+                                            children: "No data available for this category"
+                                        }, void 0, false, {
+                                            fileName: "[project]/src/components/Revenue.js",
+                                            lineNumber: 876,
+                                            columnNumber: 41
+                                        }, ("TURBOPACK compile-time value", void 0))
+                                    }, void 0, false, {
+                                        fileName: "[project]/src/components/Revenue.js",
+                                        lineNumber: 875,
+                                        columnNumber: 37
+                                    }, ("TURBOPACK compile-time value", void 0))
+                                }, void 0, false, {
+                                    fileName: "[project]/src/components/Revenue.js",
+                                    lineNumber: 844,
+                                    columnNumber: 29
+                                }, ("TURBOPACK compile-time value", void 0))
+                            ]
+                        }, void 0, true, {
+                            fileName: "[project]/src/components/Revenue.js",
+                            lineNumber: 813,
+                            columnNumber: 25
+                        }, ("TURBOPACK compile-time value", void 0))
+                    }, void 0, false, {
+                        fileName: "[project]/src/components/Revenue.js",
+                        lineNumber: 812,
+                        columnNumber: 21
+                    }, ("TURBOPACK compile-time value", void 0))
+                ]
+            }, void 0, true, {
+                fileName: "[project]/src/components/Revenue.js",
+                lineNumber: 776,
+                columnNumber: 17
             }, ("TURBOPACK compile-time value", void 0))
         ]
     }, void 0, true, {
         fileName: "[project]/src/components/Revenue.js",
-        lineNumber: 283,
+        lineNumber: 287,
         columnNumber: 9
     }, ("TURBOPACK compile-time value", void 0));
 };
