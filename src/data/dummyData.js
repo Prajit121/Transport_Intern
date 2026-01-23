@@ -399,6 +399,161 @@ export const renewalRevenue = {
   })),
 };
 
+// Permit Data
+const permitTypes = ['Contract Carriage', 'Stage Carriage', 'Goods Carriage', 'National Permit', 'AITP'];
+const vehicleClasses = ['Three Wheeler', 'Four Wheeler', 'MMV', 'HMV'];
+const permitSubTypes = ['Temporary', 'Periodic', 'Special'];
+
+export const permitFeesData = [];
+export const permitApplicationsData = [];
+
+assamDistricts.forEach(district => {
+  // Permit Fees Data - 1-2 entries per district
+  const numEntries = Math.floor(Math.random() * 2) + 1;
+  for (let i = 0; i < numEntries; i++) {
+    const pType = permitTypes[Math.floor(Math.random() * permitTypes.length)];
+    const vClass = vehicleClasses[Math.floor(Math.random() * vehicleClasses.length)];
+    const subType = permitSubTypes[Math.floor(Math.random() * permitSubTypes.length)];
+
+    const period1 = Math.floor(Math.random() * 50) + 10;
+    const period3 = Math.floor(Math.random() * 30) + 5;
+    const period5 = Math.floor(Math.random() * 20) + 2;
+    const totalVehicles = period1 + period3 + period5;
+
+    permitFeesData.push({
+      district: district,
+      permitType: pType,
+      subType: subType,
+      totalVehicles: totalVehicles,
+      vehicleClass: vClass,
+      period1Year: period1,
+      period3Year: period3,
+      period5Year: period5,
+      permitFeeRealised: Math.floor(Math.random() * 50000) + 10000,
+      lateFeeRealised: Math.floor(Math.random() * 5000) + 500
+    });
+  }
+
+  // Permit Applications Data - One entry per district
+  const totalReceived = Math.floor(Math.random() * 500) + 100;
+  const online = Math.floor(totalReceived * (0.6 + Math.random() * 0.2));
+  const offline = totalReceived - online;
+  const approved = Math.floor(totalReceived * (0.7 + Math.random() * 0.15));
+  const scrutiny = Math.floor((totalReceived - approved) * 0.6);
+  const approvalStage = totalReceived - approved - scrutiny;
+
+  permitApplicationsData.push({
+    district: district,
+    totalReceived: totalReceived,
+    online: online,
+    offline: offline,
+    scrutiny: scrutiny,
+    approvalStage: approvalStage,
+    approved: approved
+  });
+});
+
+// AETS (Automated Emission Testing Station) Data
+export const aetsData = assamDistricts.map(district => {
+  const totalCentres = Math.floor(Math.random() * 15) + 3; // 3-17 centers
+  const calibratedCentres = Math.floor(totalCentres * (0.7 + Math.random() * 0.25)); // 70-95% calibrated
+  const feesDeposited = Math.floor(Math.random() * 300000) + 50000; // ₹50k-350k
+
+  return {
+    district: district,
+    totalCentres: totalCentres,
+    calibratedCentres: calibratedCentres,
+    feesDeposited: feesDeposited
+  };
+});
+
+// PUCC (Pollution Under Control Certificate) Data
+const vehicleCategories = ['Two Wheeler', 'Three Wheeler', 'Four Wheeler', 'LMV', 'MMV', 'HMV'];
+
+export const puccData = assamDistricts.flatMap(district => {
+  return vehicleCategories.map(category => {
+    const totalApplications = Math.floor(Math.random() * 500) + 100;
+    const freshWithoutLateFee = Math.floor(totalApplications * (0.4 + Math.random() * 0.2));
+    const freshWithLateFee = Math.floor(totalApplications * (0.2 + Math.random() * 0.15));
+    const grandTotal = freshWithoutLateFee + freshWithLateFee;
+    const feesRealized = grandTotal * (Math.floor(Math.random() * 200) + 100); // ₹100-300 per PUCC
+    const lateFeeRealized = freshWithLateFee * 500; // ₹500 late fee per certificate
+
+    return {
+      district: district,
+      vehicleCategory: category,
+      totalApplications: totalApplications,
+      freshWithoutLateFee: freshWithoutLateFee,
+      freshWithLateFee: freshWithLateFee,
+      grandTotal: grandTotal,
+      feesRealized: feesRealized,
+      lateFeeRealized: lateFeeRealized
+    };
+  });
+});
+
+// Fitness Certificate Data
+export const fitnessData = assamDistricts.map(district => {
+  const totalTransportVehicles = Math.floor(Math.random() * 5000) + 1000;
+  const certificatesApplied = Math.floor(totalTransportVehicles * (0.3 + Math.random() * 0.2)); // 30-50% apply
+  const certificatesIssued = Math.floor(certificatesApplied * (0.85 + Math.random() * 0.1)); // 85-95% approved
+  const certificatesRejected = Math.floor(certificatesApplied * (0.02 + Math.random() * 0.03)); // 2-5% rejected
+  const certificatesImpounded = Math.floor(certificatesApplied * (0.01 + Math.random() * 0.02)); // 1-3% impounded
+  const feesRealised = certificatesIssued * (Math.floor(Math.random() * 300) + 200); // ₹200-500 per certificate
+  const lateFeeRealised = Math.floor(certificatesIssued * 0.2) * 50; // 20% pay late fee of ₹50
+  const withoutFCCasesBooked = Math.floor(Math.random() * 100) + 20; // 20-120 cases
+
+  return {
+    district: district,
+    totalTransportVehicles: totalTransportVehicles,
+    certificatesApplied: certificatesApplied,
+    certificatesIssued: certificatesIssued,
+    certificatesRejected: certificatesRejected,
+    certificatesImpounded: certificatesImpounded,
+    feesRealised: feesRealised,
+    lateFeeRealised: lateFeeRealised,
+    withoutFCCasesBooked: withoutFCCasesBooked
+  };
+});
+
+// Enforcement Data (Offence Cases & CF Realization)
+const offenceTypes = [
+  'Overloading',
+  'No Helmet',
+  'Triple Riding',
+  'Wrong Side Driving',
+  'Drunk Driving',
+  'No Seatbelt',
+  'Using Mobile While Driving',
+  'Red Light Jump',
+  'No Valid Documents',
+  'Over Speeding'
+];
+
+export const enforcementData = assamDistricts.flatMap(district => {
+  return offenceTypes.map(offence => {
+    const casesBooked = Math.floor(Math.random() * 500) + 100;
+    const cfImposed = casesBooked * (Math.floor(Math.random() * 1000) + 500); // ₹500-1500 per case
+    const casesDisposed = Math.floor(casesBooked * (0.6 + Math.random() * 0.25)); // 60-85% disposed
+    const cfRealised = Math.floor(cfImposed * (casesDisposed / casesBooked) * (0.8 + Math.random() * 0.15)); // 80-95% of imposed for disposed cases
+    const casesPending = casesBooked - casesDisposed;
+    const licensesSuspended = offence === 'Drunk Driving' || offence === 'Over Speeding'
+      ? Math.floor(casesDisposed * (0.1 + Math.random() * 0.15)) // 10-25% for serious offences
+      : Math.floor(casesDisposed * (0.01 + Math.random() * 0.03)); // 1-4% for others
+
+    return {
+      district: district,
+      offenceType: offence,
+      casesBooked: casesBooked,
+      cfImposed: cfImposed,
+      casesDisposed: casesDisposed,
+      cfRealised: cfRealised,
+      casesPending: casesPending,
+      licensesSuspended: licensesSuspended
+    };
+  });
+});
+
 // Export all data as a single object
 export default {
   vehicleRegistrations,
@@ -414,6 +569,12 @@ export default {
   reassignmentRevenue,
   greenTaxRevenue,
   renewalRevenue,
+  permitFeesData,
+  permitApplicationsData,
+  aetsData,
+  puccData,
+  fitnessData,
+  enforcementData,
 };
 
 // Future CSV import function (commented out for now)

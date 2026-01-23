@@ -3,10 +3,16 @@
 "use strict";
 
 __turbopack_context__.s([
+    "aetsData",
+    ()=>aetsData,
     "congestionLevels",
     ()=>congestionLevels,
     "default",
     ()=>__TURBOPACK__default__export__,
+    "enforcementData",
+    ()=>enforcementData,
+    "fitnessData",
+    ()=>fitnessData,
     "fuelEfficiency",
     ()=>fuelEfficiency,
     "greenTaxRevenue",
@@ -17,8 +23,14 @@ __turbopack_context__.s([
     ()=>newRegistrationRevenue,
     "newRegistrationTransportRevenue",
     ()=>newRegistrationTransportRevenue,
+    "permitApplicationsData",
+    ()=>permitApplicationsData,
+    "permitFeesData",
+    ()=>permitFeesData,
     "publicTransportRidership",
     ()=>publicTransportRidership,
+    "puccData",
+    ()=>puccData,
     "reassignmentRevenue",
     ()=>reassignmentRevenue,
     "renewalRevenue",
@@ -483,6 +495,163 @@ var renewalRevenue = {
         };
     })
 };
+// Permit Data
+var permitTypes = [
+    'Contract Carriage',
+    'Stage Carriage',
+    'Goods Carriage',
+    'National Permit',
+    'AITP'
+];
+var vehicleClasses = [
+    'Three Wheeler',
+    'Four Wheeler',
+    'MMV',
+    'HMV'
+];
+var permitSubTypes = [
+    'Temporary',
+    'Periodic',
+    'Special'
+];
+var permitFeesData = [];
+var permitApplicationsData = [];
+assamDistricts.forEach(function(district) {
+    // Permit Fees Data - 1-2 entries per district
+    var numEntries = Math.floor(Math.random() * 2) + 1;
+    for(var i = 0; i < numEntries; i++){
+        var pType = permitTypes[Math.floor(Math.random() * permitTypes.length)];
+        var vClass = vehicleClasses[Math.floor(Math.random() * vehicleClasses.length)];
+        var subType = permitSubTypes[Math.floor(Math.random() * permitSubTypes.length)];
+        var period1 = Math.floor(Math.random() * 50) + 10;
+        var period3 = Math.floor(Math.random() * 30) + 5;
+        var period5 = Math.floor(Math.random() * 20) + 2;
+        var totalVehicles = period1 + period3 + period5;
+        permitFeesData.push({
+            district: district,
+            permitType: pType,
+            subType: subType,
+            totalVehicles: totalVehicles,
+            vehicleClass: vClass,
+            period1Year: period1,
+            period3Year: period3,
+            period5Year: period5,
+            permitFeeRealised: Math.floor(Math.random() * 50000) + 10000,
+            lateFeeRealised: Math.floor(Math.random() * 5000) + 500
+        });
+    }
+    // Permit Applications Data - One entry per district
+    var totalReceived = Math.floor(Math.random() * 500) + 100;
+    var online = Math.floor(totalReceived * (0.6 + Math.random() * 0.2));
+    var offline = totalReceived - online;
+    var approved = Math.floor(totalReceived * (0.7 + Math.random() * 0.15));
+    var scrutiny = Math.floor((totalReceived - approved) * 0.6);
+    var approvalStage = totalReceived - approved - scrutiny;
+    permitApplicationsData.push({
+        district: district,
+        totalReceived: totalReceived,
+        online: online,
+        offline: offline,
+        scrutiny: scrutiny,
+        approvalStage: approvalStage,
+        approved: approved
+    });
+});
+var aetsData = assamDistricts.map(function(district) {
+    var totalCentres = Math.floor(Math.random() * 15) + 3; // 3-17 centers
+    var calibratedCentres = Math.floor(totalCentres * (0.7 + Math.random() * 0.25)); // 70-95% calibrated
+    var feesDeposited = Math.floor(Math.random() * 300000) + 50000; // ₹50k-350k
+    return {
+        district: district,
+        totalCentres: totalCentres,
+        calibratedCentres: calibratedCentres,
+        feesDeposited: feesDeposited
+    };
+});
+// PUCC (Pollution Under Control Certificate) Data
+var vehicleCategories = [
+    'Two Wheeler',
+    'Three Wheeler',
+    'Four Wheeler',
+    'LMV',
+    'MMV',
+    'HMV'
+];
+var puccData = assamDistricts.flatMap(function(district) {
+    return vehicleCategories.map(function(category) {
+        var totalApplications = Math.floor(Math.random() * 500) + 100;
+        var freshWithoutLateFee = Math.floor(totalApplications * (0.4 + Math.random() * 0.2));
+        var freshWithLateFee = Math.floor(totalApplications * (0.2 + Math.random() * 0.15));
+        var grandTotal = freshWithoutLateFee + freshWithLateFee;
+        var feesRealized = grandTotal * (Math.floor(Math.random() * 200) + 100); // ₹100-300 per PUCC
+        var lateFeeRealized = freshWithLateFee * 500; // ₹500 late fee per certificate
+        return {
+            district: district,
+            vehicleCategory: category,
+            totalApplications: totalApplications,
+            freshWithoutLateFee: freshWithoutLateFee,
+            freshWithLateFee: freshWithLateFee,
+            grandTotal: grandTotal,
+            feesRealized: feesRealized,
+            lateFeeRealized: lateFeeRealized
+        };
+    });
+});
+var fitnessData = assamDistricts.map(function(district) {
+    var totalTransportVehicles = Math.floor(Math.random() * 5000) + 1000;
+    var certificatesApplied = Math.floor(totalTransportVehicles * (0.3 + Math.random() * 0.2)); // 30-50% apply
+    var certificatesIssued = Math.floor(certificatesApplied * (0.85 + Math.random() * 0.1)); // 85-95% approved
+    var certificatesRejected = Math.floor(certificatesApplied * (0.02 + Math.random() * 0.03)); // 2-5% rejected
+    var certificatesImpounded = Math.floor(certificatesApplied * (0.01 + Math.random() * 0.02)); // 1-3% impounded
+    var feesRealised = certificatesIssued * (Math.floor(Math.random() * 300) + 200); // ₹200-500 per certificate
+    var lateFeeRealised = Math.floor(certificatesIssued * 0.2) * 50; // 20% pay late fee of ₹50
+    var withoutFCCasesBooked = Math.floor(Math.random() * 100) + 20; // 20-120 cases
+    return {
+        district: district,
+        totalTransportVehicles: totalTransportVehicles,
+        certificatesApplied: certificatesApplied,
+        certificatesIssued: certificatesIssued,
+        certificatesRejected: certificatesRejected,
+        certificatesImpounded: certificatesImpounded,
+        feesRealised: feesRealised,
+        lateFeeRealised: lateFeeRealised,
+        withoutFCCasesBooked: withoutFCCasesBooked
+    };
+});
+// Enforcement Data (Offence Cases & CF Realization)
+var offenceTypes = [
+    'Overloading',
+    'No Helmet',
+    'Triple Riding',
+    'Wrong Side Driving',
+    'Drunk Driving',
+    'No Seatbelt',
+    'Using Mobile While Driving',
+    'Red Light Jump',
+    'No Valid Documents',
+    'Over Speeding'
+];
+var enforcementData = assamDistricts.flatMap(function(district) {
+    return offenceTypes.map(function(offence) {
+        var casesBooked = Math.floor(Math.random() * 500) + 100;
+        var cfImposed = casesBooked * (Math.floor(Math.random() * 1000) + 500); // ₹500-1500 per case
+        var casesDisposed = Math.floor(casesBooked * (0.6 + Math.random() * 0.25)); // 60-85% disposed
+        var cfRealised = Math.floor(cfImposed * (casesDisposed / casesBooked) * (0.8 + Math.random() * 0.15)); // 80-95% of imposed for disposed cases
+        var casesPending = casesBooked - casesDisposed;
+        var licensesSuspended = offence === 'Drunk Driving' || offence === 'Over Speeding' ? Math.floor(casesDisposed * (0.1 + Math.random() * 0.15)) // 10-25% for serious offences
+         : Math.floor(casesDisposed * (0.01 + Math.random() * 0.03)); // 1-4% for others
+        return {
+            district: district,
+            offenceType: offence,
+            casesBooked: casesBooked,
+            cfImposed: cfImposed,
+            casesDisposed: casesDisposed,
+            cfRealised: cfRealised,
+            casesPending: casesPending,
+            licensesSuspended: licensesSuspended
+        };
+    });
+});
 const __TURBOPACK__default__export__ = {
     vehicleRegistrations: vehicleRegistrations,
     trafficIncidents: trafficIncidents,
@@ -496,7 +665,13 @@ const __TURBOPACK__default__export__ = {
     newReg4WheelerSplit: newReg4WheelerSplit,
     reassignmentRevenue: reassignmentRevenue,
     greenTaxRevenue: greenTaxRevenue,
-    renewalRevenue: renewalRevenue
+    renewalRevenue: renewalRevenue,
+    permitFeesData: permitFeesData,
+    permitApplicationsData: permitApplicationsData,
+    aetsData: aetsData,
+    puccData: puccData,
+    fitnessData: fitnessData,
+    enforcementData: enforcementData
 };
 if ((0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(globalThis.$RefreshHelpers$) === 'object' && globalThis.$RefreshHelpers !== null) {
     __turbopack_context__.k.registerExports(__turbopack_context__.m, globalThis.$RefreshHelpers$);

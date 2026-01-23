@@ -70,20 +70,24 @@ export default function DashboardLayout({ children }) {
                             Overview
                         </Link>
                         <Link href="/revenue" className={getLinkClasses('/revenue')}>
-                            Revenue
-                        </Link>
-                        <Link href="/vehicles" className={getLinkClasses('/vehicles')}>
                             Vehicles
                         </Link>
-                        <Link href="/traffic" className={getLinkClasses('/traffic')}>
-                            Traffic
+                        <Link href="/permit" className={getLinkClasses('/permit')}>
+                            Permit
                         </Link>
-                        <Link href="/sustainability" className={getLinkClasses('/sustainability')}>
-                            Sustainability
+                        <Link href="/aets" className={getLinkClasses('/aets')}>
+                            AETS
                         </Link>
-                        <Link href="/maintenance" className={getLinkClasses('/maintenance')}>
-                            Maintenance
+                        <Link href="/pucc" className={getLinkClasses('/pucc')}>
+                            PUCC
                         </Link>
+                        <Link href="/fitness" className={getLinkClasses('/fitness')}>
+                            Fitness
+                        </Link>
+                        <Link href="/enforcement" className={getLinkClasses('/enforcement')}>
+                            Enforcement
+                        </Link>
+
                     </div>
                 </div>
             </nav>

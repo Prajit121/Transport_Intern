@@ -3,6 +3,8 @@ module.exports = [
 "use strict";
 
 __turbopack_context__.s([
+    "aetsData",
+    ()=>aetsData,
     "congestionLevels",
     ()=>congestionLevels,
     "default",
@@ -17,8 +19,14 @@ __turbopack_context__.s([
     ()=>newRegistrationRevenue,
     "newRegistrationTransportRevenue",
     ()=>newRegistrationTransportRevenue,
+    "permitApplicationsData",
+    ()=>permitApplicationsData,
+    "permitFeesData",
+    ()=>permitFeesData,
     "publicTransportRidership",
     ()=>publicTransportRidership,
+    "puccData",
+    ()=>puccData,
     "reassignmentRevenue",
     ()=>reassignmentRevenue,
     "renewalRevenue",
@@ -434,6 +442,108 @@ const renewalRevenue = {
             cfPenalty: Math.floor(Math.random() * 10000)
         }))
 };
+// Permit Data
+const permitTypes = [
+    'Contract Carriage',
+    'Stage Carriage',
+    'Goods Carriage',
+    'National Permit',
+    'AITP'
+];
+const vehicleClasses = [
+    'Three Wheeler',
+    'Four Wheeler',
+    'MMV',
+    'HMV'
+];
+const permitSubTypes = [
+    'Temporary',
+    'Periodic',
+    'Special'
+];
+const permitFeesData = [];
+const permitApplicationsData = [];
+assamDistricts.forEach((district)=>{
+    // Permit Fees Data - 1-2 entries per district
+    const numEntries = Math.floor(Math.random() * 2) + 1;
+    for(let i = 0; i < numEntries; i++){
+        const pType = permitTypes[Math.floor(Math.random() * permitTypes.length)];
+        const vClass = vehicleClasses[Math.floor(Math.random() * vehicleClasses.length)];
+        const subType = permitSubTypes[Math.floor(Math.random() * permitSubTypes.length)];
+        const period1 = Math.floor(Math.random() * 50) + 10;
+        const period3 = Math.floor(Math.random() * 30) + 5;
+        const period5 = Math.floor(Math.random() * 20) + 2;
+        const totalVehicles = period1 + period3 + period5;
+        permitFeesData.push({
+            district: district,
+            permitType: pType,
+            subType: subType,
+            totalVehicles: totalVehicles,
+            vehicleClass: vClass,
+            period1Year: period1,
+            period3Year: period3,
+            period5Year: period5,
+            permitFeeRealised: Math.floor(Math.random() * 50000) + 10000,
+            lateFeeRealised: Math.floor(Math.random() * 5000) + 500
+        });
+    }
+    // Permit Applications Data - One entry per district
+    const totalReceived = Math.floor(Math.random() * 500) + 100;
+    const online = Math.floor(totalReceived * (0.6 + Math.random() * 0.2));
+    const offline = totalReceived - online;
+    const approved = Math.floor(totalReceived * (0.7 + Math.random() * 0.15));
+    const scrutiny = Math.floor((totalReceived - approved) * 0.6);
+    const approvalStage = totalReceived - approved - scrutiny;
+    permitApplicationsData.push({
+        district: district,
+        totalReceived: totalReceived,
+        online: online,
+        offline: offline,
+        scrutiny: scrutiny,
+        approvalStage: approvalStage,
+        approved: approved
+    });
+});
+const aetsData = assamDistricts.map((district)=>{
+    const totalCentres = Math.floor(Math.random() * 15) + 3; // 3-17 centers
+    const calibratedCentres = Math.floor(totalCentres * (0.7 + Math.random() * 0.25)); // 70-95% calibrated
+    const feesDeposited = Math.floor(Math.random() * 300000) + 50000; // ₹50k-350k
+    return {
+        district: district,
+        totalCentres: totalCentres,
+        calibratedCentres: calibratedCentres,
+        feesDeposited: feesDeposited
+    };
+});
+// PUCC (Pollution Under Control Certificate) Data
+const vehicleCategories = [
+    'Two Wheeler',
+    'Three Wheeler',
+    'Four Wheeler',
+    'LMV',
+    'MMV',
+    'HMV'
+];
+const puccData = assamDistricts.flatMap((district)=>{
+    return vehicleCategories.map((category)=>{
+        const totalApplications = Math.floor(Math.random() * 500) + 100;
+        const freshWithoutLateFee = Math.floor(totalApplications * (0.4 + Math.random() * 0.2));
+        const freshWithLateFee = Math.floor(totalApplications * (0.2 + Math.random() * 0.15));
+        const grandTotal = freshWithoutLateFee + freshWithLateFee;
+        const feesRealized = grandTotal * (Math.floor(Math.random() * 200) + 100); // ₹100-300 per PUCC
+        const lateFeeRealized = freshWithLateFee * 500; // ₹500 late fee per certificate
+        return {
+            district: district,
+            vehicleCategory: category,
+            totalApplications: totalApplications,
+            freshWithoutLateFee: freshWithoutLateFee,
+            freshWithLateFee: freshWithLateFee,
+            grandTotal: grandTotal,
+            feesRealized: feesRealized,
+            lateFeeRealized: lateFeeRealized
+        };
+    });
+});
 const __TURBOPACK__default__export__ = {
     vehicleRegistrations,
     trafficIncidents,
@@ -447,7 +557,11 @@ const __TURBOPACK__default__export__ = {
     newReg4WheelerSplit,
     reassignmentRevenue,
     greenTaxRevenue,
-    renewalRevenue
+    renewalRevenue,
+    permitFeesData,
+    permitApplicationsData,
+    aetsData,
+    puccData
 };
  // Future CSV import function (commented out for now)
  // import Papa from 'papaparse';
