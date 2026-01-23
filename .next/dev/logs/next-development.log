@@ -573,3 +573,5 @@ https://react.dev/link/hydration-mismatch
 [02:34:48.011] Browser WARN    Tried to use the 'fill' option without the 'Filler' plugin enabled. Please import and register the 'Filler' plugin and make sure it is not disabled in the options
 [02:34:48.907] Browser WARN    Tried to use the 'fill' option without the 'Filler' plugin enabled. Please import and register the 'Filler' plugin and make sure it is not disabled in the options
 [02:34:48.907] Browser WARN    Tried to use the 'fill' option without the 'Filler' plugin enabled. Please import and register the 'Filler' plugin and make sure it is not disabled in the options
+[02:44:24.014] Server  LOG     ✓ Compiled in 114ms
+[02:50:38.875] Server  LOG     ✓ Compiled in 200ms

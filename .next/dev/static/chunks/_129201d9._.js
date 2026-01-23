@@ -720,6 +720,7 @@ var PUCC = function() {
     var _useState = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_sliced_to_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])((0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false), 2), isDarkMode = _useState[0], setIsDarkMode = _useState[1];
     var _useState1 = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_sliced_to_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])((0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])('All'), 2), selectedDistrict = _useState1[0], setSelectedDistrict = _useState1[1];
     var _useState2 = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_sliced_to_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])((0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])('All'), 2), selectedVehicleCategory = _useState2[0], setSelectedVehicleCategory = _useState2[1];
+    var _useState3 = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_sliced_to_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])((0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])([]), 2), expandedDistricts = _useState3[0], setExpandedDistricts = _useState3[1];
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])({
         "PUCC.useEffect": function() {
             setIsDarkMode(document.documentElement.classList.contains('dark'));
@@ -772,6 +773,15 @@ var PUCC = function() {
     var formatCurrency = function(amount) {
         return '₹' + amount.toLocaleString('en-IN');
     };
+    var toggleDistrict = function(district) {
+        setExpandedDistricts(function(prev) {
+            return prev.includes(district) ? prev.filter(function(d) {
+                return d !== district;
+            }) : (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_to_consumable_array$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(prev).concat([
+                district
+            ]);
+        });
+    };
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
         className: "space-y-6",
         children: [
@@ -783,7 +793,7 @@ var PUCC = function() {
                         children: "PUCC Management"
                     }, void 0, false, {
                         fileName: "[project]/src/components/PUCC.js",
-                        lineNumber: 43,
+                        lineNumber: 52,
                         columnNumber: 17
                     }, _this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -791,13 +801,13 @@ var PUCC = function() {
                         children: "Pollution Under Control Certificate details vehicle class-wise"
                     }, void 0, false, {
                         fileName: "[project]/src/components/PUCC.js",
-                        lineNumber: 44,
+                        lineNumber: 53,
                         columnNumber: 17
                     }, _this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/components/PUCC.js",
-                lineNumber: 42,
+                lineNumber: 51,
                 columnNumber: 13
             }, _this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -811,7 +821,7 @@ var PUCC = function() {
                                 children: "Total Applications"
                             }, void 0, false, {
                                 fileName: "[project]/src/components/PUCC.js",
-                                lineNumber: 50,
+                                lineNumber: 59,
                                 columnNumber: 21
                             }, _this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -819,7 +829,7 @@ var PUCC = function() {
                                 children: totals.totalApplications.toLocaleString()
                             }, void 0, false, {
                                 fileName: "[project]/src/components/PUCC.js",
-                                lineNumber: 51,
+                                lineNumber: 60,
                                 columnNumber: 21
                             }, _this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -827,13 +837,13 @@ var PUCC = function() {
                                 children: "Received at AETS"
                             }, void 0, false, {
                                 fileName: "[project]/src/components/PUCC.js",
-                                lineNumber: 52,
+                                lineNumber: 61,
                                 columnNumber: 21
                             }, _this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/components/PUCC.js",
-                        lineNumber: 49,
+                        lineNumber: 58,
                         columnNumber: 17
                     }, _this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -844,7 +854,7 @@ var PUCC = function() {
                                 children: "Total PUCCs Issued"
                             }, void 0, false, {
                                 fileName: "[project]/src/components/PUCC.js",
-                                lineNumber: 55,
+                                lineNumber: 64,
                                 columnNumber: 21
                             }, _this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -852,7 +862,7 @@ var PUCC = function() {
                                 children: totals.totalPUCCs.toLocaleString()
                             }, void 0, false, {
                                 fileName: "[project]/src/components/PUCC.js",
-                                lineNumber: 56,
+                                lineNumber: 65,
                                 columnNumber: 21
                             }, _this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -860,13 +870,13 @@ var PUCC = function() {
                                 children: "All categories"
                             }, void 0, false, {
                                 fileName: "[project]/src/components/PUCC.js",
-                                lineNumber: 57,
+                                lineNumber: 66,
                                 columnNumber: 21
                             }, _this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/components/PUCC.js",
-                        lineNumber: 54,
+                        lineNumber: 63,
                         columnNumber: 17
                     }, _this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -877,7 +887,7 @@ var PUCC = function() {
                                 children: "PUCC Fees Realized"
                             }, void 0, false, {
                                 fileName: "[project]/src/components/PUCC.js",
-                                lineNumber: 60,
+                                lineNumber: 69,
                                 columnNumber: 21
                             }, _this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -885,7 +895,7 @@ var PUCC = function() {
                                 children: formatCurrency(totals.totalFees)
                             }, void 0, false, {
                                 fileName: "[project]/src/components/PUCC.js",
-                                lineNumber: 61,
+                                lineNumber: 70,
                                 columnNumber: 21
                             }, _this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -893,13 +903,13 @@ var PUCC = function() {
                                 children: "Total revenue"
                             }, void 0, false, {
                                 fileName: "[project]/src/components/PUCC.js",
-                                lineNumber: 62,
+                                lineNumber: 71,
                                 columnNumber: 21
                             }, _this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/components/PUCC.js",
-                        lineNumber: 59,
+                        lineNumber: 68,
                         columnNumber: 17
                     }, _this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -910,7 +920,7 @@ var PUCC = function() {
                                 children: "Late Fees @₹500"
                             }, void 0, false, {
                                 fileName: "[project]/src/components/PUCC.js",
-                                lineNumber: 65,
+                                lineNumber: 74,
                                 columnNumber: 21
                             }, _this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -918,7 +928,7 @@ var PUCC = function() {
                                 children: formatCurrency(totals.totalLateFees)
                             }, void 0, false, {
                                 fileName: "[project]/src/components/PUCC.js",
-                                lineNumber: 66,
+                                lineNumber: 75,
                                 columnNumber: 21
                             }, _this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -926,19 +936,19 @@ var PUCC = function() {
                                 children: "From delayed renewals"
                             }, void 0, false, {
                                 fileName: "[project]/src/components/PUCC.js",
-                                lineNumber: 67,
+                                lineNumber: 76,
                                 columnNumber: 21
                             }, _this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/components/PUCC.js",
-                        lineNumber: 64,
+                        lineNumber: 73,
                         columnNumber: 17
                     }, _this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/components/PUCC.js",
-                lineNumber: 48,
+                lineNumber: 57,
                 columnNumber: 13
             }, _this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -949,7 +959,7 @@ var PUCC = function() {
                         children: "Filters"
                     }, void 0, false, {
                         fileName: "[project]/src/components/PUCC.js",
-                        lineNumber: 73,
+                        lineNumber: 82,
                         columnNumber: 17
                     }, _this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -962,7 +972,7 @@ var PUCC = function() {
                                         children: "District"
                                     }, void 0, false, {
                                         fileName: "[project]/src/components/PUCC.js",
-                                        lineNumber: 76,
+                                        lineNumber: 85,
                                         columnNumber: 25
                                     }, _this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("select", {
@@ -977,29 +987,29 @@ var PUCC = function() {
                                                 children: district
                                             }, district, false, {
                                                 fileName: "[project]/src/components/PUCC.js",
-                                                lineNumber: 85,
+                                                lineNumber: 94,
                                                 columnNumber: 33
                                             }, _this);
                                         })
                                     }, void 0, false, {
                                         fileName: "[project]/src/components/PUCC.js",
-                                        lineNumber: 79,
+                                        lineNumber: 88,
                                         columnNumber: 25
                                     }, _this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/components/PUCC.js",
-                                lineNumber: 75,
+                                lineNumber: 84,
                                 columnNumber: 21
                             }, _this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                 children: [
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
                                         className: "block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2",
-                                        children: "Vehicle Category"
+                                        children: "Vehicle Category (within expanded districts)"
                                     }, void 0, false, {
                                         fileName: "[project]/src/components/PUCC.js",
-                                        lineNumber: 90,
+                                        lineNumber: 99,
                                         columnNumber: 25
                                     }, _this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("select", {
@@ -1014,31 +1024,31 @@ var PUCC = function() {
                                                 children: category
                                             }, category, false, {
                                                 fileName: "[project]/src/components/PUCC.js",
-                                                lineNumber: 99,
+                                                lineNumber: 108,
                                                 columnNumber: 33
                                             }, _this);
                                         })
                                     }, void 0, false, {
                                         fileName: "[project]/src/components/PUCC.js",
-                                        lineNumber: 93,
+                                        lineNumber: 102,
                                         columnNumber: 25
                                     }, _this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/components/PUCC.js",
-                                lineNumber: 89,
+                                lineNumber: 98,
                                 columnNumber: 21
                             }, _this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/components/PUCC.js",
-                        lineNumber: 74,
+                        lineNumber: 83,
                         columnNumber: 17
                     }, _this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/components/PUCC.js",
-                lineNumber: 72,
+                lineNumber: 81,
                 columnNumber: 13
             }, _this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1052,21 +1062,21 @@ var PUCC = function() {
                                 children: "PUCC Details Vehicle Class-wise"
                             }, void 0, false, {
                                 fileName: "[project]/src/components/PUCC.js",
-                                lineNumber: 109,
+                                lineNumber: 118,
                                 columnNumber: 21
                             }, _this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                                 className: "text-sm text-gray-600 dark:text-gray-400 mt-1",
-                                children: "District-wise breakdown by vehicle type/category"
+                                children: "District-wise grouped view - Click district rows to expand/collapse"
                             }, void 0, false, {
                                 fileName: "[project]/src/components/PUCC.js",
-                                lineNumber: 110,
+                                lineNumber: 119,
                                 columnNumber: 21
                             }, _this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/components/PUCC.js",
-                        lineNumber: 108,
+                        lineNumber: 117,
                         columnNumber: 17
                     }, _this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1081,34 +1091,7 @@ var PUCC = function() {
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
                                                 scope: "col",
                                                 className: "px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider",
-                                                children: "District"
-                                            }, void 0, false, {
-                                                fileName: "[project]/src/components/PUCC.js",
-                                                lineNumber: 118,
-                                                columnNumber: 33
-                                            }, _this),
-                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
-                                                scope: "col",
-                                                className: "px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider",
-                                                children: "Vehicle Category"
-                                            }, void 0, false, {
-                                                fileName: "[project]/src/components/PUCC.js",
-                                                lineNumber: 121,
-                                                columnNumber: 33
-                                            }, _this),
-                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
-                                                scope: "col",
-                                                className: "px-6 py-3 text-right text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider",
-                                                children: "Total Applications"
-                                            }, void 0, false, {
-                                                fileName: "[project]/src/components/PUCC.js",
-                                                lineNumber: 124,
-                                                columnNumber: 33
-                                            }, _this),
-                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
-                                                scope: "col",
-                                                className: "px-6 py-3 text-right text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider",
-                                                children: "PUCC Issued on Time"
+                                                children: "District / Vehicle Category"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/components/PUCC.js",
                                                 lineNumber: 127,
@@ -1117,7 +1100,7 @@ var PUCC = function() {
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
                                                 scope: "col",
                                                 className: "px-6 py-3 text-right text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider",
-                                                children: "PUCC Issued with Late Fee"
+                                                children: "Total Applications"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/components/PUCC.js",
                                                 lineNumber: 130,
@@ -1126,7 +1109,7 @@ var PUCC = function() {
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
                                                 scope: "col",
                                                 className: "px-6 py-3 text-right text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider",
-                                                children: "Grand Total PUCC"
+                                                children: "PUCC Issued on Time"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/components/PUCC.js",
                                                 lineNumber: 133,
@@ -1135,7 +1118,7 @@ var PUCC = function() {
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
                                                 scope: "col",
                                                 className: "px-6 py-3 text-right text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider",
-                                                children: "PUCC Fees"
+                                                children: "PUCC Issued with Late Fee"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/components/PUCC.js",
                                                 lineNumber: 136,
@@ -1144,130 +1127,282 @@ var PUCC = function() {
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
                                                 scope: "col",
                                                 className: "px-6 py-3 text-right text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider",
-                                                children: "Late Fee @₹500"
+                                                children: "Grand Total PUCC"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/components/PUCC.js",
                                                 lineNumber: 139,
+                                                columnNumber: 33
+                                            }, _this),
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
+                                                scope: "col",
+                                                className: "px-6 py-3 text-right text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider",
+                                                children: "PUCC Fees"
+                                            }, void 0, false, {
+                                                fileName: "[project]/src/components/PUCC.js",
+                                                lineNumber: 142,
+                                                columnNumber: 33
+                                            }, _this),
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
+                                                scope: "col",
+                                                className: "px-6 py-3 text-right text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider",
+                                                children: "Late Fee @₹500"
+                                            }, void 0, false, {
+                                                fileName: "[project]/src/components/PUCC.js",
+                                                lineNumber: 145,
                                                 columnNumber: 33
                                             }, _this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/src/components/PUCC.js",
-                                        lineNumber: 117,
+                                        lineNumber: 126,
                                         columnNumber: 29
                                     }, _this)
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/PUCC.js",
-                                    lineNumber: 116,
+                                    lineNumber: 125,
                                     columnNumber: 25
                                 }, _this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("tbody", {
                                     className: "bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700",
-                                    children: filteredData.map(function(row, idx) {
-                                        return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("tr", {
-                                            className: "hover:bg-gray-50 dark:hover:bg-gray-700 ".concat(idx % 2 === 0 ? 'bg-white dark:bg-gray-800' : 'bg-gray-50 dark:bg-gray-800/50'),
+                                    children: (selectedDistrict === 'All' ? districts.slice(1) : districts.filter(function(d) {
+                                        return d === selectedDistrict;
+                                    })).map(function(district) {
+                                        var districtData = __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$data$2f$dummyData$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].puccData.filter(function(d) {
+                                            return d.district === district;
+                                        });
+                                        var isExpanded = expandedDistricts.includes(district);
+                                        // Calculate district totals
+                                        var districtTotals = districtData.reduce(function(acc, row) {
+                                            return {
+                                                totalApplications: acc.totalApplications + row.totalApplications,
+                                                freshWithoutLateFee: acc.freshWithoutLateFee + row.freshWithoutLateFee,
+                                                freshWithLateFee: acc.freshWithLateFee + row.freshWithLateFee,
+                                                grandTotal: acc.grandTotal + row.grandTotal,
+                                                feesRealized: acc.feesRealized + row.feesRealized,
+                                                lateFeeRealized: acc.lateFeeRealized + row.lateFeeRealized
+                                            };
+                                        }, {
+                                            totalApplications: 0,
+                                            freshWithoutLateFee: 0,
+                                            freshWithLateFee: 0,
+                                            grandTotal: 0,
+                                            feesRealized: 0,
+                                            lateFeeRealized: 0
+                                        });
+                                        return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].Fragment, {
                                             children: [
-                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
-                                                    className: "px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-white",
-                                                    children: row.district
-                                                }, void 0, false, {
+                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("tr", {
+                                                    onClick: function() {
+                                                        return toggleDistrict(district);
+                                                    },
+                                                    className: "bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 cursor-pointer transition-colors",
+                                                    children: [
+                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
+                                                            className: "px-6 py-4 whitespace-nowrap text-sm font-bold text-gray-900 dark:text-white",
+                                                            children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                                className: "flex items-center",
+                                                                children: [
+                                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("svg", {
+                                                                        className: "w-4 h-4 mr-2 transition-transform ".concat(isExpanded ? 'rotate-90' : ''),
+                                                                        fill: "currentColor",
+                                                                        viewBox: "0 0 20 20",
+                                                                        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("path", {
+                                                                            fillRule: "evenodd",
+                                                                            d: "M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z",
+                                                                            clipRule: "evenodd"
+                                                                        }, void 0, false, {
+                                                                            fileName: "[project]/src/components/PUCC.js",
+                                                                            lineNumber: 186,
+                                                                            columnNumber: 57
+                                                                        }, _this)
+                                                                    }, void 0, false, {
+                                                                        fileName: "[project]/src/components/PUCC.js",
+                                                                        lineNumber: 181,
+                                                                        columnNumber: 53
+                                                                    }, _this),
+                                                                    district
+                                                                ]
+                                                            }, void 0, true, {
+                                                                fileName: "[project]/src/components/PUCC.js",
+                                                                lineNumber: 180,
+                                                                columnNumber: 49
+                                                            }, _this)
+                                                        }, void 0, false, {
+                                                            fileName: "[project]/src/components/PUCC.js",
+                                                            lineNumber: 179,
+                                                            columnNumber: 45
+                                                        }, _this),
+                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
+                                                            className: "px-6 py-4 whitespace-nowrap text-sm text-right font-bold text-gray-900 dark:text-gray-300",
+                                                            children: districtTotals.totalApplications.toLocaleString()
+                                                        }, void 0, false, {
+                                                            fileName: "[project]/src/components/PUCC.js",
+                                                            lineNumber: 191,
+                                                            columnNumber: 45
+                                                        }, _this),
+                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
+                                                            className: "px-6 py-4 whitespace-nowrap text-sm text-right font-bold text-green-600 dark:text-green-400",
+                                                            children: districtTotals.freshWithoutLateFee.toLocaleString()
+                                                        }, void 0, false, {
+                                                            fileName: "[project]/src/components/PUCC.js",
+                                                            lineNumber: 194,
+                                                            columnNumber: 45
+                                                        }, _this),
+                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
+                                                            className: "px-6 py-4 whitespace-nowrap text-sm text-right font-bold text-orange-600 dark:text-orange-400",
+                                                            children: districtTotals.freshWithLateFee.toLocaleString()
+                                                        }, void 0, false, {
+                                                            fileName: "[project]/src/components/PUCC.js",
+                                                            lineNumber: 197,
+                                                            columnNumber: 45
+                                                        }, _this),
+                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
+                                                            className: "px-6 py-4 whitespace-nowrap text-sm text-right font-bold text-blue-600 dark:text-blue-400",
+                                                            children: districtTotals.grandTotal.toLocaleString()
+                                                        }, void 0, false, {
+                                                            fileName: "[project]/src/components/PUCC.js",
+                                                            lineNumber: 200,
+                                                            columnNumber: 45
+                                                        }, _this),
+                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
+                                                            className: "px-6 py-4 whitespace-nowrap text-sm text-right font-bold text-purple-600 dark:text-purple-400",
+                                                            children: formatCurrency(districtTotals.feesRealized)
+                                                        }, void 0, false, {
+                                                            fileName: "[project]/src/components/PUCC.js",
+                                                            lineNumber: 203,
+                                                            columnNumber: 45
+                                                        }, _this),
+                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
+                                                            className: "px-6 py-4 whitespace-nowrap text-sm text-right font-bold text-red-600 dark:text-red-400",
+                                                            children: formatCurrency(districtTotals.lateFeeRealized)
+                                                        }, void 0, false, {
+                                                            fileName: "[project]/src/components/PUCC.js",
+                                                            lineNumber: 206,
+                                                            columnNumber: 45
+                                                        }, _this)
+                                                    ]
+                                                }, void 0, true, {
                                                     fileName: "[project]/src/components/PUCC.js",
-                                                    lineNumber: 147,
-                                                    columnNumber: 37
+                                                    lineNumber: 175,
+                                                    columnNumber: 41
                                                 }, _this),
-                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
-                                                    className: "px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400",
-                                                    children: row.vehicleCategory
-                                                }, void 0, false, {
-                                                    fileName: "[project]/src/components/PUCC.js",
-                                                    lineNumber: 150,
-                                                    columnNumber: 37
-                                                }, _this),
-                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
-                                                    className: "px-6 py-4 whitespace-nowrap text-sm text-right text-gray-900 dark:text-gray-300",
-                                                    children: row.totalApplications
-                                                }, void 0, false, {
-                                                    fileName: "[project]/src/components/PUCC.js",
-                                                    lineNumber: 153,
-                                                    columnNumber: 37
-                                                }, _this),
-                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
-                                                    className: "px-6 py-4 whitespace-nowrap text-sm text-right text-green-600 dark:text-green-400",
-                                                    children: row.freshWithoutLateFee
-                                                }, void 0, false, {
-                                                    fileName: "[project]/src/components/PUCC.js",
-                                                    lineNumber: 156,
-                                                    columnNumber: 37
-                                                }, _this),
-                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
-                                                    className: "px-6 py-4 whitespace-nowrap text-sm text-right text-orange-600 dark:text-orange-400",
-                                                    children: row.freshWithLateFee
-                                                }, void 0, false, {
-                                                    fileName: "[project]/src/components/PUCC.js",
-                                                    lineNumber: 159,
-                                                    columnNumber: 37
-                                                }, _this),
-                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
-                                                    className: "px-6 py-4 whitespace-nowrap text-sm text-right text-blue-600 dark:text-blue-400 font-medium",
-                                                    children: row.grandTotal
-                                                }, void 0, false, {
-                                                    fileName: "[project]/src/components/PUCC.js",
-                                                    lineNumber: 162,
-                                                    columnNumber: 37
-                                                }, _this),
-                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
-                                                    className: "px-6 py-4 whitespace-nowrap text-sm text-right text-purple-600 dark:text-purple-400 font-medium",
-                                                    children: formatCurrency(row.feesRealized)
-                                                }, void 0, false, {
-                                                    fileName: "[project]/src/components/PUCC.js",
-                                                    lineNumber: 165,
-                                                    columnNumber: 37
-                                                }, _this),
-                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
-                                                    className: "px-6 py-4 whitespace-nowrap text-sm text-right text-red-600 dark:text-red-400 font-medium",
-                                                    children: formatCurrency(row.lateFeeRealized)
-                                                }, void 0, false, {
-                                                    fileName: "[project]/src/components/PUCC.js",
-                                                    lineNumber: 168,
-                                                    columnNumber: 37
-                                                }, _this)
+                                                isExpanded && districtData.filter(function(row) {
+                                                    return selectedVehicleCategory === 'All' || row.vehicleCategory === selectedVehicleCategory;
+                                                }).map(function(row, idx) {
+                                                    return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("tr", {
+                                                        className: "hover:bg-gray-50 dark:hover:bg-gray-700/50",
+                                                        children: [
+                                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
+                                                                className: "px-6 py-3 pl-12 whitespace-nowrap text-sm text-gray-700 dark:text-gray-300",
+                                                                children: [
+                                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                                                        className: "text-gray-500 dark:text-gray-400",
+                                                                        children: "↳"
+                                                                    }, void 0, false, {
+                                                                        fileName: "[project]/src/components/PUCC.js",
+                                                                        lineNumber: 217,
+                                                                        columnNumber: 57
+                                                                    }, _this),
+                                                                    " ",
+                                                                    row.vehicleCategory
+                                                                ]
+                                                            }, void 0, true, {
+                                                                fileName: "[project]/src/components/PUCC.js",
+                                                                lineNumber: 216,
+                                                                columnNumber: 53
+                                                            }, _this),
+                                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
+                                                                className: "px-6 py-3 whitespace-nowrap text-sm text-right text-gray-700 dark:text-gray-300",
+                                                                children: row.totalApplications
+                                                            }, void 0, false, {
+                                                                fileName: "[project]/src/components/PUCC.js",
+                                                                lineNumber: 219,
+                                                                columnNumber: 53
+                                                            }, _this),
+                                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
+                                                                className: "px-6 py-3 whitespace-nowrap text-sm text-right text-green-600 dark:text-green-400",
+                                                                children: row.freshWithoutLateFee
+                                                            }, void 0, false, {
+                                                                fileName: "[project]/src/components/PUCC.js",
+                                                                lineNumber: 222,
+                                                                columnNumber: 53
+                                                            }, _this),
+                                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
+                                                                className: "px-6 py-3 whitespace-nowrap text-sm text-right text-orange-600 dark:text-orange-400",
+                                                                children: row.freshWithLateFee
+                                                            }, void 0, false, {
+                                                                fileName: "[project]/src/components/PUCC.js",
+                                                                lineNumber: 225,
+                                                                columnNumber: 53
+                                                            }, _this),
+                                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
+                                                                className: "px-6 py-3 whitespace-nowrap text-sm text-right text-blue-600 dark:text-blue-400",
+                                                                children: row.grandTotal
+                                                            }, void 0, false, {
+                                                                fileName: "[project]/src/components/PUCC.js",
+                                                                lineNumber: 228,
+                                                                columnNumber: 53
+                                                            }, _this),
+                                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
+                                                                className: "px-6 py-3 whitespace-nowrap text-sm text-right text-purple-600 dark:text-purple-400",
+                                                                children: formatCurrency(row.feesRealized)
+                                                            }, void 0, false, {
+                                                                fileName: "[project]/src/components/PUCC.js",
+                                                                lineNumber: 231,
+                                                                columnNumber: 53
+                                                            }, _this),
+                                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
+                                                                className: "px-6 py-3 whitespace-nowrap text-sm text-right text-red-600 dark:text-red-400",
+                                                                children: formatCurrency(row.lateFeeRealized)
+                                                            }, void 0, false, {
+                                                                fileName: "[project]/src/components/PUCC.js",
+                                                                lineNumber: 234,
+                                                                columnNumber: 53
+                                                            }, _this)
+                                                        ]
+                                                    }, "".concat(district, "-").concat(row.vehicleCategory), true, {
+                                                        fileName: "[project]/src/components/PUCC.js",
+                                                        lineNumber: 215,
+                                                        columnNumber: 49
+                                                    }, _this);
+                                                })
                                             ]
-                                        }, "".concat(row.district, "-").concat(row.vehicleCategory), true, {
+                                        }, district, true, {
                                             fileName: "[project]/src/components/PUCC.js",
-                                            lineNumber: 146,
-                                            columnNumber: 33
+                                            lineNumber: 173,
+                                            columnNumber: 37
                                         }, _this);
                                     })
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/PUCC.js",
-                                    lineNumber: 144,
+                                    lineNumber: 150,
                                     columnNumber: 25
                                 }, _this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/components/PUCC.js",
-                            lineNumber: 115,
+                            lineNumber: 124,
                             columnNumber: 21
                         }, _this)
                     }, void 0, false, {
                         fileName: "[project]/src/components/PUCC.js",
-                        lineNumber: 114,
+                        lineNumber: 123,
                         columnNumber: 17
                     }, _this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/components/PUCC.js",
-                lineNumber: 107,
+                lineNumber: 116,
                 columnNumber: 13
             }, _this)
         ]
     }, void 0, true, {
         fileName: "[project]/src/components/PUCC.js",
-        lineNumber: 40,
+        lineNumber: 49,
         columnNumber: 9
     }, _this);
 };
-_s(PUCC, "wa8TWlbJXLgJg9aVjBw9z4tSrS8=");
+_s(PUCC, "bCz4udElhIMBBSlUFraUYtYdNtk=");
 _c = PUCC;
 const __TURBOPACK__default__export__ = PUCC;
 var _c;
