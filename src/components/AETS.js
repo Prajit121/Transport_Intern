@@ -1,6 +1,7 @@
 'use client';
 import React, { useState, useEffect, useMemo } from 'react';
 import dummyData from '../data/dummyData';
+import DateFilter from './DateFilter';
 
 const AETS = () => {
     const [isDarkMode, setIsDarkMode] = useState(false);
@@ -38,6 +39,8 @@ const AETS = () => {
                 <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">AETS Management</h1>
                 <p className="text-gray-600 dark:text-gray-400">Automated Emission Testing Station details and fee collections</p>
             </div>
+
+            <DateFilter onFilterChange={() => { }} />
 
             {/* Summary Cards */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -126,10 +129,10 @@ const AETS = () => {
                                         </td>
                                         <td className="px-6 py-4 whitespace-nowrap text-sm text-right">
                                             <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${parseFloat(calibrationPercent) >= 90
-                                                    ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200'
-                                                    : parseFloat(calibrationPercent) >= 75
-                                                        ? 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200'
-                                                        : 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200'
+                                                ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200'
+                                                : parseFloat(calibrationPercent) >= 75
+                                                    ? 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200'
+                                                    : 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200'
                                                 }`}>
                                                 {calibrationPercent}%
                                             </span>

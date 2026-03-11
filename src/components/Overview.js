@@ -14,6 +14,8 @@ import {
 } from 'chart.js';
 import { Bar, Line, Pie } from 'react-chartjs-2';
 import dummyData from '../data/dummyData';
+import DateFilter from './DateFilter';
+import { getMonthsInRange } from '../utils/dateUtils';
 
 ChartJS.register(
   CategoryScale,
@@ -29,6 +31,11 @@ ChartJS.register(
 
 const Overview = () => {
   const [selectedMonths, setSelectedMonths] = useState(dummyData.vehicleRegistrations.map(d => d.month));
+
+  const handleFilterChange = ({ start, end }) => {
+    const monthsInRange = getMonthsInRange(start, end);
+    setSelectedMonths(monthsInRange);
+  };
 
   const months = dummyData.vehicleRegistrations.map(d => d.month);
 
@@ -231,24 +238,7 @@ const Overview = () => {
 
   return (
     <div className="space-y-6">
-      {/* Month Filter */}
-      <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-4">
-        <h3 className="text-lg font-semibold mb-3 text-gray-900 dark:text-white">Filter by Month</h3>
-        <div className="flex flex-wrap gap-2">
-          {months.map(month => (
-            <button
-              key={month}
-              onClick={() => handleMonthToggle(month)}
-              className={`px-3 py-1 rounded-md text-sm font-medium transition-colors ${selectedMonths.includes(month)
-                ? 'bg-blue-500 text-white'
-                : 'bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-600'
-                }`}
-            >
-              {month}
-            </button>
-          ))}
-        </div>
-      </div>
+      <DateFilter onFilterChange={handleFilterChange} />
 
       {/* Key Statistics Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">

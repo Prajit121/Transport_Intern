@@ -121,17 +121,17 @@ function DashboardLayout({ children }) {
                         className: "flex space-x-1 overflow-x-auto",
                         children: [
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
-                                href: "/",
-                                className: getLinkClasses('/'),
-                                children: "Overview"
+                                href: "/revenue",
+                                className: getLinkClasses('/revenue'),
+                                children: "Revenue"
                             }, void 0, false, {
                                 fileName: "[project]/src/components/DashboardLayout.js",
                                 lineNumber: 69,
                                 columnNumber: 25
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
-                                href: "/revenue",
-                                className: getLinkClasses('/revenue'),
+                                href: "/vehicles",
+                                className: getLinkClasses('/vehicles'),
                                 children: "Vehicles"
                             }, void 0, false, {
                                 fileName: "[project]/src/components/DashboardLayout.js",
@@ -166,18 +166,18 @@ function DashboardLayout({ children }) {
                                 columnNumber: 25
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
-                                href: "/fitness",
-                                className: getLinkClasses('/fitness'),
-                                children: "Fitness"
+                                href: "/enforcement",
+                                className: getLinkClasses('/enforcement'),
+                                children: "Enforcement"
                             }, void 0, false, {
                                 fileName: "[project]/src/components/DashboardLayout.js",
                                 lineNumber: 84,
                                 columnNumber: 25
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
-                                href: "/enforcement",
-                                className: getLinkClasses('/enforcement'),
-                                children: "Enforcement"
+                                href: "/fitness",
+                                className: getLinkClasses('/fitness'),
+                                children: "Fitness"
                             }, void 0, false, {
                                 fileName: "[project]/src/components/DashboardLayout.js",
                                 lineNumber: 87,

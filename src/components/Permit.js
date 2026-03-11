@@ -1,6 +1,7 @@
 'use client';
 import React, { useState, useEffect } from 'react';
 import dummyData from '../data/dummyData';
+import DateFilter from './DateFilter';
 
 const Permit = () => {
     const [isDarkMode, setIsDarkMode] = useState(false);
@@ -42,7 +43,8 @@ const Permit = () => {
                 <p className="text-gray-600 dark:text-gray-400">District-wise permit fee details and application status</p>
             </div>
 
-            {/* Filters */}
+            <DateFilter onFilterChange={() => { }} />
+
             <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-4">
                 <h3 className="text-lg font-semibold mb-3 text-gray-900 dark:text-white">Filters</h3>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">

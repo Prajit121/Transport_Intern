@@ -1,6 +1,7 @@
 'use client';
 import React, { useState, useEffect, useMemo } from 'react';
 import dummyData from '../data/dummyData';
+import DateFilter from './DateFilter';
 
 const Fitness = () => {
     const [isDarkMode, setIsDarkMode] = useState(false);
@@ -43,6 +44,8 @@ const Fitness = () => {
                 <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">Fitness Certificate Management</h1>
                 <p className="text-gray-600 dark:text-gray-400">District-wise fitness report for transport vehicles</p>
             </div>
+
+            <DateFilter onFilterChange={() => { }} />
 
             {/* Summary Cards */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">

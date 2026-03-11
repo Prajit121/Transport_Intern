@@ -66,10 +66,10 @@ export default function DashboardLayout({ children }) {
             <nav className="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="flex space-x-1 overflow-x-auto">
-                        <Link href="/" className={getLinkClasses('/')}>
-                            Overview
-                        </Link>
                         <Link href="/revenue" className={getLinkClasses('/revenue')}>
+                            Revenue
+                        </Link>
+                        <Link href="/vehicles" className={getLinkClasses('/vehicles')}>
                             Vehicles
                         </Link>
                         <Link href="/permit" className={getLinkClasses('/permit')}>
@@ -81,11 +81,11 @@ export default function DashboardLayout({ children }) {
                         <Link href="/pucc" className={getLinkClasses('/pucc')}>
                             PUCC
                         </Link>
-                        <Link href="/fitness" className={getLinkClasses('/fitness')}>
-                            Fitness
-                        </Link>
                         <Link href="/enforcement" className={getLinkClasses('/enforcement')}>
                             Enforcement
+                        </Link>
+                        <Link href="/fitness" className={getLinkClasses('/fitness')}>
+                            Fitness
                         </Link>
 
                     </div>

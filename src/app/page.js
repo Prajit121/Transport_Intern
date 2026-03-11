@@ -1,5 +1,5 @@
-import Overview from '../components/Overview';
+import Revenue from '../components/Revenue';
 
 export default function Home() {
-    return <Overview />;
+    return <Revenue />;
 }
