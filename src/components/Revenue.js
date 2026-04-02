@@ -16,6 +16,8 @@ import { Bar, Line, Pie } from 'react-chartjs-2';
 import dummyData from '../data/dummyData';
 import DateFilter from './DateFilter';
 import { getMonthsInRange } from '../utils/dateUtils';
+import ComparisonTable from './ComparisonTable';
+import { useComparison } from '../hooks/useComparison';
 
 ChartJS.register(
     CategoryScale,
@@ -34,6 +36,36 @@ const Revenue = () => {
     const [isDarkMode, setIsDarkMode] = useState(false);
     const [selectedStream, setSelectedStream] = useState('grandTotal');
 
+    const categories = [
+        { id: 'grandTotal', label: 'Grand Total Revenue' },
+        { id: 'mvTax', label: 'Total MV Tax' },
+        { id: 'mvFees', label: 'Total MV Fees' },
+        { id: 'roadSafetyCess', label: 'Road Safety Cess' },
+        { id: 'greenTax', label: 'Green Tax' },
+        { id: 'compoundingFees', label: 'Compounding Fees' },
+        { id: 'apgt', label: 'APGT' },
+        { id: 'hsrp', label: 'HSRP' },
+        { id: 'laborCess', label: 'Labor Cess' }
+    ];
+
+    const comparisonProps = useComparison({
+        initialCategory: 'grandTotal',
+        getYearDataOptions: {
+            '2023': dummyData.districtWiseRevenue2023,
+            '2024': dummyData.districtWiseRevenue2024,
+            '2025': dummyData.districtWiseRevenue,
+            '2026': dummyData.districtWiseRevenue2026,
+        }
+    });
+
+    const {
+        primaryScale,
+        compareScale,
+        primaryData,
+        comparisonDataRaw,
+        compareCategory
+    } = comparisonProps;
+
     const streams = [
         { id: 'grandTotal', name: 'Grand Total Revenue' },
         { id: 'totalMVTax', name: 'Total MV Tax' },
@@ -43,6 +75,7 @@ const Revenue = () => {
         { id: 'totalCF', name: 'Compounding Fees' },
         { id: 'totalAPGT', name: 'APGT' },
         { id: 'totalHSRP', name: 'HSRP' },
+        { id: 'totalLaborCess', name: 'Labor Cess' },
     ];
 
     const handleFilterChange = ({ start, end }) => {
@@ -74,6 +107,8 @@ const Revenue = () => {
                 return d.apgt;
             case 'totalHSRP':
                 return d.hsrp;
+            case 'totalLaborCess':
+                return d.laborCess;
             case 'grandTotal':
             default:
                 return (
@@ -82,10 +117,52 @@ const Revenue = () => {
                     d.roadSafetyCessNonTransport + d.roadSafetyCessTransport +
                     d.greenTaxNonTransport + d.greenTaxTransport +
                     d.cfOffence + d.cfDelayFine + d.fitnessCF +
-                    d.puccLateFine + d.otherLateFees + d.apgt + d.hsrp
+                    d.puccLateFine + d.otherLateFees + d.apgt + d.hsrp + d.laborCess
                 );
         }
     };
+
+    const getDistrictCategoryValue = (districtData, category) => {
+        if (!districtData) return 0;
+        switch (category) {
+            case 'mvTax': return districtData.mvTax.nonTransport + districtData.mvTax.newReg + districtData.mvTax.alreadyReg;
+            case 'mvFees': return districtData.mvFees.sarathi + districtData.mvFees.vahan + districtData.mvFees.pucc;
+            case 'roadSafetyCess': return districtData.roadSafetyCess.nonTransport + districtData.roadSafetyCess.transport;
+            case 'greenTax': return districtData.greenTax.nonTransport + districtData.greenTax.transport;
+            case 'compoundingFees': return districtData.compoundingFees.offenceCF + districtData.compoundingFees.perDayCF + districtData.compoundingFees.fitnessCF + districtData.compoundingFees.puccLateFine + districtData.compoundingFees.otherLateFees;
+            case 'apgt': return districtData.apgt;
+            case 'hsrp': return districtData.hsrp;
+            case 'laborCess': return districtData.laborCess;
+            case 'grandTotal':
+            default:
+                return (
+                    districtData.mvTax.nonTransport + districtData.mvTax.newReg + districtData.mvTax.alreadyReg +
+                    districtData.mvFees.sarathi + districtData.mvFees.vahan + districtData.mvFees.pucc +
+                    districtData.roadSafetyCess.nonTransport + districtData.roadSafetyCess.transport +
+                    districtData.greenTax.nonTransport + districtData.greenTax.transport +
+                    districtData.compoundingFees.offenceCF + districtData.compoundingFees.perDayCF + districtData.compoundingFees.fitnessCF + districtData.compoundingFees.puccLateFine + districtData.compoundingFees.otherLateFees +
+                    districtData.apgt + districtData.hsrp + districtData.laborCess
+                );
+        }
+    };
+
+    const scaleRow = (row, scaleFactor) => {
+        const scale = (val) => Math.floor(val * scaleFactor);
+        return {
+            ...row,
+            mvTax: { nonTransport: scale(row.mvTax.nonTransport), newReg: scale(row.mvTax.newReg), alreadyReg: scale(row.mvTax.alreadyReg) },
+            mvFees: { sarathi: scale(row.mvFees.sarathi), vahan: scale(row.mvFees.vahan), pucc: scale(row.mvFees.pucc) },
+            roadSafetyCess: { nonTransport: scale(row.roadSafetyCess.nonTransport), transport: scale(row.roadSafetyCess.transport) },
+            greenTax: { nonTransport: scale(row.greenTax.nonTransport), transport: scale(row.greenTax.transport) },
+            compoundingFees: { offenceCF: scale(row.compoundingFees.offenceCF), perDayCF: scale(row.compoundingFees.perDayCF), fitnessCF: scale(row.compoundingFees.fitnessCF), puccLateFine: scale(row.compoundingFees.puccLateFine), otherLateFees: scale(row.compoundingFees.otherLateFees) },
+            apgt: scale(row.apgt),
+            hsrp: scale(row.hsrp),
+            laborCess: scale(row.laborCess),
+        };
+    };
+
+    const scaledPrimaryData = primaryData.map(row => scaleRow(row, primaryScale));
+    const scaledComparisonData = comparisonDataRaw.map(row => scaleRow(row, compareScale));
 
     // Calculate total revenue for summary cards (using 2025 as base)
     const stats = useMemo(() => {
@@ -106,7 +183,8 @@ const Revenue = () => {
         );
         const totalAPGT = filteredData2025.reduce((sum, d) => sum + d.apgt, 0);
         const totalHSRP = filteredData2025.reduce((sum, d) => sum + d.hsrp, 0);
-        const grandTotal = totalMVTax + totalMVFees + totalRoadSafetyCess + totalGreenTax + totalCF + totalAPGT + totalHSRP;
+        const totalLaborCess = filteredData2025.reduce((sum, d) => sum + d.laborCess, 0);
+        const grandTotal = totalMVTax + totalMVFees + totalRoadSafetyCess + totalGreenTax + totalCF + totalAPGT + totalHSRP + totalLaborCess;
 
         return {
             totalMVTax,
@@ -116,13 +194,14 @@ const Revenue = () => {
             totalCF,
             totalAPGT,
             totalHSRP,
+            totalLaborCess,
             grandTotal,
         };
     }, [filteredData2025]);
 
     // Revenue breakdown by category (Pie chart)
     const revenuePieData = {
-        labels: ['MV Tax', 'MV Fees', 'Road Safety Cess', 'Green Tax', 'Compounding Fees', 'APGT', 'HSRP'],
+        labels: ['MV Tax', 'MV Fees', 'Road Safety Cess', 'Green Tax', 'Compounding Fees', 'APGT', 'HSRP', 'Labor Cess'],
         datasets: [
             {
                 data: [
@@ -132,7 +211,8 @@ const Revenue = () => {
                     stats.totalGreenTax,
                     stats.totalCF,
                     stats.totalAPGT,
-                    stats.totalHSRP
+                    stats.totalHSRP,
+                    stats.totalLaborCess
                 ],
                 backgroundColor: [
                     'rgba(59, 130, 246, 0.8)',
@@ -142,6 +222,7 @@ const Revenue = () => {
                     'rgba(239, 68, 68, 0.8)',
                     'rgba(168, 85, 247, 0.8)',
                     'rgba(99, 102, 241, 0.8)',
+                    'rgba(236, 72, 153, 0.8)',
                 ],
                 borderColor: [
                     'rgba(59, 130, 246, 1)',
@@ -151,6 +232,7 @@ const Revenue = () => {
                     'rgba(239, 68, 68, 1)',
                     'rgba(168, 85, 247, 1)',
                     'rgba(99, 102, 241, 1)',
+                    'rgba(236, 72, 153, 1)',
                 ],
                 borderWidth: 1,
             },
@@ -322,88 +404,193 @@ const Revenue = () => {
             </div>
 
             {/* Bottom Section: District-wise Detailed Table */}
-            <div className="bg-white dark:bg-gray-800 rounded-lg shadow overflow-hidden">
-                <div className="px-6 py-4 border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-700/50">
-                    <h2 className="text-xl font-bold text-gray-900 dark:text-white uppercase tracking-tight">
-                        District-Wise Revenue Collection Statement
-                    </h2>
-                </div>
-                <div className="overflow-x-auto">
+            <ComparisonTable
+                title="District-Wise Revenue"
+                isComparisonMode={comparisonProps.isComparisonMode}
+                setIsComparisonMode={comparisonProps.setIsComparisonMode}
+                primaryRange={comparisonProps.primaryRange}
+                setPrimaryRange={comparisonProps.setPrimaryRange}
+                compareRange={comparisonProps.compareRange}
+                setCompareRange={comparisonProps.setCompareRange}
+                compareCategory={comparisonProps.compareCategory}
+                setCompareCategory={comparisonProps.setCompareCategory}
+                categories={categories}
+                comparisonChildren={
                     <table className="min-w-full border-collapse border border-gray-200 dark:border-gray-700">
                         <thead className="bg-gray-100 dark:bg-gray-800 text-xs font-bold uppercase text-gray-700 dark:text-gray-300">
-                            {/* Row 1 */}
                             <tr>
-                                <th rowSpan="3" className="border border-gray-300 dark:border-gray-600 px-4 py-2 text-center">District</th>
-                                <th colSpan="3" className="border border-gray-300 dark:border-gray-600 px-4 py-2 text-center">MV Tax</th>
-                                <th colSpan="3" className="border border-gray-300 dark:border-gray-600 px-4 py-2 text-center">MV Fees</th>
-                                <th colSpan="2" className="border border-gray-300 dark:border-gray-600 px-4 py-2 text-center">Road Safety Cess</th>
-                                <th colSpan="2" className="border border-gray-300 dark:border-gray-600 px-4 py-2 text-center">Green Tax</th>
-                                <th colSpan="5" className="border border-gray-300 dark:border-gray-600 px-4 py-2 text-center">C.F. (Compounding Fees)</th>
-                                <th rowSpan="3" className="border border-gray-300 dark:border-gray-600 px-4 py-2 text-center">APGT</th>
-                                <th rowSpan="3" className="border border-gray-300 dark:border-gray-600 px-4 py-2 text-center">HSRP</th>
-                            </tr>
-                            {/* Row 2 */}
-                            <tr>
-                                <th rowSpan="2" className="border border-gray-300 dark:border-gray-600 px-2 py-1 text-center">Non-Transport</th>
-                                <th colSpan="2" className="border border-gray-300 dark:border-gray-600 px-2 py-1 text-center">Transport</th>
-                                <th rowSpan="2" className="border border-gray-300 dark:border-gray-600 px-2 py-1 text-center">Sarathi</th>
-                                <th rowSpan="2" className="border border-gray-300 dark:border-gray-600 px-2 py-1 text-center">Vahan</th>
-                                <th rowSpan="2" className="border border-gray-300 dark:border-gray-600 px-2 py-1 text-center">PUCC</th>
-                                <th rowSpan="2" className="border border-gray-300 dark:border-gray-600 px-2 py-1 text-center">Non-Transport</th>
-                                <th rowSpan="2" className="border border-gray-300 dark:border-gray-600 px-2 py-1 text-center">Transport</th>
-                                <th rowSpan="2" className="border border-gray-300 dark:border-gray-600 px-2 py-1 text-center">Non-Transport</th>
-                                <th rowSpan="2" className="border border-gray-300 dark:border-gray-600 px-2 py-1 text-center">Transport</th>
-                                <th rowSpan="2" className="border border-gray-300 dark:border-gray-600 px-2 py-1 text-center">Offence CF</th>
-                                <th rowSpan="2" className="border border-gray-300 dark:border-gray-600 px-2 py-1 text-center text-[10px]">CF @₹5/day delay</th>
-                                <th rowSpan="2" className="border border-gray-300 dark:border-gray-600 px-2 py-1 text-center text-[10px]">Fitness CF @₹50/day</th>
-                                <th rowSpan="2" className="border border-gray-300 dark:border-gray-600 px-2 py-1 text-center text-[10px]">PUCC Late @₹500</th>
-                                <th rowSpan="2" className="border border-gray-300 dark:border-gray-600 px-2 py-1 text-center text-[10px]">Other Late fees</th>
-                            </tr>
-                            {/* Row 3 */}
-                            <tr>
-                                <th className="border border-gray-300 dark:border-gray-600 px-2 py-1 text-center text-[10px]">New Registration</th>
-                                <th className="border border-gray-300 dark:border-gray-600 px-2 py-1 text-center text-[10px]">Already Registered</th>
+                                <th className="border border-gray-300 dark:border-gray-600 px-4 py-3 text-left">District</th>
+                                <th className="border border-gray-300 dark:border-gray-600 px-4 py-3 text-right">Selected Period</th>
+                                <th className="border border-gray-300 dark:border-gray-600 px-4 py-3 text-right">Comparison Period</th>
+                                <th className="border border-gray-300 dark:border-gray-600 px-4 py-3 text-right">Variance (₹)</th>
+                                <th className="border border-gray-300 dark:border-gray-600 px-4 py-3 text-right">Trend</th>
                             </tr>
                         </thead>
                         <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
-                            {dummyData.districtWiseRevenue.map((row, idx) => (
-                                <tr key={row.district} className={idx % 2 === 0 ? 'bg-white dark:bg-gray-800' : 'bg-gray-50 dark:bg-gray-900/40'}>
-                                    <td className="border border-gray-200 dark:border-gray-700 px-4 py-2 text-sm font-medium text-gray-900 dark:text-white">{row.district}</td>
-                                    
-                                    {/* MV Tax */}
-                                    <td className="border border-gray-200 dark:border-gray-700 px-2 py-2 text-right text-xs text-gray-600 dark:text-gray-400">{row.mvTax.nonTransport.toLocaleString()}</td>
-                                    <td className="border border-gray-200 dark:border-gray-700 px-2 py-2 text-right text-xs text-gray-600 dark:text-gray-400">{row.mvTax.newReg.toLocaleString()}</td>
-                                    <td className="border border-gray-200 dark:border-gray-700 px-2 py-2 text-right text-xs text-gray-600 dark:text-gray-400">{row.mvTax.alreadyReg.toLocaleString()}</td>
-                                    
-                                    {/* MV Fees */}
-                                    <td className="border border-gray-200 dark:border-gray-700 px-2 py-2 text-right text-xs text-green-600 dark:text-green-400 font-medium">{row.mvFees.sarathi.toLocaleString()}</td>
-                                    <td className="border border-gray-200 dark:border-gray-700 px-2 py-2 text-right text-xs text-green-600 dark:text-green-400 font-medium">{row.mvFees.vahan.toLocaleString()}</td>
-                                    <td className="border border-gray-200 dark:border-gray-700 px-2 py-2 text-right text-xs text-green-600 dark:text-green-400 font-medium">{row.mvFees.pucc.toLocaleString()}</td>
-                                    
-                                    {/* Road Safety Cess */}
-                                    <td className="border border-gray-200 dark:border-gray-700 px-2 py-2 text-right text-xs text-yellow-600 dark:text-yellow-400">{row.roadSafetyCess.nonTransport.toLocaleString()}</td>
-                                    <td className="border border-gray-200 dark:border-gray-700 px-2 py-2 text-right text-xs text-yellow-600 dark:text-yellow-400">{row.roadSafetyCess.transport.toLocaleString()}</td>
-                                    
-                                    {/* Green Tax */}
-                                    <td className="border border-gray-200 dark:border-gray-700 px-2 py-2 text-right text-xs text-emerald-600 dark:text-emerald-400">{row.greenTax.nonTransport.toLocaleString()}</td>
-                                    <td className="border border-gray-200 dark:border-gray-700 px-2 py-2 text-right text-xs text-emerald-600 dark:text-emerald-400">{row.greenTax.transport.toLocaleString()}</td>
-                                    
-                                    {/* Compounding Fees */}
-                                    <td className="border border-gray-200 dark:border-gray-700 px-2 py-2 text-right text-xs text-red-600 dark:text-red-400">{row.compoundingFees.offenceCF.toLocaleString()}</td>
-                                    <td className="border border-gray-200 dark:border-gray-700 px-2 py-2 text-right text-xs text-red-600 dark:text-red-400">{row.compoundingFees.perDayCF.toLocaleString()}</td>
-                                    <td className="border border-gray-200 dark:border-gray-700 px-2 py-2 text-right text-xs text-red-600 dark:text-red-400">{row.compoundingFees.fitnessCF.toLocaleString()}</td>
-                                    <td className="border border-gray-200 dark:border-gray-700 px-2 py-2 text-right text-xs text-red-600 dark:text-red-400">{row.compoundingFees.puccLateFine.toLocaleString()}</td>
-                                    <td className="border border-gray-200 dark:border-gray-700 px-2 py-2 text-right text-xs text-red-600 dark:text-red-400">{row.compoundingFees.otherLateFees.toLocaleString()}</td>
-                                    
-                                    {/* APGT & HSRP */}
-                                    <td className="border border-gray-200 dark:border-gray-700 px-2 py-2 text-right text-xs text-purple-600 dark:text-purple-400 font-bold">{row.apgt.toLocaleString()}</td>
-                                    <td className="border border-gray-200 dark:border-gray-700 px-2 py-2 text-right text-xs text-indigo-600 dark:text-indigo-400 font-bold">{row.hsrp.toLocaleString()}</td>
-                                </tr>
-                            ))}
+                            {scaledPrimaryData.map((rowPrimary, idx) => {
+                                const rowComparison = comparisonProps.comparisonDataRaw?.find(d => d.district === rowPrimary.district);
+                                
+                                const valPrimary = getDistrictCategoryValue(rowPrimary, comparisonProps.compareCategory);
+                                const valComparison = getDistrictCategoryValue(rowComparison, comparisonProps.compareCategory);
+                                
+                                const variance = valComparison - valPrimary;
+                                const variancePct = valPrimary === 0 ? 0 : (variance / valPrimary) * 100;
+                                
+                                const isPositive = variance > 0;
+                                const isNegative = variance < 0;
+                                
+                                return (
+                                    <tr key={rowPrimary.district} className={idx % 2 === 0 ? 'bg-white dark:bg-gray-800' : 'bg-gray-50 dark:bg-gray-900/40'}>
+                                        <td className="border border-gray-200 dark:border-gray-700 px-4 py-3 text-sm font-medium text-gray-900 dark:text-white">
+                                            {rowPrimary.district}
+                                        </td>
+                                        <td className="border border-gray-200 dark:border-gray-700 px-4 py-3 text-right text-sm text-gray-600 dark:text-gray-400">
+                                            {formatCurrency(valPrimary)}
+                                        </td>
+                                        <td className="border border-gray-200 dark:border-gray-700 px-4 py-3 text-right text-sm text-gray-900 dark:text-white font-semibold">
+                                            {formatCurrency(valComparison)}
+                                        </td>
+                                        <td className={`border border-gray-200 dark:border-gray-700 px-4 py-3 text-right text-sm font-bold ${isPositive ? 'text-green-600 dark:text-green-400' : isNegative ? 'text-red-600 dark:text-red-400' : 'text-gray-600 dark:text-gray-400'}`}>
+                                            {isPositive ? '+' : ''}{formatCurrency(variance)}
+                                        </td>
+                                        <td className={`border border-gray-200 dark:border-gray-700 px-4 py-3 text-right text-sm font-bold ${isPositive ? 'text-green-600 dark:text-green-400' : isNegative ? 'text-red-600 dark:text-red-400' : 'text-gray-600 dark:text-gray-400'}`}>
+                                            <div className="flex items-center justify-end gap-1">
+                                                {isPositive && <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>}
+                                                {isNegative && <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 17h8m0 0v-8m0 8l-8-8-4 4-6-6"></path></svg>}
+                                                {isPositive ? '+' : ''}{variancePct.toFixed(1)}%
+                                            </div>
+                                        </td>
+                                    </tr>
+                                );
+                            })}
                         </tbody>
                     </table>
-                </div>
-            </div>
+                }
+            >
+                <table className="min-w-full border-collapse border border-gray-200 dark:border-gray-700">
+                            <thead className="bg-gray-100 dark:bg-gray-800 text-xs font-bold uppercase text-gray-700 dark:text-gray-300">
+                                {/* Row 1 */}
+                                <tr>
+                                    <th rowSpan="3" className="border border-gray-300 dark:border-gray-600 px-4 py-2 text-center">District</th>
+                                    <th colSpan="3" className="border border-gray-300 dark:border-gray-600 px-4 py-2 text-center">MV Tax</th>
+                                    <th colSpan="3" className="border border-gray-300 dark:border-gray-600 px-4 py-2 text-center">MV Fees</th>
+                                    <th colSpan="2" className="border border-gray-300 dark:border-gray-600 px-4 py-2 text-center">Road Safety Cess</th>
+                                    <th colSpan="2" className="border border-gray-300 dark:border-gray-600 px-4 py-2 text-center">Green Tax</th>
+                                    <th colSpan="5" className="border border-gray-300 dark:border-gray-600 px-4 py-2 text-center">C.F. (Compounding Fees)</th>
+                                    <th rowSpan="3" className="border border-gray-300 dark:border-gray-600 px-4 py-2 text-center">APGT</th>
+                                    <th rowSpan="3" className="border border-gray-300 dark:border-gray-600 px-4 py-2 text-center">HSRP</th>
+                                </tr>
+                                {/* Row 2 */}
+                                <tr>
+                                    <th rowSpan="2" className="border border-gray-300 dark:border-gray-600 px-2 py-1 text-center">Non-Transport</th>
+                                    <th colSpan="2" className="border border-gray-300 dark:border-gray-600 px-2 py-1 text-center">Transport</th>
+                                    <th rowSpan="2" className="border border-gray-300 dark:border-gray-600 px-2 py-1 text-center">Sarathi</th>
+                                    <th rowSpan="2" className="border border-gray-300 dark:border-gray-600 px-2 py-1 text-center">Vahan</th>
+                                    <th rowSpan="2" className="border border-gray-300 dark:border-gray-600 px-2 py-1 text-center">PUCC</th>
+                                    <th rowSpan="2" className="border border-gray-300 dark:border-gray-600 px-2 py-1 text-center">Non-Transport</th>
+                                    <th rowSpan="2" className="border border-gray-300 dark:border-gray-600 px-2 py-1 text-center">Transport</th>
+                                    <th rowSpan="2" className="border border-gray-300 dark:border-gray-600 px-2 py-1 text-center">Non-Transport</th>
+                                    <th rowSpan="2" className="border border-gray-300 dark:border-gray-600 px-2 py-1 text-center">Transport</th>
+                                    <th rowSpan="2" className="border border-gray-300 dark:border-gray-600 px-2 py-1 text-center">Offence CF</th>
+                                    <th rowSpan="2" className="border border-gray-300 dark:border-gray-600 px-2 py-1 text-center text-[10px]">CF @₹5/day delay</th>
+                                    <th rowSpan="2" className="border border-gray-300 dark:border-gray-600 px-2 py-1 text-center text-[10px]">Fitness CF @₹50/day</th>
+                                    <th rowSpan="2" className="border border-gray-300 dark:border-gray-600 px-2 py-1 text-center text-[10px]">PUCC Late @₹500</th>
+                                    <th rowSpan="2" className="border border-gray-300 dark:border-gray-600 px-2 py-1 text-center text-[10px]">Other Late fees</th>
+                                </tr>
+                                {/* Row 3 */}
+                                <tr>
+                                    <th className="border border-gray-300 dark:border-gray-600 px-2 py-1 text-center text-[10px]">New Registration</th>
+                                    <th className="border border-gray-300 dark:border-gray-600 px-2 py-1 text-center text-[10px]">Already Registered</th>
+                                </tr>
+                            </thead>
+                            <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
+                                {scaledPrimaryData.map((row, idx) => (
+                                    <tr key={row.district} className={idx % 2 === 0 ? 'bg-white dark:bg-gray-800' : 'bg-gray-50 dark:bg-gray-900/40'}>
+                                        <td className="border border-gray-200 dark:border-gray-700 px-4 py-2 text-sm font-medium text-gray-900 dark:text-white">{row.district}</td>
+                                        
+                                        {/* MV Tax */}
+                                        <td className="border border-gray-200 dark:border-gray-700 px-2 py-2 text-right text-xs text-gray-600 dark:text-gray-400">{row.mvTax.nonTransport.toLocaleString()}</td>
+                                        <td className="border border-gray-200 dark:border-gray-700 px-2 py-2 text-right text-xs text-gray-600 dark:text-gray-400">{row.mvTax.newReg.toLocaleString()}</td>
+                                        <td className="border border-gray-200 dark:border-gray-700 px-2 py-2 text-right text-xs text-gray-600 dark:text-gray-400">{row.mvTax.alreadyReg.toLocaleString()}</td>
+                                        
+                                        {/* MV Fees */}
+                                        <td className="border border-gray-200 dark:border-gray-700 px-2 py-2 text-right text-xs text-green-600 dark:text-green-400 font-medium">{row.mvFees.sarathi.toLocaleString()}</td>
+                                        <td className="border border-gray-200 dark:border-gray-700 px-2 py-2 text-right text-xs text-green-600 dark:text-green-400 font-medium">{row.mvFees.vahan.toLocaleString()}</td>
+                                        <td className="border border-gray-200 dark:border-gray-700 px-2 py-2 text-right text-xs text-green-600 dark:text-green-400 font-medium">{row.mvFees.pucc.toLocaleString()}</td>
+                                        
+                                        {/* Road Safety Cess */}
+                                        <td className="border border-gray-200 dark:border-gray-700 px-2 py-2 text-right text-xs text-yellow-600 dark:text-yellow-400">{row.roadSafetyCess.nonTransport.toLocaleString()}</td>
+                                        <td className="border border-gray-200 dark:border-gray-700 px-2 py-2 text-right text-xs text-yellow-600 dark:text-yellow-400">{row.roadSafetyCess.transport.toLocaleString()}</td>
+                                        
+                                        {/* Green Tax */}
+                                        <td className="border border-gray-200 dark:border-gray-700 px-2 py-2 text-right text-xs text-emerald-600 dark:text-emerald-400">{row.greenTax.nonTransport.toLocaleString()}</td>
+                                        <td className="border border-gray-200 dark:border-gray-700 px-2 py-2 text-right text-xs text-emerald-600 dark:text-emerald-400">{row.greenTax.transport.toLocaleString()}</td>
+                                        
+                                        {/* Compounding Fees */}
+                                        <td className="border border-gray-200 dark:border-gray-700 px-2 py-2 text-right text-xs text-red-600 dark:text-red-400">{row.compoundingFees.offenceCF.toLocaleString()}</td>
+                                        <td className="border border-gray-200 dark:border-gray-700 px-2 py-2 text-right text-xs text-red-600 dark:text-red-400">{row.compoundingFees.perDayCF.toLocaleString()}</td>
+                                        <td className="border border-gray-200 dark:border-gray-700 px-2 py-2 text-right text-xs text-red-600 dark:text-red-400">{row.compoundingFees.fitnessCF.toLocaleString()}</td>
+                                        <td className="border border-gray-200 dark:border-gray-700 px-2 py-2 text-right text-xs text-red-600 dark:text-red-400">{row.compoundingFees.puccLateFine.toLocaleString()}</td>
+                                        <td className="border border-gray-200 dark:border-gray-700 px-2 py-2 text-right text-xs text-red-600 dark:text-red-400">{row.compoundingFees.otherLateFees.toLocaleString()}</td>
+                                        
+                                        {/* APGT & HSRP */}
+                                        <td className="border border-gray-200 dark:border-gray-700 px-2 py-2 text-right text-xs text-purple-600 dark:text-purple-400 font-bold">{row.apgt.toLocaleString()}</td>
+                                        <td className="border border-gray-200 dark:border-gray-700 px-2 py-2 text-right text-xs text-indigo-600 dark:text-indigo-400 font-bold">{row.hsrp.toLocaleString()}</td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    ) : (
+                        <table className="min-w-full border-collapse border border-gray-200 dark:border-gray-700">
+                            <thead className="bg-gray-100 dark:bg-gray-800 text-xs font-bold uppercase text-gray-700 dark:text-gray-300">
+                                <tr>
+                                    <th className="border border-gray-300 dark:border-gray-600 px-4 py-3 text-left">District</th>
+                                    <th className="border border-gray-300 dark:border-gray-600 px-4 py-3 text-right">Selected Period</th>
+                                    <th className="border border-gray-300 dark:border-gray-600 px-4 py-3 text-right">Comparison Period</th>
+                                    <th className="border border-gray-300 dark:border-gray-600 px-4 py-3 text-right">Variance (₹)</th>
+                                    <th className="border border-gray-300 dark:border-gray-600 px-4 py-3 text-right">Trend</th>
+                                </tr>
+                            </thead>
+                            <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
+                                {scaledPrimaryData.map((rowPrimary, idx) => {
+                                    const rowComparison = scaledComparisonData?.find(d => d.district === rowPrimary.district);
+                                    
+                                    const valPrimary = getDistrictCategoryValue(rowPrimary, compareCategory);
+                                    const valComparison = getDistrictCategoryValue(rowComparison, compareCategory);
+                                    
+                                    const variance = valComparison - valPrimary;
+                                    const variancePct = valPrimary === 0 ? 0 : (variance / valPrimary) * 100;
+                                    
+                                    const isPositive = variance > 0;
+                                    const isNegative = variance < 0;
+                                    
+                                    return (
+                                        <tr key={rowPrimary.district} className={idx % 2 === 0 ? 'bg-white dark:bg-gray-800' : 'bg-gray-50 dark:bg-gray-900/40'}>
+                                            <td className="border border-gray-200 dark:border-gray-700 px-4 py-3 text-sm font-medium text-gray-900 dark:text-white">
+                                                {rowPrimary.district}
+                                            </td>
+                                            <td className="border border-gray-200 dark:border-gray-700 px-4 py-3 text-right text-sm text-gray-600 dark:text-gray-400">
+                                                {formatCurrency(valPrimary)}
+                                            </td>
+                                            <td className="border border-gray-200 dark:border-gray-700 px-4 py-3 text-right text-sm text-gray-900 dark:text-white font-semibold">
+                                                {formatCurrency(valComparison)}
+                                            </td>
+                                            <td className={`border border-gray-200 dark:border-gray-700 px-4 py-3 text-right text-sm font-bold ${isPositive ? 'text-green-600 dark:text-green-400' : isNegative ? 'text-red-600 dark:text-red-400' : 'text-gray-600 dark:text-gray-400'}`}>
+                                                {isPositive ? '+' : ''}{formatCurrency(variance)}
+                                            </td>
+                                            <td className={`border border-gray-200 dark:border-gray-700 px-4 py-3 text-right text-sm font-bold ${isPositive ? 'text-green-600 dark:text-green-400' : isNegative ? 'text-red-600 dark:text-red-400' : 'text-gray-600 dark:text-gray-400'}`}>
+                                                <div className="flex items-center justify-end gap-1">
+                                                    {isPositive && <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>}
+                                                    {isNegative && <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 17h8m0 0v-8m0 8l-8-8-4 4-6-6"></path></svg>}
+                                                    {isPositive ? '+' : ''}{variancePct.toFixed(1)}%
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    );
+                                })}
+                            </tbody>
+                        </table>
+            </ComparisonTable>
         </div>
     );
 };

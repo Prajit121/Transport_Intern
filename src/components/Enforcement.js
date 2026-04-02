@@ -2,6 +2,8 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import dummyData from '../data/dummyData';
 import DateFilter from './DateFilter';
+import ComparisonTable from './ComparisonTable';
+import { useComparison } from '../hooks/useComparison';
 
 const Enforcement = () => {
     const [isDarkMode, setIsDarkMode] = useState(false);
@@ -29,6 +31,40 @@ const Enforcement = () => {
     const districts = ['All', ...new Set(dummyData.enforcementData.map(d => d.district))];
     const offenceTypes = ['All', ...new Set(dummyData.enforcementData.map(d => d.offenceType))];
 
+    const comparisonProps = useComparison({
+        initialCategory: 'casesBooked',
+        getYearDataOptions: {
+            '2024': dummyData.enforcementData || dummyData.enforcementData2026,
+            '2025': dummyData.enforcementData,
+            '2026': dummyData.enforcementData2026,
+        }
+    });
+
+    const {
+        primaryScale,
+        compareScale,
+        primaryData,
+        comparisonDataRaw,
+        compareCategory
+    } = comparisonProps;
+
+    const scaleRow = (row, scaleFactor) => {
+        if (!row) return null;
+        const scale = (val) => Math.floor(val * scaleFactor);
+        return {
+            ...row,
+            casesBooked: scale(row.casesBooked),
+            cfImposed: scale(row.cfImposed),
+            casesDisposed: scale(row.casesDisposed),
+            cfRealised: scale(row.cfRealised),
+            casesPending: scale(row.casesPending),
+            licensesSuspended: scale(row.licensesSuspended),
+        };
+    };
+
+    const scaledPrimaryDataRaw = primaryData.map(row => scaleRow(row, primaryScale));
+    const scaledComparisonDataRaw = comparisonDataRaw.map(row => scaleRow(row, compareScale));
+
     const toggleDistrict = (district) => {
         setExpandedDistricts(prev =>
             prev.includes(district)
@@ -36,6 +72,15 @@ const Enforcement = () => {
                 : [...prev, district]
         );
     };
+
+    const categories = [
+        { id: 'casesBooked', label: 'Cases Booked' },
+        { id: 'cfImposed', label: 'CF Imposed' },
+        { id: 'casesDisposed', label: 'Cases Disposed' },
+        { id: 'cfRealised', label: 'CF Realised' },
+        { id: 'casesPending', label: 'Cases Pending' },
+        { id: 'licensesSuspended', label: 'Licenses Suspended' }
+    ];
 
     const formatCurrency = (amount) => {
         return '₹' + amount.toLocaleString('en-IN');
@@ -125,136 +170,193 @@ const Enforcement = () => {
             </div>
 
             {/* Grouped Enforcement Table */}
-            <div className="bg-white dark:bg-gray-800 rounded-lg shadow overflow-hidden">
-                <div className="px-6 py-4 border-b border-gray-200 dark:border-gray-700">
-                    <h2 className="text-xl font-semibold text-gray-900 dark:text-white">Offence Case Detection & CF Realization Report</h2>
-                    <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
-                        District-wise grouped view - Click district rows to expand/collapse
-                    </p>
-                </div>
-                <div className="overflow-x-auto">
+            <ComparisonTable
+                title="Offence Case Detection & CF Realization Report"
+                isComparisonMode={comparisonProps.isComparisonMode}
+                setIsComparisonMode={comparisonProps.setIsComparisonMode}
+                primaryRange={comparisonProps.primaryRange}
+                setPrimaryRange={comparisonProps.setPrimaryRange}
+                compareRange={comparisonProps.compareRange}
+                setCompareRange={comparisonProps.setCompareRange}
+                compareCategory={comparisonProps.compareCategory}
+                setCompareCategory={comparisonProps.setCompareCategory}
+                categories={categories}
+                comparisonChildren={
                     <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
-                        <thead className="bg-gray-50 dark:bg-gray-700">
+                        <thead className="bg-gray-100 dark:bg-gray-800 text-xs font-bold uppercase text-gray-700 dark:text-gray-300">
                             <tr>
-                                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
-                                    District / Offence Type
-                                </th>
-                                <th scope="col" className="px-6 py-3 text-right text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
-                                    Cases Booked
-                                </th>
-                                <th scope="col" className="px-6 py-3 text-right text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
-                                    CF Imposed
-                                </th>
-                                <th scope="col" className="px-6 py-3 text-right text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
-                                    Cases Disposed
-                                </th>
-                                <th scope="col" className="px-6 py-3 text-right text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
-                                    CF Realised
-                                </th>
-                                <th scope="col" className="px-6 py-3 text-right text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
-                                    Cases Pending
-                                </th>
-                                <th scope="col" className="px-6 py-3 text-right text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
-                                    Licenses Suspended
-                                </th>
+                                <th className="px-6 py-4 text-left border-b border-gray-200 dark:border-gray-700">District</th>
+                                <th className="px-6 py-4 text-right border-b border-gray-200 dark:border-gray-700">Selected Period</th>
+                                <th className="px-6 py-4 text-right border-b border-gray-200 dark:border-gray-700">Comparison Period</th>
+                                <th className="px-6 py-4 text-right border-b border-gray-200 dark:border-gray-700">Variance</th>
+                                <th className="px-6 py-4 text-right border-b border-gray-200 dark:border-gray-700">Trend</th>
                             </tr>
                         </thead>
-                        <tbody className="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
-                            {(selectedDistrict === 'All' ? districts.slice(1) : districts.filter(d => d === selectedDistrict)).map((district) => {
-                                const districtData = dummyData.enforcementData.filter(d => d.district === district);
-                                const isExpanded = expandedDistricts.includes(district);
-
-                                // Calculate district totals
-                                const districtTotals = districtData.reduce((acc, row) => ({
-                                    casesBooked: acc.casesBooked + row.casesBooked,
-                                    cfImposed: acc.cfImposed + row.cfImposed,
-                                    casesDisposed: acc.casesDisposed + row.casesDisposed,
-                                    cfRealised: acc.cfRealised + row.cfRealised,
-                                    casesPending: acc.casesPending + row.casesPending,
-                                    licensesSuspended: acc.licensesSuspended + row.licensesSuspended
-                                }), {
-                                    casesBooked: 0,
-                                    cfImposed: 0,
-                                    casesDisposed: 0,
-                                    cfRealised: 0,
-                                    casesPending: 0,
-                                    licensesSuspended: 0
-                                });
-
+                        <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
+                            {(selectedDistrict === 'All' ? districts.slice(1) : districts.filter(d => d === selectedDistrict)).map((district, idx) => {
+                                const pData = scaledPrimaryDataRaw.filter(d => d.district === district);
+                                const cData = scaledComparisonDataRaw.filter(d => d.district === district);
+                                
+                                const valPrimary = pData.reduce((sum, r) => sum + (r[compareCategory] || 0), 0);
+                                const valComparison = cData.reduce((sum, r) => sum + (r[compareCategory] || 0), 0);
+                                
+                                const variance = valComparison - valPrimary;
+                                const variancePct = valPrimary === 0 ? 0 : (variance / valPrimary) * 100;
+                                
+                                const isPositive = variance > 0;
+                                const isNegative = variance < 0;
+                                
+                                const isCurrency = ['cfImposed', 'cfRealised'].includes(compareCategory);
+                                
                                 return (
-                                    <React.Fragment key={district}>
-                                        {/* District Summary Row */}
-                                        <tr
-                                            onClick={() => toggleDistrict(district)}
-                                            className="bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 cursor-pointer transition-colors"
-                                        >
-                                            <td className="px-6 py-4 whitespace-nowrap text-sm font-bold text-gray-900 dark:text-white">
-                                                <div className="flex items-center">
-                                                    <svg
-                                                        className={`w-4 h-4 mr-2 transition-transform ${isExpanded ? 'rotate-90' : ''}`}
-                                                        fill="currentColor"
-                                                        viewBox="0 0 20 20"
-                                                    >
-                                                        <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" />
-                                                    </svg>
-                                                    {district}
-                                                </div>
-                                            </td>
-                                            <td className="px-6 py-4 whitespace-nowrap text-sm text-right font-bold text-blue-600 dark:text-blue-400">
-                                                {districtTotals.casesBooked.toLocaleString()}
-                                            </td>
-                                            <td className="px-6 py-4 whitespace-nowrap text-sm text-right font-bold text-orange-600 dark:text-orange-400">
-                                                {formatCurrency(districtTotals.cfImposed)}
-                                            </td>
-                                            <td className="px-6 py-4 whitespace-nowrap text-sm text-right font-bold text-purple-600 dark:text-purple-400">
-                                                {districtTotals.casesDisposed.toLocaleString()}
-                                            </td>
-                                            <td className="px-6 py-4 whitespace-nowrap text-sm text-right font-bold text-green-600 dark:text-green-400">
-                                                {formatCurrency(districtTotals.cfRealised)}
-                                            </td>
-                                            <td className="px-6 py-4 whitespace-nowrap text-sm text-right font-bold text-yellow-600 dark:text-yellow-400">
-                                                {districtTotals.casesPending.toLocaleString()}
-                                            </td>
-                                            <td className="px-6 py-4 whitespace-nowrap text-sm text-right font-bold text-red-600 dark:text-red-400">
-                                                {districtTotals.licensesSuspended.toLocaleString()}
-                                            </td>
-                                        </tr>
-
-                                        {/* Expanded Offence Rows */}
-                                        {isExpanded && districtData
-                                            .filter(row => selectedOffenceType === 'All' || row.offenceType === selectedOffenceType)
-                                            .map((row, idx) => (
-                                                <tr key={`${district}-${row.offenceType}`} className="hover:bg-gray-50 dark:hover:bg-gray-700/50">
-                                                    <td className="px-6 py-3 pl-12 whitespace-nowrap text-sm text-gray-700 dark:text-gray-300">
-                                                        <span className="text-gray-500 dark:text-gray-400">↳</span> {row.offenceType}
-                                                    </td>
-                                                    <td className="px-6 py-3 whitespace-nowrap text-sm text-right text-blue-600 dark:text-blue-400">
-                                                        {row.casesBooked}
-                                                    </td>
-                                                    <td className="px-6 py-3 whitespace-nowrap text-sm text-right text-orange-600 dark:text-orange-400">
-                                                        {formatCurrency(row.cfImposed)}
-                                                    </td>
-                                                    <td className="px-6 py-3 whitespace-nowrap text-sm text-right text-purple-600 dark:text-purple-400">
-                                                        {row.casesDisposed}
-                                                    </td>
-                                                    <td className="px-6 py-3 whitespace-nowrap text-sm text-right text-green-600 dark:text-green-400">
-                                                        {formatCurrency(row.cfRealised)}
-                                                    </td>
-                                                    <td className="px-6 py-3 whitespace-nowrap text-sm text-right text-yellow-600 dark:text-yellow-400">
-                                                        {row.casesPending}
-                                                    </td>
-                                                    <td className="px-6 py-3 whitespace-nowrap text-sm text-right text-red-600 dark:text-red-400">
-                                                        {row.licensesSuspended}
-                                                    </td>
-                                                </tr>
-                                            ))}
-                                    </React.Fragment>
+                                    <tr key={district} className={idx % 2 === 0 ? 'bg-white dark:bg-gray-800' : 'bg-gray-50 dark:bg-gray-900/40'}>
+                                        <td className="px-6 py-4 text-sm font-medium text-gray-900 dark:text-white">
+                                            {district}
+                                        </td>
+                                        <td className="px-6 py-4 text-right text-sm text-gray-600 dark:text-gray-400">
+                                            {isCurrency ? formatCurrency(valPrimary) : valPrimary.toLocaleString()}
+                                        </td>
+                                        <td className="px-6 py-4 text-right text-sm text-gray-900 dark:text-white font-semibold">
+                                            {isCurrency ? formatCurrency(valComparison) : valComparison.toLocaleString()}
+                                        </td>
+                                        <td className={`px-6 py-4 text-right text-sm font-bold ${isPositive ? 'text-green-600 dark:text-green-400' : isNegative ? 'text-red-600 dark:text-red-400' : 'text-gray-600 dark:text-gray-400'}`}>
+                                            {isPositive ? '+' : ''}{isCurrency ? formatCurrency(variance) : variance.toLocaleString()}
+                                        </td>
+                                        <td className={`px-6 py-4 text-right text-sm font-bold ${isPositive ? 'text-green-600 dark:text-green-400' : isNegative ? 'text-red-600 dark:text-red-400' : 'text-gray-600 dark:text-gray-400'}`}>
+                                            <div className="flex items-center justify-end gap-1">
+                                                {isPositive && <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>}
+                                                {isNegative && <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 17h8m0 0v-8m0 8l-8-8-4 4-6-6"></path></svg>}
+                                                {isPositive ? '+' : ''}{variancePct.toFixed(1)}%
+                                            </div>
+                                        </td>
+                                    </tr>
                                 );
                             })}
                         </tbody>
                     </table>
-                </div>
-            </div>
+                }
+            >
+                <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+                    <thead className="bg-gray-50 dark:bg-gray-700">
+                        <tr>
+                            <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                                District / Offence Type
+                            </th>
+                            <th scope="col" className="px-6 py-3 text-right text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                                Cases Booked
+                            </th>
+                            <th scope="col" className="px-6 py-3 text-right text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                                CF Imposed
+                            </th>
+                            <th scope="col" className="px-6 py-3 text-right text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                                Cases Disposed
+                            </th>
+                            <th scope="col" className="px-6 py-3 text-right text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                                CF Realised
+                            </th>
+                            <th scope="col" className="px-6 py-3 text-right text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                                Cases Pending
+                            </th>
+                            <th scope="col" className="px-6 py-3 text-right text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                                Licenses Suspended
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody className="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
+                        {(selectedDistrict === 'All' ? districts.slice(1) : districts.filter(d => d === selectedDistrict)).map((district) => {
+                            const districtData = scaledPrimaryDataRaw.filter(d => d.district === district);
+                            const isExpanded = expandedDistricts.includes(district);
+
+                            // Calculate district totals
+                            const districtTotals = districtData.reduce((acc, row) => ({
+                                casesBooked: acc.casesBooked + row.casesBooked,
+                                cfImposed: acc.cfImposed + row.cfImposed,
+                                casesDisposed: acc.casesDisposed + row.casesDisposed,
+                                cfRealised: acc.cfRealised + row.cfRealised,
+                                casesPending: acc.casesPending + row.casesPending,
+                                licensesSuspended: acc.licensesSuspended + row.licensesSuspended
+                            }), {
+                                casesBooked: 0,
+                                cfImposed: 0,
+                                casesDisposed: 0,
+                                cfRealised: 0,
+                                casesPending: 0,
+                                licensesSuspended: 0
+                            });
+
+                            return (
+                                <React.Fragment key={district}>
+                                    {/* District Summary Row */}
+                                    <tr
+                                        onClick={() => toggleDistrict(district)}
+                                        className="bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 cursor-pointer transition-colors"
+                                    >
+                                        <td className="px-6 py-4 whitespace-nowrap text-sm font-bold text-gray-900 dark:text-white">
+                                            <div className="flex items-center">
+                                                <svg
+                                                    className={`w-4 h-4 mr-2 transition-transform ${isExpanded ? 'rotate-90' : ''}`}
+                                                    fill="currentColor"
+                                                    viewBox="0 0 20 20"
+                                                >
+                                                    <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" />
+                                                </svg>
+                                                {district}
+                                            </div>
+                                        </td>
+                                        <td className="px-6 py-4 whitespace-nowrap text-sm text-right font-bold text-blue-600 dark:text-blue-400">
+                                            {districtTotals.casesBooked.toLocaleString()}
+                                        </td>
+                                        <td className="px-6 py-4 whitespace-nowrap text-sm text-right font-bold text-orange-600 dark:text-orange-400">
+                                            {formatCurrency(districtTotals.cfImposed)}
+                                        </td>
+                                        <td className="px-6 py-4 whitespace-nowrap text-sm text-right font-bold text-purple-600 dark:text-purple-400">
+                                            {districtTotals.casesDisposed.toLocaleString()}
+                                        </td>
+                                        <td className="px-6 py-4 whitespace-nowrap text-sm text-right font-bold text-green-600 dark:text-green-400">
+                                            {formatCurrency(districtTotals.cfRealised)}
+                                        </td>
+                                        <td className="px-6 py-4 whitespace-nowrap text-sm text-right font-bold text-yellow-600 dark:text-yellow-400">
+                                            {districtTotals.casesPending.toLocaleString()}
+                                        </td>
+                                        <td className="px-6 py-4 whitespace-nowrap text-sm text-right font-bold text-red-600 dark:text-red-400">
+                                            {districtTotals.licensesSuspended.toLocaleString()}
+                                        </td>
+                                    </tr>
+
+                                    {/* Expanded Offence Rows */}
+                                    {isExpanded && districtData
+                                        .filter(row => selectedOffenceType === 'All' || row.offenceType === selectedOffenceType)
+                                        .map((row, idx) => (
+                                            <tr key={`${district}-${row.offenceType}`} className="hover:bg-gray-50 dark:hover:bg-gray-700/50">
+                                                <td className="px-6 py-3 pl-12 whitespace-nowrap text-sm text-gray-700 dark:text-gray-300">
+                                                    <span className="text-gray-500 dark:text-gray-400">↳</span> {row.offenceType}
+                                                </td>
+                                                <td className="px-6 py-3 whitespace-nowrap text-sm text-right text-blue-600 dark:text-blue-400">
+                                                    {row.casesBooked}
+                                                </td>
+                                                <td className="px-6 py-3 whitespace-nowrap text-sm text-right text-orange-600 dark:text-orange-400">
+                                                    {formatCurrency(row.cfImposed)}
+                                                </td>
+                                                <td className="px-6 py-3 whitespace-nowrap text-sm text-right text-purple-600 dark:text-purple-400">
+                                                    {row.casesDisposed}
+                                                </td>
+                                                <td className="px-6 py-3 whitespace-nowrap text-sm text-right text-green-600 dark:text-green-400">
+                                                    {formatCurrency(row.cfRealised)}
+                                                </td>
+                                                <td className="px-6 py-3 whitespace-nowrap text-sm text-right text-yellow-600 dark:text-yellow-400">
+                                                    {row.casesPending}
+                                                </td>
+                                                <td className="px-6 py-3 whitespace-nowrap text-sm text-right text-red-600 dark:text-red-400">
+                                                    {row.licensesSuspended}
+                                                </td>
+                                            </tr>
+                                        ))}
+                                </React.Fragment>
+                            );
+                        })}
+                    </tbody>
+                </table>
+            </ComparisonTable>
         </div>
     );
 };

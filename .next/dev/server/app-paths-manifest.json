@@ -1,7 +1,16 @@
 {
   "/_not-found/page": "app/_not-found/page.js",
+  "/aets/page": "app/aets/page.js",
+  "/dealer-audit/page": "app/dealer-audit/page.js",
+  "/dl/page": "app/dl/page.js",
+  "/enforcement/page": "app/enforcement/page.js",
+  "/fitness/page": "app/fitness/page.js",
+  "/manpower/page": "app/manpower/page.js",
   "/page": "app/page.js",
+  "/performance-index/page": "app/performance-index/page.js",
   "/permit/page": "app/permit/page.js",
+  "/pucc/page": "app/pucc/page.js",
   "/revenue/page": "app/revenue/page.js",
+  "/service-delivery/page": "app/service-delivery/page.js",
   "/vehicles/page": "app/vehicles/page.js"
 }

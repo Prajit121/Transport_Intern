@@ -16,6 +16,8 @@ import { Bar, Line, Pie } from 'react-chartjs-2';
 import dummyData from '../data/dummyData';
 import DateFilter from './DateFilter';
 import { getMonthsInRange } from '../utils/dateUtils';
+import ComparisonTable from './ComparisonTable';
+import { useComparison } from '../hooks/useComparison';
 
 ChartJS.register(
     CategoryScale,
@@ -33,6 +35,50 @@ const Vehicles = () => {
     const [selectedMonths, setSelectedMonths] = useState(dummyData.vehicleRegistrations.map(d => d.month));
     const [isDarkMode, setIsDarkMode] = useState(false);
     const [selectedStream, setSelectedStream] = useState('total');
+    const [selectedDistrict, setSelectedDistrict] = useState('All');
+
+    const categories = [
+        { id: 'total', label: 'Total Registrations' },
+        { id: 'nonTransport', label: 'Non Transport' },
+        { id: 'transport', label: 'Transport' },
+        { id: 'twoWheeler', label: '2 Wheeler' },
+        { id: 'threeWheeler', label: '3 Wheeler' }
+    ];
+
+    const appCategories = [
+        { id: 'totalReceived', label: 'Total Received' },
+        { id: 'dealerPoint', label: 'Dealer Point' },
+        { id: 'dtoOffice', label: 'DTO Office' },
+        { id: 'scrutiny', label: 'Under Scrutiny' },
+        { id: 'approvalStage', label: 'Approval Stage' },
+        { id: 'approved', label: 'Approved' }
+    ];
+
+    const comparisonProps = useComparison({
+        initialCategory: 'total',
+        getYearDataOptions: {
+            '2024': dummyData.districtWiseVehicles2024,
+            '2025': dummyData.districtWiseVehicles,
+            '2026': dummyData.districtWiseVehicles2026,
+        }
+    });
+
+    const comparisonPropsApps = useComparison({
+        initialCategory: 'totalReceived',
+        getYearDataOptions: {
+            '2024': dummyData.registrationApplicationsData || dummyData.registrationApplicationsData2026,
+            '2025': dummyData.registrationApplicationsData,
+            '2026': dummyData.registrationApplicationsData2026,
+        }
+    });
+
+    const {
+        primaryScale,
+        compareScale,
+        primaryData,
+        comparisonDataRaw,
+        compareCategory
+    } = comparisonProps;
 
     const streams = [
         { id: 'total', name: 'Total Registrations' },
@@ -53,6 +99,33 @@ const Vehicles = () => {
 
     const filteredData2025 = dummyData.vehicleRegistrations.filter(d => selectedMonths.includes(d.month));
     const filteredData2026 = dummyData.vehicleRegistrations2026.filter(d => selectedMonths.includes(d.month));
+
+    const scaleRow = (row, scaleFactor) => {
+        const scale = (val) => Math.floor(val * scaleFactor);
+        return {
+            ...row,
+            total: scale(row.total),
+            nonTransport: scale(row.nonTransport),
+            transport: scale(row.transport),
+            twoWheeler: scale(row.twoWheeler),
+            threeWheeler: scale(row.threeWheeler),
+        };
+    };
+
+    const scaledPrimaryData = primaryData.map(row => scaleRow(row, primaryScale));
+    const scaledComparisonData = comparisonDataRaw.map(row => scaleRow(row, compareScale));
+
+    const getDistrictCategoryValue = (districtData, category) => {
+        if (!districtData) return 0;
+        switch (category) {
+            case 'nonTransport': return districtData.nonTransport;
+            case 'transport': return districtData.transport;
+            case 'twoWheeler': return districtData.twoWheeler;
+            case 'threeWheeler': return districtData.threeWheeler;
+            case 'total':
+            default: return districtData.total;
+        }
+    };
 
     const getStreamValue = (d) => {
         if (!d) return 0;
@@ -186,6 +259,27 @@ const Vehicles = () => {
         },
     };
 
+    const scaleAppRow = (row, scaleFactor) => {
+        if (!row) return null;
+        const scale = (val) => Math.floor(val * scaleFactor);
+        return {
+            ...row,
+            totalReceived: scale(row.totalReceived),
+            dealerPoint: scale(row.dealerPoint),
+            dtoOffice: scale(row.dtoOffice),
+            scrutiny: scale(row.scrutiny),
+            approvalStage: scale(row.approvalStage),
+            approved: scale(row.approved)
+        };
+    };
+
+    const scaledAppPrimaryRaw = comparisonPropsApps.primaryData.map(row => scaleAppRow(row, comparisonPropsApps.primaryScale));
+    const scaledAppComparisonRaw = comparisonPropsApps.comparisonDataRaw?.map(row => scaleAppRow(row, comparisonPropsApps.compareScale));
+
+    const scaledAppPrimaryData = selectedDistrict === 'All'
+        ? scaledAppPrimaryRaw
+        : scaledAppPrimaryRaw.filter(d => d.district === selectedDistrict);
+
     return (
         <div className="space-y-6">
             <DateFilter onFilterChange={handleFilterChange} />
@@ -249,76 +343,187 @@ const Vehicles = () => {
             </div>
 
             {/* District-wise Registration Table */}
-            <div className="bg-white dark:bg-gray-800 rounded-lg shadow overflow-hidden">
-                <div className="px-6 py-4 border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-700/50">
-                    <h2 className="text-xl font-bold text-gray-900 dark:text-white uppercase tracking-tight">
-                        DISTRICT-WISE VEHICLE REGISTRATION
-                    </h2>
-                </div>
-                <div className="overflow-x-auto">
+            {/* District-wise Registration Table */}
+            <ComparisonTable
+                title="DISTRICT-WISE VEHICLE REGISTRATION"
+                isComparisonMode={comparisonProps.isComparisonMode}
+                setIsComparisonMode={comparisonProps.setIsComparisonMode}
+                primaryRange={comparisonProps.primaryRange}
+                setPrimaryRange={comparisonProps.setPrimaryRange}
+                compareRange={comparisonProps.compareRange}
+                setCompareRange={comparisonProps.setCompareRange}
+                compareCategory={comparisonProps.compareCategory}
+                setCompareCategory={comparisonProps.setCompareCategory}
+                categories={categories}
+                comparisonChildren={
                     <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
                         <thead className="bg-gray-100 dark:bg-gray-800 text-xs font-bold uppercase text-gray-700 dark:text-gray-300">
                             <tr>
                                 <th className="px-6 py-4 text-left border-b border-gray-200 dark:border-gray-700">District</th>
-                                <th className="px-6 py-4 text-right border-b border-gray-200 dark:border-gray-700">Total registrations</th>
-                                <th className="px-6 py-4 text-right border-b border-gray-200 dark:border-gray-700">Non Transport</th>
-                                <th className="px-6 py-4 text-right border-b border-gray-200 dark:border-gray-700">Transport</th>
-                                <th className="px-6 py-4 text-right border-b border-gray-200 dark:border-gray-700">2 Wheeler</th>
-                                <th className="px-6 py-4 text-right border-b border-gray-200 dark:border-gray-700">3 Wheeler</th>
+                                <th className="px-6 py-4 text-right border-b border-gray-200 dark:border-gray-700">Selected Period</th>
+                                <th className="px-6 py-4 text-right border-b border-gray-200 dark:border-gray-700">Comparison Period</th>
+                                <th className="px-6 py-4 text-right border-b border-gray-200 dark:border-gray-700">Variance</th>
+                                <th className="px-6 py-4 text-right border-b border-gray-200 dark:border-gray-700">Trend</th>
                             </tr>
                         </thead>
                         <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
-                            {dummyData.districtWiseVehicles.map((row, idx) => (
-                                <tr key={row.district} className={idx % 2 === 0 ? 'bg-white dark:bg-gray-800' : 'bg-gray-50 dark:bg-gray-900/40'}>
-                                    <td className="px-6 py-4 text-sm font-medium text-gray-900 dark:text-white">{row.district}</td>
-                                    <td className="px-6 py-4 text-sm text-right text-blue-600 dark:text-blue-400 font-bold">{row.total.toLocaleString()}</td>
-                                    <td className="px-6 py-4 text-sm text-right text-gray-600 dark:text-gray-400">{row.nonTransport.toLocaleString()}</td>
-                                    <td className="px-6 py-4 text-sm text-right text-gray-600 dark:text-gray-400">{row.transport.toLocaleString()}</td>
-                                    <td className="px-6 py-4 text-sm text-right text-gray-600 dark:text-gray-400">{row.twoWheeler.toLocaleString()}</td>
-                                    <td className="px-6 py-4 text-sm text-right text-gray-600 dark:text-gray-400">{row.threeWheeler.toLocaleString()}</td>
-                                </tr>
-                            ))}
+                            {scaledPrimaryData.map((rowPrimary, idx) => {
+                                const rowComparison = comparisonProps.comparisonDataRaw?.find(d => d.district === rowPrimary.district);
+                                
+                                const valPrimary = getDistrictCategoryValue(rowPrimary, comparisonProps.compareCategory);
+                                const valComparison = getDistrictCategoryValue(rowComparison, comparisonProps.compareCategory);
+                                
+                                const variance = valComparison - valPrimary;
+                                const variancePct = valPrimary === 0 ? 0 : (variance / valPrimary) * 100;
+                                
+                                const isPositive = variance > 0;
+                                const isNegative = variance < 0;
+                                
+                                return (
+                                    <tr key={rowPrimary.district} className={idx % 2 === 0 ? 'bg-white dark:bg-gray-800' : 'bg-gray-50 dark:bg-gray-900/40'}>
+                                        <td className="px-6 py-4 text-sm font-medium text-gray-900 dark:text-white">
+                                            {rowPrimary.district}
+                                        </td>
+                                        <td className="px-6 py-4 text-right text-sm text-gray-600 dark:text-gray-400">
+                                            {valPrimary.toLocaleString()}
+                                        </td>
+                                        <td className="px-6 py-4 text-right text-sm text-gray-900 dark:text-white font-semibold">
+                                            {valComparison.toLocaleString()}
+                                        </td>
+                                        <td className={`px-6 py-4 text-right text-sm font-bold ${isPositive ? 'text-green-600 dark:text-green-400' : isNegative ? 'text-red-600 dark:text-red-400' : 'text-gray-600 dark:text-gray-400'}`}>
+                                            {isPositive ? '+' : ''}{variance.toLocaleString()}
+                                        </td>
+                                        <td className={`px-6 py-4 text-right text-sm font-bold ${isPositive ? 'text-green-600 dark:text-green-400' : isNegative ? 'text-red-600 dark:text-red-400' : 'text-gray-600 dark:text-gray-400'}`}>
+                                            <div className="flex items-center justify-end gap-1">
+                                                {isPositive && <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>}
+                                                {isNegative && <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 17h8m0 0v-8m0 8l-8-8-4 4-6-6"></path></svg>}
+                                                {isPositive ? '+' : ''}{variancePct.toFixed(1)}%
+                                            </div>
+                                        </td>
+                                    </tr>
+                                );
+                            })}
                         </tbody>
                     </table>
-                </div>
-            </div>
+                }
+            >
+                <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+                    <thead className="bg-gray-100 dark:bg-gray-800 text-xs font-bold uppercase text-gray-700 dark:text-gray-300">
+                        <tr>
+                            <th className="px-6 py-4 text-left border-b border-gray-200 dark:border-gray-700">District</th>
+                            <th className="px-6 py-4 text-right border-b border-gray-200 dark:border-gray-700">Total registrations</th>
+                            <th className="px-6 py-4 text-right border-b border-gray-200 dark:border-gray-700">Non Transport</th>
+                            <th className="px-6 py-4 text-right border-b border-gray-200 dark:border-gray-700">Transport</th>
+                            <th className="px-6 py-4 text-right border-b border-gray-200 dark:border-gray-700">2 Wheeler</th>
+                            <th className="px-6 py-4 text-right border-b border-gray-200 dark:border-gray-700">3 Wheeler</th>
+                        </tr>
+                    </thead>
+                    <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
+                        {scaledPrimaryData.map((row, idx) => (
+                            <tr key={row.district} className={idx % 2 === 0 ? 'bg-white dark:bg-gray-800' : 'bg-gray-50 dark:bg-gray-900/40'}>
+                                <td className="px-6 py-4 text-sm font-medium text-gray-900 dark:text-white">{row.district}</td>
+                                <td className="px-6 py-4 text-sm text-right text-blue-600 dark:text-blue-400 font-bold">{row.total.toLocaleString()}</td>
+                                <td className="px-6 py-4 text-sm text-right text-gray-600 dark:text-gray-400">{row.nonTransport.toLocaleString()}</td>
+                                <td className="px-6 py-4 text-sm text-right text-gray-600 dark:text-gray-400">{row.transport.toLocaleString()}</td>
+                                <td className="px-6 py-4 text-sm text-right text-gray-600 dark:text-gray-400">{row.twoWheeler.toLocaleString()}</td>
+                                <td className="px-6 py-4 text-sm text-right text-gray-600 dark:text-gray-400">{row.threeWheeler.toLocaleString()}</td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            </ComparisonTable>
 
             {/* Registration Application Status Table (from Image) */}
-            <div className="bg-white dark:bg-gray-800 rounded-lg shadow overflow-hidden">
-                <div className="px-6 py-4 border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-700/50">
-                    <h2 className="text-xl font-bold text-gray-900 dark:text-white uppercase tracking-tight">
-                        Registration Application Status
-                    </h2>
-                </div>
-                <div className="overflow-x-auto">
+            <ComparisonTable
+                title="Registration Application Status"
+                isComparisonMode={comparisonPropsApps.isComparisonMode}
+                setIsComparisonMode={comparisonPropsApps.setIsComparisonMode}
+                primaryRange={comparisonPropsApps.primaryRange}
+                setPrimaryRange={comparisonPropsApps.setPrimaryRange}
+                compareRange={comparisonPropsApps.compareRange}
+                setCompareRange={comparisonPropsApps.setCompareRange}
+                compareCategory={comparisonPropsApps.compareCategory}
+                setCompareCategory={comparisonPropsApps.setCompareCategory}
+                categories={appCategories}
+                comparisonChildren={
                     <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
-                        <thead className="bg-gray-100 dark:bg-gray-800 text-[10px] font-bold uppercase text-gray-700 dark:text-gray-300">
+                        <thead className="bg-gray-100 dark:bg-gray-800 text-xs font-bold uppercase text-gray-700 dark:text-gray-300">
                             <tr>
-                                <th className="px-4 py-3 text-left">Name of District</th>
-                                <th className="px-4 py-3 text-center">Total applications received for new registration</th>
-                                <th className="px-4 py-3 text-center">Total registration made from dealer-point</th>
-                                <th className="px-4 py-3 text-center">Total registration made from DTO office, if any</th>
-                                <th className="px-4 py-3 text-center">Total applications under scrutiny stage</th>
-                                <th className="px-4 py-3 text-center">Total applications under approval stage</th>
-                                <th className="px-4 py-3 text-center">Total applications approved</th>
+                                <th className="px-6 py-4 text-left border-b border-gray-200 dark:border-gray-700">District</th>
+                                <th className="px-6 py-4 text-right border-b border-gray-200 dark:border-gray-700">Selected Period</th>
+                                <th className="px-6 py-4 text-right border-b border-gray-200 dark:border-gray-700">Comparison Period</th>
+                                <th className="px-6 py-4 text-right border-b border-gray-200 dark:border-gray-700">Variance</th>
+                                <th className="px-6 py-4 text-right border-b border-gray-200 dark:border-gray-700">Trend</th>
                             </tr>
                         </thead>
                         <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
-                            {dummyData.registrationApplicationsData.map((row, idx) => (
-                                <tr key={row.district} className={idx % 2 === 0 ? 'bg-white dark:bg-gray-800' : 'bg-gray-50 dark:bg-gray-900/40'}>
-                                    <td className="px-4 py-3 text-sm font-medium text-gray-900 dark:text-white">{row.district}</td>
-                                    <td className="px-4 py-3 text-sm text-right text-gray-600 dark:text-gray-400">{row.totalReceived.toLocaleString()}</td>
-                                    <td className="px-4 py-3 text-sm text-right text-blue-600 dark:text-blue-400 font-medium">{row.dealerPoint.toLocaleString()}</td>
-                                    <td className="px-4 py-3 text-sm text-right text-gray-600 dark:text-gray-400">{row.dtoOffice.toLocaleString()}</td>
-                                    <td className="px-4 py-3 text-sm text-right text-yellow-600 dark:text-yellow-400 font-medium">{row.scrutiny.toLocaleString()}</td>
-                                    <td className="px-4 py-3 text-sm text-right text-orange-600 dark:text-orange-400 font-medium">{row.approvalStage.toLocaleString()}</td>
-                                    <td className="px-4 py-3 text-sm text-right text-green-600 dark:text-green-400 font-bold">{row.approved.toLocaleString()}</td>
-                                </tr>
-                            ))}
+                            {scaledAppPrimaryData.map((rowPrimary, idx) => {
+                                const rowComparison = scaledAppComparisonRaw?.find(d => d.district === rowPrimary.district);
+                                
+                                const valPrimary = rowPrimary[comparisonPropsApps.compareCategory] || 0;
+                                const valComparison = rowComparison ? rowComparison[comparisonPropsApps.compareCategory] || 0 : 0;
+                                
+                                const variance = valComparison - valPrimary;
+                                const variancePct = valPrimary === 0 ? 0 : (variance / valPrimary) * 100;
+                                
+                                const isPositive = variance > 0;
+                                const isNegative = variance < 0;
+                                
+                                return (
+                                    <tr key={rowPrimary.district} className={idx % 2 === 0 ? 'bg-white dark:bg-gray-800' : 'bg-gray-50 dark:bg-gray-900/40'}>
+                                        <td className="px-6 py-4 text-sm font-medium text-gray-900 dark:text-white">
+                                            {rowPrimary.district}
+                                        </td>
+                                        <td className="px-6 py-4 text-right text-sm text-gray-600 dark:text-gray-400">
+                                            {valPrimary.toLocaleString()}
+                                        </td>
+                                        <td className="px-6 py-4 text-right text-sm text-gray-900 dark:text-white font-semibold">
+                                            {valComparison.toLocaleString()}
+                                        </td>
+                                        <td className={`px-6 py-4 text-right text-sm font-bold ${isPositive ? 'text-green-600 dark:text-green-400' : isNegative ? 'text-red-600 dark:text-red-400' : 'text-gray-600 dark:text-gray-400'}`}>
+                                            {isPositive ? '+' : ''}{variance.toLocaleString()}
+                                        </td>
+                                        <td className={`px-6 py-4 text-right text-sm font-bold ${isPositive ? 'text-green-600 dark:text-green-400' : isNegative ? 'text-red-600 dark:text-red-400' : 'text-gray-600 dark:text-gray-400'}`}>
+                                            <div className="flex items-center justify-end gap-1">
+                                                {isPositive && <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>}
+                                                {isNegative && <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 17h8m0 0v-8m0 8l-8-8-4 4-6-6"></path></svg>}
+                                                {isPositive ? '+' : ''}{variancePct.toFixed(1)}%
+                                            </div>
+                                        </td>
+                                    </tr>
+                                );
+                            })}
                         </tbody>
                     </table>
-                </div>
-            </div>
+                }
+            >
+                <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+                    <thead className="bg-gray-100 dark:bg-gray-800 text-[10px] font-bold uppercase text-gray-700 dark:text-gray-300">
+                        <tr>
+                            <th className="px-4 py-3 text-left">Name of District</th>
+                            <th className="px-4 py-3 text-center">Total applications received for new registration</th>
+                            <th className="px-4 py-3 text-center">Total registration made from dealer-point</th>
+                            <th className="px-4 py-3 text-center">Total registration made from DTO office, if any</th>
+                            <th className="px-4 py-3 text-center">Total applications under scrutiny stage</th>
+                            <th className="px-4 py-3 text-center">Total applications under approval stage</th>
+                            <th className="px-4 py-3 text-center">Total applications approved</th>
+                        </tr>
+                    </thead>
+                    <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
+                        {scaledAppPrimaryData.map((row, idx) => (
+                            <tr key={row.district} className={idx % 2 === 0 ? 'bg-white dark:bg-gray-800' : 'bg-gray-50 dark:bg-gray-900/40'}>
+                                <td className="px-4 py-3 text-sm font-medium text-gray-900 dark:text-white">{row.district}</td>
+                                <td className="px-4 py-3 text-sm text-right text-gray-600 dark:text-gray-400">{row.totalReceived.toLocaleString()}</td>
+                                <td className="px-4 py-3 text-sm text-right text-blue-600 dark:text-blue-400 font-medium">{row.dealerPoint.toLocaleString()}</td>
+                                <td className="px-4 py-3 text-sm text-right text-gray-600 dark:text-gray-400">{row.dtoOffice.toLocaleString()}</td>
+                                <td className="px-4 py-3 text-sm text-right text-yellow-600 dark:text-yellow-400 font-medium">{row.scrutiny.toLocaleString()}</td>
+                                <td className="px-4 py-3 text-sm text-right text-orange-600 dark:text-orange-400 font-medium">{row.approvalStage.toLocaleString()}</td>
+                                <td className="px-4 py-3 text-sm text-right text-green-600 dark:text-green-400 font-bold">{row.approved.toLocaleString()}</td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            </ComparisonTable>
         </div>
     );
 };

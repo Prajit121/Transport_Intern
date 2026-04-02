@@ -1,5 +1,5 @@
-[00:00:01.695] Server  LOG     ✓ Ready in 1440ms
-[00:00:05.975] Browser ERROR   uncaughtError: Error: Hydration failed because the server rendered text didn't match the client. As a result this tree will be regenerated on the client. This can happen if a SSR-ed Client Component used:
+[00:00:02.288] Server  LOG     ✓ Ready in 1961ms
+[00:00:09.749] Browser ERROR   uncaughtError: Error: Hydration failed because the server rendered text didn't match the client. As a result this tree will be regenerated on the client. This can happen if a SSR-ed Client Component used:
 
 - A server/client branch `if (typeof window !== 'undefined')`.
 - Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
@@ -12,66 +12,16 @@ It can also happen if the client has a browser extension installed which messes 
 https://react.dev/link/hydration-mismatch
 
   ...
-    <InnerScrollAndFocusHandler segmentPath={[...]} focusAndScrollRef={{apply:false, ...}}>
-      <ErrorBoundary errorComponent={undefined} errorStyles={undefined} errorScripts={undefined}>
-        <LoadingBoundary name="/" loading={null}>
-          <HTTPAccessFallbackBoundary notFound={<SegmentViewNode>} forbidden={undefined} unauthorized={undefined}>
-            <HTTPAccessFallbackErrorBoundary pathname="/" notFound={<SegmentViewNode>} forbidden={undefined} ...>
-              <RedirectBoundary>
-                <RedirectErrorBoundary router={{...}}>
-                  <InnerLayoutRouter url="/" tree={[...]} params={{}} cacheNode={{rsc:<Fragment>, ...}} ...>
-                    <SegmentViewNode type="page" pagePath="page.js">
-                      <SegmentTrieNode>
-                      <Home>
-                        <Overview>
-                          <div className="space-y-6">
-                            <DateFilter>
-                            <div className="grid grid-...">
-                              <div className="bg-white d...">
-                                <h3>
-                                <p className="text-3xl font-bold text-gray-900 dark:text-white mt-2">
-+                                 31,496
--                                 31,289
-                              ...
-                            ...
-                    ...
-                  ...
-      ...
-
-[00:00:05.975] Browser WARN    Tried to use the 'fill' option without the 'Filler' plugin enabled. Please import and register the 'Filler' plugin and make sure it is not disabled in the options
-[00:00:05.975] Browser WARN    Tried to use the 'fill' option without the 'Filler' plugin enabled. Please import and register the 'Filler' plugin and make sure it is not disabled in the options
-[00:00:54.965] Browser WARN    Tried to use the 'fill' option without the 'Filler' plugin enabled. Please import and register the 'Filler' plugin and make sure it is not disabled in the options
-[00:00:54.965] Browser WARN    Tried to use the 'fill' option without the 'Filler' plugin enabled. Please import and register the 'Filler' plugin and make sure it is not disabled in the options
-[00:03:57.754] Server  LOG     ✓ Compiled in 790ms
-[00:04:02.042] Server  LOG     ✓ Compiled in 133ms
-[00:04:29.492] Server  LOG     ✓ Compiled in 123ms
-[00:05:58.152] Browser WARN    Tried to use the 'fill' option without the 'Filler' plugin enabled. Please import and register the 'Filler' plugin and make sure it is not disabled in the options
-[00:05:58.152] Browser WARN    Tried to use the 'fill' option without the 'Filler' plugin enabled. Please import and register the 'Filler' plugin and make sure it is not disabled in the options
-[00:08:03.620] Server  LOG     ✓ Compiled in 162ms
-[00:14:48.945] Server  LOG     ✓ Compiled in 144ms
-[00:14:57.357] Browser ERROR   uncaughtError: Error: Hydration failed because the server rendered text didn't match the client. As a result this tree will be regenerated on the client. This can happen if a SSR-ed Client Component used:
-
-- A server/client branch `if (typeof window !== 'undefined')`.
-- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
-- Date formatting in a user's locale which doesn't match the server.
-- External changing data without sending a snapshot of it along with the HTML.
-- Invalid HTML tag nesting.
-
-It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
-
-https://react.dev/link/hydration-mismatch
-
-  ...
-    <InnerScrollAndFocusHandler segmentPath={[...]} focusAndScrollRef={{apply:false, ...}}>
-      <ErrorBoundary errorComponent={undefined} errorStyles={undefined} errorScripts={undefined}>
-        <LoadingBoundary name="revenue/" loading={null}>
-          <HTTPAccessFallbackBoundary notFound={undefined} forbidden={undefined} unauthorized={undefined}>
+    <ErrorBoundary errorComponent={undefined} errorStyles={undefined} errorScripts={undefined}>
+      <LoadingBoundary name="/" loading={null}>
+        <HTTPAccessFallbackBoundary notFound={<SegmentViewNode>} forbidden={undefined} unauthorized={undefined}>
+          <HTTPAccessFallbackErrorBoundary pathname="/" notFound={<SegmentViewNode>} forbidden={undefined} ...>
             <RedirectBoundary>
               <RedirectErrorBoundary router={{...}}>
-                <InnerLayoutRouter url="/revenue" tree={[...]} params={{}} cacheNode={{rsc:<Fragment>, ...}} ...>
-                  <SegmentViewNode type="page" pagePath="revenue/pa...">
+                <InnerLayoutRouter url="/" tree={[...]} params={{}} cacheNode={{rsc:<Fragment>, ...}} segmentPath={[...]} ...>
+                  <SegmentViewNode type="page" pagePath="page.js">
                     <SegmentTrieNode>
-                    <RevenuePage>
+                    <Home>
                       <Revenue>
                         <div className="space-y-6">
                           <DateFilter>
@@ -80,791 +30,140 @@ https://react.dev/link/hydration-mismatch
                               <div className="bg-gradien...">
                                 <h3>
                                 <p className="text-3xl font-bold text-white mt-2">
-+                                 ₹2,71,84,821
--                                 ₹2,70,03,703
++                                 ₹2,70,02,207
+-                                 ₹2,69,80,727
                               ...
                             ...
                           ...
                   ...
                 ...
-      ...
 
-[00:14:57.357] Browser WARN    Tried to use the 'fill' option without the 'Filler' plugin enabled. Please import and register the 'Filler' plugin and make sure it is not disabled in the options
-[00:14:57.357] Browser WARN    Tried to use the 'fill' option without the 'Filler' plugin enabled. Please import and register the 'Filler' plugin and make sure it is not disabled in the options
-[00:15:03.830] Server  LOG     ✓ Compiled in 67ms
-[00:15:07.340] Browser WARN    Tried to use the 'fill' option without the 'Filler' plugin enabled. Please import and register the 'Filler' plugin and make sure it is not disabled in the options
-[00:15:07.340] Browser WARN    Tried to use the 'fill' option without the 'Filler' plugin enabled. Please import and register the 'Filler' plugin and make sure it is not disabled in the options
-[00:15:08.501] Browser WARN    Tried to use the 'fill' option without the 'Filler' plugin enabled. Please import and register the 'Filler' plugin and make sure it is not disabled in the options
-[00:15:08.501] Browser WARN    Tried to use the 'fill' option without the 'Filler' plugin enabled. Please import and register the 'Filler' plugin and make sure it is not disabled in the options
-[00:15:08.885] Server  LOG     ✓ Compiled in 56ms
-[00:15:57.621] Server  LOG     ✓ Compiled in 125ms
-[00:16:27.147] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:16:27.147] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:16:27.147] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:16:27.148] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:16:27.148] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:16:27.148] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:16:27.148] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:16:27.967] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:16:27.967] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:16:27.967] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:16:27.967] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:16:27.967] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:16:27.967] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:16:27.967] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:16:27.967] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:16:27.967] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:16:27.967] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:16:27.967] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:16:27.967] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:16:27.967] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:16:27.967] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:16:27.967] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:16:27.967] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:16:27.967] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:16:27.967] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:16:27.967] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:16:27.967] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:16:27.967] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:16:27.967] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:16:27.967] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:16:27.967] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:16:27.967] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:16:27.967] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:16:27.967] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:16:27.967] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:16:27.967] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:16:27.967] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:16:27.967] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:16:27.967] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:16:27.967] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:16:27.967] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:16:27.967] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:16:27.967] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:16:27.967] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:16:27.967] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:16:30.284] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:16:30.284] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:16:32.799] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:16:32.799] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:16:32.799] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:16:32.799] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:16:32.799] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:16:32.800] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:16:32.800] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:16:33.783] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:16:33.783] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:16:33.783] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:16:33.783] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:16:33.783] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:16:33.783] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:16:33.784] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:16:33.784] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:16:33.784] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:16:36.500] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:16:36.500] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:16:36.500] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:16:36.500] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:16:36.500] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:16:36.500] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:16:37.467] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:16:37.467] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:16:37.467] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:16:37.468] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:16:37.468] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:16:37.468] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:16:37.468] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:16:37.468] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:16:37.468] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:16:37.468] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:16:37.468] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:16:37.468] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:16:37.468] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:16:37.468] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:16:37.468] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:16:37.468] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:16:37.468] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:16:37.468] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:16:37.468] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:16:37.468] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:16:37.468] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:16:37.468] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:16:37.468] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:16:37.468] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:16:37.468] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:16:37.468] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:16:37.468] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:16:37.468] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:16:37.468] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:16:37.468] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:16:37.469] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:16:37.469] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:16:37.469] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:16:37.469] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:16:37.469] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:16:37.469] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:16:37.469] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:16:37.469] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:16:37.469] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:16:37.469] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:16:37.469] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:16:37.469] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:16:37.469] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:16:37.469] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:16:37.469] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:16:39.052] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:16:39.052] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:16:39.052] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:16:39.052] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:16:39.052] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:16:39.052] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:16:39.052] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:16:39.052] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:16:39.052] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:16:39.052] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:16:39.052] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:16:39.052] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:16:39.052] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:16:39.052] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:16:39.052] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:16:39.052] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:16:39.052] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:16:39.052] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:16:39.052] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:16:39.052] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:16:39.052] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:16:39.052] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:16:39.052] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:16:39.052] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:16:39.052] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:16:39.052] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:16:39.052] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:16:39.052] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:16:42.282] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:16:42.283] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:16:42.283] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:16:42.283] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:16:42.283] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:16:42.283] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:16:42.283] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:16:42.283] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:16:42.283] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:00.435] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:00.436] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:00.436] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:00.436] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:00.436] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:00.436] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:00.436] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:00.436] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:00.436] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:00.436] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:00.436] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:00.436] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:00.436] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:00.436] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:00.436] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:00.436] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:00.436] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:00.436] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:00.436] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:00.436] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:00.436] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:00.436] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:00.436] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:00.436] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:00.436] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:00.689] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:02.067] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:02.067] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:02.067] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:02.067] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:02.067] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:02.067] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:02.067] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:02.067] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:02.067] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:02.067] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:02.067] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:02.067] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:02.067] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:02.067] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:02.067] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:02.067] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:02.068] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:02.068] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:02.068] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:02.068] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:02.068] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:02.068] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:02.068] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:02.068] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:02.068] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:02.068] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:02.068] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:02.068] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:02.068] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:02.068] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:02.068] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:02.068] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:02.068] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:02.068] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:02.068] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:02.068] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:02.068] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:02.068] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:02.068] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:02.068] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:02.068] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:02.068] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:02.068] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:02.068] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:02.068] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:02.068] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:02.068] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:02.068] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:02.068] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:02.068] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:02.068] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:02.068] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:02.287] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:03.034] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:03.034] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:03.034] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:03.034] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:03.034] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:03.034] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:03.034] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:03.034] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:03.034] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:03.034] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:03.034] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:03.034] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:03.034] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:03.034] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:03.034] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:03.034] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:03.034] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:03.034] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:03.034] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:03.034] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:03.034] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:03.257] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:04.150] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:04.150] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:04.150] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:04.150] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:04.150] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:04.150] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:04.150] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:04.150] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:04.150] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:04.150] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:04.150] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:04.151] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:04.151] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:04.151] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:04.151] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:04.151] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:04.151] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:04.151] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:04.151] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:04.151] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:04.151] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:04.151] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:04.151] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:04.151] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:04.151] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:04.151] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:04.151] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:04.151] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:04.151] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:04.151] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:04.515] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:04.515] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:04.515] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:04.515] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:04.515] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:04.515] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:04.515] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:04.515] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:04.706] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:05.107] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:05.738] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:06.237] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:06.968] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:06.968] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:06.968] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:06.968] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:06.968] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:06.968] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:06.968] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:06.968] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:06.968] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:06.968] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:06.968] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:06.968] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:06.968] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:06.968] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:06.968] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:07.359] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:08.134] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:08.134] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:08.134] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:08.134] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:08.134] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:08.134] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:08.134] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:08.134] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:08.134] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:08.134] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:08.521] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:08.871] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:09.268] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:09.268] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:09.268] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:09.268] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:09.268] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:09.268] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:09.268] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:09.268] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:09.268] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:09.268] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:09.268] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:09.506] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:09.506] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:09.506] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:09.774] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:09.973] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:10.301] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:10.301] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:10.301] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:10.301] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:10.301] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:10.301] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:10.301] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:10.301] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:11.185] Browser WARN    Tried to use the 'fill' option without the 'Filler' plugin enabled. Please import and register the 'Filler' plugin and make sure it is not disabled in the options
-[00:17:11.185] Browser WARN    Tried to use the 'fill' option without the 'Filler' plugin enabled. Please import and register the 'Filler' plugin and make sure it is not disabled in the options
-[00:17:12.450] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:12.450] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:12.450] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:12.450] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:12.450] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:12.450] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:12.450] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:13.337] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:13.337] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:13.337] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:13.337] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:13.337] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:13.337] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:13.337] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:13.337] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:13.337] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:13.337] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:13.337] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:13.337] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:13.337] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:13.337] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:13.337] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:13.337] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:13.337] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:13.337] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:13.337] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:13.337] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:13.337] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:13.337] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:13.337] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:13.337] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:13.337] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:13.337] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:13.337] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:13.337] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:13.337] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:13.337] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:13.337] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:13.337] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:13.337] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:13.337] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:13.337] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:13.337] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:13.337] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:13.337] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:13.337] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:13.337] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:13.938] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:14.867] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:14.867] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:14.867] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:14.867] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:14.867] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:14.867] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:14.867] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:14.867] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:14.867] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:14.867] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:14.867] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:14.867] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:14.867] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:14.867] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:14.867] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:14.867] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:15.122] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:15.639] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:16.283] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:16.283] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:16.283] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:16.283] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:16.283] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:16.283] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:16.283] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:16.283] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:16.283] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:16.283] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:16.283] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:16.283] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:16.283] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:16.283] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:16.283] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:16.283] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:16.283] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:16.283] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:19.667] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:19.668] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:22.735] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:22.735] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:22.735] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:22.735] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:22.735] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:22.735] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:22.735] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:23.268] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:23.268] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:23.268] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:23.268] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:23.268] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:23.268] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:23.268] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:23.268] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:23.268] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:23.268] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:23.269] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:23.269] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:23.269] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:23.269] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:23.269] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:23.269] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:23.269] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:23.269] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:23.269] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:23.767] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:23.767] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:23.767] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:23.767] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:23.767] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:23.767] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:23.767] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:23.767] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:23.767] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:23.767] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:23.767] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:23.767] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:23.767] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:23.767] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:23.767] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:23.767] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:23.767] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:23.767] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:23.767] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:23.767] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:24.178] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:24.178] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:24.178] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:24.178] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:24.178] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:24.178] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:24.178] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:24.178] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:24.178] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:24.178] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:24.178] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:24.178] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:24.178] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:24.178] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:24.178] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:24.178] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:25.487] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:25.487] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:25.487] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:25.487] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:25.487] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:25.487] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:25.487] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:25.487] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:25.487] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:25.487] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:25.487] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:25.487] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:25.487] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:25.487] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:25.487] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:25.487] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:25.487] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:25.487] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:25.487] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:25.487] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:25.487] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:25.487] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:25.487] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:25.487] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:25.487] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:25.487] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:25.487] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:25.487] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:25.487] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:25.487] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:25.487] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:25.487] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:25.487] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:25.487] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:25.487] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:25.487] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:25.487] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:25.487] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:25.487] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:25.487] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:25.487] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:25.487] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:25.487] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:25.487] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:25.487] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:26.143] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:26.143] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:26.143] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:26.143] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:26.143] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:26.143] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:26.143] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:27.286] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:27.286] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:27.286] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:27.286] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:27.286] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:27.286] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:27.286] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:27.286] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:27.286] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:27.286] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:27.286] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:27.286] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:27.286] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:27.286] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:27.286] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:27.286] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:27.286] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:27.286] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:27.286] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:27.286] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:27.286] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:27.286] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:27.286] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:27.286] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:27.286] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:27.286] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:27.422] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:17:28.785] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:18:28.223] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:18:28.223] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:18:28.224] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:18:28.224] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:18:28.224] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:18:28.224] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:18:28.224] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:18:28.605] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:18:28.605] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:18:28.605] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:18:28.605] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:18:28.605] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:18:28.605] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:18:28.605] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:18:28.605] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:18:28.605] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:18:33.470] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:18:33.471] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:18:33.471] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:18:33.471] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:18:33.471] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:18:39.072] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:18:39.072] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:18:39.072] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:18:39.072] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:18:39.073] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:18:39.073] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:18:39.073] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:18:39.073] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:18:39.354] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:18:39.354] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:18:39.354] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:18:39.354] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:18:39.354] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:18:39.354] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:19:50.559] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:19:50.559] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:19:50.906] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:19:50.907] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:19:50.907] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:19:50.907] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:19:50.907] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:19:50.907] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:19:53.875] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:19:53.875] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:19:53.875] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:19:53.875] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:19:53.875] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:19:53.875] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:19:54.741] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:19:54.741] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:19:54.741] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:19:54.741] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:19:54.741] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:19:54.741] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:19:54.741] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:19:54.741] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:19:54.741] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:19:54.741] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:19:54.741] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:19:54.741] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:19:54.741] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:19:54.741] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:19:54.741] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:19:54.741] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:19:54.741] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:19:54.741] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:19:54.741] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:19:54.741] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:19:54.741] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:19:54.741] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:19:54.741] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:19:54.741] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:19:54.741] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:19:54.741] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:19:54.741] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:19:54.741] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:19:54.741] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:19:54.741] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:19:54.741] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:19:54.741] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:19:54.741] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:19:54.741] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:19:54.741] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:19:54.741] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:19:54.741] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:19:54.741] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:19:56.361] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:19:56.361] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:19:56.361] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:19:56.361] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:19:56.361] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:19:56.361] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:19:56.361] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:19:56.361] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:19:56.361] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:19:56.361] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:19:56.361] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:19:56.361] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:19:56.361] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:19:56.361] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:19:56.361] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:19:56.361] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:19:56.361] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:19:56.361] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:19:57.275] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:19:57.275] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:19:57.275] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:19:57.275] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:19:57.275] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:19:57.275] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:19:57.275] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:19:57.275] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:19:57.275] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:19:57.275] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:19:57.275] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:19:57.275] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:19:57.275] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:19:57.275] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:19:57.275] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:19:57.275] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:19:57.275] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:19:57.275] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:19:57.275] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:19:57.275] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:19:57.275] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:19:57.275] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:19:57.275] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:19:57.275] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:19:57.275] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:19:57.275] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:19:57.275] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:19:57.275] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:19:57.275] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:19:57.275] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:19:57.275] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:19:57.275] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:19:57.275] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:19:57.275] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:19:57.275] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:19:57.275] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:19:57.275] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:19:57.275] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:19:57.275] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:19:57.457] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:19:57.457] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:19:57.723] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:19:57.723] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:19:57.723] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:19:58.573] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:19:58.574] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:19:58.574] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:19:58.574] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:19:58.574] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:19:58.574] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:19:58.574] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:19:58.574] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:19:58.574] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:19:58.574] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:19:59.523] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:19:59.524] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:19:59.524] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:19:59.524] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:19:59.524] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:19:59.524] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:19:59.524] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:19:59.524] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'amount.toLocaleString')
-[00:21:10.617] Server  LOG     ✓ Compiled in 126ms
-[00:24:52.558] Server  LOG     ✓ Compiled in 86ms
-[00:28:26.598] Server  LOG     ✓ Compiled in 144ms
-[00:28:33.734] Server  LOG     ✓ Compiled in 53ms
-[00:28:58.360] Server  LOG     ✓ Compiled in 123ms
-[00:32:34.897] Browser WARN    Tried to use the 'fill' option without the 'Filler' plugin enabled. Please import and register the 'Filler' plugin and make sure it is not disabled in the options
-[00:32:34.898] Browser WARN    Tried to use the 'fill' option without the 'Filler' plugin enabled. Please import and register the 'Filler' plugin and make sure it is not disabled in the options
-[00:33:10.306] Browser WARN    Tried to use the 'fill' option without the 'Filler' plugin enabled. Please import and register the 'Filler' plugin and make sure it is not disabled in the options
-[00:33:10.306] Browser WARN    Tried to use the 'fill' option without the 'Filler' plugin enabled. Please import and register the 'Filler' plugin and make sure it is not disabled in the options
-[00:33:40.889] Browser WARN    Tried to use the 'fill' option without the 'Filler' plugin enabled. Please import and register the 'Filler' plugin and make sure it is not disabled in the options
-[00:33:40.889] Browser WARN    Tried to use the 'fill' option without the 'Filler' plugin enabled. Please import and register the 'Filler' plugin and make sure it is not disabled in the options
-[00:33:46.995] Browser WARN    Tried to use the 'fill' option without the 'Filler' plugin enabled. Please import and register the 'Filler' plugin and make sure it is not disabled in the options
-[00:33:46.995] Browser WARN    Tried to use the 'fill' option without the 'Filler' plugin enabled. Please import and register the 'Filler' plugin and make sure it is not disabled in the options
-[00:42:38.281] Server  LOG     ✓ Compiled in 157ms
-[00:42:49.277] Server  LOG     ✓ Compiled in 53ms
-[00:42:51.189] Server  WARN    ⚠ Fast Refresh had to perform a full reload due to a runtime error.
-[00:42:51.314] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'row.bikes.toLocaleString')
-[00:42:51.316] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'row.bikes.toLocaleString')
-[00:42:51.732] Server  ERROR   ⨯ TypeError: Cannot read properties of undefined (reading 'toLocaleString')
-[00:42:53.188] Browser ERROR   uncaughtError: TypeError: undefined is not an object (evaluating 'row.bikes.toLocaleString')
-[00:43:10.274] Server  LOG     ✓ Compiled in 172ms
-[00:43:48.349] Server  WARN    ⚠ Fast Refresh had to perform a full reload due to a runtime error.
-[00:43:48.454] Browser ERROR   unhandledRejection: Error: No link element found for chunk /_next/static/chunks/src_app_globals_91e4631d.css
-[00:43:49.010] Browser ERROR   uncaughtError: Error: Hydration failed because the server rendered text didn't match the client. As a result this tree will be regenerated on the client. This can happen if a SSR-ed Client Component used:
+[00:07:03.811] Browser ERROR   uncaughtError: Error: Hydration failed because the server rendered text didn't match the client. As a result this tree will be regenerated on the client. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+https://react.dev/link/hydration-mismatch
+
+  ...
+    <ErrorBoundary errorComponent={undefined} errorStyles={undefined} errorScripts={undefined}>
+      <LoadingBoundary name="/" loading={null}>
+        <HTTPAccessFallbackBoundary notFound={<SegmentViewNode>} forbidden={undefined} unauthorized={undefined}>
+          <HTTPAccessFallbackErrorBoundary pathname="/" notFound={<SegmentViewNode>} forbidden={undefined} ...>
+            <RedirectBoundary>
+              <RedirectErrorBoundary router={{...}}>
+                <InnerLayoutRouter url="/" tree={[...]} params={{}} cacheNode={{rsc:<Fragment>, ...}} segmentPath={[...]} ...>
+                  <SegmentViewNode type="page" pagePath="page.js">
+                    <SegmentTrieNode>
+                    <Home>
+                      <Revenue>
+                        <div className="space-y-6">
+                          <DateFilter>
+                          <div className="grid grid-...">
+                            <div className="grid grid-...">
+                              <div className="bg-gradien...">
+                                <h3>
+                                <p className="text-3xl font-bold text-white mt-2">
++                                 ₹2,66,41,154
+-                                 ₹2,69,80,727
+                              ...
+                            ...
+                          ...
+                  ...
+                ...
+
+[00:08:12.582] Browser ERROR   uncaughtError: Error: Hydration failed because the server rendered text didn't match the client. As a result this tree will be regenerated on the client. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+https://react.dev/link/hydration-mismatch
+
+  ...
+    <ErrorBoundary errorComponent={undefined} errorStyles={undefined} errorScripts={undefined}>
+      <LoadingBoundary name="/" loading={null}>
+        <HTTPAccessFallbackBoundary notFound={<SegmentViewNode>} forbidden={undefined} unauthorized={undefined}>
+          <HTTPAccessFallbackErrorBoundary pathname="/" notFound={<SegmentViewNode>} forbidden={undefined} ...>
+            <RedirectBoundary>
+              <RedirectErrorBoundary router={{...}}>
+                <InnerLayoutRouter url="/" tree={[...]} params={{}} cacheNode={{rsc:<Fragment>, ...}} segmentPath={[...]} ...>
+                  <SegmentViewNode type="page" pagePath="page.js">
+                    <SegmentTrieNode>
+                    <Home>
+                      <Revenue>
+                        <div className="space-y-6">
+                          <DateFilter>
+                          <div className="grid grid-...">
+                            <div className="grid grid-...">
+                              <div className="bg-gradien...">
+                                <h3>
+                                <p className="text-3xl font-bold text-white mt-2">
++                                 ₹2,69,40,165
+-                                 ₹2,69,80,727
+                              ...
+                            ...
+                          ...
+                  ...
+                ...
+
+[00:08:52.186] Server  LOG     ✓ Compiled in 965ms
+[00:09:09.163] Server  LOG     ✓ Compiled in 123ms
+[00:09:47.068] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:09:47.522] Browser ERROR   uncaughtError: Error: Hydration failed because the server rendered text didn't match the client. As a result this tree will be regenerated on the client. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+https://react.dev/link/hydration-mismatch
+
+  ...
+    <ErrorBoundary errorComponent={undefined} errorStyles={undefined} errorScripts={undefined}>
+      <LoadingBoundary name="/" loading={null}>
+        <HTTPAccessFallbackBoundary notFound={<SegmentViewNode>} forbidden={undefined} unauthorized={undefined}>
+          <HTTPAccessFallbackErrorBoundary pathname="/" notFound={<SegmentViewNode>} forbidden={undefined} ...>
+            <RedirectBoundary>
+              <RedirectErrorBoundary router={{...}}>
+                <InnerLayoutRouter url="/" tree={[...]} params={{}} cacheNode={{rsc:<Fragment>, ...}} segmentPath={[...]} ...>
+                  <SegmentViewNode type="page" pagePath="page.js">
+                    <SegmentTrieNode>
+                    <Home>
+                      <Revenue>
+                        <div className="space-y-6">
+                          <DateFilter>
+                          <div className="grid grid-...">
+                            <div className="grid grid-...">
+                              <div className="bg-gradien...">
+                                <h3>
+                                <p className="text-3xl font-bold text-white mt-2">
++                                 ₹2,73,50,739
+-                                 ₹2,69,82,148
+                              ...
+                            ...
+                          ...
+                  ...
+                ...
+
+[01:49:41.929] Server  LOG     ✓ Compiled in 210ms
+[01:50:07.425] Server  LOG     ✓ Compiled in 71ms
+[01:50:30.878] Server  LOG     ✓ Compiled in 635ms
+[01:51:20.360] Server  LOG     ✓ Compiled in 114ms
+[01:51:53.598] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[01:51:53.910] Browser ERROR   uncaughtError: Error: Hydration failed because the server rendered text didn't match the client. As a result this tree will be regenerated on the client. This can happen if a SSR-ed Client Component used:
 
 - A server/client branch `if (typeof window !== 'undefined')`.
 - Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
@@ -895,8 +194,8 @@ https://react.dev/link/hydration-mismatch
                               <div className="bg-gradien...">
                                 <h3>
                                 <p className="text-4xl font-bold text-white mt-2">
-+                                 43,603
--                                 42,671
++                                 44,568
+-                                 44,847
                               ...
                             ...
                           ...
@@ -904,10 +203,870 @@ https://react.dev/link/hydration-mismatch
                 ...
       ...
 
-[00:46:53.712] Server  LOG     ✓ Compiled in 96ms
-[00:46:59.654] Server  LOG     ✓ Compiled in 79ms
-[00:47:09.334] Server  LOG     ✓ Compiled in 105ms
-[00:51:13.114] Server  LOG     ✓ Compiled in 142ms
-[00:51:18.036] Server  LOG     ✓ Compiled in 67ms
-[00:51:53.430] Server  LOG     ✓ Compiled in 57ms
-[00:54:14.675] Server  LOG     ✓ Compiled in 111ms
+[02:02:54.092] Browser ERROR   uncaughtError: Error: Hydration failed because the server rendered text didn't match the client. As a result this tree will be regenerated on the client. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+https://react.dev/link/hydration-mismatch
+
+  ...
+    <InnerScrollAndFocusHandler segmentPath={[...]} focusAndScrollRef={{apply:false, ...}}>
+      <ErrorBoundary errorComponent={undefined} errorStyles={undefined} errorScripts={undefined}>
+        <LoadingBoundary name="vehicles/" loading={null}>
+          <HTTPAccessFallbackBoundary notFound={undefined} forbidden={undefined} unauthorized={undefined}>
+            <RedirectBoundary>
+              <RedirectErrorBoundary router={{...}}>
+                <InnerLayoutRouter url="/vehicles" tree={[...]} params={{}} cacheNode={{rsc:<Fragment>, ...}} ...>
+                  <SegmentViewNode type="page" pagePath="vehicles/p...">
+                    <SegmentTrieNode>
+                    <VehiclesPage>
+                      <Vehicles>
+                        <div className="space-y-6">
+                          <DateFilter>
+                          <div className="grid grid-...">
+                            <div className="grid grid-...">
+                              <div className="bg-gradien...">
+                                <h3>
+                                <p className="text-4xl font-bold text-white mt-2">
++                                 44,448
+-                                 44,847
+                              ...
+                            ...
+                          ...
+                  ...
+                ...
+      ...
+
+[02:11:44.593] Server  LOG     ✓ Compiled in 438ms
+[02:13:12.461] Server  LOG     ✓ Compiled in 307ms
+[02:13:12.632] Browser ERROR   ./src/components/Revenue.js:144:11
+Ecmascript file had an error
+  142 |     };
+  143 |
+> 144 |     const getDistrictCategoryValue = (districtData, category) => {
+      |           ^^^^^^^^^^^^^^^^^^^^^^^^
+  145 |         const scale = (val) => Math.floor(val * scaleFactor);
+  146 |         return {
+  147 |             ...row,
+
+the name `getDistrictCategoryValue` is defined multiple times
+
+Import trace:
+  Server Component:
+    ./src/components/Revenue.js
+    ./src/app/page.js
+[02:13:39.839] Browser ERROR   ./src/components/Revenue.js:144:11
+Ecmascript file had an error
+  142 |     };
+  143 |
+> 144 |     const getDistrictCategoryValue = (districtData, category) => {
+      |           ^^^^^^^^^^^^^^^^^^^^^^^^
+  145 |         const scale = (val) => Math.floor(val * scaleFactor);
+  146 |         return {
+  147 |             ...row,
+
+the name `getDistrictCategoryValue` is defined multiple times
+
+Import trace:
+  Server Component:
+    ./src/components/Revenue.js
+    ./src/app/page.js
+[02:13:56.634] Server  LOG     ✓ Compiled in 110ms
+[02:14:51.127] Server  LOG     ✓ Compiled in 108ms
+[02:14:51.237] Browser ERROR   ./src/components/Revenue.js:582:22
+Parsing ecmascript source code failed
+  580 |                             </tbody>
+  581 |                         </table>
+> 582 |                     )}
+      |                      ^
+  583 |                 </div>
+  584 |             </div>
+  585 |         </div>
+
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+
+Import trace:
+  Server Component:
+    ./src/components/Revenue.js
+    ./src/app/page.js
+[02:15:25.574] Server  LOG     ✓ Compiled in 109ms
+[02:15:58.899] Server  LOG     ✓ Compiled in 244ms
+[02:15:59.063] Browser ERROR   uncaughtError: ReferenceError: primaryRange is not defined
+[02:17:14.642] Server  LOG     ✓ Compiled in 103ms
+[02:17:14.651] Server  WARN    ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[02:17:15.487] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[02:17:15.847] Browser ERROR   uncaughtError: Error: Hydration failed because the server rendered text didn't match the client. As a result this tree will be regenerated on the client. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+https://react.dev/link/hydration-mismatch
+
+  ...
+    <InnerScrollAndFocusHandler segmentPath={[...]} focusAndScrollRef={{apply:false, ...}}>
+      <ErrorBoundary errorComponent={undefined} errorStyles={undefined} errorScripts={undefined}>
+        <LoadingBoundary name="vehicles/" loading={null}>
+          <HTTPAccessFallbackBoundary notFound={undefined} forbidden={undefined} unauthorized={undefined}>
+            <RedirectBoundary>
+              <RedirectErrorBoundary router={{...}}>
+                <InnerLayoutRouter url="/vehicles" tree={[...]} params={{}} cacheNode={{rsc:<Fragment>, ...}} ...>
+                  <SegmentViewNode type="page" pagePath="vehicles/p...">
+                    <SegmentTrieNode>
+                    <VehiclesPage>
+                      <Vehicles>
+                        <div className="space-y-6">
+                          <DateFilter>
+                          <div className="grid grid-...">
+                            <div className="grid grid-...">
+                              <div className="bg-gradien...">
+                                <h3>
+                                <p className="text-4xl font-bold text-white mt-2">
++                                 43,921
+-                                 44,047
+                              ...
+                            ...
+                          ...
+                  ...
+                ...
+      ...
+
+[02:24:43.786] Server  LOG     ✓ Compiled in 113ms
+[02:25:10.486] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[02:25:10.823] Browser ERROR   uncaughtError: Error: Hydration failed because the server rendered text didn't match the client. As a result this tree will be regenerated on the client. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+https://react.dev/link/hydration-mismatch
+
+  ...
+    <ErrorBoundary errorComponent={undefined} errorStyles={undefined} errorScripts={undefined}>
+      <LoadingBoundary name="/" loading={null}>
+        <HTTPAccessFallbackBoundary notFound={<SegmentViewNode>} forbidden={undefined} unauthorized={undefined}>
+          <HTTPAccessFallbackErrorBoundary pathname="/" notFound={<SegmentViewNode>} forbidden={undefined} ...>
+            <RedirectBoundary>
+              <RedirectErrorBoundary router={{...}}>
+                <InnerLayoutRouter url="/" tree={[...]} params={{}} cacheNode={{rsc:<Fragment>, ...}} segmentPath={[...]} ...>
+                  <SegmentViewNode type="page" pagePath="page.js">
+                    <SegmentTrieNode>
+                    <Home>
+                      <Revenue>
+                        <div className="space-y-6">
+                          <DateFilter>
+                          <div className="grid grid-...">
+                            <div className="grid grid-...">
+                              <div className="bg-gradien...">
+                                <h3>
+                                <p className="text-3xl font-bold text-white mt-2">
++                                 ₹2,68,43,775
+-                                 ₹2,70,73,472
+                              ...
+                            ...
+                          ...
+                  ...
+                ...
+
+[02:42:46.138] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[02:42:46.340] Browser ERROR   uncaughtError: Error: Hydration failed because the server rendered text didn't match the client. As a result this tree will be regenerated on the client. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+https://react.dev/link/hydration-mismatch
+
+  ...
+    <ScrollAndFocusHandler segmentPath={[...]}>
+      <InnerScrollAndFocusHandler segmentPath={[...]} focusAndScrollRef={{apply:false, ...}}>
+        <ErrorBoundary errorComponent={undefined} errorStyles={undefined} errorScripts={undefined}>
+          <LoadingBoundary name="aets/" loading={null}>
+            <HTTPAccessFallbackBoundary notFound={undefined} forbidden={undefined} unauthorized={undefined}>
+              <RedirectBoundary>
+                <RedirectErrorBoundary router={{...}}>
+                  <InnerLayoutRouter url="/aets" tree={[...]} params={{}} cacheNode={{rsc:<Fragment>, ...}} ...>
+                    <SegmentViewNode type="page" pagePath="aets/page.js">
+                      <SegmentTrieNode>
+                      <AETSPage>
+                        <AETS>
+                          <div className="space-y-6">
+                            <div>
+                            <DateFilter>
+                            <div className="grid grid-...">
+                              <div className="bg-white d...">
+                                <h3>
+                                <p className="text-3xl font-bold text-blue-600 dark:text-blue-400 mt-2">
++                                 330
+-                                 321
+                                ...
+                              ...
+                            ...
+                    ...
+                  ...
+        ...
+
+[02:43:30.900] Server  WARN    ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[02:43:30.950] Server  WARN    ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[02:43:30.964] Browser ERROR   ./src/components/Revenue.js:582:22
+Parsing ecmascript source code failed
+  580 |                             </tbody>
+  581 |                         </table>
+> 582 |                     )}
+      |                      ^
+  583 |                 </div>
+  584 |             </div>
+  585 |         </div>
+
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+
+Import trace:
+  Server Component:
+    ./src/components/Revenue.js
+    ./src/app/page.js
+[02:43:30.964] Browser ERROR   uncaughtError: ReferenceError: Can't find variable: primaryRange
+[02:43:31.183] Browser ERROR   Failed to fetch RSC payload for http://localhost:3000/vehicles. Falling back to browser navigation. {}
+[02:43:31.183] Browser ERROR   Failed to fetch RSC payload for http://localhost:3000/vehicles. Falling back to browser navigation. {}
+[02:43:32.168] Browser ERROR   uncaughtError: Error: Hydration failed because the server rendered text didn't match the client. As a result this tree will be regenerated on the client. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+https://react.dev/link/hydration-mismatch
+
+  ...
+    <InnerScrollAndFocusHandler segmentPath={[...]} focusAndScrollRef={{apply:false, ...}}>
+      <ErrorBoundary errorComponent={undefined} errorStyles={undefined} errorScripts={undefined}>
+        <LoadingBoundary name="vehicles/" loading={null}>
+          <HTTPAccessFallbackBoundary notFound={undefined} forbidden={undefined} unauthorized={undefined}>
+            <RedirectBoundary>
+              <RedirectErrorBoundary router={{...}}>
+                <InnerLayoutRouter url="/vehicles" tree={[...]} params={{}} cacheNode={{rsc:<Fragment>, ...}} ...>
+                  <SegmentViewNode type="page" pagePath="vehicles/p...">
+                    <SegmentTrieNode>
+                    <VehiclesPage>
+                      <Vehicles>
+                        <div className="space-y-6">
+                          <DateFilter>
+                          <div className="grid grid-...">
+                            <div className="grid grid-...">
+                              <div className="bg-gradien...">
+                                <h3>
+                                <p className="text-4xl font-bold text-white mt-2">
++                                 44,004
+-                                 44,047
+                              ...
+                            ...
+                          ...
+                  ...
+                ...
+      ...
+
+[05:16:10.784] Browser ERROR   uncaughtError: Error: Hydration failed because the server rendered text didn't match the client. As a result this tree will be regenerated on the client. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+https://react.dev/link/hydration-mismatch
+
+  ...
+    <InnerScrollAndFocusHandler segmentPath={[...]} focusAndScrollRef={{apply:false, ...}}>
+      <ErrorBoundary errorComponent={undefined} errorStyles={undefined} errorScripts={undefined}>
+        <LoadingBoundary name="revenue/" loading={null}>
+          <HTTPAccessFallbackBoundary notFound={undefined} forbidden={undefined} unauthorized={undefined}>
+            <RedirectBoundary>
+              <RedirectErrorBoundary router={{...}}>
+                <InnerLayoutRouter url="/revenue" tree={[...]} params={{}} cacheNode={{rsc:<Fragment>, ...}} ...>
+                  <SegmentViewNode type="page" pagePath="revenue/pa...">
+                    <SegmentTrieNode>
+                    <RevenuePage>
+                      <Revenue>
+                        <div className="space-y-6">
+                          <DateFilter>
+                          <div className="grid grid-...">
+                            <div className="grid grid-...">
+                              <div className="bg-gradien...">
+                                <h3>
+                                <p className="text-3xl font-bold text-white mt-2">
++                                 ₹2,70,03,667
+-                                 ₹2,70,90,958
+                              ...
+                            ...
+                          ...
+                  ...
+                ...
+      ...
+
+[05:17:09.623] Browser ERROR   uncaughtError: Error: Hydration failed because the server rendered text didn't match the client. As a result this tree will be regenerated on the client. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+https://react.dev/link/hydration-mismatch
+
+  ...
+    <InnerScrollAndFocusHandler segmentPath={[...]} focusAndScrollRef={{apply:false, ...}}>
+      <ErrorBoundary errorComponent={undefined} errorStyles={undefined} errorScripts={undefined}>
+        <LoadingBoundary name="revenue/" loading={null}>
+          <HTTPAccessFallbackBoundary notFound={undefined} forbidden={undefined} unauthorized={undefined}>
+            <RedirectBoundary>
+              <RedirectErrorBoundary router={{...}}>
+                <InnerLayoutRouter url="/revenue" tree={[...]} params={{}} cacheNode={{rsc:<Fragment>, ...}} ...>
+                  <SegmentViewNode type="page" pagePath="revenue/pa...">
+                    <SegmentTrieNode>
+                    <RevenuePage>
+                      <Revenue>
+                        <div className="space-y-6">
+                          <DateFilter>
+                          <div className="grid grid-...">
+                            <div className="grid grid-...">
+                              <div className="bg-gradien...">
+                                <h3>
+                                <p className="text-3xl font-bold text-white mt-2">
++                                 ₹2,66,80,490
+-                                 ₹2,70,90,958
+                              ...
+                            ...
+                          ...
+                  ...
+                ...
+      ...
+
+[05:21:25.981] Server  LOG     ✓ Compiled in 151ms
+[05:21:27.236] Server  ERROR   ⨯ ReferenceError: permitFeesData2026 is not defined
+[05:21:27.954] Server  ERROR   ⨯ ReferenceError: permitFeesData2026 is not defined
+[05:21:28.323] Server  ERROR   ⨯ ReferenceError: permitFeesData2026 is not defined
+[05:21:28.543] Server  ERROR   ⨯ ReferenceError: permitFeesData2026 is not defined
+[05:21:29.024] Server  ERROR   ⨯ ReferenceError: permitFeesData2026 is not defined
+[05:21:29.291] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[05:21:29.439] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[05:21:29.621] Browser ERROR   uncaughtError: ReferenceError: permitFeesData2026 is not defined
+[05:21:29.707] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[05:21:30.612] Browser ERROR   uncaughtError: ReferenceError: permitFeesData2026 is not defined
+[05:21:30.634] Browser ERROR   uncaughtError: ReferenceError: Can't find variable: permitFeesData2026
+[05:22:43.477] Server  LOG     ✓ Compiled in 144ms
+[05:22:43.481] Server  WARN    ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[05:22:43.489] Server  WARN    ⚠ Fast Refresh had to perform a full reload when ./src/data/dummyData.js changed. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[05:22:43.492] Server  WARN    ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[05:22:43.494] Server  WARN    ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[05:22:43.494] Server  WARN    ⚠ Fast Refresh had to perform a full reload when ./src/data/dummyData.js changed. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[05:22:43.494] Server  WARN    ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[05:22:43.495] Server  WARN    ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[05:22:43.496] Server  WARN    ⚠ Fast Refresh had to perform a full reload when ./src/data/dummyData.js changed. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[05:22:43.496] Server  WARN    ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[05:22:44.627] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[05:22:44.644] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[05:22:45.055] Browser ERROR   uncaughtError: Error: Hydration failed because the server rendered text didn't match the client. As a result this tree will be regenerated on the client. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+https://react.dev/link/hydration-mismatch
+
+  ...
+    <InnerScrollAndFocusHandler segmentPath={[...]} focusAndScrollRef={{apply:false, ...}}>
+      <ErrorBoundary errorComponent={undefined} errorStyles={undefined} errorScripts={undefined}>
+        <LoadingBoundary name="revenue/" loading={null}>
+          <HTTPAccessFallbackBoundary notFound={undefined} forbidden={undefined} unauthorized={undefined}>
+            <RedirectBoundary>
+              <RedirectErrorBoundary router={{...}}>
+                <InnerLayoutRouter url="/revenue" tree={[...]} params={{}} cacheNode={{rsc:<Fragment>, ...}} ...>
+                  <SegmentViewNode type="page" pagePath="revenue/pa...">
+                    <SegmentTrieNode>
+                    <RevenuePage>
+                      <Revenue>
+                        <div className="space-y-6">
+                          <DateFilter>
+                          <div className="grid grid-...">
+                            <div className="grid grid-...">
+                              <div className="bg-gradien...">
+                                <h3>
+                                <p className="text-3xl font-bold text-white mt-2">
++                                 ₹2,67,17,693
+-                                 ₹2,66,83,309
+                              ...
+                            ...
+                          ...
+                  ...
+                ...
+      ...
+
+[05:22:45.613] Browser ERROR   uncaughtError: Error: Hydration failed because the server rendered text didn't match the client. As a result this tree will be regenerated on the client. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+https://react.dev/link/hydration-mismatch
+
+  ...
+    <InnerScrollAndFocusHandler segmentPath={[...]} focusAndScrollRef={{apply:false, ...}}>
+      <ErrorBoundary errorComponent={undefined} errorStyles={undefined} errorScripts={undefined}>
+        <LoadingBoundary name="vehicles/" loading={null}>
+          <HTTPAccessFallbackBoundary notFound={undefined} forbidden={undefined} unauthorized={undefined}>
+            <RedirectBoundary>
+              <RedirectErrorBoundary router={{...}}>
+                <InnerLayoutRouter url="/vehicles" tree={[...]} params={{}} cacheNode={{rsc:<Fragment>, ...}} ...>
+                  <SegmentViewNode type="page" pagePath="vehicles/p...">
+                    <SegmentTrieNode>
+                    <VehiclesPage>
+                      <Vehicles>
+                        <div className="space-y-6">
+                          <DateFilter>
+                          <div className="grid grid-...">
+                            <div className="grid grid-...">
+                              <div className="bg-gradien...">
+                                <h3>
+                                <p className="text-4xl font-bold text-white mt-2">
++                                 43,817
+-                                 43,968
+                              ...
+                            ...
+                          ...
+                  ...
+                ...
+      ...
+
+[05:22:45.614] Browser ERROR   uncaughtError: Error: Hydration failed because the server rendered text didn't match the client. As a result this tree will be regenerated on the client. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+https://react.dev/link/hydration-mismatch
+
+  ...
+    <ScrollAndFocusHandler segmentPath={[...]}>
+      <InnerScrollAndFocusHandler segmentPath={[...]} focusAndScrollRef={{apply:false, ...}}>
+        <ErrorBoundary errorComponent={undefined} errorStyles={undefined} errorScripts={undefined}>
+          <LoadingBoundary name="aets/" loading={null}>
+            <HTTPAccessFallbackBoundary notFound={undefined} forbidden={undefined} unauthorized={undefined}>
+              <RedirectBoundary>
+                <RedirectErrorBoundary router={{...}}>
+                  <InnerLayoutRouter url="/aets" tree={[...]} params={{}} cacheNode={{rsc:<Fragment>, ...}} ...>
+                    <SegmentViewNode type="page" pagePath="aets/page.js">
+                      <SegmentTrieNode>
+                      <AETSPage>
+                        <AETS>
+                          <div className="space-y-6">
+                            <div>
+                            <DateFilter>
+                            <div className="grid grid-...">
+                              <div className="bg-white d...">
+                                <h3>
+                                <p className="text-3xl font-bold text-blue-600 dark:text-blue-400 mt-2">
++                                 317
+-                                 319
+                                ...
+                              ...
+                            ...
+                    ...
+                  ...
+        ...
+
+[05:22:53.708] Server  LOG     ✓ Compiled in 99ms
+[05:22:53.797] Browser ERROR   uncaughtError: ReferenceError: Can't find variable: scaledAppPrimaryData
+[05:22:54.618] Browser ERROR   uncaughtError: ReferenceError: scaledAppPrimaryData is not defined
+[05:23:12.413] Server  ERROR   ⨯ ReferenceError: scaledAppPrimaryData is not defined
+[05:23:13.592] Browser ERROR   uncaughtError: ReferenceError: Can't find variable: scaledAppPrimaryData
+[05:24:20.190] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[05:24:20.604] Browser ERROR   uncaughtError: Error: Hydration failed because the server rendered text didn't match the client. As a result this tree will be regenerated on the client. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+https://react.dev/link/hydration-mismatch
+
+  ...
+    <ErrorBoundary errorComponent={undefined} errorStyles={undefined} errorScripts={undefined}>
+      <LoadingBoundary name="/" loading={null}>
+        <HTTPAccessFallbackBoundary notFound={<SegmentViewNode>} forbidden={undefined} unauthorized={undefined}>
+          <HTTPAccessFallbackErrorBoundary pathname="/" notFound={<SegmentViewNode>} forbidden={undefined} ...>
+            <RedirectBoundary>
+              <RedirectErrorBoundary router={{...}}>
+                <InnerLayoutRouter url="/" tree={[...]} params={{}} cacheNode={{rsc:<Fragment>, ...}} segmentPath={[...]} ...>
+                  <SegmentViewNode type="page" pagePath="page.js">
+                    <SegmentTrieNode>
+                    <Home>
+                      <Revenue>
+                        <div className="space-y-6">
+                          <DateFilter>
+                          <div className="grid grid-...">
+                            <div className="grid grid-...">
+                              <div className="bg-gradien...">
+                                <h3>
+                                <p className="text-3xl font-bold text-white mt-2">
++                                 ₹2,66,07,704
+-                                 ₹2,69,58,106
+                              ...
+                            ...
+                          ...
+                  ...
+                ...
+
+[05:24:28.812] Browser ERROR   uncaughtError: ReferenceError: scaledAppPrimaryData is not defined
+[05:28:12.944] Server  ERROR   ⨯ ReferenceError: scaledAppPrimaryData is not defined
+[05:28:13.135] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[05:28:13.350] Browser ERROR   uncaughtError: ReferenceError: scaledAppPrimaryData is not defined
+[05:28:20.878] Server  ERROR   ⨯ ReferenceError: scaledAppPrimaryData is not defined
+[05:28:21.257] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[05:28:21.605] Browser ERROR   uncaughtError: ReferenceError: scaledAppPrimaryData is not defined
+[05:28:44.265] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[05:28:44.675] Browser ERROR   uncaughtError: Error: Hydration failed because the server rendered text didn't match the client. As a result this tree will be regenerated on the client. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+https://react.dev/link/hydration-mismatch
+
+  ...
+    <ErrorBoundary errorComponent={undefined} errorStyles={undefined} errorScripts={undefined}>
+      <LoadingBoundary name="permit/" loading={null}>
+        <HTTPAccessFallbackBoundary notFound={undefined} forbidden={undefined} unauthorized={undefined}>
+          <RedirectBoundary>
+            <RedirectErrorBoundary router={{...}}>
+              <InnerLayoutRouter url="/permit" tree={[...]} params={{}} cacheNode={{rsc:<Fragment>, ...}} ...>
+                <SegmentViewNode type="page" pagePath="permit/pag...">
+                  <SegmentTrieNode>
+                  <PermitPage>
+                    <Permit>
+                      <div className="space-y-6">
+                        <div>
+                        <DateFilter>
+                        <div className="bg-white d...">
+                          <h3>
+                          <div className="grid grid-...">
+                            <div>
+                            <div>
+                              <label>
+                              <select value="All" onChange={function onChange} className="w-full px-...">
+                                <option>
+                                <option value="Goods Carriage">
++                                 Goods Carriage
+-                                 Contract Carriage
+                                ...
+                            ...
+                        ...
+                ...
+              ...
+
+[05:29:06.562] Server  ERROR   ⨯ ReferenceError: scaledAppPrimaryData is not defined
+[05:29:06.706] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[05:29:06.940] Browser ERROR   uncaughtError: ReferenceError: scaledAppPrimaryData is not defined
+[05:31:07.057] Server  LOG     ✓ Compiled in 180ms
+[05:31:07.170] Browser ERROR   ./src/components/Vehicles.js:262:11
+Ecmascript file had an error
+  260 |     };
+  261 |
+> 262 |     const appCategories = [
+      |           ^^^^^^^^^^^^^
+  263 |         { id: 'totalReceived', label: 'Total Received' },
+  264 |         { id: 'dealerPoint', label: 'Dealer Point' },
+  265 |         { id: 'dtoOffice', label: 'DTO Office' },
+
+the name `appCategories` is defined multiple times
+
+Import trace:
+  Server Component:
+    ./src/components/Vehicles.js
+    ./src/app/vehicles/page.js
+[05:31:07.170] Browser ERROR   ./src/components/Vehicles.js:262:11
+Ecmascript file had an error
+  260 |     };
+  261 |
+> 262 |     const appCategories = [
+      |           ^^^^^^^^^^^^^
+  263 |         { id: 'totalReceived', label: 'Total Received' },
+  264 |         { id: 'dealerPoint', label: 'Dealer Point' },
+  265 |         { id: 'dtoOffice', label: 'DTO Office' },
+
+the name `appCategories` is defined multiple times
+
+Import trace:
+  Server Component:
+    ./src/components/Vehicles.js
+    ./src/app/vehicles/page.js
+[05:31:07.171] Browser ERROR   ./src/components/Vehicles.js:262:11
+Ecmascript file had an error
+  260 |     };
+  261 |
+> 262 |     const appCategories = [
+      |           ^^^^^^^^^^^^^
+  263 |         { id: 'totalReceived', label: 'Total Received' },
+  264 |         { id: 'dealerPoint', label: 'Dealer Point' },
+  265 |         { id: 'dtoOffice', label: 'DTO Office' },
+
+the name `appCategories` is defined multiple times
+
+Import trace:
+  Server Component:
+    ./src/components/Vehicles.js
+    ./src/app/vehicles/page.js
+[05:31:07.171] Browser ERROR   ./src/components/Vehicles.js:262:11
+Ecmascript file had an error
+  260 |     };
+  261 |
+> 262 |     const appCategories = [
+      |           ^^^^^^^^^^^^^
+  263 |         { id: 'totalReceived', label: 'Total Received' },
+  264 |         { id: 'dealerPoint', label: 'Dealer Point' },
+  265 |         { id: 'dtoOffice', label: 'DTO Office' },
+
+the name `appCategories` is defined multiple times
+
+Import trace:
+  Server Component:
+    ./src/components/Vehicles.js
+    ./src/app/vehicles/page.js
+[05:31:07.667] Browser ERROR   ./src/components/Vehicles.js:262:11
+Ecmascript file had an error
+  260 |     };
+  261 |
+> 262 |     const appCategories = [
+      |           ^^^^^^^^^^^^^
+  263 |         { id: 'totalReceived', label: 'Total Received' },
+  264 |         { id: 'dealerPoint', label: 'Dealer Point' },
+  265 |         { id: 'dtoOffice', label: 'DTO Office' },
+
+the name `appCategories` is defined multiple times
+
+Import trace:
+  Server Component:
+    ./src/components/Vehicles.js
+    ./src/app/vehicles/page.js
+[05:31:40.115] Server  LOG     ✓ Compiled in 138ms
+[05:31:40.118] Server  WARN    ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[05:31:40.331] Server  WARN    ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[05:31:41.004] Server  WARN    ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[05:31:42.096] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[05:31:42.165] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[05:31:43.043] Browser ERROR   uncaughtError: Error: Hydration failed because the server rendered text didn't match the client. As a result this tree will be regenerated on the client. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+https://react.dev/link/hydration-mismatch
+
+  ...
+    <InnerScrollAndFocusHandler segmentPath={[...]} focusAndScrollRef={{apply:false, ...}}>
+      <ErrorBoundary errorComponent={undefined} errorStyles={undefined} errorScripts={undefined}>
+        <LoadingBoundary name="vehicles/" loading={null}>
+          <HTTPAccessFallbackBoundary notFound={undefined} forbidden={undefined} unauthorized={undefined}>
+            <RedirectBoundary>
+              <RedirectErrorBoundary router={{...}}>
+                <InnerLayoutRouter url="/vehicles" tree={[...]} params={{}} cacheNode={{rsc:<Fragment>, ...}} ...>
+                  <SegmentViewNode type="page" pagePath="vehicles/p...">
+                    <SegmentTrieNode>
+                    <VehiclesPage>
+                      <Vehicles>
+                        <div className="space-y-6">
+                          <DateFilter>
+                          <div className="grid grid-...">
+                            <div className="grid grid-...">
+                              <div className="bg-gradien...">
+                                <h3>
+                                <p className="text-4xl font-bold text-white mt-2">
++                                 43,344
+-                                 43,890
+                              ...
+                            ...
+                          ...
+                  ...
+                ...
+      ...
+
+[05:31:43.277] Browser ERROR   uncaughtError: Error: Hydration failed because the server rendered text didn't match the client. As a result this tree will be regenerated on the client. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+https://react.dev/link/hydration-mismatch
+
+  ...
+    <InnerScrollAndFocusHandler segmentPath={[...]} focusAndScrollRef={{apply:false, ...}}>
+      <ErrorBoundary errorComponent={undefined} errorStyles={undefined} errorScripts={undefined}>
+        <LoadingBoundary name="vehicles/" loading={null}>
+          <HTTPAccessFallbackBoundary notFound={undefined} forbidden={undefined} unauthorized={undefined}>
+            <RedirectBoundary>
+              <RedirectErrorBoundary router={{...}}>
+                <InnerLayoutRouter url="/vehicles" tree={[...]} params={{}} cacheNode={{rsc:<Fragment>, ...}} ...>
+                  <SegmentViewNode type="page" pagePath="vehicles/p...">
+                    <SegmentTrieNode>
+                    <VehiclesPage>
+                      <Vehicles>
+                        <div className="space-y-6">
+                          <DateFilter>
+                          <div className="grid grid-...">
+                            <div className="grid grid-...">
+                              <div className="bg-gradien...">
+                                <h3>
+                                <p className="text-4xl font-bold text-white mt-2">
++                                 45,094
+-                                 43,890
+                              ...
+                            ...
+                          ...
+                  ...
+                ...
+      ...
+
+[05:31:44.101] Browser ERROR   uncaughtError: Error: Hydration failed because the server rendered text didn't match the client. As a result this tree will be regenerated on the client. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+https://react.dev/link/hydration-mismatch
+
+  ...
+    <InnerScrollAndFocusHandler segmentPath={[...]} focusAndScrollRef={{apply:false, ...}}>
+      <ErrorBoundary errorComponent={undefined} errorStyles={undefined} errorScripts={undefined}>
+        <LoadingBoundary name="vehicles/" loading={null}>
+          <HTTPAccessFallbackBoundary notFound={undefined} forbidden={undefined} unauthorized={undefined}>
+            <RedirectBoundary>
+              <RedirectErrorBoundary router={{...}}>
+                <InnerLayoutRouter url="/vehicles" tree={[...]} params={{}} cacheNode={{rsc:<Fragment>, ...}} ...>
+                  <SegmentViewNode type="page" pagePath="vehicles/p...">
+                    <SegmentTrieNode>
+                    <VehiclesPage>
+                      <Vehicles>
+                        <div className="space-y-6">
+                          <DateFilter>
+                          <div className="grid grid-...">
+                            <div className="grid grid-...">
+                              <div className="bg-gradien...">
+                                <h3>
+                                <p className="text-4xl font-bold text-white mt-2">
++                                 43,479
+-                                 43,890
+                              ...
+                            ...
+                          ...
+                  ...
+                ...
+      ...
+
+[05:46:36.043] Server  LOG     ✓ Compiled in 193ms
+[05:47:18.290] Server  LOG     ✓ Compiled in 111ms
+[05:48:12.897] Server  LOG     ✓ Compiled in 138ms
+[05:48:40.057] Server  LOG     ✓ Compiled in 103ms
+[05:50:08.298] Server  LOG     ✓ Compiled in 133ms
+[05:50:41.468] Server  LOG     ✓ Compiled in 135ms
+[05:51:09.430] Server  LOG     ✓ Compiled in 101ms
+[05:51:42.820] Server  LOG     ✓ Compiled in 523ms
+[05:51:43.151] Server  LOG     ✓ Compiled in 0ms
+[05:51:44.256] Server  LOG     ✓ Compiled in 170ms
+[05:52:15.636] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[05:52:16.025] Browser ERROR   uncaughtError: Error: Hydration failed because the server rendered text didn't match the client. As a result this tree will be regenerated on the client. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+https://react.dev/link/hydration-mismatch
+
+  ...
+    <InnerScrollAndFocusHandler segmentPath={[...]} focusAndScrollRef={{apply:false, ...}}>
+      <ErrorBoundary errorComponent={undefined} errorStyles={undefined} errorScripts={undefined}>
+        <LoadingBoundary name="revenue/" loading={null}>
+          <HTTPAccessFallbackBoundary notFound={undefined} forbidden={undefined} unauthorized={undefined}>
+            <RedirectBoundary>
+              <RedirectErrorBoundary router={{...}}>
+                <InnerLayoutRouter url="/revenue" tree={[...]} params={{}} cacheNode={{rsc:<Fragment>, ...}} ...>
+                  <SegmentViewNode type="page" pagePath="revenue/pa...">
+                    <SegmentTrieNode>
+                    <RevenuePage>
+                      <Revenue>
+                        <div className="space-y-6">
+                          <DateFilter>
+                          <div className="grid grid-...">
+                            <div className="grid grid-...">
+                              <div className="bg-gradien...">
+                                <h3>
+                                <p className="text-3xl font-bold text-white mt-2">
++                                 ₹2,74,90,258
+-                                 ₹2,73,76,762
+                              ...
+                            ...
+                          ...
+                  ...
+                ...
+      ...
+
+[05:52:38.801] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[05:53:09.379] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[05:56:45.090] Server  LOG     ✓ Compiled in 141ms

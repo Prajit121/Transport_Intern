@@ -11,8 +11,18 @@ __turbopack_context__.s([
     ()=>__TURBOPACK__default__export__,
     "districtWiseRevenue",
     ()=>districtWiseRevenue,
+    "districtWiseRevenue2023",
+    ()=>districtWiseRevenue2023,
+    "districtWiseRevenue2024",
+    ()=>districtWiseRevenue2024,
+    "districtWiseRevenue2026",
+    ()=>districtWiseRevenue2026,
     "districtWiseVehicles",
     ()=>districtWiseVehicles,
+    "districtWiseVehicles2024",
+    ()=>districtWiseVehicles2024,
+    "districtWiseVehicles2026",
+    ()=>districtWiseVehicles2026,
     "enforcementData",
     ()=>enforcementData,
     "fitnessData",
@@ -587,14 +597,16 @@ const vehicleCategories = [
 const puccData = assamDistricts.flatMap((district)=>{
     return vehicleCategories.map((category)=>{
         const totalApplications = Math.floor(Math.random() * 500) + 100;
+        const totalVehicles = Math.floor(totalApplications * (1.2 + Math.random() * 0.4)); // More vehicles than apps
         const freshWithoutLateFee = Math.floor(totalApplications * (0.4 + Math.random() * 0.2));
         const freshWithLateFee = Math.floor(totalApplications * (0.2 + Math.random() * 0.15));
         const grandTotal = freshWithoutLateFee + freshWithLateFee;
-        const feesRealized = grandTotal * (Math.floor(Math.random() * 200) + 100); // ₹100-300 per PUCC
-        const lateFeeRealized = freshWithLateFee * 500; // ₹500 late fee per certificate
+        const feesRealized = grandTotal * (Math.floor(Math.random() * 200) + 100);
+        const lateFeeRealized = freshWithLateFee * 500;
         return {
             district: district,
             vehicleCategory: category,
+            totalVehicles: totalVehicles,
             totalApplications: totalApplications,
             freshWithoutLateFee: freshWithoutLateFee,
             freshWithLateFee: freshWithLateFee,
@@ -692,12 +704,148 @@ const districtWiseRevenue = assamDistricts.map((district)=>{
         hsrp: Math.floor(140000 * factor)
     };
 });
+const districtWiseRevenue2024 = assamDistricts.map((district)=>{
+    const factor = 0.5 + Math.random(); // Varied performance by district
+    const growth = 1 + (Math.random() * 0.2 - 0.2); // -20% to 0% growth
+    return {
+        district,
+        mvTax: {
+            nonTransport: Math.floor(1200000 * factor * growth),
+            newReg: Math.floor(850000 * factor * growth),
+            alreadyReg: Math.floor(450000 * factor * growth)
+        },
+        mvFees: {
+            sarathi: Math.floor(150000 * factor * growth),
+            vahan: Math.floor(220000 * factor * growth),
+            pucc: Math.floor(80000 * factor * growth)
+        },
+        roadSafetyCess: {
+            nonTransport: Math.floor(350000 * factor * growth),
+            transport: Math.floor(250000 * factor * growth)
+        },
+        greenTax: {
+            nonTransport: Math.floor(180000 * factor * growth),
+            transport: Math.floor(120000 * factor * growth)
+        },
+        compoundingFees: {
+            offenceCF: Math.floor(95000 * factor * growth),
+            perDayCF: Math.floor(45000 * factor * growth),
+            fitnessCF: Math.floor(35000 * factor * growth),
+            puccLateFine: Math.floor(25000 * factor * growth),
+            otherLateFees: Math.floor(15000 * factor * growth)
+        },
+        apgt: Math.floor(110000 * factor * growth),
+        hsrp: Math.floor(140000 * factor * growth)
+    };
+});
+const districtWiseRevenue2023 = assamDistricts.map((district)=>{
+    const factor = 0.5 + Math.random(); // Varied performance by district
+    const growth = 1 + (Math.random() * 0.2 - 0.4); // -40% to -20% growth
+    return {
+        district,
+        mvTax: {
+            nonTransport: Math.floor(1200000 * factor * growth),
+            newReg: Math.floor(850000 * factor * growth),
+            alreadyReg: Math.floor(450000 * factor * growth)
+        },
+        mvFees: {
+            sarathi: Math.floor(150000 * factor * growth),
+            vahan: Math.floor(220000 * factor * growth),
+            pucc: Math.floor(80000 * factor * growth)
+        },
+        roadSafetyCess: {
+            nonTransport: Math.floor(350000 * factor * growth),
+            transport: Math.floor(250000 * factor * growth)
+        },
+        greenTax: {
+            nonTransport: Math.floor(180000 * factor * growth),
+            transport: Math.floor(120000 * factor * growth)
+        },
+        compoundingFees: {
+            offenceCF: Math.floor(95000 * factor * growth),
+            perDayCF: Math.floor(45000 * factor * growth),
+            fitnessCF: Math.floor(35000 * factor * growth),
+            puccLateFine: Math.floor(25000 * factor * growth),
+            otherLateFees: Math.floor(15000 * factor * growth)
+        },
+        apgt: Math.floor(110000 * factor * growth),
+        hsrp: Math.floor(140000 * factor * growth)
+    };
+});
+const districtWiseRevenue2026 = assamDistricts.map((district)=>{
+    const factor = 0.5 + Math.random(); // Varied performance by district
+    const growth = 1 + (Math.random() * 0.4 - 0.1); // -10% to +30% growth
+    return {
+        district,
+        mvTax: {
+            nonTransport: Math.floor(1200000 * factor * growth),
+            newReg: Math.floor(850000 * factor * growth),
+            alreadyReg: Math.floor(450000 * factor * growth)
+        },
+        mvFees: {
+            sarathi: Math.floor(150000 * factor * growth),
+            vahan: Math.floor(220000 * factor * growth),
+            pucc: Math.floor(80000 * factor * growth)
+        },
+        roadSafetyCess: {
+            nonTransport: Math.floor(350000 * factor * growth),
+            transport: Math.floor(250000 * factor * growth)
+        },
+        greenTax: {
+            nonTransport: Math.floor(180000 * factor * growth),
+            transport: Math.floor(120000 * factor * growth)
+        },
+        compoundingFees: {
+            offenceCF: Math.floor(95000 * factor * growth),
+            perDayCF: Math.floor(45000 * factor * growth),
+            fitnessCF: Math.floor(35000 * factor * growth),
+            puccLateFine: Math.floor(25000 * factor * growth),
+            otherLateFees: Math.floor(15000 * factor * growth)
+        },
+        apgt: Math.floor(110000 * factor * growth),
+        hsrp: Math.floor(140000 * factor * growth)
+    };
+});
 const districtWiseVehicles = assamDistricts.map((district)=>{
     const factor = 0.5 + Math.random();
     const twoWheeler = Math.floor(2500 * factor);
     const threeWheeler = Math.floor(600 * factor);
     const nonTransport = Math.floor(2800 * factor);
     const transport = Math.floor(1200 * factor);
+    const total = nonTransport + transport;
+    return {
+        district,
+        total,
+        nonTransport,
+        transport,
+        twoWheeler,
+        threeWheeler
+    };
+});
+const districtWiseVehicles2024 = assamDistricts.map((district)=>{
+    const factor = 0.5 + Math.random();
+    const growth = 1 + (Math.random() * 0.2 - 0.2); // -20% to 0% growth
+    const twoWheeler = Math.floor(2500 * factor * growth);
+    const threeWheeler = Math.floor(600 * factor * growth);
+    const nonTransport = Math.floor(2800 * factor * growth);
+    const transport = Math.floor(1200 * factor * growth);
+    const total = nonTransport + transport;
+    return {
+        district,
+        total,
+        nonTransport,
+        transport,
+        twoWheeler,
+        threeWheeler
+    };
+});
+const districtWiseVehicles2026 = assamDistricts.map((district)=>{
+    const factor = 0.5 + Math.random();
+    const growth = 1 + (Math.random() * 0.4 - 0.1); // -10% to +30% growth
+    const twoWheeler = Math.floor(2500 * factor * growth);
+    const threeWheeler = Math.floor(600 * factor * growth);
+    const nonTransport = Math.floor(2800 * factor * growth);
+    const transport = Math.floor(1200 * factor * growth);
     const total = nonTransport + transport;
     return {
         district,
@@ -748,7 +896,12 @@ const __TURBOPACK__default__export__ = {
     fitnessData,
     enforcementData,
     districtWiseRevenue,
+    districtWiseRevenue2023,
+    districtWiseRevenue2024,
+    districtWiseRevenue2026,
     districtWiseVehicles,
+    districtWiseVehicles2024,
+    districtWiseVehicles2026,
     registrationApplicationsData
 };
  // Future CSV import function (commented out for now)

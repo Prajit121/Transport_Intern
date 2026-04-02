@@ -2,6 +2,8 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import dummyData from '../data/dummyData';
 import DateFilter from './DateFilter';
+import ComparisonTable from './ComparisonTable';
+import { useComparison } from '../hooks/useComparison';
 
 const Fitness = () => {
     const [isDarkMode, setIsDarkMode] = useState(false);
@@ -29,9 +31,56 @@ const Fitness = () => {
     const districts = ['All', ...dummyData.fitnessData.map(d => d.district)];
 
     // Filter data
-    const filteredData = selectedDistrict === 'All'
-        ? dummyData.fitnessData
-        : dummyData.fitnessData.filter(d => d.district === selectedDistrict);
+    const comparisonProps = useComparison({
+        initialCategory: 'certificatesIssued',
+        getYearDataOptions: {
+            '2024': dummyData.fitnessData || dummyData.fitnessData2026,
+            '2025': dummyData.fitnessData,
+            '2026': dummyData.fitnessData2026,
+        }
+    });
+
+    const {
+        primaryScale,
+        compareScale,
+        primaryData,
+        comparisonDataRaw,
+        compareCategory
+    } = comparisonProps;
+
+    const scaleRow = (row, scaleFactor) => {
+        if (!row) return null;
+        const scale = (val) => Math.floor(val * scaleFactor);
+        return {
+            ...row,
+            totalTransportVehicles: scale(row.totalTransportVehicles),
+            certificatesApplied: scale(row.certificatesApplied),
+            certificatesIssued: scale(row.certificatesIssued),
+            certificatesRejected: scale(row.certificatesRejected),
+            certificatesImpounded: scale(row.certificatesImpounded),
+            feesRealised: scale(row.feesRealised),
+            lateFeeRealised: scale(row.lateFeeRealised),
+            withoutFCCasesBooked: scale(row.withoutFCCasesBooked),
+        };
+    };
+
+    const scaledPrimaryDataRaw = primaryData.map(row => scaleRow(row, primaryScale));
+    const scaledComparisonDataRaw = comparisonDataRaw.map(row => scaleRow(row, compareScale));
+
+    const scaledPrimaryData = selectedDistrict === 'All'
+        ? scaledPrimaryDataRaw
+        : scaledPrimaryDataRaw.filter(d => d.district === selectedDistrict);
+
+    const categories = [
+        { id: 'totalTransportVehicles', label: 'Total Transport Vehicles' },
+        { id: 'certificatesApplied', label: 'FC Applied' },
+        { id: 'certificatesIssued', label: 'FC Issued/Renewed' },
+        { id: 'certificatesRejected', label: 'FC Rejected' },
+        { id: 'certificatesImpounded', label: 'FC Impounded' },
+        { id: 'feesRealised', label: 'Fitness Fee Realised' },
+        { id: 'lateFeeRealised', label: 'Late Fee @₹50' },
+        { id: 'withoutFCCasesBooked', label: 'Offence Cases Booked (No CF)' }
+    ];
 
     const formatCurrency = (amount) => {
         return '₹' + amount.toLocaleString('en-IN');
@@ -92,88 +141,148 @@ const Fitness = () => {
             </div>
 
             {/* Fitness Report Table */}
-            <div className="bg-white dark:bg-gray-800 rounded-lg shadow overflow-hidden">
-                <div className="px-6 py-4 border-b border-gray-200 dark:border-gray-700">
-                    <h2 className="text-xl font-semibold text-gray-900 dark:text-white">Fitness Report District-wise</h2>
-                    <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
-                        Complete report for the selected period
-                    </p>
-                </div>
-                <div className="overflow-x-auto">
+            <ComparisonTable
+                title="Fitness Report District-wise"
+                isComparisonMode={comparisonProps.isComparisonMode}
+                setIsComparisonMode={comparisonProps.setIsComparisonMode}
+                primaryRange={comparisonProps.primaryRange}
+                setPrimaryRange={comparisonProps.setPrimaryRange}
+                compareRange={comparisonProps.compareRange}
+                setCompareRange={comparisonProps.setCompareRange}
+                compareCategory={comparisonProps.compareCategory}
+                setCompareCategory={comparisonProps.setCompareCategory}
+                categories={categories}
+                comparisonChildren={
                     <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
-                        <thead className="bg-gray-50 dark:bg-gray-700">
+                        <thead className="bg-gray-100 dark:bg-gray-800 text-xs font-bold uppercase text-gray-700 dark:text-gray-300">
                             <tr>
-                                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
-                                    Sl No
-                                </th>
-                                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
-                                    Name of District
-                                </th>
-                                <th scope="col" className="px-6 py-3 text-right text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
-                                    Total Transport Vehicles
-                                </th>
-                                <th scope="col" className="px-6 py-3 text-right text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
-                                    FC Applied
-                                </th>
-                                <th scope="col" className="px-6 py-3 text-right text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
-                                    FC Issued/Renewed
-                                </th>
-                                <th scope="col" className="px-6 py-3 text-right text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
-                                    FC Rejected
-                                </th>
-                                <th scope="col" className="px-6 py-3 text-right text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
-                                    FC Impounded
-                                </th>
-                                <th scope="col" className="px-6 py-3 text-right text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
-                                    Fitness Fee Realised
-                                </th>
-                                <th scope="col" className="px-6 py-3 text-right text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
-                                    Late Fee @₹50
-                                </th>
-                                <th scope="col" className="px-6 py-3 text-right text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
-                                    Offence Cases Booked (No CF)
-                                </th>
+                                <th className="px-6 py-4 text-left border-b border-gray-200 dark:border-gray-700">No.</th>
+                                <th className="px-6 py-4 text-left border-b border-gray-200 dark:border-gray-700">Name of District</th>
+                                <th className="px-6 py-4 text-right border-b border-gray-200 dark:border-gray-700">Selected Period</th>
+                                <th className="px-6 py-4 text-right border-b border-gray-200 dark:border-gray-700">Comparison Period</th>
+                                <th className="px-6 py-4 text-right border-b border-gray-200 dark:border-gray-700">Variance</th>
+                                <th className="px-6 py-4 text-right border-b border-gray-200 dark:border-gray-700">Trend</th>
                             </tr>
                         </thead>
-                        <tbody className="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
-                            {filteredData.map((row, idx) => (
-                                <tr key={row.district} className={`hover:bg-gray-50 dark:hover:bg-gray-700 ${idx % 2 === 0 ? 'bg-white dark:bg-gray-800' : 'bg-gray-50 dark:bg-gray-800/50'}`}>
-                                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">
-                                        {idx + 1}
-                                    </td>
-                                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-white">
-                                        {row.district}
-                                    </td>
-                                    <td className="px-6 py-4 whitespace-nowrap text-sm text-right text-gray-900 dark:text-gray-300">
-                                        {row.totalTransportVehicles.toLocaleString()}
-                                    </td>
-                                    <td className="px-6 py-4 whitespace-nowrap text-sm text-right text-blue-600 dark:text-blue-400">
-                                        {row.certificatesApplied.toLocaleString()}
-                                    </td>
-                                    <td className="px-6 py-4 whitespace-nowrap text-sm text-right text-green-600 dark:text-green-400 font-medium">
-                                        {row.certificatesIssued.toLocaleString()}
-                                    </td>
-                                    <td className="px-6 py-4 whitespace-nowrap text-sm text-right text-red-600 dark:text-red-400">
-                                        {row.certificatesRejected}
-                                    </td>
-                                    <td className="px-6 py-4 whitespace-nowrap text-sm text-right text-orange-600 dark:text-orange-400">
-                                        {row.certificatesImpounded}
-                                    </td>
-                                    <td className="px-6 py-4 whitespace-nowrap text-sm text-right text-purple-600 dark:text-purple-400 font-medium">
-                                        {formatCurrency(row.feesRealised)}
-                                    </td>
-                                    <td className="px-6 py-4 whitespace-nowrap text-sm text-right text-yellow-600 dark:text-yellow-400">
-                                        {formatCurrency(row.lateFeeRealised)}
-                                    </td>
-                                    <td className="px-6 py-4 whitespace-nowrap text-sm text-right text-red-600 dark:text-red-400 font-medium">
-                                        {row.withoutFCCasesBooked}
-                                    </td>
-                                </tr>
-                            ))}
+                        <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
+                            {scaledPrimaryData.map((rowPrimary, idx) => {
+                                const rowComparison = scaledComparisonDataRaw?.find(d => d.district === rowPrimary.district);
+                                
+                                const valPrimary = rowPrimary[compareCategory] || 0;
+                                const valComparison = rowComparison ? rowComparison[compareCategory] || 0 : 0;
+                                
+                                const variance = valComparison - valPrimary;
+                                const variancePct = valPrimary === 0 ? 0 : (variance / valPrimary) * 100;
+                                
+                                const isPositive = variance > 0;
+                                const isNegative = variance < 0;
+                                
+                                const isCurrency = ['feesRealised', 'lateFeeRealised'].includes(compareCategory);
+                                
+                                return (
+                                    <tr key={rowPrimary.district} className={idx % 2 === 0 ? 'bg-white dark:bg-gray-800' : 'bg-gray-50 dark:bg-gray-900/40'}>
+                                        <td className="px-6 py-4 text-sm text-gray-500 dark:text-gray-400">
+                                            {idx + 1}
+                                        </td>
+                                        <td className="px-6 py-4 text-sm font-medium text-gray-900 dark:text-white">
+                                            {rowPrimary.district}
+                                        </td>
+                                        <td className="px-6 py-4 text-right text-sm text-gray-600 dark:text-gray-400">
+                                            {isCurrency ? formatCurrency(valPrimary) : valPrimary.toLocaleString()}
+                                        </td>
+                                        <td className="px-6 py-4 text-right text-sm text-gray-900 dark:text-white font-semibold">
+                                            {isCurrency ? formatCurrency(valComparison) : valComparison.toLocaleString()}
+                                        </td>
+                                        <td className={`px-6 py-4 text-right text-sm font-bold ${isPositive ? 'text-green-600 dark:text-green-400' : isNegative ? 'text-red-600 dark:text-red-400' : 'text-gray-600 dark:text-gray-400'}`}>
+                                            {isPositive ? '+' : ''}{isCurrency ? formatCurrency(variance) : variance.toLocaleString()}
+                                        </td>
+                                        <td className={`px-6 py-4 text-right text-sm font-bold ${isPositive ? 'text-green-600 dark:text-green-400' : isNegative ? 'text-red-600 dark:text-red-400' : 'text-gray-600 dark:text-gray-400'}`}>
+                                            <div className="flex items-center justify-end gap-1">
+                                                {isPositive && <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>}
+                                                {isNegative && <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 17h8m0 0v-8m0 8l-8-8-4 4-6-6"></path></svg>}
+                                                {isPositive ? '+' : ''}{variancePct.toFixed(1)}%
+                                            </div>
+                                        </td>
+                                    </tr>
+                                );
+                            })}
                         </tbody>
                     </table>
-                </div>
-            </div>
+                }
+            >
+                <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+                    <thead className="bg-gray-50 dark:bg-gray-700">
+                        <tr>
+                            <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                                Sl No
+                            </th>
+                            <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                                Name of District
+                            </th>
+                            <th scope="col" className="px-6 py-3 text-right text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                                Total Transport Vehicles
+                            </th>
+                            <th scope="col" className="px-6 py-3 text-right text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                                FC Applied
+                            </th>
+                            <th scope="col" className="px-6 py-3 text-right text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                                FC Issued/Renewed
+                            </th>
+                            <th scope="col" className="px-6 py-3 text-right text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                                FC Rejected
+                            </th>
+                            <th scope="col" className="px-6 py-3 text-right text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                                FC Impounded
+                            </th>
+                            <th scope="col" className="px-6 py-3 text-right text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                                Fitness Fee Realised
+                            </th>
+                            <th scope="col" className="px-6 py-3 text-right text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                                Late Fee @₹50
+                            </th>
+                            <th scope="col" className="px-6 py-3 text-right text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                                Offence Cases Booked (No CF)
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody className="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
+                        {scaledPrimaryData.map((row, idx) => (
+                            <tr key={row.district} className={`hover:bg-gray-50 dark:hover:bg-gray-700 ${idx % 2 === 0 ? 'bg-white dark:bg-gray-800' : 'bg-gray-50 dark:bg-gray-800/50'}`}>
+                                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">
+                                    {idx + 1}
+                                </td>
+                                <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-white">
+                                    {row.district}
+                                </td>
+                                <td className="px-6 py-4 whitespace-nowrap text-sm text-right text-gray-900 dark:text-gray-300">
+                                    {row.totalTransportVehicles.toLocaleString()}
+                                </td>
+                                <td className="px-6 py-4 whitespace-nowrap text-sm text-right text-blue-600 dark:text-blue-400">
+                                    {row.certificatesApplied.toLocaleString()}
+                                </td>
+                                <td className="px-6 py-4 whitespace-nowrap text-sm text-right text-green-600 dark:text-green-400 font-medium">
+                                    {row.certificatesIssued.toLocaleString()}
+                                </td>
+                                <td className="px-6 py-4 whitespace-nowrap text-sm text-right text-red-600 dark:text-red-400">
+                                    {row.certificatesRejected}
+                                </td>
+                                <td className="px-6 py-4 whitespace-nowrap text-sm text-right text-orange-600 dark:text-orange-400">
+                                    {row.certificatesImpounded}
+                                </td>
+                                <td className="px-6 py-4 whitespace-nowrap text-sm text-right text-purple-600 dark:text-purple-400 font-medium">
+                                    {formatCurrency(row.feesRealised)}
+                                </td>
+                                <td className="px-6 py-4 whitespace-nowrap text-sm text-right text-yellow-600 dark:text-yellow-400">
+                                    {formatCurrency(row.lateFeeRealised)}
+                                </td>
+                                <td className="px-6 py-4 whitespace-nowrap text-sm text-right text-red-600 dark:text-red-400 font-medium">
+                                    {row.withoutFCCasesBooked}
+                                </td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            </ComparisonTable>
         </div>
     );
 };

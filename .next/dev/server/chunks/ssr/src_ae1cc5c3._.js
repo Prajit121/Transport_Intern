@@ -9,6 +9,20 @@ __turbopack_context__.s([
     ()=>congestionLevels,
     "default",
     ()=>__TURBOPACK__default__export__,
+    "districtWiseRevenue",
+    ()=>districtWiseRevenue,
+    "districtWiseRevenue2023",
+    ()=>districtWiseRevenue2023,
+    "districtWiseRevenue2024",
+    ()=>districtWiseRevenue2024,
+    "districtWiseRevenue2026",
+    ()=>districtWiseRevenue2026,
+    "districtWiseVehicles",
+    ()=>districtWiseVehicles,
+    "districtWiseVehicles2024",
+    ()=>districtWiseVehicles2024,
+    "districtWiseVehicles2026",
+    ()=>districtWiseVehicles2026,
     "enforcementData",
     ()=>enforcementData,
     "fitnessData",
@@ -33,16 +47,22 @@ __turbopack_context__.s([
     ()=>puccData,
     "reassignmentRevenue",
     ()=>reassignmentRevenue,
+    "registrationApplicationsData",
+    ()=>registrationApplicationsData,
     "renewalRevenue",
     ()=>renewalRevenue,
     "revenueCollection",
     ()=>revenueCollection,
+    "revenueCollection2026",
+    ()=>revenueCollection2026,
     "roadMaintenance",
     ()=>roadMaintenance,
     "trafficIncidents",
     ()=>trafficIncidents,
     "vehicleRegistrations",
-    ()=>vehicleRegistrations
+    ()=>vehicleRegistrations,
+    "vehicleRegistrations2026",
+    ()=>vehicleRegistrations2026
 ]);
 // Dummy data for Transport Department Statistics Dashboard
 // Monthly data for Jan-Dec 2025
@@ -61,13 +81,35 @@ const months = [
     'Dec'
 ];
 const vehicleRegistrations = months.map((month, index)=>{
-    // Seasonal variations: higher in spring/summer, lower in winter
     const seasonalFactor = index < 2 || index > 9 ? 0.85 : index < 5 ? 1.15 : 1.0;
+    const twoWheeler = Math.floor((1500 + Math.random() * 500) * seasonalFactor);
+    const threeWheeler = Math.floor((300 + Math.random() * 100) * seasonalFactor);
+    const cars = Math.floor((1200 + Math.random() * 300) * seasonalFactor);
+    const others = Math.floor((200 + Math.random() * 100) * seasonalFactor);
     return {
         month,
-        cars: Math.floor((1200 + Math.random() * 300) * seasonalFactor),
-        bikes: Math.floor((800 + Math.random() * 200) * seasonalFactor * 1.2),
-        trucks: Math.floor((200 + Math.random() * 100) * seasonalFactor * 0.9)
+        twoWheeler,
+        threeWheeler,
+        cars,
+        others,
+        nonTransport: Math.floor((cars + twoWheeler) * 0.9 + others * 0.2),
+        transport: Math.floor((cars + twoWheeler) * 0.1 + threeWheeler + others * 0.8)
+    };
+});
+const vehicleRegistrations2026 = months.map((month, index)=>{
+    const seasonalFactor = (index < 2 || index > 9 ? 0.85 : index < 5 ? 1.15 : 1.0) * 1.12; // 12% growth
+    const twoWheeler = Math.floor((1500 + Math.random() * 500) * seasonalFactor);
+    const threeWheeler = Math.floor((300 + Math.random() * 100) * seasonalFactor);
+    const cars = Math.floor((1200 + Math.random() * 300) * seasonalFactor);
+    const others = Math.floor((200 + Math.random() * 100) * seasonalFactor);
+    return {
+        month,
+        twoWheeler,
+        threeWheeler,
+        cars,
+        others,
+        nonTransport: Math.floor((cars + twoWheeler) * 0.9 + others * 0.2),
+        transport: Math.floor((cars + twoWheeler) * 0.1 + threeWheeler + others * 0.8)
     };
 });
 const trafficIncidents = months.map((month, index)=>{
@@ -140,6 +182,30 @@ const revenueCollection = months.map((month, index)=>{
         cfDelayFine: Math.floor((28000 + Math.random() * 7000) * revenueFactor),
         fitnessCF: Math.floor((18000 + Math.random() * 5000) * revenueFactor),
         // Other Fees
+        puccLateFine: Math.floor((15000 + Math.random() * 4000) * revenueFactor),
+        otherLateFees: Math.floor((22000 + Math.random() * 6000) * revenueFactor),
+        apgt: Math.floor((38000 + Math.random() * 9000) * revenueFactor),
+        hsrp: Math.floor((52000 + Math.random() * 12000) * revenueFactor)
+    };
+});
+const revenueCollection2026 = months.map((month, index)=>{
+    const revenueFactor = (index > 2 && index < 6 ? 1.2 : index > 8 ? 0.9 : 1.0) * 1.15; // 15% increase
+    return {
+        month,
+        mvTaxNonTransport: Math.floor((450000 + Math.random() * 100000) * revenueFactor),
+        mvTaxTransport: Math.floor((280000 + Math.random() * 60000) * revenueFactor),
+        mvTaxNewRegistration: Math.floor((320000 + Math.random() * 80000) * revenueFactor),
+        mvTaxFromRegistered: Math.floor((180000 + Math.random() * 40000) * revenueFactor),
+        mvFeesSarathi: Math.floor((45000 + Math.random() * 10000) * revenueFactor),
+        mvFeesVahan: Math.floor((65000 + Math.random() * 15000) * revenueFactor),
+        mvFeesPUCC: Math.floor((35000 + Math.random() * 8000) * revenueFactor),
+        roadSafetyCessNonTransport: Math.floor((120000 + Math.random() * 30000) * revenueFactor),
+        roadSafetyCessTransport: Math.floor((85000 + Math.random() * 20000) * revenueFactor),
+        greenTaxNonTransport: Math.floor((95000 + Math.random() * 20000) * revenueFactor),
+        greenTaxTransport: Math.floor((72000 + Math.random() * 15000) * revenueFactor),
+        cfOffence: Math.floor((42000 + Math.random() * 10000) * revenueFactor),
+        cfDelayFine: Math.floor((28000 + Math.random() * 7000) * revenueFactor),
+        fitnessCF: Math.floor((18000 + Math.random() * 5000) * revenueFactor),
         puccLateFine: Math.floor((15000 + Math.random() * 4000) * revenueFactor),
         otherLateFees: Math.floor((22000 + Math.random() * 6000) * revenueFactor),
         apgt: Math.floor((38000 + Math.random() * 9000) * revenueFactor),
@@ -531,14 +597,16 @@ const vehicleCategories = [
 const puccData = assamDistricts.flatMap((district)=>{
     return vehicleCategories.map((category)=>{
         const totalApplications = Math.floor(Math.random() * 500) + 100;
+        const totalVehicles = Math.floor(totalApplications * (1.2 + Math.random() * 0.4)); // More vehicles than apps
         const freshWithoutLateFee = Math.floor(totalApplications * (0.4 + Math.random() * 0.2));
         const freshWithLateFee = Math.floor(totalApplications * (0.2 + Math.random() * 0.15));
         const grandTotal = freshWithoutLateFee + freshWithLateFee;
-        const feesRealized = grandTotal * (Math.floor(Math.random() * 200) + 100); // ₹100-300 per PUCC
-        const lateFeeRealized = freshWithLateFee * 500; // ₹500 late fee per certificate
+        const feesRealized = grandTotal * (Math.floor(Math.random() * 200) + 100);
+        const lateFeeRealized = freshWithLateFee * 500;
         return {
             district: district,
             vehicleCategory: category,
+            totalVehicles: totalVehicles,
             totalApplications: totalApplications,
             freshWithoutLateFee: freshWithoutLateFee,
             freshWithLateFee: freshWithLateFee,
@@ -603,14 +671,218 @@ const enforcementData = assamDistricts.flatMap((district)=>{
         };
     });
 });
+const districtWiseRevenue = assamDistricts.map((district)=>{
+    const factor = 0.5 + Math.random(); // Varied performance by district
+    return {
+        district,
+        mvTax: {
+            nonTransport: Math.floor(1200000 * factor),
+            newReg: Math.floor(850000 * factor),
+            alreadyReg: Math.floor(450000 * factor)
+        },
+        mvFees: {
+            sarathi: Math.floor(150000 * factor),
+            vahan: Math.floor(220000 * factor),
+            pucc: Math.floor(80000 * factor)
+        },
+        roadSafetyCess: {
+            nonTransport: Math.floor(350000 * factor),
+            transport: Math.floor(250000 * factor)
+        },
+        greenTax: {
+            nonTransport: Math.floor(180000 * factor),
+            transport: Math.floor(120000 * factor)
+        },
+        compoundingFees: {
+            offenceCF: Math.floor(95000 * factor),
+            perDayCF: Math.floor(45000 * factor),
+            fitnessCF: Math.floor(35000 * factor),
+            puccLateFine: Math.floor(25000 * factor),
+            otherLateFees: Math.floor(15000 * factor)
+        },
+        apgt: Math.floor(110000 * factor),
+        hsrp: Math.floor(140000 * factor)
+    };
+});
+const districtWiseRevenue2024 = assamDistricts.map((district)=>{
+    const factor = 0.5 + Math.random(); // Varied performance by district
+    const growth = 1 + (Math.random() * 0.2 - 0.2); // -20% to 0% growth
+    return {
+        district,
+        mvTax: {
+            nonTransport: Math.floor(1200000 * factor * growth),
+            newReg: Math.floor(850000 * factor * growth),
+            alreadyReg: Math.floor(450000 * factor * growth)
+        },
+        mvFees: {
+            sarathi: Math.floor(150000 * factor * growth),
+            vahan: Math.floor(220000 * factor * growth),
+            pucc: Math.floor(80000 * factor * growth)
+        },
+        roadSafetyCess: {
+            nonTransport: Math.floor(350000 * factor * growth),
+            transport: Math.floor(250000 * factor * growth)
+        },
+        greenTax: {
+            nonTransport: Math.floor(180000 * factor * growth),
+            transport: Math.floor(120000 * factor * growth)
+        },
+        compoundingFees: {
+            offenceCF: Math.floor(95000 * factor * growth),
+            perDayCF: Math.floor(45000 * factor * growth),
+            fitnessCF: Math.floor(35000 * factor * growth),
+            puccLateFine: Math.floor(25000 * factor * growth),
+            otherLateFees: Math.floor(15000 * factor * growth)
+        },
+        apgt: Math.floor(110000 * factor * growth),
+        hsrp: Math.floor(140000 * factor * growth)
+    };
+});
+const districtWiseRevenue2023 = assamDistricts.map((district)=>{
+    const factor = 0.5 + Math.random(); // Varied performance by district
+    const growth = 1 + (Math.random() * 0.2 - 0.4); // -40% to -20% growth
+    return {
+        district,
+        mvTax: {
+            nonTransport: Math.floor(1200000 * factor * growth),
+            newReg: Math.floor(850000 * factor * growth),
+            alreadyReg: Math.floor(450000 * factor * growth)
+        },
+        mvFees: {
+            sarathi: Math.floor(150000 * factor * growth),
+            vahan: Math.floor(220000 * factor * growth),
+            pucc: Math.floor(80000 * factor * growth)
+        },
+        roadSafetyCess: {
+            nonTransport: Math.floor(350000 * factor * growth),
+            transport: Math.floor(250000 * factor * growth)
+        },
+        greenTax: {
+            nonTransport: Math.floor(180000 * factor * growth),
+            transport: Math.floor(120000 * factor * growth)
+        },
+        compoundingFees: {
+            offenceCF: Math.floor(95000 * factor * growth),
+            perDayCF: Math.floor(45000 * factor * growth),
+            fitnessCF: Math.floor(35000 * factor * growth),
+            puccLateFine: Math.floor(25000 * factor * growth),
+            otherLateFees: Math.floor(15000 * factor * growth)
+        },
+        apgt: Math.floor(110000 * factor * growth),
+        hsrp: Math.floor(140000 * factor * growth)
+    };
+});
+const districtWiseRevenue2026 = assamDistricts.map((district)=>{
+    const factor = 0.5 + Math.random(); // Varied performance by district
+    const growth = 1 + (Math.random() * 0.4 - 0.1); // -10% to +30% growth
+    return {
+        district,
+        mvTax: {
+            nonTransport: Math.floor(1200000 * factor * growth),
+            newReg: Math.floor(850000 * factor * growth),
+            alreadyReg: Math.floor(450000 * factor * growth)
+        },
+        mvFees: {
+            sarathi: Math.floor(150000 * factor * growth),
+            vahan: Math.floor(220000 * factor * growth),
+            pucc: Math.floor(80000 * factor * growth)
+        },
+        roadSafetyCess: {
+            nonTransport: Math.floor(350000 * factor * growth),
+            transport: Math.floor(250000 * factor * growth)
+        },
+        greenTax: {
+            nonTransport: Math.floor(180000 * factor * growth),
+            transport: Math.floor(120000 * factor * growth)
+        },
+        compoundingFees: {
+            offenceCF: Math.floor(95000 * factor * growth),
+            perDayCF: Math.floor(45000 * factor * growth),
+            fitnessCF: Math.floor(35000 * factor * growth),
+            puccLateFine: Math.floor(25000 * factor * growth),
+            otherLateFees: Math.floor(15000 * factor * growth)
+        },
+        apgt: Math.floor(110000 * factor * growth),
+        hsrp: Math.floor(140000 * factor * growth)
+    };
+});
+const districtWiseVehicles = assamDistricts.map((district)=>{
+    const factor = 0.5 + Math.random();
+    const twoWheeler = Math.floor(2500 * factor);
+    const threeWheeler = Math.floor(600 * factor);
+    const nonTransport = Math.floor(2800 * factor);
+    const transport = Math.floor(1200 * factor);
+    const total = nonTransport + transport;
+    return {
+        district,
+        total,
+        nonTransport,
+        transport,
+        twoWheeler,
+        threeWheeler
+    };
+});
+const districtWiseVehicles2024 = assamDistricts.map((district)=>{
+    const factor = 0.5 + Math.random();
+    const growth = 1 + (Math.random() * 0.2 - 0.2); // -20% to 0% growth
+    const twoWheeler = Math.floor(2500 * factor * growth);
+    const threeWheeler = Math.floor(600 * factor * growth);
+    const nonTransport = Math.floor(2800 * factor * growth);
+    const transport = Math.floor(1200 * factor * growth);
+    const total = nonTransport + transport;
+    return {
+        district,
+        total,
+        nonTransport,
+        transport,
+        twoWheeler,
+        threeWheeler
+    };
+});
+const districtWiseVehicles2026 = assamDistricts.map((district)=>{
+    const factor = 0.5 + Math.random();
+    const growth = 1 + (Math.random() * 0.4 - 0.1); // -10% to +30% growth
+    const twoWheeler = Math.floor(2500 * factor * growth);
+    const threeWheeler = Math.floor(600 * factor * growth);
+    const nonTransport = Math.floor(2800 * factor * growth);
+    const transport = Math.floor(1200 * factor * growth);
+    const total = nonTransport + transport;
+    return {
+        district,
+        total,
+        nonTransport,
+        transport,
+        twoWheeler,
+        threeWheeler
+    };
+});
+const registrationApplicationsData = assamDistricts.map((district)=>{
+    const totalReceived = Math.floor(Math.random() * 800) + 200;
+    const dealerPoint = Math.floor(totalReceived * (0.85 + Math.random() * 0.1));
+    const dtoOffice = totalReceived - dealerPoint;
+    const approved = Math.floor(totalReceived * (0.75 + Math.random() * 0.2));
+    const scrutiny = Math.floor((totalReceived - approved) * 0.6);
+    const approvalStage = totalReceived - approved - scrutiny;
+    return {
+        district,
+        totalReceived,
+        dealerPoint,
+        dtoOffice,
+        scrutiny,
+        approvalStage,
+        approved
+    };
+});
 const __TURBOPACK__default__export__ = {
     vehicleRegistrations,
+    vehicleRegistrations2026,
     trafficIncidents,
     publicTransportRidership,
     congestionLevels,
     fuelEfficiency,
     roadMaintenance,
     revenueCollection,
+    revenueCollection2026,
     newRegistrationRevenue,
     newRegistrationTransportRevenue,
     newReg4WheelerSplit,
@@ -622,7 +894,15 @@ const __TURBOPACK__default__export__ = {
     aetsData,
     puccData,
     fitnessData,
-    enforcementData
+    enforcementData,
+    districtWiseRevenue,
+    districtWiseRevenue2023,
+    districtWiseRevenue2024,
+    districtWiseRevenue2026,
+    districtWiseVehicles,
+    districtWiseVehicles2024,
+    districtWiseVehicles2026,
+    registrationApplicationsData
 };
  // Future CSV import function (commented out for now)
  // import Papa from 'papaparse';
@@ -675,8 +955,8 @@ const DateFilter = ({ onFilterChange })=>{
             name: 'Last Month'
         },
         {
-            id: 'all',
-            name: 'All Time'
+            id: 'lastYear',
+            name: 'Last Year'
         }
     ];
     const handlePresetClick = (presetId)=>{
@@ -704,7 +984,7 @@ const DateFilter = ({ onFilterChange })=>{
                 start = `${year}-02-01`;
                 end = `${year}-02-28`;
                 break;
-            case 'all':
+            case 'lastYear':
                 start = '2025-01-01';
                 end = '2025-12-31';
                 break;
@@ -865,7 +1145,8 @@ const PUCC = ()=>{
             totalApplications: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$data$2f$dummyData$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"].puccData.reduce((sum, d)=>sum + d.totalApplications, 0),
             totalPUCCs: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$data$2f$dummyData$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"].puccData.reduce((sum, d)=>sum + d.grandTotal, 0),
             totalFees: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$data$2f$dummyData$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"].puccData.reduce((sum, d)=>sum + d.feesRealized, 0),
-            totalLateFees: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$data$2f$dummyData$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"].puccData.reduce((sum, d)=>sum + d.lateFeeRealized, 0)
+            totalLateFees: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$data$2f$dummyData$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"].puccData.reduce((sum, d)=>sum + d.lateFeeRealized, 0),
+            totalDefaulters: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$data$2f$dummyData$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"].puccData.reduce((sum, d)=>sum + (d.totalVehicles - d.grandTotal), 0)
         };
     }, []);
     // Get unique values for filters
@@ -903,7 +1184,7 @@ const PUCC = ()=>{
                         children: "PUCC Management"
                     }, void 0, false, {
                         fileName: "[project]/src/components/PUCC.js",
-                        lineNumber: 53,
+                        lineNumber: 54,
                         columnNumber: 17
                     }, ("TURBOPACK compile-time value", void 0)),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -911,24 +1192,24 @@ const PUCC = ()=>{
                         children: "Pollution Under Control Certificate details vehicle class-wise"
                     }, void 0, false, {
                         fileName: "[project]/src/components/PUCC.js",
-                        lineNumber: 54,
+                        lineNumber: 55,
                         columnNumber: 17
                     }, ("TURBOPACK compile-time value", void 0))
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/components/PUCC.js",
-                lineNumber: 52,
+                lineNumber: 53,
                 columnNumber: 13
             }, ("TURBOPACK compile-time value", void 0)),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$DateFilter$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
                 onFilterChange: ()=>{}
             }, void 0, false, {
                 fileName: "[project]/src/components/PUCC.js",
-                lineNumber: 57,
+                lineNumber: 58,
                 columnNumber: 13
             }, ("TURBOPACK compile-time value", void 0)),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                className: "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6",
+                className: "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6",
                 children: [
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                         className: "bg-white dark:bg-gray-800 rounded-lg shadow p-6",
@@ -938,7 +1219,7 @@ const PUCC = ()=>{
                                 children: "Total Applications"
                             }, void 0, false, {
                                 fileName: "[project]/src/components/PUCC.js",
-                                lineNumber: 62,
+                                lineNumber: 63,
                                 columnNumber: 21
                             }, ("TURBOPACK compile-time value", void 0)),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -946,7 +1227,7 @@ const PUCC = ()=>{
                                 children: totals.totalApplications.toLocaleString()
                             }, void 0, false, {
                                 fileName: "[project]/src/components/PUCC.js",
-                                lineNumber: 63,
+                                lineNumber: 64,
                                 columnNumber: 21
                             }, ("TURBOPACK compile-time value", void 0)),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -954,13 +1235,46 @@ const PUCC = ()=>{
                                 children: "Received at AETS"
                             }, void 0, false, {
                                 fileName: "[project]/src/components/PUCC.js",
-                                lineNumber: 64,
+                                lineNumber: 65,
                                 columnNumber: 21
                             }, ("TURBOPACK compile-time value", void 0))
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/components/PUCC.js",
-                        lineNumber: 61,
+                        lineNumber: 62,
+                        columnNumber: 17
+                    }, ("TURBOPACK compile-time value", void 0)),
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                        className: "bg-white dark:bg-gray-800 rounded-lg shadow p-6 border-l-4 border-yellow-500",
+                        children: [
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
+                                className: "text-sm font-medium text-gray-500 dark:text-gray-400",
+                                children: "Total Defaulters"
+                            }, void 0, false, {
+                                fileName: "[project]/src/components/PUCC.js",
+                                lineNumber: 68,
+                                columnNumber: 21
+                            }, ("TURBOPACK compile-time value", void 0)),
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                                className: "text-3xl font-bold text-yellow-600 dark:text-yellow-400 mt-2",
+                                children: totals.totalDefaulters.toLocaleString()
+                            }, void 0, false, {
+                                fileName: "[project]/src/components/PUCC.js",
+                                lineNumber: 69,
+                                columnNumber: 21
+                            }, ("TURBOPACK compile-time value", void 0)),
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                                className: "text-xs text-gray-500 dark:text-gray-400 mt-1",
+                                children: "Pending PUCC renewals"
+                            }, void 0, false, {
+                                fileName: "[project]/src/components/PUCC.js",
+                                lineNumber: 70,
+                                columnNumber: 21
+                            }, ("TURBOPACK compile-time value", void 0))
+                        ]
+                    }, void 0, true, {
+                        fileName: "[project]/src/components/PUCC.js",
+                        lineNumber: 67,
                         columnNumber: 17
                     }, ("TURBOPACK compile-time value", void 0)),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -971,7 +1285,7 @@ const PUCC = ()=>{
                                 children: "Total PUCCs Issued"
                             }, void 0, false, {
                                 fileName: "[project]/src/components/PUCC.js",
-                                lineNumber: 67,
+                                lineNumber: 73,
                                 columnNumber: 21
                             }, ("TURBOPACK compile-time value", void 0)),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -979,7 +1293,7 @@ const PUCC = ()=>{
                                 children: totals.totalPUCCs.toLocaleString()
                             }, void 0, false, {
                                 fileName: "[project]/src/components/PUCC.js",
-                                lineNumber: 68,
+                                lineNumber: 74,
                                 columnNumber: 21
                             }, ("TURBOPACK compile-time value", void 0)),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -987,13 +1301,13 @@ const PUCC = ()=>{
                                 children: "All categories"
                             }, void 0, false, {
                                 fileName: "[project]/src/components/PUCC.js",
-                                lineNumber: 69,
+                                lineNumber: 75,
                                 columnNumber: 21
                             }, ("TURBOPACK compile-time value", void 0))
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/components/PUCC.js",
-                        lineNumber: 66,
+                        lineNumber: 72,
                         columnNumber: 17
                     }, ("TURBOPACK compile-time value", void 0)),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1004,7 +1318,7 @@ const PUCC = ()=>{
                                 children: "PUCC Fees Realized"
                             }, void 0, false, {
                                 fileName: "[project]/src/components/PUCC.js",
-                                lineNumber: 72,
+                                lineNumber: 78,
                                 columnNumber: 21
                             }, ("TURBOPACK compile-time value", void 0)),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -1012,7 +1326,7 @@ const PUCC = ()=>{
                                 children: formatCurrency(totals.totalFees)
                             }, void 0, false, {
                                 fileName: "[project]/src/components/PUCC.js",
-                                lineNumber: 73,
+                                lineNumber: 79,
                                 columnNumber: 21
                             }, ("TURBOPACK compile-time value", void 0)),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -1020,13 +1334,13 @@ const PUCC = ()=>{
                                 children: "Total revenue"
                             }, void 0, false, {
                                 fileName: "[project]/src/components/PUCC.js",
-                                lineNumber: 74,
+                                lineNumber: 80,
                                 columnNumber: 21
                             }, ("TURBOPACK compile-time value", void 0))
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/components/PUCC.js",
-                        lineNumber: 71,
+                        lineNumber: 77,
                         columnNumber: 17
                     }, ("TURBOPACK compile-time value", void 0)),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1037,7 +1351,7 @@ const PUCC = ()=>{
                                 children: "Late Fees @₹500"
                             }, void 0, false, {
                                 fileName: "[project]/src/components/PUCC.js",
-                                lineNumber: 77,
+                                lineNumber: 83,
                                 columnNumber: 21
                             }, ("TURBOPACK compile-time value", void 0)),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -1045,7 +1359,7 @@ const PUCC = ()=>{
                                 children: formatCurrency(totals.totalLateFees)
                             }, void 0, false, {
                                 fileName: "[project]/src/components/PUCC.js",
-                                lineNumber: 78,
+                                lineNumber: 84,
                                 columnNumber: 21
                             }, ("TURBOPACK compile-time value", void 0)),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -1053,19 +1367,19 @@ const PUCC = ()=>{
                                 children: "From delayed renewals"
                             }, void 0, false, {
                                 fileName: "[project]/src/components/PUCC.js",
-                                lineNumber: 79,
+                                lineNumber: 85,
                                 columnNumber: 21
                             }, ("TURBOPACK compile-time value", void 0))
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/components/PUCC.js",
-                        lineNumber: 76,
+                        lineNumber: 82,
                         columnNumber: 17
                     }, ("TURBOPACK compile-time value", void 0))
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/components/PUCC.js",
-                lineNumber: 60,
+                lineNumber: 61,
                 columnNumber: 13
             }, ("TURBOPACK compile-time value", void 0)),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1076,7 +1390,7 @@ const PUCC = ()=>{
                         children: "Filters"
                     }, void 0, false, {
                         fileName: "[project]/src/components/PUCC.js",
-                        lineNumber: 85,
+                        lineNumber: 91,
                         columnNumber: 17
                     }, ("TURBOPACK compile-time value", void 0)),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1089,7 +1403,7 @@ const PUCC = ()=>{
                                         children: "District"
                                     }, void 0, false, {
                                         fileName: "[project]/src/components/PUCC.js",
-                                        lineNumber: 88,
+                                        lineNumber: 94,
                                         columnNumber: 25
                                     }, ("TURBOPACK compile-time value", void 0)),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("select", {
@@ -1101,18 +1415,18 @@ const PUCC = ()=>{
                                                 children: district
                                             }, district, false, {
                                                 fileName: "[project]/src/components/PUCC.js",
-                                                lineNumber: 97,
+                                                lineNumber: 103,
                                                 columnNumber: 33
                                             }, ("TURBOPACK compile-time value", void 0)))
                                     }, void 0, false, {
                                         fileName: "[project]/src/components/PUCC.js",
-                                        lineNumber: 91,
+                                        lineNumber: 97,
                                         columnNumber: 25
                                     }, ("TURBOPACK compile-time value", void 0))
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/components/PUCC.js",
-                                lineNumber: 87,
+                                lineNumber: 93,
                                 columnNumber: 21
                             }, ("TURBOPACK compile-time value", void 0)),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1122,7 +1436,7 @@ const PUCC = ()=>{
                                         children: "Vehicle Category (within expanded districts)"
                                     }, void 0, false, {
                                         fileName: "[project]/src/components/PUCC.js",
-                                        lineNumber: 102,
+                                        lineNumber: 108,
                                         columnNumber: 25
                                     }, ("TURBOPACK compile-time value", void 0)),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("select", {
@@ -1134,30 +1448,30 @@ const PUCC = ()=>{
                                                 children: category
                                             }, category, false, {
                                                 fileName: "[project]/src/components/PUCC.js",
-                                                lineNumber: 111,
+                                                lineNumber: 117,
                                                 columnNumber: 33
                                             }, ("TURBOPACK compile-time value", void 0)))
                                     }, void 0, false, {
                                         fileName: "[project]/src/components/PUCC.js",
-                                        lineNumber: 105,
+                                        lineNumber: 111,
                                         columnNumber: 25
                                     }, ("TURBOPACK compile-time value", void 0))
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/components/PUCC.js",
-                                lineNumber: 101,
+                                lineNumber: 107,
                                 columnNumber: 21
                             }, ("TURBOPACK compile-time value", void 0))
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/components/PUCC.js",
-                        lineNumber: 86,
+                        lineNumber: 92,
                         columnNumber: 17
                     }, ("TURBOPACK compile-time value", void 0))
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/components/PUCC.js",
-                lineNumber: 84,
+                lineNumber: 90,
                 columnNumber: 13
             }, ("TURBOPACK compile-time value", void 0)),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1171,7 +1485,7 @@ const PUCC = ()=>{
                                 children: "PUCC Details Vehicle Class-wise"
                             }, void 0, false, {
                                 fileName: "[project]/src/components/PUCC.js",
-                                lineNumber: 121,
+                                lineNumber: 127,
                                 columnNumber: 21
                             }, ("TURBOPACK compile-time value", void 0)),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -1179,13 +1493,13 @@ const PUCC = ()=>{
                                 children: "District-wise grouped view - Click district rows to expand/collapse"
                             }, void 0, false, {
                                 fileName: "[project]/src/components/PUCC.js",
-                                lineNumber: 122,
+                                lineNumber: 128,
                                 columnNumber: 21
                             }, ("TURBOPACK compile-time value", void 0))
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/components/PUCC.js",
-                        lineNumber: 120,
+                        lineNumber: 126,
                         columnNumber: 17
                     }, ("TURBOPACK compile-time value", void 0)),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1203,7 +1517,7 @@ const PUCC = ()=>{
                                                 children: "District / Vehicle Category"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/components/PUCC.js",
-                                                lineNumber: 130,
+                                                lineNumber: 136,
                                                 columnNumber: 33
                                             }, ("TURBOPACK compile-time value", void 0)),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
@@ -1212,7 +1526,7 @@ const PUCC = ()=>{
                                                 children: "Total Applications"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/components/PUCC.js",
-                                                lineNumber: 133,
+                                                lineNumber: 139,
                                                 columnNumber: 33
                                             }, ("TURBOPACK compile-time value", void 0)),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
@@ -1221,7 +1535,7 @@ const PUCC = ()=>{
                                                 children: "PUCC Issued on Time"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/components/PUCC.js",
-                                                lineNumber: 136,
+                                                lineNumber: 142,
                                                 columnNumber: 33
                                             }, ("TURBOPACK compile-time value", void 0)),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
@@ -1230,7 +1544,7 @@ const PUCC = ()=>{
                                                 children: "PUCC Issued with Late Fee"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/components/PUCC.js",
-                                                lineNumber: 139,
+                                                lineNumber: 145,
                                                 columnNumber: 33
                                             }, ("TURBOPACK compile-time value", void 0)),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
@@ -1239,7 +1553,7 @@ const PUCC = ()=>{
                                                 children: "Grand Total PUCC"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/components/PUCC.js",
-                                                lineNumber: 142,
+                                                lineNumber: 148,
                                                 columnNumber: 33
                                             }, ("TURBOPACK compile-time value", void 0)),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
@@ -1248,7 +1562,7 @@ const PUCC = ()=>{
                                                 children: "PUCC Fees"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/components/PUCC.js",
-                                                lineNumber: 145,
+                                                lineNumber: 151,
                                                 columnNumber: 33
                                             }, ("TURBOPACK compile-time value", void 0)),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
@@ -1257,18 +1571,18 @@ const PUCC = ()=>{
                                                 children: "Late Fee @₹500"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/components/PUCC.js",
-                                                lineNumber: 148,
+                                                lineNumber: 154,
                                                 columnNumber: 33
                                             }, ("TURBOPACK compile-time value", void 0))
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/src/components/PUCC.js",
-                                        lineNumber: 129,
+                                        lineNumber: 135,
                                         columnNumber: 29
                                     }, ("TURBOPACK compile-time value", void 0))
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/PUCC.js",
-                                    lineNumber: 128,
+                                    lineNumber: 134,
                                     columnNumber: 25
                                 }, ("TURBOPACK compile-time value", void 0)),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("tbody", {
@@ -1313,24 +1627,24 @@ const PUCC = ()=>{
                                                                             clipRule: "evenodd"
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/src/components/PUCC.js",
-                                                                            lineNumber: 189,
+                                                                            lineNumber: 195,
                                                                             columnNumber: 57
                                                                         }, ("TURBOPACK compile-time value", void 0))
                                                                     }, void 0, false, {
                                                                         fileName: "[project]/src/components/PUCC.js",
-                                                                        lineNumber: 184,
+                                                                        lineNumber: 190,
                                                                         columnNumber: 53
                                                                     }, ("TURBOPACK compile-time value", void 0)),
                                                                     district
                                                                 ]
                                                             }, void 0, true, {
                                                                 fileName: "[project]/src/components/PUCC.js",
-                                                                lineNumber: 183,
+                                                                lineNumber: 189,
                                                                 columnNumber: 49
                                                             }, ("TURBOPACK compile-time value", void 0))
                                                         }, void 0, false, {
                                                             fileName: "[project]/src/components/PUCC.js",
-                                                            lineNumber: 182,
+                                                            lineNumber: 188,
                                                             columnNumber: 45
                                                         }, ("TURBOPACK compile-time value", void 0)),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
@@ -1338,7 +1652,7 @@ const PUCC = ()=>{
                                                             children: districtTotals.totalApplications.toLocaleString()
                                                         }, void 0, false, {
                                                             fileName: "[project]/src/components/PUCC.js",
-                                                            lineNumber: 194,
+                                                            lineNumber: 200,
                                                             columnNumber: 45
                                                         }, ("TURBOPACK compile-time value", void 0)),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
@@ -1346,7 +1660,7 @@ const PUCC = ()=>{
                                                             children: districtTotals.freshWithoutLateFee.toLocaleString()
                                                         }, void 0, false, {
                                                             fileName: "[project]/src/components/PUCC.js",
-                                                            lineNumber: 197,
+                                                            lineNumber: 203,
                                                             columnNumber: 45
                                                         }, ("TURBOPACK compile-time value", void 0)),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
@@ -1354,7 +1668,7 @@ const PUCC = ()=>{
                                                             children: districtTotals.freshWithLateFee.toLocaleString()
                                                         }, void 0, false, {
                                                             fileName: "[project]/src/components/PUCC.js",
-                                                            lineNumber: 200,
+                                                            lineNumber: 206,
                                                             columnNumber: 45
                                                         }, ("TURBOPACK compile-time value", void 0)),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
@@ -1362,7 +1676,7 @@ const PUCC = ()=>{
                                                             children: districtTotals.grandTotal.toLocaleString()
                                                         }, void 0, false, {
                                                             fileName: "[project]/src/components/PUCC.js",
-                                                            lineNumber: 203,
+                                                            lineNumber: 209,
                                                             columnNumber: 45
                                                         }, ("TURBOPACK compile-time value", void 0)),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
@@ -1370,7 +1684,7 @@ const PUCC = ()=>{
                                                             children: formatCurrency(districtTotals.feesRealized)
                                                         }, void 0, false, {
                                                             fileName: "[project]/src/components/PUCC.js",
-                                                            lineNumber: 206,
+                                                            lineNumber: 212,
                                                             columnNumber: 45
                                                         }, ("TURBOPACK compile-time value", void 0)),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
@@ -1378,13 +1692,13 @@ const PUCC = ()=>{
                                                             children: formatCurrency(districtTotals.lateFeeRealized)
                                                         }, void 0, false, {
                                                             fileName: "[project]/src/components/PUCC.js",
-                                                            lineNumber: 209,
+                                                            lineNumber: 215,
                                                             columnNumber: 45
                                                         }, ("TURBOPACK compile-time value", void 0))
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/src/components/PUCC.js",
-                                                    lineNumber: 178,
+                                                    lineNumber: 184,
                                                     columnNumber: 41
                                                 }, ("TURBOPACK compile-time value", void 0)),
                                                 isExpanded && districtData.filter((row)=>selectedVehicleCategory === 'All' || row.vehicleCategory === selectedVehicleCategory).map((row, idx)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("tr", {
@@ -1398,7 +1712,7 @@ const PUCC = ()=>{
                                                                         children: "↳"
                                                                     }, void 0, false, {
                                                                         fileName: "[project]/src/components/PUCC.js",
-                                                                        lineNumber: 220,
+                                                                        lineNumber: 226,
                                                                         columnNumber: 57
                                                                     }, ("TURBOPACK compile-time value", void 0)),
                                                                     " ",
@@ -1406,7 +1720,7 @@ const PUCC = ()=>{
                                                                 ]
                                                             }, void 0, true, {
                                                                 fileName: "[project]/src/components/PUCC.js",
-                                                                lineNumber: 219,
+                                                                lineNumber: 225,
                                                                 columnNumber: 53
                                                             }, ("TURBOPACK compile-time value", void 0)),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
@@ -1414,7 +1728,7 @@ const PUCC = ()=>{
                                                                 children: row.totalApplications
                                                             }, void 0, false, {
                                                                 fileName: "[project]/src/components/PUCC.js",
-                                                                lineNumber: 222,
+                                                                lineNumber: 228,
                                                                 columnNumber: 53
                                                             }, ("TURBOPACK compile-time value", void 0)),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
@@ -1422,7 +1736,7 @@ const PUCC = ()=>{
                                                                 children: row.freshWithoutLateFee
                                                             }, void 0, false, {
                                                                 fileName: "[project]/src/components/PUCC.js",
-                                                                lineNumber: 225,
+                                                                lineNumber: 231,
                                                                 columnNumber: 53
                                                             }, ("TURBOPACK compile-time value", void 0)),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
@@ -1430,7 +1744,7 @@ const PUCC = ()=>{
                                                                 children: row.freshWithLateFee
                                                             }, void 0, false, {
                                                                 fileName: "[project]/src/components/PUCC.js",
-                                                                lineNumber: 228,
+                                                                lineNumber: 234,
                                                                 columnNumber: 53
                                                             }, ("TURBOPACK compile-time value", void 0)),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
@@ -1438,7 +1752,7 @@ const PUCC = ()=>{
                                                                 children: row.grandTotal
                                                             }, void 0, false, {
                                                                 fileName: "[project]/src/components/PUCC.js",
-                                                                lineNumber: 231,
+                                                                lineNumber: 237,
                                                                 columnNumber: 53
                                                             }, ("TURBOPACK compile-time value", void 0)),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
@@ -1446,7 +1760,7 @@ const PUCC = ()=>{
                                                                 children: formatCurrency(row.feesRealized)
                                                             }, void 0, false, {
                                                                 fileName: "[project]/src/components/PUCC.js",
-                                                                lineNumber: 234,
+                                                                lineNumber: 240,
                                                                 columnNumber: 53
                                                             }, ("TURBOPACK compile-time value", void 0)),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
@@ -1454,48 +1768,48 @@ const PUCC = ()=>{
                                                                 children: formatCurrency(row.lateFeeRealized)
                                                             }, void 0, false, {
                                                                 fileName: "[project]/src/components/PUCC.js",
-                                                                lineNumber: 237,
+                                                                lineNumber: 243,
                                                                 columnNumber: 53
                                                             }, ("TURBOPACK compile-time value", void 0))
                                                         ]
                                                     }, `${district}-${row.vehicleCategory}`, true, {
                                                         fileName: "[project]/src/components/PUCC.js",
-                                                        lineNumber: 218,
+                                                        lineNumber: 224,
                                                         columnNumber: 49
                                                     }, ("TURBOPACK compile-time value", void 0)))
                                             ]
                                         }, district, true, {
                                             fileName: "[project]/src/components/PUCC.js",
-                                            lineNumber: 176,
+                                            lineNumber: 182,
                                             columnNumber: 37
                                         }, ("TURBOPACK compile-time value", void 0));
                                     })
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/PUCC.js",
-                                    lineNumber: 153,
+                                    lineNumber: 159,
                                     columnNumber: 25
                                 }, ("TURBOPACK compile-time value", void 0))
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/components/PUCC.js",
-                            lineNumber: 127,
+                            lineNumber: 133,
                             columnNumber: 21
                         }, ("TURBOPACK compile-time value", void 0))
                     }, void 0, false, {
                         fileName: "[project]/src/components/PUCC.js",
-                        lineNumber: 126,
+                        lineNumber: 132,
                         columnNumber: 17
                     }, ("TURBOPACK compile-time value", void 0))
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/components/PUCC.js",
-                lineNumber: 119,
+                lineNumber: 125,
                 columnNumber: 13
             }, ("TURBOPACK compile-time value", void 0))
         ]
     }, void 0, true, {
         fileName: "[project]/src/components/PUCC.js",
-        lineNumber: 50,
+        lineNumber: 51,
         columnNumber: 9
     }, ("TURBOPACK compile-time value", void 0));
 };

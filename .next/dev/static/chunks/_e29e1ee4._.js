@@ -9,6 +9,10 @@ __turbopack_context__.s([
     ()=>congestionLevels,
     "default",
     ()=>__TURBOPACK__default__export__,
+    "districtWiseRevenue",
+    ()=>districtWiseRevenue,
+    "districtWiseVehicles",
+    ()=>districtWiseVehicles,
     "enforcementData",
     ()=>enforcementData,
     "fitnessData",
@@ -33,16 +37,22 @@ __turbopack_context__.s([
     ()=>puccData,
     "reassignmentRevenue",
     ()=>reassignmentRevenue,
+    "registrationApplicationsData",
+    ()=>registrationApplicationsData,
     "renewalRevenue",
     ()=>renewalRevenue,
     "revenueCollection",
     ()=>revenueCollection,
+    "revenueCollection2026",
+    ()=>revenueCollection2026,
     "roadMaintenance",
     ()=>roadMaintenance,
     "trafficIncidents",
     ()=>trafficIncidents,
     "vehicleRegistrations",
-    ()=>vehicleRegistrations
+    ()=>vehicleRegistrations,
+    "vehicleRegistrations2026",
+    ()=>vehicleRegistrations2026
 ]);
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_define_property$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/@swc/helpers/esm/_define_property.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/@swc/helpers/esm/_type_of.js [app-client] (ecmascript)");
@@ -65,13 +75,35 @@ var months = [
     'Dec'
 ];
 var vehicleRegistrations = months.map(function(month, index) {
-    // Seasonal variations: higher in spring/summer, lower in winter
     var seasonalFactor = index < 2 || index > 9 ? 0.85 : index < 5 ? 1.15 : 1.0;
+    var twoWheeler = Math.floor((1500 + Math.random() * 500) * seasonalFactor);
+    var threeWheeler = Math.floor((300 + Math.random() * 100) * seasonalFactor);
+    var cars = Math.floor((1200 + Math.random() * 300) * seasonalFactor);
+    var others = Math.floor((200 + Math.random() * 100) * seasonalFactor);
     return {
         month: month,
-        cars: Math.floor((1200 + Math.random() * 300) * seasonalFactor),
-        bikes: Math.floor((800 + Math.random() * 200) * seasonalFactor * 1.2),
-        trucks: Math.floor((200 + Math.random() * 100) * seasonalFactor * 0.9)
+        twoWheeler: twoWheeler,
+        threeWheeler: threeWheeler,
+        cars: cars,
+        others: others,
+        nonTransport: Math.floor((cars + twoWheeler) * 0.9 + others * 0.2),
+        transport: Math.floor((cars + twoWheeler) * 0.1 + threeWheeler + others * 0.8)
+    };
+});
+var vehicleRegistrations2026 = months.map(function(month, index) {
+    var seasonalFactor = (index < 2 || index > 9 ? 0.85 : index < 5 ? 1.15 : 1.0) * 1.12; // 12% growth
+    var twoWheeler = Math.floor((1500 + Math.random() * 500) * seasonalFactor);
+    var threeWheeler = Math.floor((300 + Math.random() * 100) * seasonalFactor);
+    var cars = Math.floor((1200 + Math.random() * 300) * seasonalFactor);
+    var others = Math.floor((200 + Math.random() * 100) * seasonalFactor);
+    return {
+        month: month,
+        twoWheeler: twoWheeler,
+        threeWheeler: threeWheeler,
+        cars: cars,
+        others: others,
+        nonTransport: Math.floor((cars + twoWheeler) * 0.9 + others * 0.2),
+        transport: Math.floor((cars + twoWheeler) * 0.1 + threeWheeler + others * 0.8)
     };
 });
 var trafficIncidents = months.map(function(month, index) {
@@ -144,6 +176,30 @@ var revenueCollection = months.map(function(month, index) {
         cfDelayFine: Math.floor((28000 + Math.random() * 7000) * revenueFactor),
         fitnessCF: Math.floor((18000 + Math.random() * 5000) * revenueFactor),
         // Other Fees
+        puccLateFine: Math.floor((15000 + Math.random() * 4000) * revenueFactor),
+        otherLateFees: Math.floor((22000 + Math.random() * 6000) * revenueFactor),
+        apgt: Math.floor((38000 + Math.random() * 9000) * revenueFactor),
+        hsrp: Math.floor((52000 + Math.random() * 12000) * revenueFactor)
+    };
+});
+var revenueCollection2026 = months.map(function(month, index) {
+    var revenueFactor = (index > 2 && index < 6 ? 1.2 : index > 8 ? 0.9 : 1.0) * 1.15; // 15% increase
+    return {
+        month: month,
+        mvTaxNonTransport: Math.floor((450000 + Math.random() * 100000) * revenueFactor),
+        mvTaxTransport: Math.floor((280000 + Math.random() * 60000) * revenueFactor),
+        mvTaxNewRegistration: Math.floor((320000 + Math.random() * 80000) * revenueFactor),
+        mvTaxFromRegistered: Math.floor((180000 + Math.random() * 40000) * revenueFactor),
+        mvFeesSarathi: Math.floor((45000 + Math.random() * 10000) * revenueFactor),
+        mvFeesVahan: Math.floor((65000 + Math.random() * 15000) * revenueFactor),
+        mvFeesPUCC: Math.floor((35000 + Math.random() * 8000) * revenueFactor),
+        roadSafetyCessNonTransport: Math.floor((120000 + Math.random() * 30000) * revenueFactor),
+        roadSafetyCessTransport: Math.floor((85000 + Math.random() * 20000) * revenueFactor),
+        greenTaxNonTransport: Math.floor((95000 + Math.random() * 20000) * revenueFactor),
+        greenTaxTransport: Math.floor((72000 + Math.random() * 15000) * revenueFactor),
+        cfOffence: Math.floor((42000 + Math.random() * 10000) * revenueFactor),
+        cfDelayFine: Math.floor((28000 + Math.random() * 7000) * revenueFactor),
+        fitnessCF: Math.floor((18000 + Math.random() * 5000) * revenueFactor),
         puccLateFine: Math.floor((15000 + Math.random() * 4000) * revenueFactor),
         otherLateFees: Math.floor((22000 + Math.random() * 6000) * revenueFactor),
         apgt: Math.floor((38000 + Math.random() * 9000) * revenueFactor),
@@ -580,14 +636,16 @@ var vehicleCategories = [
 var puccData = assamDistricts.flatMap(function(district) {
     return vehicleCategories.map(function(category) {
         var totalApplications = Math.floor(Math.random() * 500) + 100;
+        var totalVehicles = Math.floor(totalApplications * (1.2 + Math.random() * 0.4)); // More vehicles than apps
         var freshWithoutLateFee = Math.floor(totalApplications * (0.4 + Math.random() * 0.2));
         var freshWithLateFee = Math.floor(totalApplications * (0.2 + Math.random() * 0.15));
         var grandTotal = freshWithoutLateFee + freshWithLateFee;
-        var feesRealized = grandTotal * (Math.floor(Math.random() * 200) + 100); // ₹100-300 per PUCC
-        var lateFeeRealized = freshWithLateFee * 500; // ₹500 late fee per certificate
+        var feesRealized = grandTotal * (Math.floor(Math.random() * 200) + 100);
+        var lateFeeRealized = freshWithLateFee * 500;
         return {
             district: district,
             vehicleCategory: category,
+            totalVehicles: totalVehicles,
             totalApplications: totalApplications,
             freshWithoutLateFee: freshWithoutLateFee,
             freshWithLateFee: freshWithLateFee,
@@ -652,14 +710,82 @@ var enforcementData = assamDistricts.flatMap(function(district) {
         };
     });
 });
+var districtWiseRevenue = assamDistricts.map(function(district) {
+    var factor = 0.5 + Math.random(); // Varied performance by district
+    return {
+        district: district,
+        mvTax: {
+            nonTransport: Math.floor(1200000 * factor),
+            newReg: Math.floor(850000 * factor),
+            alreadyReg: Math.floor(450000 * factor)
+        },
+        mvFees: {
+            sarathi: Math.floor(150000 * factor),
+            vahan: Math.floor(220000 * factor),
+            pucc: Math.floor(80000 * factor)
+        },
+        roadSafetyCess: {
+            nonTransport: Math.floor(350000 * factor),
+            transport: Math.floor(250000 * factor)
+        },
+        greenTax: {
+            nonTransport: Math.floor(180000 * factor),
+            transport: Math.floor(120000 * factor)
+        },
+        compoundingFees: {
+            offenceCF: Math.floor(95000 * factor),
+            perDayCF: Math.floor(45000 * factor),
+            fitnessCF: Math.floor(35000 * factor),
+            puccLateFine: Math.floor(25000 * factor),
+            otherLateFees: Math.floor(15000 * factor)
+        },
+        apgt: Math.floor(110000 * factor),
+        hsrp: Math.floor(140000 * factor)
+    };
+});
+var districtWiseVehicles = assamDistricts.map(function(district) {
+    var factor = 0.5 + Math.random();
+    var twoWheeler = Math.floor(2500 * factor);
+    var threeWheeler = Math.floor(600 * factor);
+    var nonTransport = Math.floor(2800 * factor);
+    var transport = Math.floor(1200 * factor);
+    var total = nonTransport + transport;
+    return {
+        district: district,
+        total: total,
+        nonTransport: nonTransport,
+        transport: transport,
+        twoWheeler: twoWheeler,
+        threeWheeler: threeWheeler
+    };
+});
+var registrationApplicationsData = assamDistricts.map(function(district) {
+    var totalReceived = Math.floor(Math.random() * 800) + 200;
+    var dealerPoint = Math.floor(totalReceived * (0.85 + Math.random() * 0.1));
+    var dtoOffice = totalReceived - dealerPoint;
+    var approved = Math.floor(totalReceived * (0.75 + Math.random() * 0.2));
+    var scrutiny = Math.floor((totalReceived - approved) * 0.6);
+    var approvalStage = totalReceived - approved - scrutiny;
+    return {
+        district: district,
+        totalReceived: totalReceived,
+        dealerPoint: dealerPoint,
+        dtoOffice: dtoOffice,
+        scrutiny: scrutiny,
+        approvalStage: approvalStage,
+        approved: approved
+    };
+});
 const __TURBOPACK__default__export__ = {
     vehicleRegistrations: vehicleRegistrations,
+    vehicleRegistrations2026: vehicleRegistrations2026,
     trafficIncidents: trafficIncidents,
     publicTransportRidership: publicTransportRidership,
     congestionLevels: congestionLevels,
     fuelEfficiency: fuelEfficiency,
     roadMaintenance: roadMaintenance,
     revenueCollection: revenueCollection,
+    revenueCollection2026: revenueCollection2026,
     newRegistrationRevenue: newRegistrationRevenue,
     newRegistrationTransportRevenue: newRegistrationTransportRevenue,
     newReg4WheelerSplit: newReg4WheelerSplit,
@@ -671,7 +797,10 @@ const __TURBOPACK__default__export__ = {
     aetsData: aetsData,
     puccData: puccData,
     fitnessData: fitnessData,
-    enforcementData: enforcementData
+    enforcementData: enforcementData,
+    districtWiseRevenue: districtWiseRevenue,
+    districtWiseVehicles: districtWiseVehicles,
+    registrationApplicationsData: registrationApplicationsData
 };
 if ((0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$swc$2f$helpers$2f$esm$2f$_type_of$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["_"])(globalThis.$RefreshHelpers$) === 'object' && globalThis.$RefreshHelpers !== null) {
     __turbopack_context__.k.registerExports(__turbopack_context__.m, globalThis.$RefreshHelpers$);
@@ -735,8 +864,8 @@ var DateFilter = function(param) {
             name: 'Last Month'
         },
         {
-            id: 'all',
-            name: 'All Time'
+            id: 'lastYear',
+            name: 'Last Year'
         }
     ];
     var handlePresetClick = function(presetId) {
@@ -764,7 +893,7 @@ var DateFilter = function(param) {
                 start = "".concat(year, "-02-01");
                 end = "".concat(year, "-02-28");
                 break;
-            case 'all':
+            case 'lastYear':
                 start = '2025-01-01';
                 end = '2025-12-31';
                 break;

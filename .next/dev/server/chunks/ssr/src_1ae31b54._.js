@@ -5,18 +5,40 @@ module.exports = [
 __turbopack_context__.s([
     "aetsData",
     ()=>aetsData,
+    "aetsData2024",
+    ()=>aetsData2024,
+    "aetsData2026",
+    ()=>aetsData2026,
     "congestionLevels",
     ()=>congestionLevels,
     "default",
     ()=>__TURBOPACK__default__export__,
     "districtWiseRevenue",
     ()=>districtWiseRevenue,
+    "districtWiseRevenue2023",
+    ()=>districtWiseRevenue2023,
+    "districtWiseRevenue2024",
+    ()=>districtWiseRevenue2024,
+    "districtWiseRevenue2026",
+    ()=>districtWiseRevenue2026,
     "districtWiseVehicles",
     ()=>districtWiseVehicles,
+    "districtWiseVehicles2024",
+    ()=>districtWiseVehicles2024,
+    "districtWiseVehicles2026",
+    ()=>districtWiseVehicles2026,
     "enforcementData",
     ()=>enforcementData,
+    "enforcementData2024",
+    ()=>enforcementData2024,
+    "enforcementData2026",
+    ()=>enforcementData2026,
     "fitnessData",
     ()=>fitnessData,
+    "fitnessData2024",
+    ()=>fitnessData2024,
+    "fitnessData2026",
+    ()=>fitnessData2026,
     "fuelEfficiency",
     ()=>fuelEfficiency,
     "greenTaxRevenue",
@@ -29,12 +51,20 @@ __turbopack_context__.s([
     ()=>newRegistrationTransportRevenue,
     "permitApplicationsData",
     ()=>permitApplicationsData,
+    "permitApplicationsData2024",
+    ()=>permitApplicationsData2024,
+    "permitApplicationsData2026",
+    ()=>permitApplicationsData2026,
     "permitFeesData",
     ()=>permitFeesData,
     "publicTransportRidership",
     ()=>publicTransportRidership,
     "puccData",
     ()=>puccData,
+    "puccData2024",
+    ()=>puccData2024,
+    "puccData2026",
+    ()=>puccData2026,
     "reassignmentRevenue",
     ()=>reassignmentRevenue,
     "registrationApplicationsData",
@@ -587,14 +617,16 @@ const vehicleCategories = [
 const puccData = assamDistricts.flatMap((district)=>{
     return vehicleCategories.map((category)=>{
         const totalApplications = Math.floor(Math.random() * 500) + 100;
+        const totalVehicles = Math.floor(totalApplications * (1.2 + Math.random() * 0.4)); // More vehicles than apps
         const freshWithoutLateFee = Math.floor(totalApplications * (0.4 + Math.random() * 0.2));
         const freshWithLateFee = Math.floor(totalApplications * (0.2 + Math.random() * 0.15));
         const grandTotal = freshWithoutLateFee + freshWithLateFee;
-        const feesRealized = grandTotal * (Math.floor(Math.random() * 200) + 100); // ₹100-300 per PUCC
-        const lateFeeRealized = freshWithLateFee * 500; // ₹500 late fee per certificate
+        const feesRealized = grandTotal * (Math.floor(Math.random() * 200) + 100);
+        const lateFeeRealized = freshWithLateFee * 500;
         return {
             district: district,
             vehicleCategory: category,
+            totalVehicles: totalVehicles,
             totalApplications: totalApplications,
             freshWithoutLateFee: freshWithoutLateFee,
             freshWithLateFee: freshWithLateFee,
@@ -692,12 +724,148 @@ const districtWiseRevenue = assamDistricts.map((district)=>{
         hsrp: Math.floor(140000 * factor)
     };
 });
+const districtWiseRevenue2024 = assamDistricts.map((district)=>{
+    const factor = 0.5 + Math.random(); // Varied performance by district
+    const growth = 1 + (Math.random() * 0.2 - 0.2); // -20% to 0% growth
+    return {
+        district,
+        mvTax: {
+            nonTransport: Math.floor(1200000 * factor * growth),
+            newReg: Math.floor(850000 * factor * growth),
+            alreadyReg: Math.floor(450000 * factor * growth)
+        },
+        mvFees: {
+            sarathi: Math.floor(150000 * factor * growth),
+            vahan: Math.floor(220000 * factor * growth),
+            pucc: Math.floor(80000 * factor * growth)
+        },
+        roadSafetyCess: {
+            nonTransport: Math.floor(350000 * factor * growth),
+            transport: Math.floor(250000 * factor * growth)
+        },
+        greenTax: {
+            nonTransport: Math.floor(180000 * factor * growth),
+            transport: Math.floor(120000 * factor * growth)
+        },
+        compoundingFees: {
+            offenceCF: Math.floor(95000 * factor * growth),
+            perDayCF: Math.floor(45000 * factor * growth),
+            fitnessCF: Math.floor(35000 * factor * growth),
+            puccLateFine: Math.floor(25000 * factor * growth),
+            otherLateFees: Math.floor(15000 * factor * growth)
+        },
+        apgt: Math.floor(110000 * factor * growth),
+        hsrp: Math.floor(140000 * factor * growth)
+    };
+});
+const districtWiseRevenue2023 = assamDistricts.map((district)=>{
+    const factor = 0.5 + Math.random(); // Varied performance by district
+    const growth = 1 + (Math.random() * 0.2 - 0.4); // -40% to -20% growth
+    return {
+        district,
+        mvTax: {
+            nonTransport: Math.floor(1200000 * factor * growth),
+            newReg: Math.floor(850000 * factor * growth),
+            alreadyReg: Math.floor(450000 * factor * growth)
+        },
+        mvFees: {
+            sarathi: Math.floor(150000 * factor * growth),
+            vahan: Math.floor(220000 * factor * growth),
+            pucc: Math.floor(80000 * factor * growth)
+        },
+        roadSafetyCess: {
+            nonTransport: Math.floor(350000 * factor * growth),
+            transport: Math.floor(250000 * factor * growth)
+        },
+        greenTax: {
+            nonTransport: Math.floor(180000 * factor * growth),
+            transport: Math.floor(120000 * factor * growth)
+        },
+        compoundingFees: {
+            offenceCF: Math.floor(95000 * factor * growth),
+            perDayCF: Math.floor(45000 * factor * growth),
+            fitnessCF: Math.floor(35000 * factor * growth),
+            puccLateFine: Math.floor(25000 * factor * growth),
+            otherLateFees: Math.floor(15000 * factor * growth)
+        },
+        apgt: Math.floor(110000 * factor * growth),
+        hsrp: Math.floor(140000 * factor * growth)
+    };
+});
+const districtWiseRevenue2026 = assamDistricts.map((district)=>{
+    const factor = 0.5 + Math.random(); // Varied performance by district
+    const growth = 1 + (Math.random() * 0.4 - 0.1); // -10% to +30% growth
+    return {
+        district,
+        mvTax: {
+            nonTransport: Math.floor(1200000 * factor * growth),
+            newReg: Math.floor(850000 * factor * growth),
+            alreadyReg: Math.floor(450000 * factor * growth)
+        },
+        mvFees: {
+            sarathi: Math.floor(150000 * factor * growth),
+            vahan: Math.floor(220000 * factor * growth),
+            pucc: Math.floor(80000 * factor * growth)
+        },
+        roadSafetyCess: {
+            nonTransport: Math.floor(350000 * factor * growth),
+            transport: Math.floor(250000 * factor * growth)
+        },
+        greenTax: {
+            nonTransport: Math.floor(180000 * factor * growth),
+            transport: Math.floor(120000 * factor * growth)
+        },
+        compoundingFees: {
+            offenceCF: Math.floor(95000 * factor * growth),
+            perDayCF: Math.floor(45000 * factor * growth),
+            fitnessCF: Math.floor(35000 * factor * growth),
+            puccLateFine: Math.floor(25000 * factor * growth),
+            otherLateFees: Math.floor(15000 * factor * growth)
+        },
+        apgt: Math.floor(110000 * factor * growth),
+        hsrp: Math.floor(140000 * factor * growth)
+    };
+});
 const districtWiseVehicles = assamDistricts.map((district)=>{
     const factor = 0.5 + Math.random();
     const twoWheeler = Math.floor(2500 * factor);
     const threeWheeler = Math.floor(600 * factor);
     const nonTransport = Math.floor(2800 * factor);
     const transport = Math.floor(1200 * factor);
+    const total = nonTransport + transport;
+    return {
+        district,
+        total,
+        nonTransport,
+        transport,
+        twoWheeler,
+        threeWheeler
+    };
+});
+const districtWiseVehicles2024 = assamDistricts.map((district)=>{
+    const factor = 0.5 + Math.random();
+    const growth = 1 + (Math.random() * 0.2 - 0.2); // -20% to 0% growth
+    const twoWheeler = Math.floor(2500 * factor * growth);
+    const threeWheeler = Math.floor(600 * factor * growth);
+    const nonTransport = Math.floor(2800 * factor * growth);
+    const transport = Math.floor(1200 * factor * growth);
+    const total = nonTransport + transport;
+    return {
+        district,
+        total,
+        nonTransport,
+        transport,
+        twoWheeler,
+        threeWheeler
+    };
+});
+const districtWiseVehicles2026 = assamDistricts.map((district)=>{
+    const factor = 0.5 + Math.random();
+    const growth = 1 + (Math.random() * 0.4 - 0.1); // -10% to +30% growth
+    const twoWheeler = Math.floor(2500 * factor * growth);
+    const threeWheeler = Math.floor(600 * factor * growth);
+    const nonTransport = Math.floor(2800 * factor * growth);
+    const transport = Math.floor(1200 * factor * growth);
     const total = nonTransport + transport;
     return {
         district,
@@ -725,6 +893,126 @@ const registrationApplicationsData = assamDistricts.map((district)=>{
         approved
     };
 });
+const permitApplicationsData2024 = permitApplicationsData.map((row)=>{
+    const g = 1 + (Math.random() * 0.2 - 0.2);
+    return {
+        ...row,
+        totalReceived: Math.floor(row.totalReceived * g),
+        online: Math.floor(row.online * g),
+        offline: Math.floor(row.offline * g),
+        scrutiny: Math.floor(row.scrutiny * g),
+        approvalStage: Math.floor(row.approvalStage * g),
+        approved: Math.floor(row.approved * g)
+    };
+});
+const permitApplicationsData2026 = permitApplicationsData.map((row)=>{
+    const g = 1 + (Math.random() * 0.4 - 0.1);
+    return {
+        ...row,
+        totalReceived: Math.floor(row.totalReceived * g),
+        online: Math.floor(row.online * g),
+        offline: Math.floor(row.offline * g),
+        scrutiny: Math.floor(row.scrutiny * g),
+        approvalStage: Math.floor(row.approvalStage * g),
+        approved: Math.floor(row.approved * g)
+    };
+});
+const aetsData2024 = aetsData.map((r)=>{
+    const g = 1 + (Math.random() * 0.2 - 0.2);
+    return {
+        ...r,
+        totalCentres: r.totalCentres,
+        calibratedCentres: Math.floor(r.calibratedCentres * g),
+        feesDeposited: Math.floor(r.feesDeposited * g)
+    };
+});
+const aetsData2026 = aetsData.map((r)=>{
+    const g = 1 + (Math.random() * 0.4 - 0.1);
+    return {
+        ...r,
+        totalCentres: r.totalCentres,
+        calibratedCentres: Math.floor(r.calibratedCentres * g),
+        feesDeposited: Math.floor(r.feesDeposited * g)
+    };
+});
+const puccData2024 = puccData.map((r)=>{
+    const g = 1 + (Math.random() * 0.2 - 0.2);
+    return {
+        ...r,
+        totalVehicles: Math.floor(r.totalVehicles * g),
+        totalApplications: Math.floor(r.totalApplications * g),
+        freshWithoutLateFee: Math.floor(r.freshWithoutLateFee * g),
+        freshWithLateFee: Math.floor(r.freshWithLateFee * g),
+        grandTotal: Math.floor(r.grandTotal * g),
+        feesRealized: Math.floor(r.feesRealized * g),
+        lateFeeRealized: Math.floor(r.lateFeeRealized * g)
+    };
+});
+const puccData2026 = puccData.map((r)=>{
+    const g = 1 + (Math.random() * 0.4 - 0.1);
+    return {
+        ...r,
+        totalVehicles: Math.floor(r.totalVehicles * g),
+        totalApplications: Math.floor(r.totalApplications * g),
+        freshWithoutLateFee: Math.floor(r.freshWithoutLateFee * g),
+        freshWithLateFee: Math.floor(r.freshWithLateFee * g),
+        grandTotal: Math.floor(r.grandTotal * g),
+        feesRealized: Math.floor(r.feesRealized * g),
+        lateFeeRealized: Math.floor(r.lateFeeRealized * g)
+    };
+});
+const fitnessData2024 = fitnessData.map((r)=>{
+    const g = 1 + (Math.random() * 0.2 - 0.2);
+    return {
+        ...r,
+        totalTransportVehicles: Math.floor(r.totalTransportVehicles * g),
+        certificatesApplied: Math.floor(r.certificatesApplied * g),
+        certificatesIssued: Math.floor(r.certificatesIssued * g),
+        certificatesRejected: Math.floor(r.certificatesRejected * g),
+        certificatesImpounded: Math.floor(r.certificatesImpounded * g),
+        feesRealised: Math.floor(r.feesRealised * g),
+        lateFeeRealised: Math.floor(r.lateFeeRealised * g),
+        withoutFCCasesBooked: Math.floor(r.withoutFCCasesBooked * g)
+    };
+});
+const fitnessData2026 = fitnessData.map((r)=>{
+    const g = 1 + (Math.random() * 0.4 - 0.1);
+    return {
+        ...r,
+        totalTransportVehicles: Math.floor(r.totalTransportVehicles * g),
+        certificatesApplied: Math.floor(r.certificatesApplied * g),
+        certificatesIssued: Math.floor(r.certificatesIssued * g),
+        certificatesRejected: Math.floor(r.certificatesRejected * g),
+        certificatesImpounded: Math.floor(r.certificatesImpounded * g),
+        feesRealised: Math.floor(r.feesRealised * g),
+        lateFeeRealised: Math.floor(r.lateFeeRealised * g),
+        withoutFCCasesBooked: Math.floor(r.withoutFCCasesBooked * g)
+    };
+});
+const enforcementData2024 = enforcementData.map((r)=>{
+    const g = 1 + (Math.random() * 0.2 - 0.2);
+    return {
+        ...r,
+        casesBooked: Math.floor(r.casesBooked * g),
+        cfImposed: Math.floor(r.cfImposed * g),
+        casesDisposed: Math.floor(r.casesDisposed * g),
+        cfRealised: Math.floor(r.cfRealised * g),
+        casesPending: Math.floor(r.casesPending * g),
+        licensesSuspended: Math.floor(r.licensesSuspended * g)
+    };
+});
+const enforcementData2026 = enforcementData.map((r)=>{
+    const g = 1 + (Math.random() * 0.4 - 0.1);
+    return {
+        ...r,
+        casesBooked: Math.floor(r.casesBooked * g),
+        cfImposed: Math.floor(r.cfImposed * g),
+        casesDisposed: Math.floor(r.casesDisposed * g),
+        cfRealised: Math.floor(r.cfRealised * g),
+        casesPending: Math.floor(r.casesPending * g),
+        licensesSuspended: Math.floor(r.licensesSuspended * g)
+    };
+});
 const __TURBOPACK__default__export__ = {
     vehicleRegistrations,
     vehicleRegistrations2026,
@@ -743,12 +1031,27 @@ const __TURBOPACK__default__export__ = {
     renewalRevenue,
     permitFeesData,
     permitApplicationsData,
+    permitApplicationsData2024,
+    permitApplicationsData2026,
     aetsData,
+    aetsData2024,
+    aetsData2026,
     puccData,
+    puccData2024,
+    puccData2026,
     fitnessData,
+    fitnessData2024,
+    fitnessData2026,
     enforcementData,
+    enforcementData2024,
+    enforcementData2026,
     districtWiseRevenue,
+    districtWiseRevenue2023,
+    districtWiseRevenue2024,
+    districtWiseRevenue2026,
     districtWiseVehicles,
+    districtWiseVehicles2024,
+    districtWiseVehicles2026,
     registrationApplicationsData
 };
  // Future CSV import function (commented out for now)
@@ -1026,6 +1329,16 @@ const Vehicles = ()=>{
     const [selectedMonths, setSelectedMonths] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$data$2f$dummyData$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"].vehicleRegistrations.map((d)=>d.month));
     const [isDarkMode, setIsDarkMode] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(false);
     const [selectedStream, setSelectedStream] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])('total');
+    const [isComparisonMode, setIsComparisonMode] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(false);
+    const [compareCategory, setCompareCategory] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])('total');
+    const [primaryRange, setPrimaryRange] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])({
+        start: '2025-01-01',
+        end: '2025-01-15'
+    });
+    const [compareRange, setCompareRange] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])({
+        start: '2025-06-01',
+        end: '2025-06-15'
+    });
     const streams = [
         {
             id: 'total',
@@ -1057,6 +1370,62 @@ const Vehicles = ()=>{
     }, []);
     const filteredData2025 = __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$data$2f$dummyData$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"].vehicleRegistrations.filter((d)=>selectedMonths.includes(d.month));
     const filteredData2026 = __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$data$2f$dummyData$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"].vehicleRegistrations2026.filter((d)=>selectedMonths.includes(d.month));
+    const getDaysBetween = (start, end)=>{
+        if (!start || !end) return 365;
+        const startD = new Date(start);
+        const endD = new Date(end);
+        if (isNaN(startD) || isNaN(endD)) return 365;
+        const diff = endD - startD;
+        return Math.max(1, Math.ceil(diff / (1000 * 60 * 60 * 24)) + 1);
+    };
+    const getYearData = (year)=>{
+        switch(year){
+            case '2024':
+                return __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$data$2f$dummyData$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"].districtWiseVehicles2024;
+            case '2026':
+                return __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$data$2f$dummyData$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"].districtWiseVehicles2026;
+            case '2025':
+            default:
+                return __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$data$2f$dummyData$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"].districtWiseVehicles;
+        }
+    };
+    const primaryYear = primaryRange.start ? primaryRange.start.substring(0, 4) : '2025';
+    const primaryData = getYearData(primaryYear) || __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$data$2f$dummyData$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"].districtWiseVehicles;
+    const primaryDays = getDaysBetween(primaryRange.start, primaryRange.end);
+    const primaryScale = primaryDays / 365;
+    const compareYear = compareRange.start ? compareRange.start.substring(0, 4) : '2026';
+    const comparisonDataRaw = getYearData(compareYear) || __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$data$2f$dummyData$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"].districtWiseVehicles2026;
+    const compareDays = getDaysBetween(compareRange.start, compareRange.end);
+    const compareScale = compareDays / 365;
+    const scaleRow = (row, scaleFactor)=>{
+        const scale = (val)=>Math.floor(val * scaleFactor);
+        return {
+            ...row,
+            total: scale(row.total),
+            nonTransport: scale(row.nonTransport),
+            transport: scale(row.transport),
+            twoWheeler: scale(row.twoWheeler),
+            threeWheeler: scale(row.threeWheeler)
+        };
+    };
+    const scaledPrimaryData = primaryData.map((row)=>scaleRow(row, primaryScale));
+    const scaledComparisonData = comparisonDataRaw.map((row)=>scaleRow(row, compareScale));
+    const getDistrictCategoryValue = (districtData, category)=>{
+        if (!districtData) return 0;
+        switch(category){
+            case 'nonTransport':
+                return districtData.nonTransport;
+            case 'transport':
+                return districtData.transport;
+            case 'twoWheeler':
+                return districtData.twoWheeler;
+            case 'threeWheeler':
+                return districtData.threeWheeler;
+            case 'total':
+            default:
+                return districtData.total;
+        }
+    };
     const getStreamValue = (d)=>{
         if (!d) return 0;
         switch(selectedStream){
@@ -1209,7 +1578,7 @@ const Vehicles = ()=>{
                 onFilterChange: handleFilterChange
             }, void 0, false, {
                 fileName: "[project]/src/components/Vehicles.js",
-                lineNumber: 191,
+                lineNumber: 250,
                 columnNumber: 13
             }, ("TURBOPACK compile-time value", void 0)),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1226,7 +1595,7 @@ const Vehicles = ()=>{
                                         children: "Total new vehicle registrations (2025)"
                                     }, void 0, false, {
                                         fileName: "[project]/src/components/Vehicles.js",
-                                        lineNumber: 196,
+                                        lineNumber: 255,
                                         columnNumber: 25
                                     }, ("TURBOPACK compile-time value", void 0)),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -1234,13 +1603,13 @@ const Vehicles = ()=>{
                                         children: stats.grandTotal.toLocaleString()
                                     }, void 0, false, {
                                         fileName: "[project]/src/components/Vehicles.js",
-                                        lineNumber: 197,
+                                        lineNumber: 256,
                                         columnNumber: 25
                                     }, ("TURBOPACK compile-time value", void 0))
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/components/Vehicles.js",
-                                lineNumber: 195,
+                                lineNumber: 254,
                                 columnNumber: 21
                             }, ("TURBOPACK compile-time value", void 0)),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1251,7 +1620,7 @@ const Vehicles = ()=>{
                                         children: "Non Transport"
                                     }, void 0, false, {
                                         fileName: "[project]/src/components/Vehicles.js",
-                                        lineNumber: 200,
+                                        lineNumber: 259,
                                         columnNumber: 25
                                     }, ("TURBOPACK compile-time value", void 0)),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -1259,13 +1628,13 @@ const Vehicles = ()=>{
                                         children: stats.totalNonTransport.toLocaleString()
                                     }, void 0, false, {
                                         fileName: "[project]/src/components/Vehicles.js",
-                                        lineNumber: 201,
+                                        lineNumber: 260,
                                         columnNumber: 25
                                     }, ("TURBOPACK compile-time value", void 0))
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/components/Vehicles.js",
-                                lineNumber: 199,
+                                lineNumber: 258,
                                 columnNumber: 21
                             }, ("TURBOPACK compile-time value", void 0)),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1276,7 +1645,7 @@ const Vehicles = ()=>{
                                         children: "Transport"
                                     }, void 0, false, {
                                         fileName: "[project]/src/components/Vehicles.js",
-                                        lineNumber: 204,
+                                        lineNumber: 263,
                                         columnNumber: 25
                                     }, ("TURBOPACK compile-time value", void 0)),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -1284,13 +1653,13 @@ const Vehicles = ()=>{
                                         children: stats.totalTransport.toLocaleString()
                                     }, void 0, false, {
                                         fileName: "[project]/src/components/Vehicles.js",
-                                        lineNumber: 205,
+                                        lineNumber: 264,
                                         columnNumber: 25
                                     }, ("TURBOPACK compile-time value", void 0))
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/components/Vehicles.js",
-                                lineNumber: 203,
+                                lineNumber: 262,
                                 columnNumber: 21
                             }, ("TURBOPACK compile-time value", void 0)),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1301,7 +1670,7 @@ const Vehicles = ()=>{
                                         children: "2 Wheeler"
                                     }, void 0, false, {
                                         fileName: "[project]/src/components/Vehicles.js",
-                                        lineNumber: 208,
+                                        lineNumber: 267,
                                         columnNumber: 25
                                     }, ("TURBOPACK compile-time value", void 0)),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -1309,13 +1678,13 @@ const Vehicles = ()=>{
                                         children: stats.total2Wheeler.toLocaleString()
                                     }, void 0, false, {
                                         fileName: "[project]/src/components/Vehicles.js",
-                                        lineNumber: 209,
+                                        lineNumber: 268,
                                         columnNumber: 25
                                     }, ("TURBOPACK compile-time value", void 0))
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/components/Vehicles.js",
-                                lineNumber: 207,
+                                lineNumber: 266,
                                 columnNumber: 21
                             }, ("TURBOPACK compile-time value", void 0)),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1326,7 +1695,7 @@ const Vehicles = ()=>{
                                         children: "3 Wheeler"
                                     }, void 0, false, {
                                         fileName: "[project]/src/components/Vehicles.js",
-                                        lineNumber: 212,
+                                        lineNumber: 271,
                                         columnNumber: 25
                                     }, ("TURBOPACK compile-time value", void 0)),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -1334,19 +1703,19 @@ const Vehicles = ()=>{
                                         children: stats.total3Wheeler.toLocaleString()
                                     }, void 0, false, {
                                         fileName: "[project]/src/components/Vehicles.js",
-                                        lineNumber: 213,
+                                        lineNumber: 272,
                                         columnNumber: 25
                                     }, ("TURBOPACK compile-time value", void 0))
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/components/Vehicles.js",
-                                lineNumber: 211,
+                                lineNumber: 270,
                                 columnNumber: 21
                             }, ("TURBOPACK compile-time value", void 0))
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/components/Vehicles.js",
-                        lineNumber: 194,
+                        lineNumber: 253,
                         columnNumber: 17
                     }, ("TURBOPACK compile-time value", void 0)),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1357,7 +1726,7 @@ const Vehicles = ()=>{
                                 children: "Registrations by Type (2025)"
                             }, void 0, false, {
                                 fileName: "[project]/src/components/Vehicles.js",
-                                lineNumber: 218,
+                                lineNumber: 277,
                                 columnNumber: 21
                             }, ("TURBOPACK compile-time value", void 0)),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1367,24 +1736,24 @@ const Vehicles = ()=>{
                                     options: pieOptions
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/Vehicles.js",
-                                    lineNumber: 220,
+                                    lineNumber: 279,
                                     columnNumber: 25
                                 }, ("TURBOPACK compile-time value", void 0))
                             }, void 0, false, {
                                 fileName: "[project]/src/components/Vehicles.js",
-                                lineNumber: 219,
+                                lineNumber: 278,
                                 columnNumber: 21
                             }, ("TURBOPACK compile-time value", void 0))
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/components/Vehicles.js",
-                        lineNumber: 217,
+                        lineNumber: 276,
                         columnNumber: 17
                     }, ("TURBOPACK compile-time value", void 0))
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/components/Vehicles.js",
-                lineNumber: 193,
+                lineNumber: 252,
                 columnNumber: 13
             }, ("TURBOPACK compile-time value", void 0)),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1398,7 +1767,7 @@ const Vehicles = ()=>{
                                 children: "Total Registration Trend (2025 vs 2026)"
                             }, void 0, false, {
                                 fileName: "[project]/src/components/Vehicles.js",
-                                lineNumber: 227,
+                                lineNumber: 286,
                                 columnNumber: 21
                             }, ("TURBOPACK compile-time value", void 0)),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1409,18 +1778,18 @@ const Vehicles = ()=>{
                                         children: stream.name
                                     }, stream.id, false, {
                                         fileName: "[project]/src/components/Vehicles.js",
-                                        lineNumber: 231,
+                                        lineNumber: 290,
                                         columnNumber: 29
                                     }, ("TURBOPACK compile-time value", void 0)))
                             }, void 0, false, {
                                 fileName: "[project]/src/components/Vehicles.js",
-                                lineNumber: 229,
+                                lineNumber: 288,
                                 columnNumber: 21
                             }, ("TURBOPACK compile-time value", void 0))
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/components/Vehicles.js",
-                        lineNumber: 226,
+                        lineNumber: 285,
                         columnNumber: 17
                     }, ("TURBOPACK compile-time value", void 0)),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1430,41 +1799,275 @@ const Vehicles = ()=>{
                             options: commonOptions
                         }, void 0, false, {
                             fileName: "[project]/src/components/Vehicles.js",
-                            lineNumber: 247,
+                            lineNumber: 306,
                             columnNumber: 21
                         }, ("TURBOPACK compile-time value", void 0))
                     }, void 0, false, {
                         fileName: "[project]/src/components/Vehicles.js",
-                        lineNumber: 246,
+                        lineNumber: 305,
                         columnNumber: 17
                     }, ("TURBOPACK compile-time value", void 0))
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/components/Vehicles.js",
-                lineNumber: 225,
+                lineNumber: 284,
                 columnNumber: 13
             }, ("TURBOPACK compile-time value", void 0)),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                className: "bg-white dark:bg-gray-800 rounded-lg shadow overflow-hidden",
+                className: "bg-white dark:bg-gray-800 rounded-lg shadow overflow-hidden mt-6",
                 children: [
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                        className: "px-6 py-4 border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-700/50",
-                        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
-                            className: "text-xl font-bold text-gray-900 dark:text-white uppercase tracking-tight",
-                            children: "DISTRICT-WISE VEHICLE REGISTRATION"
-                        }, void 0, false, {
-                            fileName: "[project]/src/components/Vehicles.js",
-                            lineNumber: 254,
-                            columnNumber: 21
-                        }, ("TURBOPACK compile-time value", void 0))
-                    }, void 0, false, {
+                        className: "px-6 py-4 border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-700/50 flex flex-col md:flex-row justify-between items-start md:items-center gap-4",
+                        children: [
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
+                                className: "text-xl font-bold text-gray-900 dark:text-white uppercase tracking-tight flex flex-col sm:flex-row items-start sm:items-center gap-2 mt-2 md:mt-0",
+                                children: [
+                                    "DISTRICT-WISE VEHICLE REGISTRATION",
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                        className: "flex items-center gap-2 text-sm ml-0 sm:ml-4 font-normal normal-case pt-1 sm:pt-0",
+                                        children: [
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
+                                                type: "date",
+                                                value: primaryRange.start,
+                                                onChange: (e)=>setPrimaryRange({
+                                                        ...primaryRange,
+                                                        start: e.target.value
+                                                    }),
+                                                className: "bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white rounded px-2 py-1 focus:ring-blue-500 focus:border-blue-500"
+                                            }, void 0, false, {
+                                                fileName: "[project]/src/components/Vehicles.js",
+                                                lineNumber: 316,
+                                                columnNumber: 29
+                                            }, ("TURBOPACK compile-time value", void 0)),
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                                className: "text-gray-500",
+                                                children: "to"
+                                            }, void 0, false, {
+                                                fileName: "[project]/src/components/Vehicles.js",
+                                                lineNumber: 317,
+                                                columnNumber: 29
+                                            }, ("TURBOPACK compile-time value", void 0)),
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
+                                                type: "date",
+                                                value: primaryRange.end,
+                                                onChange: (e)=>setPrimaryRange({
+                                                        ...primaryRange,
+                                                        end: e.target.value
+                                                    }),
+                                                className: "bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white rounded px-2 py-1 focus:ring-blue-500 focus:border-blue-500"
+                                            }, void 0, false, {
+                                                fileName: "[project]/src/components/Vehicles.js",
+                                                lineNumber: 318,
+                                                columnNumber: 29
+                                            }, ("TURBOPACK compile-time value", void 0))
+                                        ]
+                                    }, void 0, true, {
+                                        fileName: "[project]/src/components/Vehicles.js",
+                                        lineNumber: 315,
+                                        columnNumber: 25
+                                    }, ("TURBOPACK compile-time value", void 0))
+                                ]
+                            }, void 0, true, {
+                                fileName: "[project]/src/components/Vehicles.js",
+                                lineNumber: 313,
+                                columnNumber: 21
+                            }, ("TURBOPACK compile-time value", void 0)),
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
+                                className: "flex items-center cursor-pointer",
+                                children: [
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                        className: "relative",
+                                        children: [
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
+                                                type: "checkbox",
+                                                className: "sr-only",
+                                                checked: isComparisonMode,
+                                                onChange: ()=>setIsComparisonMode(!isComparisonMode)
+                                            }, void 0, false, {
+                                                fileName: "[project]/src/components/Vehicles.js",
+                                                lineNumber: 323,
+                                                columnNumber: 29
+                                            }, ("TURBOPACK compile-time value", void 0)),
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                className: `block w-10 h-6 rounded-full transition-colors ${isComparisonMode ? 'bg-blue-600' : 'bg-gray-300 dark:bg-gray-600'}`
+                                            }, void 0, false, {
+                                                fileName: "[project]/src/components/Vehicles.js",
+                                                lineNumber: 324,
+                                                columnNumber: 29
+                                            }, ("TURBOPACK compile-time value", void 0)),
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                className: `dot absolute left-1 top-1 bg-white w-4 h-4 rounded-full transition-transform ${isComparisonMode ? 'transform translate-x-4' : ''}`
+                                            }, void 0, false, {
+                                                fileName: "[project]/src/components/Vehicles.js",
+                                                lineNumber: 325,
+                                                columnNumber: 29
+                                            }, ("TURBOPACK compile-time value", void 0))
+                                        ]
+                                    }, void 0, true, {
+                                        fileName: "[project]/src/components/Vehicles.js",
+                                        lineNumber: 322,
+                                        columnNumber: 25
+                                    }, ("TURBOPACK compile-time value", void 0)),
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                        className: "ml-3 text-sm font-semibold text-gray-700 dark:text-gray-300",
+                                        children: "Custom Comparison"
+                                    }, void 0, false, {
+                                        fileName: "[project]/src/components/Vehicles.js",
+                                        lineNumber: 327,
+                                        columnNumber: 25
+                                    }, ("TURBOPACK compile-time value", void 0))
+                                ]
+                            }, void 0, true, {
+                                fileName: "[project]/src/components/Vehicles.js",
+                                lineNumber: 321,
+                                columnNumber: 21
+                            }, ("TURBOPACK compile-time value", void 0))
+                        ]
+                    }, void 0, true, {
                         fileName: "[project]/src/components/Vehicles.js",
-                        lineNumber: 253,
+                        lineNumber: 312,
                         columnNumber: 17
+                    }, ("TURBOPACK compile-time value", void 0)),
+                    isComparisonMode && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                        className: "px-6 py-4 bg-blue-50 dark:bg-blue-900/20 border-b border-gray-200 dark:border-gray-700 flex flex-wrap gap-6 items-center",
+                        children: [
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                className: "flex items-center gap-3",
+                                children: [
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                        className: "text-sm font-medium text-gray-700 dark:text-gray-300",
+                                        children: "Compare with timeline:"
+                                    }, void 0, false, {
+                                        fileName: "[project]/src/components/Vehicles.js",
+                                        lineNumber: 336,
+                                        columnNumber: 29
+                                    }, ("TURBOPACK compile-time value", void 0)),
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                        className: "flex items-center gap-2 text-sm font-normal",
+                                        children: [
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
+                                                type: "date",
+                                                value: compareRange.start,
+                                                onChange: (e)=>setCompareRange({
+                                                        ...compareRange,
+                                                        start: e.target.value
+                                                    }),
+                                                className: "bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white rounded px-2 py-1 focus:ring-blue-500 focus:border-blue-500"
+                                            }, void 0, false, {
+                                                fileName: "[project]/src/components/Vehicles.js",
+                                                lineNumber: 338,
+                                                columnNumber: 33
+                                            }, ("TURBOPACK compile-time value", void 0)),
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                                className: "text-gray-500",
+                                                children: "to"
+                                            }, void 0, false, {
+                                                fileName: "[project]/src/components/Vehicles.js",
+                                                lineNumber: 339,
+                                                columnNumber: 33
+                                            }, ("TURBOPACK compile-time value", void 0)),
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
+                                                type: "date",
+                                                value: compareRange.end,
+                                                onChange: (e)=>setCompareRange({
+                                                        ...compareRange,
+                                                        end: e.target.value
+                                                    }),
+                                                className: "bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white rounded px-2 py-1 focus:ring-blue-500 focus:border-blue-500"
+                                            }, void 0, false, {
+                                                fileName: "[project]/src/components/Vehicles.js",
+                                                lineNumber: 340,
+                                                columnNumber: 33
+                                            }, ("TURBOPACK compile-time value", void 0))
+                                        ]
+                                    }, void 0, true, {
+                                        fileName: "[project]/src/components/Vehicles.js",
+                                        lineNumber: 337,
+                                        columnNumber: 29
+                                    }, ("TURBOPACK compile-time value", void 0))
+                                ]
+                            }, void 0, true, {
+                                fileName: "[project]/src/components/Vehicles.js",
+                                lineNumber: 335,
+                                columnNumber: 25
+                            }, ("TURBOPACK compile-time value", void 0)),
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                className: "flex items-center gap-3 border-l sm:pl-6 border-blue-200 dark:border-blue-800",
+                                children: [
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                        className: "text-sm font-medium text-gray-700 dark:text-gray-300",
+                                        children: "Category:"
+                                    }, void 0, false, {
+                                        fileName: "[project]/src/components/Vehicles.js",
+                                        lineNumber: 344,
+                                        columnNumber: 29
+                                    }, ("TURBOPACK compile-time value", void 0)),
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("select", {
+                                        value: compareCategory,
+                                        onChange: (e)=>setCompareCategory(e.target.value),
+                                        className: "bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 shadow-sm",
+                                        children: [
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
+                                                value: "total",
+                                                children: "Total Registrations"
+                                            }, void 0, false, {
+                                                fileName: "[project]/src/components/Vehicles.js",
+                                                lineNumber: 350,
+                                                columnNumber: 33
+                                            }, ("TURBOPACK compile-time value", void 0)),
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
+                                                value: "nonTransport",
+                                                children: "Non Transport"
+                                            }, void 0, false, {
+                                                fileName: "[project]/src/components/Vehicles.js",
+                                                lineNumber: 351,
+                                                columnNumber: 33
+                                            }, ("TURBOPACK compile-time value", void 0)),
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
+                                                value: "transport",
+                                                children: "Transport"
+                                            }, void 0, false, {
+                                                fileName: "[project]/src/components/Vehicles.js",
+                                                lineNumber: 352,
+                                                columnNumber: 33
+                                            }, ("TURBOPACK compile-time value", void 0)),
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
+                                                value: "twoWheeler",
+                                                children: "2 Wheeler"
+                                            }, void 0, false, {
+                                                fileName: "[project]/src/components/Vehicles.js",
+                                                lineNumber: 353,
+                                                columnNumber: 33
+                                            }, ("TURBOPACK compile-time value", void 0)),
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
+                                                value: "threeWheeler",
+                                                children: "3 Wheeler"
+                                            }, void 0, false, {
+                                                fileName: "[project]/src/components/Vehicles.js",
+                                                lineNumber: 354,
+                                                columnNumber: 33
+                                            }, ("TURBOPACK compile-time value", void 0))
+                                        ]
+                                    }, void 0, true, {
+                                        fileName: "[project]/src/components/Vehicles.js",
+                                        lineNumber: 345,
+                                        columnNumber: 29
+                                    }, ("TURBOPACK compile-time value", void 0))
+                                ]
+                            }, void 0, true, {
+                                fileName: "[project]/src/components/Vehicles.js",
+                                lineNumber: 343,
+                                columnNumber: 25
+                            }, ("TURBOPACK compile-time value", void 0))
+                        ]
+                    }, void 0, true, {
+                        fileName: "[project]/src/components/Vehicles.js",
+                        lineNumber: 334,
+                        columnNumber: 21
                     }, ("TURBOPACK compile-time value", void 0)),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                         className: "overflow-x-auto",
-                        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("table", {
+                        children: !isComparisonMode ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("table", {
                             className: "min-w-full divide-y divide-gray-200 dark:divide-gray-700",
                             children: [
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("thead", {
@@ -1476,63 +2079,63 @@ const Vehicles = ()=>{
                                                 children: "District"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/components/Vehicles.js",
-                                                lineNumber: 262,
-                                                columnNumber: 33
+                                                lineNumber: 365,
+                                                columnNumber: 37
                                             }, ("TURBOPACK compile-time value", void 0)),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
                                                 className: "px-6 py-4 text-right border-b border-gray-200 dark:border-gray-700",
                                                 children: "Total registrations"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/components/Vehicles.js",
-                                                lineNumber: 263,
-                                                columnNumber: 33
+                                                lineNumber: 366,
+                                                columnNumber: 37
                                             }, ("TURBOPACK compile-time value", void 0)),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
                                                 className: "px-6 py-4 text-right border-b border-gray-200 dark:border-gray-700",
                                                 children: "Non Transport"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/components/Vehicles.js",
-                                                lineNumber: 264,
-                                                columnNumber: 33
+                                                lineNumber: 367,
+                                                columnNumber: 37
                                             }, ("TURBOPACK compile-time value", void 0)),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
                                                 className: "px-6 py-4 text-right border-b border-gray-200 dark:border-gray-700",
                                                 children: "Transport"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/components/Vehicles.js",
-                                                lineNumber: 265,
-                                                columnNumber: 33
+                                                lineNumber: 368,
+                                                columnNumber: 37
                                             }, ("TURBOPACK compile-time value", void 0)),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
                                                 className: "px-6 py-4 text-right border-b border-gray-200 dark:border-gray-700",
                                                 children: "2 Wheeler"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/components/Vehicles.js",
-                                                lineNumber: 266,
-                                                columnNumber: 33
+                                                lineNumber: 369,
+                                                columnNumber: 37
                                             }, ("TURBOPACK compile-time value", void 0)),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
                                                 className: "px-6 py-4 text-right border-b border-gray-200 dark:border-gray-700",
                                                 children: "3 Wheeler"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/components/Vehicles.js",
-                                                lineNumber: 267,
-                                                columnNumber: 33
+                                                lineNumber: 370,
+                                                columnNumber: 37
                                             }, ("TURBOPACK compile-time value", void 0))
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/src/components/Vehicles.js",
-                                        lineNumber: 261,
-                                        columnNumber: 29
+                                        lineNumber: 364,
+                                        columnNumber: 33
                                     }, ("TURBOPACK compile-time value", void 0))
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/Vehicles.js",
-                                    lineNumber: 260,
-                                    columnNumber: 25
+                                    lineNumber: 363,
+                                    columnNumber: 29
                                 }, ("TURBOPACK compile-time value", void 0)),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("tbody", {
                                     className: "divide-y divide-gray-200 dark:divide-gray-700",
-                                    children: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$data$2f$dummyData$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"].districtWiseVehicles.map((row, idx)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("tr", {
+                                    children: scaledPrimaryData.map((row, idx)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("tr", {
                                             className: idx % 2 === 0 ? 'bg-white dark:bg-gray-800' : 'bg-gray-50 dark:bg-gray-900/40',
                                             children: [
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
@@ -1540,75 +2143,257 @@ const Vehicles = ()=>{
                                                     children: row.district
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/components/Vehicles.js",
-                                                    lineNumber: 273,
-                                                    columnNumber: 37
+                                                    lineNumber: 376,
+                                                    columnNumber: 41
                                                 }, ("TURBOPACK compile-time value", void 0)),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
                                                     className: "px-6 py-4 text-sm text-right text-blue-600 dark:text-blue-400 font-bold",
                                                     children: row.total.toLocaleString()
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/components/Vehicles.js",
-                                                    lineNumber: 274,
-                                                    columnNumber: 37
+                                                    lineNumber: 377,
+                                                    columnNumber: 41
                                                 }, ("TURBOPACK compile-time value", void 0)),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
                                                     className: "px-6 py-4 text-sm text-right text-gray-600 dark:text-gray-400",
                                                     children: row.nonTransport.toLocaleString()
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/components/Vehicles.js",
-                                                    lineNumber: 275,
-                                                    columnNumber: 37
+                                                    lineNumber: 378,
+                                                    columnNumber: 41
                                                 }, ("TURBOPACK compile-time value", void 0)),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
                                                     className: "px-6 py-4 text-sm text-right text-gray-600 dark:text-gray-400",
                                                     children: row.transport.toLocaleString()
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/components/Vehicles.js",
-                                                    lineNumber: 276,
-                                                    columnNumber: 37
+                                                    lineNumber: 379,
+                                                    columnNumber: 41
                                                 }, ("TURBOPACK compile-time value", void 0)),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
                                                     className: "px-6 py-4 text-sm text-right text-gray-600 dark:text-gray-400",
                                                     children: row.twoWheeler.toLocaleString()
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/components/Vehicles.js",
-                                                    lineNumber: 277,
-                                                    columnNumber: 37
+                                                    lineNumber: 380,
+                                                    columnNumber: 41
                                                 }, ("TURBOPACK compile-time value", void 0)),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
                                                     className: "px-6 py-4 text-sm text-right text-gray-600 dark:text-gray-400",
                                                     children: row.threeWheeler.toLocaleString()
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/components/Vehicles.js",
-                                                    lineNumber: 278,
-                                                    columnNumber: 37
+                                                    lineNumber: 381,
+                                                    columnNumber: 41
                                                 }, ("TURBOPACK compile-time value", void 0))
                                             ]
                                         }, row.district, true, {
                                             fileName: "[project]/src/components/Vehicles.js",
-                                            lineNumber: 272,
-                                            columnNumber: 33
+                                            lineNumber: 375,
+                                            columnNumber: 37
                                         }, ("TURBOPACK compile-time value", void 0)))
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/Vehicles.js",
-                                    lineNumber: 270,
-                                    columnNumber: 25
+                                    lineNumber: 373,
+                                    columnNumber: 29
                                 }, ("TURBOPACK compile-time value", void 0))
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/components/Vehicles.js",
-                            lineNumber: 259,
-                            columnNumber: 21
+                            lineNumber: 362,
+                            columnNumber: 25
+                        }, ("TURBOPACK compile-time value", void 0)) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("table", {
+                            className: "min-w-full divide-y divide-gray-200 dark:divide-gray-700",
+                            children: [
+                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("thead", {
+                                    className: "bg-gray-100 dark:bg-gray-800 text-xs font-bold uppercase text-gray-700 dark:text-gray-300",
+                                    children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("tr", {
+                                        children: [
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
+                                                className: "px-6 py-4 text-left border-b border-gray-200 dark:border-gray-700",
+                                                children: "District"
+                                            }, void 0, false, {
+                                                fileName: "[project]/src/components/Vehicles.js",
+                                                lineNumber: 390,
+                                                columnNumber: 37
+                                            }, ("TURBOPACK compile-time value", void 0)),
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
+                                                className: "px-6 py-4 text-right border-b border-gray-200 dark:border-gray-700",
+                                                children: "Selected Period"
+                                            }, void 0, false, {
+                                                fileName: "[project]/src/components/Vehicles.js",
+                                                lineNumber: 391,
+                                                columnNumber: 37
+                                            }, ("TURBOPACK compile-time value", void 0)),
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
+                                                className: "px-6 py-4 text-right border-b border-gray-200 dark:border-gray-700",
+                                                children: "Comparison Period"
+                                            }, void 0, false, {
+                                                fileName: "[project]/src/components/Vehicles.js",
+                                                lineNumber: 392,
+                                                columnNumber: 37
+                                            }, ("TURBOPACK compile-time value", void 0)),
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
+                                                className: "px-6 py-4 text-right border-b border-gray-200 dark:border-gray-700",
+                                                children: "Variance"
+                                            }, void 0, false, {
+                                                fileName: "[project]/src/components/Vehicles.js",
+                                                lineNumber: 393,
+                                                columnNumber: 37
+                                            }, ("TURBOPACK compile-time value", void 0)),
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
+                                                className: "px-6 py-4 text-right border-b border-gray-200 dark:border-gray-700",
+                                                children: "Trend"
+                                            }, void 0, false, {
+                                                fileName: "[project]/src/components/Vehicles.js",
+                                                lineNumber: 394,
+                                                columnNumber: 37
+                                            }, ("TURBOPACK compile-time value", void 0))
+                                        ]
+                                    }, void 0, true, {
+                                        fileName: "[project]/src/components/Vehicles.js",
+                                        lineNumber: 389,
+                                        columnNumber: 33
+                                    }, ("TURBOPACK compile-time value", void 0))
+                                }, void 0, false, {
+                                    fileName: "[project]/src/components/Vehicles.js",
+                                    lineNumber: 388,
+                                    columnNumber: 29
+                                }, ("TURBOPACK compile-time value", void 0)),
+                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("tbody", {
+                                    className: "divide-y divide-gray-200 dark:divide-gray-700",
+                                    children: scaledPrimaryData.map((rowPrimary, idx)=>{
+                                        const rowComparison = scaledComparisonData?.find((d)=>d.district === rowPrimary.district);
+                                        const valPrimary = getDistrictCategoryValue(rowPrimary, compareCategory);
+                                        const valComparison = getDistrictCategoryValue(rowComparison, compareCategory);
+                                        const variance = valComparison - valPrimary;
+                                        const variancePct = valPrimary === 0 ? 0 : variance / valPrimary * 100;
+                                        const isPositive = variance > 0;
+                                        const isNegative = variance < 0;
+                                        return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("tr", {
+                                            className: idx % 2 === 0 ? 'bg-white dark:bg-gray-800' : 'bg-gray-50 dark:bg-gray-900/40',
+                                            children: [
+                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
+                                                    className: "px-6 py-4 text-sm font-medium text-gray-900 dark:text-white",
+                                                    children: rowPrimary.district
+                                                }, void 0, false, {
+                                                    fileName: "[project]/src/components/Vehicles.js",
+                                                    lineNumber: 412,
+                                                    columnNumber: 45
+                                                }, ("TURBOPACK compile-time value", void 0)),
+                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
+                                                    className: "px-6 py-4 text-right text-sm text-gray-600 dark:text-gray-400",
+                                                    children: valPrimary.toLocaleString()
+                                                }, void 0, false, {
+                                                    fileName: "[project]/src/components/Vehicles.js",
+                                                    lineNumber: 415,
+                                                    columnNumber: 45
+                                                }, ("TURBOPACK compile-time value", void 0)),
+                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
+                                                    className: "px-6 py-4 text-right text-sm text-gray-900 dark:text-white font-semibold",
+                                                    children: valComparison.toLocaleString()
+                                                }, void 0, false, {
+                                                    fileName: "[project]/src/components/Vehicles.js",
+                                                    lineNumber: 418,
+                                                    columnNumber: 45
+                                                }, ("TURBOPACK compile-time value", void 0)),
+                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
+                                                    className: `px-6 py-4 text-right text-sm font-bold ${isPositive ? 'text-green-600 dark:text-green-400' : isNegative ? 'text-red-600 dark:text-red-400' : 'text-gray-600 dark:text-gray-400'}`,
+                                                    children: [
+                                                        isPositive ? '+' : '',
+                                                        variance.toLocaleString()
+                                                    ]
+                                                }, void 0, true, {
+                                                    fileName: "[project]/src/components/Vehicles.js",
+                                                    lineNumber: 421,
+                                                    columnNumber: 45
+                                                }, ("TURBOPACK compile-time value", void 0)),
+                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
+                                                    className: `px-6 py-4 text-right text-sm font-bold ${isPositive ? 'text-green-600 dark:text-green-400' : isNegative ? 'text-red-600 dark:text-red-400' : 'text-gray-600 dark:text-gray-400'}`,
+                                                    children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                        className: "flex items-center justify-end gap-1",
+                                                        children: [
+                                                            isPositive && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("svg", {
+                                                                className: "w-4 h-4",
+                                                                fill: "none",
+                                                                stroke: "currentColor",
+                                                                viewBox: "0 0 24 24",
+                                                                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("path", {
+                                                                    strokeLinecap: "round",
+                                                                    strokeLinejoin: "round",
+                                                                    strokeWidth: "2",
+                                                                    d: "M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"
+                                                                }, void 0, false, {
+                                                                    fileName: "[project]/src/components/Vehicles.js",
+                                                                    lineNumber: 426,
+                                                                    columnNumber: 147
+                                                                }, ("TURBOPACK compile-time value", void 0))
+                                                            }, void 0, false, {
+                                                                fileName: "[project]/src/components/Vehicles.js",
+                                                                lineNumber: 426,
+                                                                columnNumber: 68
+                                                            }, ("TURBOPACK compile-time value", void 0)),
+                                                            isNegative && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("svg", {
+                                                                className: "w-4 h-4",
+                                                                fill: "none",
+                                                                stroke: "currentColor",
+                                                                viewBox: "0 0 24 24",
+                                                                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("path", {
+                                                                    strokeLinecap: "round",
+                                                                    strokeLinejoin: "round",
+                                                                    strokeWidth: "2",
+                                                                    d: "M13 17h8m0 0v-8m0 8l-8-8-4 4-6-6"
+                                                                }, void 0, false, {
+                                                                    fileName: "[project]/src/components/Vehicles.js",
+                                                                    lineNumber: 427,
+                                                                    columnNumber: 147
+                                                                }, ("TURBOPACK compile-time value", void 0))
+                                                            }, void 0, false, {
+                                                                fileName: "[project]/src/components/Vehicles.js",
+                                                                lineNumber: 427,
+                                                                columnNumber: 68
+                                                            }, ("TURBOPACK compile-time value", void 0)),
+                                                            isPositive ? '+' : '',
+                                                            variancePct.toFixed(1),
+                                                            "%"
+                                                        ]
+                                                    }, void 0, true, {
+                                                        fileName: "[project]/src/components/Vehicles.js",
+                                                        lineNumber: 425,
+                                                        columnNumber: 49
+                                                    }, ("TURBOPACK compile-time value", void 0))
+                                                }, void 0, false, {
+                                                    fileName: "[project]/src/components/Vehicles.js",
+                                                    lineNumber: 424,
+                                                    columnNumber: 45
+                                                }, ("TURBOPACK compile-time value", void 0))
+                                            ]
+                                        }, rowPrimary.district, true, {
+                                            fileName: "[project]/src/components/Vehicles.js",
+                                            lineNumber: 411,
+                                            columnNumber: 41
+                                        }, ("TURBOPACK compile-time value", void 0));
+                                    })
+                                }, void 0, false, {
+                                    fileName: "[project]/src/components/Vehicles.js",
+                                    lineNumber: 397,
+                                    columnNumber: 29
+                                }, ("TURBOPACK compile-time value", void 0))
+                            ]
+                        }, void 0, true, {
+                            fileName: "[project]/src/components/Vehicles.js",
+                            lineNumber: 387,
+                            columnNumber: 25
                         }, ("TURBOPACK compile-time value", void 0))
                     }, void 0, false, {
                         fileName: "[project]/src/components/Vehicles.js",
-                        lineNumber: 258,
+                        lineNumber: 360,
                         columnNumber: 17
                     }, ("TURBOPACK compile-time value", void 0))
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/components/Vehicles.js",
-                lineNumber: 252,
+                lineNumber: 311,
                 columnNumber: 13
             }, ("TURBOPACK compile-time value", void 0)),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1621,12 +2406,12 @@ const Vehicles = ()=>{
                             children: "Registration Application Status"
                         }, void 0, false, {
                             fileName: "[project]/src/components/Vehicles.js",
-                            lineNumber: 289,
+                            lineNumber: 443,
                             columnNumber: 21
                         }, ("TURBOPACK compile-time value", void 0))
                     }, void 0, false, {
                         fileName: "[project]/src/components/Vehicles.js",
-                        lineNumber: 288,
+                        lineNumber: 442,
                         columnNumber: 17
                     }, ("TURBOPACK compile-time value", void 0)),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1643,7 +2428,7 @@ const Vehicles = ()=>{
                                                 children: "Name of District"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/components/Vehicles.js",
-                                                lineNumber: 297,
+                                                lineNumber: 451,
                                                 columnNumber: 33
                                             }, ("TURBOPACK compile-time value", void 0)),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
@@ -1651,7 +2436,7 @@ const Vehicles = ()=>{
                                                 children: "Total applications received for new registration"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/components/Vehicles.js",
-                                                lineNumber: 298,
+                                                lineNumber: 452,
                                                 columnNumber: 33
                                             }, ("TURBOPACK compile-time value", void 0)),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
@@ -1659,7 +2444,7 @@ const Vehicles = ()=>{
                                                 children: "Total registration made from dealer-point"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/components/Vehicles.js",
-                                                lineNumber: 299,
+                                                lineNumber: 453,
                                                 columnNumber: 33
                                             }, ("TURBOPACK compile-time value", void 0)),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
@@ -1667,7 +2452,7 @@ const Vehicles = ()=>{
                                                 children: "Total registration made from DTO office, if any"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/components/Vehicles.js",
-                                                lineNumber: 300,
+                                                lineNumber: 454,
                                                 columnNumber: 33
                                             }, ("TURBOPACK compile-time value", void 0)),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
@@ -1675,7 +2460,7 @@ const Vehicles = ()=>{
                                                 children: "Total applications under scrutiny stage"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/components/Vehicles.js",
-                                                lineNumber: 301,
+                                                lineNumber: 455,
                                                 columnNumber: 33
                                             }, ("TURBOPACK compile-time value", void 0)),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
@@ -1683,7 +2468,7 @@ const Vehicles = ()=>{
                                                 children: "Total applications under approval stage"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/components/Vehicles.js",
-                                                lineNumber: 302,
+                                                lineNumber: 456,
                                                 columnNumber: 33
                                             }, ("TURBOPACK compile-time value", void 0)),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
@@ -1691,18 +2476,18 @@ const Vehicles = ()=>{
                                                 children: "Total applications approved"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/components/Vehicles.js",
-                                                lineNumber: 303,
+                                                lineNumber: 457,
                                                 columnNumber: 33
                                             }, ("TURBOPACK compile-time value", void 0))
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/src/components/Vehicles.js",
-                                        lineNumber: 296,
+                                        lineNumber: 450,
                                         columnNumber: 29
                                     }, ("TURBOPACK compile-time value", void 0))
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/Vehicles.js",
-                                    lineNumber: 295,
+                                    lineNumber: 449,
                                     columnNumber: 25
                                 }, ("TURBOPACK compile-time value", void 0)),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("tbody", {
@@ -1715,7 +2500,7 @@ const Vehicles = ()=>{
                                                     children: row.district
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/components/Vehicles.js",
-                                                    lineNumber: 309,
+                                                    lineNumber: 463,
                                                     columnNumber: 37
                                                 }, ("TURBOPACK compile-time value", void 0)),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
@@ -1723,7 +2508,7 @@ const Vehicles = ()=>{
                                                     children: row.totalReceived.toLocaleString()
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/components/Vehicles.js",
-                                                    lineNumber: 310,
+                                                    lineNumber: 464,
                                                     columnNumber: 37
                                                 }, ("TURBOPACK compile-time value", void 0)),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
@@ -1731,7 +2516,7 @@ const Vehicles = ()=>{
                                                     children: row.dealerPoint.toLocaleString()
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/components/Vehicles.js",
-                                                    lineNumber: 311,
+                                                    lineNumber: 465,
                                                     columnNumber: 37
                                                 }, ("TURBOPACK compile-time value", void 0)),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
@@ -1739,7 +2524,7 @@ const Vehicles = ()=>{
                                                     children: row.dtoOffice.toLocaleString()
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/components/Vehicles.js",
-                                                    lineNumber: 312,
+                                                    lineNumber: 466,
                                                     columnNumber: 37
                                                 }, ("TURBOPACK compile-time value", void 0)),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
@@ -1747,7 +2532,7 @@ const Vehicles = ()=>{
                                                     children: row.scrutiny.toLocaleString()
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/components/Vehicles.js",
-                                                    lineNumber: 313,
+                                                    lineNumber: 467,
                                                     columnNumber: 37
                                                 }, ("TURBOPACK compile-time value", void 0)),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
@@ -1755,7 +2540,7 @@ const Vehicles = ()=>{
                                                     children: row.approvalStage.toLocaleString()
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/components/Vehicles.js",
-                                                    lineNumber: 314,
+                                                    lineNumber: 468,
                                                     columnNumber: 37
                                                 }, ("TURBOPACK compile-time value", void 0)),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
@@ -1763,41 +2548,41 @@ const Vehicles = ()=>{
                                                     children: row.approved.toLocaleString()
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/components/Vehicles.js",
-                                                    lineNumber: 315,
+                                                    lineNumber: 469,
                                                     columnNumber: 37
                                                 }, ("TURBOPACK compile-time value", void 0))
                                             ]
                                         }, row.district, true, {
                                             fileName: "[project]/src/components/Vehicles.js",
-                                            lineNumber: 308,
+                                            lineNumber: 462,
                                             columnNumber: 33
                                         }, ("TURBOPACK compile-time value", void 0)))
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/Vehicles.js",
-                                    lineNumber: 306,
+                                    lineNumber: 460,
                                     columnNumber: 25
                                 }, ("TURBOPACK compile-time value", void 0))
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/components/Vehicles.js",
-                            lineNumber: 294,
+                            lineNumber: 448,
                             columnNumber: 21
                         }, ("TURBOPACK compile-time value", void 0))
                     }, void 0, false, {
                         fileName: "[project]/src/components/Vehicles.js",
-                        lineNumber: 293,
+                        lineNumber: 447,
                         columnNumber: 17
                     }, ("TURBOPACK compile-time value", void 0))
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/components/Vehicles.js",
-                lineNumber: 287,
+                lineNumber: 441,
                 columnNumber: 13
             }, ("TURBOPACK compile-time value", void 0))
         ]
     }, void 0, true, {
         fileName: "[project]/src/components/Vehicles.js",
-        lineNumber: 190,
+        lineNumber: 249,
         columnNumber: 9
     }, ("TURBOPACK compile-time value", void 0));
 };

@@ -138,6 +138,7 @@ export const revenueCollection = months.map((month, index) => {
     otherLateFees: Math.floor((22000 + Math.random() * 6000) * revenueFactor),
     apgt: Math.floor((38000 + Math.random() * 9000) * revenueFactor),
     hsrp: Math.floor((52000 + Math.random() * 12000) * revenueFactor),
+    laborCess: Math.floor((25000 + Math.random() * 8000) * revenueFactor),
   };
 });
 
@@ -164,6 +165,7 @@ export const revenueCollection2026 = months.map((month, index) => {
     otherLateFees: Math.floor((22000 + Math.random() * 6000) * revenueFactor),
     apgt: Math.floor((38000 + Math.random() * 9000) * revenueFactor),
     hsrp: Math.floor((52000 + Math.random() * 12000) * revenueFactor),
+    laborCess: Math.floor((25000 + Math.random() * 8000) * revenueFactor),
   };
 });
 
@@ -519,21 +521,33 @@ export const aetsData = assamDistricts.map(district => {
   };
 });
 
+export const permitFeesData2026 = permitFeesData.map(d => ({
+  ...d,
+  totalVehicles: Math.floor(d.totalVehicles * 1.15),
+  period1Year: Math.floor(d.period1Year * 1.15),
+  period3Year: Math.floor(d.period3Year * 1.15),
+  period5Year: Math.floor(d.period5Year * 1.15),
+  permitFeeRealised: Math.floor(d.permitFeeRealised * 1.15),
+  lateFeeRealised: Math.floor(d.lateFeeRealised * 1.15),
+}));
+
 // PUCC (Pollution Under Control Certificate) Data
 const vehicleCategories = ['Two Wheeler', 'Three Wheeler', 'Four Wheeler', 'LMV', 'MMV', 'HMV'];
 
 export const puccData = assamDistricts.flatMap(district => {
   return vehicleCategories.map(category => {
     const totalApplications = Math.floor(Math.random() * 500) + 100;
+    const totalVehicles = Math.floor(totalApplications * (1.2 + Math.random() * 0.4)); // More vehicles than apps
     const freshWithoutLateFee = Math.floor(totalApplications * (0.4 + Math.random() * 0.2));
     const freshWithLateFee = Math.floor(totalApplications * (0.2 + Math.random() * 0.15));
     const grandTotal = freshWithoutLateFee + freshWithLateFee;
-    const feesRealized = grandTotal * (Math.floor(Math.random() * 200) + 100); // ₹100-300 per PUCC
-    const lateFeeRealized = freshWithLateFee * 500; // ₹500 late fee per certificate
+    const feesRealized = grandTotal * (Math.floor(Math.random() * 200) + 100); 
+    const lateFeeRealized = freshWithLateFee * 500; 
 
     return {
       district: district,
       vehicleCategory: category,
+      totalVehicles: totalVehicles,
       totalApplications: totalApplications,
       freshWithoutLateFee: freshWithoutLateFee,
       freshWithLateFee: freshWithLateFee,
@@ -638,6 +652,118 @@ export const districtWiseRevenue = assamDistricts.map(district => {
     },
     apgt: Math.floor(110000 * factor),
     hsrp: Math.floor(140000 * factor),
+    laborCess: Math.floor(80000 * factor),
+  };
+});
+
+// Generate district-wise detailed revenue collection statement for 2024
+export const districtWiseRevenue2024 = assamDistricts.map(district => {
+  const factor = 0.5 + Math.random(); // Varied performance by district
+  const growth = 1 + (Math.random() * 0.2 - 0.2); // -20% to 0% growth
+  return {
+    district,
+    mvTax: {
+      nonTransport: Math.floor(1200000 * factor * growth),
+      newReg: Math.floor(850000 * factor * growth),
+      alreadyReg: Math.floor(450000 * factor * growth),
+    },
+    mvFees: {
+      sarathi: Math.floor(150000 * factor * growth),
+      vahan: Math.floor(220000 * factor * growth),
+      pucc: Math.floor(80000 * factor * growth),
+    },
+    roadSafetyCess: {
+      nonTransport: Math.floor(350000 * factor * growth),
+      transport: Math.floor(250000 * factor * growth),
+    },
+    greenTax: {
+      nonTransport: Math.floor(180000 * factor * growth),
+      transport: Math.floor(120000 * factor * growth),
+    },
+    compoundingFees: {
+      offenceCF: Math.floor(95000 * factor * growth),
+      perDayCF: Math.floor(45000 * factor * growth),
+      fitnessCF: Math.floor(35000 * factor * growth),
+      puccLateFine: Math.floor(25000 * factor * growth),
+      otherLateFees: Math.floor(15000 * factor * growth),
+    },
+    apgt: Math.floor(110000 * factor * growth),
+    hsrp: Math.floor(140000 * factor * growth),
+    laborCess: Math.floor(80000 * factor * growth),
+  };
+});
+
+// Generate district-wise detailed revenue collection statement for 2023
+export const districtWiseRevenue2023 = assamDistricts.map(district => {
+  const factor = 0.5 + Math.random(); // Varied performance by district
+  const growth = 1 + (Math.random() * 0.2 - 0.4); // -40% to -20% growth
+  return {
+    district,
+    mvTax: {
+      nonTransport: Math.floor(1200000 * factor * growth),
+      newReg: Math.floor(850000 * factor * growth),
+      alreadyReg: Math.floor(450000 * factor * growth),
+    },
+    mvFees: {
+      sarathi: Math.floor(150000 * factor * growth),
+      vahan: Math.floor(220000 * factor * growth),
+      pucc: Math.floor(80000 * factor * growth),
+    },
+    roadSafetyCess: {
+      nonTransport: Math.floor(350000 * factor * growth),
+      transport: Math.floor(250000 * factor * growth),
+    },
+    greenTax: {
+      nonTransport: Math.floor(180000 * factor * growth),
+      transport: Math.floor(120000 * factor * growth),
+    },
+    compoundingFees: {
+      offenceCF: Math.floor(95000 * factor * growth),
+      perDayCF: Math.floor(45000 * factor * growth),
+      fitnessCF: Math.floor(35000 * factor * growth),
+      puccLateFine: Math.floor(25000 * factor * growth),
+      otherLateFees: Math.floor(15000 * factor * growth),
+    },
+    apgt: Math.floor(110000 * factor * growth),
+    hsrp: Math.floor(140000 * factor * growth),
+    laborCess: Math.floor(80000 * factor * growth),
+  };
+});
+
+// Generate district-wise detailed revenue collection statement for 2026
+export const districtWiseRevenue2026 = assamDistricts.map(district => {
+  const factor = 0.5 + Math.random(); // Varied performance by district
+  const growth = 1 + (Math.random() * 0.4 - 0.1); // -10% to +30% growth
+  return {
+    district,
+    mvTax: {
+      nonTransport: Math.floor(1200000 * factor * growth),
+      newReg: Math.floor(850000 * factor * growth),
+      alreadyReg: Math.floor(450000 * factor * growth),
+    },
+    mvFees: {
+      sarathi: Math.floor(150000 * factor * growth),
+      vahan: Math.floor(220000 * factor * growth),
+      pucc: Math.floor(80000 * factor * growth),
+    },
+    roadSafetyCess: {
+      nonTransport: Math.floor(350000 * factor * growth),
+      transport: Math.floor(250000 * factor * growth),
+    },
+    greenTax: {
+      nonTransport: Math.floor(180000 * factor * growth),
+      transport: Math.floor(120000 * factor * growth),
+    },
+    compoundingFees: {
+      offenceCF: Math.floor(95000 * factor * growth),
+      perDayCF: Math.floor(45000 * factor * growth),
+      fitnessCF: Math.floor(35000 * factor * growth),
+      puccLateFine: Math.floor(25000 * factor * growth),
+      otherLateFees: Math.floor(15000 * factor * growth),
+    },
+    apgt: Math.floor(110000 * factor * growth),
+    hsrp: Math.floor(140000 * factor * growth),
+    laborCess: Math.floor(80000 * factor * growth),
   };
 });
 
@@ -648,6 +774,46 @@ export const districtWiseVehicles = assamDistricts.map(district => {
   const threeWheeler = Math.floor(600 * factor);
   const nonTransport = Math.floor(2800 * factor);
   const transport = Math.floor(1200 * factor);
+  const total = nonTransport + transport;
+
+  return {
+    district,
+    total,
+    nonTransport,
+    transport,
+    twoWheeler,
+    threeWheeler
+  };
+});
+
+// Generate district-wise vehicle registration data for 2024 (Baseline)
+export const districtWiseVehicles2024 = assamDistricts.map(district => {
+  const factor = 0.5 + Math.random();
+  const growth = 1 + (Math.random() * 0.2 - 0.2); // -20% to 0% growth
+  const twoWheeler = Math.floor(2500 * factor * growth);
+  const threeWheeler = Math.floor(600 * factor * growth);
+  const nonTransport = Math.floor(2800 * factor * growth);
+  const transport = Math.floor(1200 * factor * growth);
+  const total = nonTransport + transport;
+
+  return {
+    district,
+    total,
+    nonTransport,
+    transport,
+    twoWheeler,
+    threeWheeler
+  };
+});
+
+// Generate district-wise vehicle registration data for 2026 (Projected)
+export const districtWiseVehicles2026 = assamDistricts.map(district => {
+  const factor = 0.5 + Math.random();
+  const growth = 1 + (Math.random() * 0.4 - 0.1); // -10% to +30% growth
+  const twoWheeler = Math.floor(2500 * factor * growth);
+  const threeWheeler = Math.floor(600 * factor * growth);
+  const nonTransport = Math.floor(2800 * factor * growth);
+  const transport = Math.floor(1200 * factor * growth);
   const total = nonTransport + transport;
 
   return {
@@ -680,6 +846,66 @@ export const registrationApplicationsData = assamDistricts.map(district => {
   };
 });
 
+export const registrationApplicationsData2026 = registrationApplicationsData.map(d => ({
+  district: d.district,
+  totalReceived: Math.floor(d.totalReceived * 1.12),
+  dealerPoint: Math.floor(d.dealerPoint * 1.12),
+  dtoOffice: Math.floor(d.dtoOffice * 1.12),
+  scrutiny: Math.floor(d.scrutiny * 1.12),
+  approvalStage: Math.floor(d.approvalStage * 1.12),
+  approved: Math.floor(d.approved * 1.12)
+}));
+
+// Generate 2024 and 2026 variants for Permit, PUCC, AETS, Fitness, and Enforcement
+export const permitApplicationsData2024 = permitApplicationsData.map(row => {
+  const g = 1 + (Math.random() * 0.2 - 0.2);
+  return { ...row, totalReceived: Math.floor(row.totalReceived * g), online: Math.floor(row.online * g), offline: Math.floor(row.offline * g), scrutiny: Math.floor(row.scrutiny * g), approvalStage: Math.floor(row.approvalStage * g), approved: Math.floor(row.approved * g) };
+});
+export const permitApplicationsData2026 = permitApplicationsData.map(row => {
+  const g = 1 + (Math.random() * 0.4 - 0.1);
+  return { ...row, totalReceived: Math.floor(row.totalReceived * g), online: Math.floor(row.online * g), offline: Math.floor(row.offline * g), scrutiny: Math.floor(row.scrutiny * g), approvalStage: Math.floor(row.approvalStage * g), approved: Math.floor(row.approved * g) };
+});
+export const aetsData2024 = aetsData.map(r => { const g = 1 + (Math.random() * 0.2 - 0.2); return {...r, totalCentres: r.totalCentres, calibratedCentres: Math.floor(r.calibratedCentres * g), feesDeposited: Math.floor(r.feesDeposited * g)}; });
+export const aetsData2026 = aetsData.map(r => { const g = 1 + (Math.random() * 0.4 - 0.1); return {...r, totalCentres: r.totalCentres, calibratedCentres: Math.floor(r.calibratedCentres * g), feesDeposited: Math.floor(r.feesDeposited * g)}; });
+export const puccData2024 = puccData.map(r => { const g = 1 + (Math.random() * 0.2 - 0.2); return {...r, totalVehicles: Math.floor(r.totalVehicles*g), totalApplications: Math.floor(r.totalApplications*g), freshWithoutLateFee: Math.floor(r.freshWithoutLateFee*g), freshWithLateFee: Math.floor(r.freshWithLateFee*g), grandTotal: Math.floor(r.grandTotal*g), feesRealized: Math.floor(r.feesRealized*g), lateFeeRealized: Math.floor(r.lateFeeRealized*g)}; });
+export const puccData2026 = puccData.map(r => { const g = 1 + (Math.random() * 0.4 - 0.1); return {...r, totalVehicles: Math.floor(r.totalVehicles*g), totalApplications: Math.floor(r.totalApplications*g), freshWithoutLateFee: Math.floor(r.freshWithoutLateFee*g), freshWithLateFee: Math.floor(r.freshWithLateFee*g), grandTotal: Math.floor(r.grandTotal*g), feesRealized: Math.floor(r.feesRealized*g), lateFeeRealized: Math.floor(r.lateFeeRealized*g)}; });
+export const fitnessData2024 = fitnessData.map(r => { const g = 1 + (Math.random() * 0.2 - 0.2); return {...r, totalTransportVehicles: Math.floor(r.totalTransportVehicles*g), certificatesApplied: Math.floor(r.certificatesApplied*g), certificatesIssued: Math.floor(r.certificatesIssued*g), certificatesRejected: Math.floor(r.certificatesRejected*g), certificatesImpounded: Math.floor(r.certificatesImpounded*g), feesRealised: Math.floor(r.feesRealised*g), lateFeeRealised: Math.floor(r.lateFeeRealised*g), withoutFCCasesBooked: Math.floor(r.withoutFCCasesBooked*g)};});
+export const fitnessData2026 = fitnessData.map(r => { const g = 1 + (Math.random() * 0.4 - 0.1); return {...r, totalTransportVehicles: Math.floor(r.totalTransportVehicles*g), certificatesApplied: Math.floor(r.certificatesApplied*g), certificatesIssued: Math.floor(r.certificatesIssued*g), certificatesRejected: Math.floor(r.certificatesRejected*g), certificatesImpounded: Math.floor(r.certificatesImpounded*g), feesRealised: Math.floor(r.feesRealised*g), lateFeeRealised: Math.floor(r.lateFeeRealised*g), withoutFCCasesBooked: Math.floor(r.withoutFCCasesBooked*g)};});
+export const enforcementData2024 = enforcementData.map(r => { const g = 1 + (Math.random() * 0.2 - 0.2); return {...r, casesBooked: Math.floor(r.casesBooked*g), cfImposed: Math.floor(r.cfImposed*g), casesDisposed: Math.floor(r.casesDisposed*g), cfRealised: Math.floor(r.cfRealised*g), casesPending: Math.floor(r.casesPending*g), licensesSuspended: Math.floor(r.licensesSuspended*g)};});
+export const enforcementData2026 = enforcementData.map(r => { const g = 1 + (Math.random() * 0.4 - 0.1); return {...r, casesBooked: Math.floor(r.casesBooked*g), cfImposed: Math.floor(r.cfImposed*g), casesDisposed: Math.floor(r.casesDisposed*g), cfRealised: Math.floor(r.cfRealised*g), casesPending: Math.floor(r.casesPending*g), licensesSuspended: Math.floor(r.licensesSuspended*g)};});
+
+// Dealer Audit Data
+export const dealerAuditData = [
+  { dealerName: 'Sri Kamakhya Motors', totalRegistrations: 450, twoWheeler: 400, threeWheeler: 0, nonTransport: 50, mobileUpdates: 120, tradeCertStatus: 'Valid', validUntil: '2027-10-15' },
+  { dealerName: 'Bimal Auto Agency', totalRegistrations: 320, twoWheeler: 150, threeWheeler: 20, nonTransport: 150, mobileUpdates: 95, tradeCertStatus: 'Valid', validUntil: '2026-11-20' },
+  { dealerName: 'Podder Car World', totalRegistrations: 680, twoWheeler: 0, threeWheeler: 0, nonTransport: 680, mobileUpdates: 420, tradeCertStatus: 'Expired', validUntil: '2025-12-31' },
+  { dealerName: 'Pallavi Motors', totalRegistrations: 290, twoWheeler: 290, threeWheeler: 0, nonTransport: 0, mobileUpdates: 110, tradeCertStatus: 'Valid', validUntil: '2026-08-05' },
+  { dealerName: 'Gargya Toyota', totalRegistrations: 180, twoWheeler: 0, threeWheeler: 0, nonTransport: 180, mobileUpdates: 140, tradeCertStatus: 'Expiring Soon', validUntil: '2026-05-15' },
+  { dealerName: 'Sethi Motors', totalRegistrations: 510, twoWheeler: 480, threeWheeler: 30, nonTransport: 0, mobileUpdates: 230, tradeCertStatus: 'Valid', validUntil: '2028-02-10' },
+];
+
+// Service Delivery Data
+export const serviceDeliveryData = {
+  contactless: {
+    physical: 125000,
+    eService: 480000 
+  },
+  delivery: [
+    { serviceName: 'Learner License Issuance', applicationsHandled: 150000, avgProcessingTime: '2 Days' },
+    { serviceName: 'Driving License Renewal', applicationsHandled: 85000, avgProcessingTime: '5 Days' },
+    { serviceName: 'Vehicle Registration (Dealer)', applicationsHandled: 210000, avgProcessingTime: '1 Day' },
+    { serviceName: 'Fitness Certificate', applicationsHandled: 45000, avgProcessingTime: 'Same Day' },
+    { serviceName: 'Permit Issuance/Renewal', applicationsHandled: 32000, avgProcessingTime: '3 Days' },
+  ],
+  pendency: [
+    { serviceName: 'Learner License Issuance', pendingApplications: 450 },
+    { serviceName: 'Driving License Renewal', pendingApplications: 1200 },
+    { serviceName: 'Vehicle Registration', pendingApplications: 350 },
+    { serviceName: 'Fitness Certificate', pendingApplications: 80 },
+    { serviceName: 'Permit Issuance/Renewal', pendingApplications: 210 },
+  ]
+};
+
 // Export all data as a single object
 export default {
   vehicleRegistrations,
@@ -698,14 +924,34 @@ export default {
   greenTaxRevenue,
   renewalRevenue,
   permitFeesData,
+  permitFeesData2026,
   permitApplicationsData,
+  permitApplicationsData2024,
+  permitApplicationsData2026,
   aetsData,
+  aetsData2024,
+  aetsData2026,
   puccData,
+  puccData2024,
+  puccData2026,
   fitnessData,
+  fitnessData2024,
+  fitnessData2026,
   enforcementData,
+  enforcementData2024,
+  enforcementData2026,
   districtWiseRevenue,
+  districtWiseRevenue2023,
+  districtWiseRevenue2024,
+  districtWiseRevenue2026,
   districtWiseVehicles,
+  districtWiseVehicles2024,
+  districtWiseVehicles2026,
   registrationApplicationsData,
+  registrationApplicationsData2026,
+  permitFeesData2026,
+  dealerAuditData,
+  serviceDeliveryData
 };
 
 // Future CSV import function (commented out for now)
