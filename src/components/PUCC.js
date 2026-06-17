@@ -2,8 +2,8 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import dummyData from '../data/dummyData';
 import DateFilter from './DateFilter';
-import ComparisonTable from './ComparisonTable';
-import { useComparison } from '../hooks/useComparison';
+import ComparisonTableEnhanced from './ComparisonTableEnhanced';
+import { useComparisonEnhanced } from '../hooks/useComparisonEnhanced';
 
 const PUCC = () => {
     const [isDarkMode, setIsDarkMode] = useState(false);
@@ -31,7 +31,7 @@ const PUCC = () => {
     const vehicleCategories = ['All', ...new Set(dummyData.puccData.map(d => d.vehicleCategory))];
 
     // Filter data
-    const comparisonProps = useComparison({
+    const comparisonProps = useComparisonEnhanced({
         initialCategory: 'grandTotal',
         getYearDataOptions: {
             '2024': dummyData.puccData || dummyData.puccData2026, // fallback
@@ -41,11 +41,22 @@ const PUCC = () => {
     });
 
     const {
+        isComparisonEnabled,
+        setIsComparisonEnabled,
+        primaryRange,
+        setPrimaryRange,
+        compareRange,
+        setCompareRange,
+        compareCategory,
+        setCompareCategory,
+        primaryDistrict,
+        setPrimaryDistrict,
+        compareDistrict,
+        setCompareDistrict,
         primaryScale,
         compareScale,
         primaryData,
-        comparisonDataRaw,
-        compareCategory
+        comparisonDataRaw
     } = comparisonProps;
 
     const scaleRow = (row, scaleFactor) => {
@@ -100,23 +111,30 @@ const PUCC = () => {
                 <p className="text-gray-600 dark:text-gray-400">Pollution Under Control Certificate details vehicle class-wise</p>
             </div>
 
-            <DateFilter onFilterChange={() => { }} />
+            <DateFilter
+                onFilterChange={({ district }) => {
+                    if (district) {
+                        setSelectedDistrict(district);
+                        setExpandedDistricts([]); // reset expansion when switching districts
+                    }
+                }}
+            />
 
             {/* Summary Cards */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
                 <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
                     <h3 className="text-sm font-medium text-gray-500 dark:text-gray-400">Total Applications</h3>
-                    <p className="text-3xl font-bold text-blue-600 dark:text-blue-400 mt-2">{totals.totalApplications.toLocaleString()}</p>
+                    <p className="text-3xl font-bold text-blue-600 dark:text-blue-400 mt-2">{formatCurrency(totals.totalApplications)}</p>
                     <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">Received at AETS</p>
                 </div>
                 <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-6 border-l-4 border-yellow-500">
                     <h3 className="text-sm font-medium text-gray-500 dark:text-gray-400">Total Defaulters</h3>
-                    <p className="text-3xl font-bold text-yellow-600 dark:text-yellow-400 mt-2">{totals.totalDefaulters.toLocaleString()}</p>
+                    <p className="text-3xl font-bold text-yellow-600 dark:text-yellow-400 mt-2">{formatCurrency(totals.totalDefaulters)}</p>
                     <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">Pending PUCC renewals</p>
                 </div>
                 <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
                     <h3 className="text-sm font-medium text-gray-500 dark:text-gray-400">Total PUCCs Issued</h3>
-                    <p className="text-3xl font-bold text-green-600 dark:text-green-400 mt-2">{totals.totalPUCCs.toLocaleString()}</p>
+                    <p className="text-3xl font-bold text-green-600 dark:text-green-400 mt-2">{formatCurrency(totals.totalPUCCs)}</p>
                     <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">All categories</p>
                 </div>
                 <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
@@ -134,21 +152,7 @@ const PUCC = () => {
             {/* Filters */}
             <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-4">
                 <h3 className="text-lg font-semibold mb-3 text-gray-900 dark:text-white">Filters</h3>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                            District
-                        </label>
-                        <select
-                            value={selectedDistrict}
-                            onChange={(e) => setSelectedDistrict(e.target.value)}
-                            className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500"
-                        >
-                            {districts.map(district => (
-                                <option key={district} value={district}>{district}</option>
-                            ))}
-                        </select>
-                    </div>
+                <div className="grid grid-cols-1 md:grid-cols-1 gap-4">
                     <div>
                         <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                             Vehicle Category (within expanded districts)
@@ -167,22 +171,28 @@ const PUCC = () => {
             </div>
 
             {/* PUCC Details Table */}
-            <ComparisonTable
+            <ComparisonTableEnhanced
                 title="PUCC Details Vehicle Class-wise"
-                isComparisonMode={comparisonProps.isComparisonMode}
-                setIsComparisonMode={comparisonProps.setIsComparisonMode}
-                primaryRange={comparisonProps.primaryRange}
-                setPrimaryRange={comparisonProps.setPrimaryRange}
-                compareRange={comparisonProps.compareRange}
-                setCompareRange={comparisonProps.setCompareRange}
-                compareCategory={comparisonProps.compareCategory}
-                setCompareCategory={comparisonProps.setCompareCategory}
+                isComparisonEnabled={isComparisonEnabled}
+                setIsComparisonEnabled={setIsComparisonEnabled}
+                primaryRange={primaryRange}
+                setPrimaryRange={setPrimaryRange}
+                compareRange={compareRange}
+                setCompareRange={setCompareRange}
+                primaryDistrict={primaryDistrict}
+                setPrimaryDistrict={setPrimaryDistrict}
+                compareDistrict={compareDistrict}
+                setCompareDistrict={setCompareDistrict}
+                compareCategory={compareCategory}
+                setCompareCategory={setCompareCategory}
                 categories={categories}
                 comparisonChildren={
                     <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
                         <thead className="bg-gray-100 dark:bg-gray-800 text-xs font-bold uppercase text-gray-700 dark:text-gray-300">
                             <tr>
+                                <th className="px-6 py-4 text-left border-b border-gray-200 dark:border-gray-700">Serial No.</th>
                                 <th className="px-6 py-4 text-left border-b border-gray-200 dark:border-gray-700">District</th>
+                                <th className="px-6 py-4 text-left border-b border-gray-200 dark:border-gray-700">PUCC Issuing AETS Name &amp; Address</th>
                                 <th className="px-6 py-4 text-right border-b border-gray-200 dark:border-gray-700">Selected Period</th>
                                 <th className="px-6 py-4 text-right border-b border-gray-200 dark:border-gray-700">Comparison Period</th>
                                 <th className="px-6 py-4 text-right border-b border-gray-200 dark:border-gray-700">Variance</th>
@@ -193,6 +203,7 @@ const PUCC = () => {
                             {(selectedDistrict === 'All' ? districts.slice(1) : districts.filter(d => d === selectedDistrict)).map((district, idx) => {
                                 const pData = scaledPrimaryDataRaw.filter(d => d.district === district);
                                 const cData = scaledComparisonDataRaw.filter(d => d.district === district);
+                                const aetsNameAddress = pData[0]?.aetsNameAddress || '';
                                 
                                 const valPrimary = pData.reduce((sum, r) => sum + (r[compareCategory] || 0), 0);
                                 const valComparison = cData.reduce((sum, r) => sum + (r[compareCategory] || 0), 0);
@@ -206,16 +217,22 @@ const PUCC = () => {
                                 return (
                                     <tr key={district} className={idx % 2 === 0 ? 'bg-white dark:bg-gray-800' : 'bg-gray-50 dark:bg-gray-900/40'}>
                                         <td className="px-6 py-4 text-sm font-medium text-gray-900 dark:text-white">
+                                            {idx + 1}
+                                        </td>
+                                        <td className="px-6 py-4 text-sm font-medium text-gray-900 dark:text-white">
                                             {district}
                                         </td>
+                                        <td className="px-6 py-4 text-sm text-gray-500 dark:text-gray-400">
+                                            {aetsNameAddress}
+                                        </td>
                                         <td className="px-6 py-4 text-right text-sm text-gray-600 dark:text-gray-400">
-                                            {['feesRealized', 'lateFeeRealized'].includes(compareCategory) ? formatCurrency(valPrimary) : valPrimary.toLocaleString()}
+                                            {['feesRealized', 'lateFeeRealized'].includes(compareCategory) ? formatCurrency(valPrimary) : formatCurrency(valPrimary)}
                                         </td>
                                         <td className="px-6 py-4 text-right text-sm text-gray-900 dark:text-white font-semibold">
-                                            {['feesRealized', 'lateFeeRealized'].includes(compareCategory) ? formatCurrency(valComparison) : valComparison.toLocaleString()}
+                                            {['feesRealized', 'lateFeeRealized'].includes(compareCategory) ? formatCurrency(valComparison) : formatCurrency(valComparison)}
                                         </td>
                                         <td className={`px-6 py-4 text-right text-sm font-bold ${isPositive ? 'text-green-600 dark:text-green-400' : isNegative ? 'text-red-600 dark:text-red-400' : 'text-gray-600 dark:text-gray-400'}`}>
-                                            {isPositive ? '+' : ''}{['feesRealized', 'lateFeeRealized'].includes(compareCategory) ? formatCurrency(variance) : variance.toLocaleString()}
+                                            {isPositive ? '+' : ''}{['feesRealized', 'lateFeeRealized'].includes(compareCategory) ? formatCurrency(variance) : formatCurrency(variance)}
                                         </td>
                                         <td className={`px-6 py-4 text-right text-sm font-bold ${isPositive ? 'text-green-600 dark:text-green-400' : isNegative ? 'text-red-600 dark:text-red-400' : 'text-gray-600 dark:text-gray-400'}`}>
                                             <div className="flex items-center justify-end gap-1">
@@ -235,7 +252,13 @@ const PUCC = () => {
                     <thead className="bg-gray-50 dark:bg-gray-700">
                         <tr>
                             <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                                Serial No.
+                            </th>
+                            <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
                                 District / Vehicle Category
+                            </th>
+                            <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                                PUCC Issuing AETS Name &amp; Address
                             </th>
                             <th scope="col" className="px-6 py-3 text-right text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
                                 Total Applications
@@ -258,9 +281,10 @@ const PUCC = () => {
                         </tr>
                     </thead>
                     <tbody className="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
-                        {(selectedDistrict === 'All' ? districts.slice(1) : districts.filter(d => d === selectedDistrict)).map((district) => {
+                        {(selectedDistrict === 'All' ? districts.slice(1) : districts.filter(d => d === selectedDistrict)).map((district, districtIdx) => {
                             const districtData = scaledPrimaryDataRaw.filter(d => d.district === district);
                             const isExpanded = expandedDistricts.includes(district);
+                            const aetsNameAddress = districtData[0]?.aetsNameAddress || '';
 
                             // Calculate district totals
                             const districtTotals = districtData.reduce((acc, row) => ({
@@ -287,6 +311,9 @@ const PUCC = () => {
                                         className="bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 cursor-pointer transition-colors"
                                     >
                                         <td className="px-6 py-4 whitespace-nowrap text-sm font-bold text-gray-900 dark:text-white">
+                                            {districtIdx + 1}
+                                        </td>
+                                        <td className="px-6 py-4 whitespace-nowrap text-sm font-bold text-gray-900 dark:text-white">
                                             <div className="flex items-center">
                                                 <svg
                                                     className={`w-4 h-4 mr-2 transition-transform ${isExpanded ? 'rotate-90' : ''}`}
@@ -298,17 +325,20 @@ const PUCC = () => {
                                                 {district}
                                             </div>
                                         </td>
+                                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-700 dark:text-gray-300">
+                                            {aetsNameAddress}
+                                        </td>
                                         <td className="px-6 py-4 whitespace-nowrap text-sm text-right font-bold text-gray-900 dark:text-gray-300">
-                                            {districtTotals.totalApplications.toLocaleString()}
+                                            {formatCurrency(districtTotals.totalApplications)}
                                         </td>
                                         <td className="px-6 py-4 whitespace-nowrap text-sm text-right font-bold text-green-600 dark:text-green-400">
-                                            {districtTotals.freshWithoutLateFee.toLocaleString()}
+                                            {formatCurrency(districtTotals.freshWithoutLateFee)}
                                         </td>
                                         <td className="px-6 py-4 whitespace-nowrap text-sm text-right font-bold text-orange-600 dark:text-orange-400">
-                                            {districtTotals.freshWithLateFee.toLocaleString()}
+                                            {formatCurrency(districtTotals.freshWithLateFee)}
                                         </td>
                                         <td className="px-6 py-4 whitespace-nowrap text-sm text-right font-bold text-blue-600 dark:text-blue-400">
-                                            {districtTotals.grandTotal.toLocaleString()}
+                                            {formatCurrency(districtTotals.grandTotal)}
                                         </td>
                                         <td className="px-6 py-4 whitespace-nowrap text-sm text-right font-bold text-purple-600 dark:text-purple-400">
                                             {formatCurrency(districtTotals.feesRealized)}
@@ -323,8 +353,14 @@ const PUCC = () => {
                                         .filter(row => selectedVehicleCategory === 'All' || row.vehicleCategory === selectedVehicleCategory)
                                         .map((row, idx) => (
                                             <tr key={`${district}-${row.vehicleCategory}`} className="hover:bg-gray-50 dark:hover:bg-gray-700/50">
+                                                <td className="px-6 py-3 whitespace-nowrap text-sm text-gray-700 dark:text-gray-300">
+                                                    {districtIdx + 1}.{idx + 1}
+                                                </td>
                                                 <td className="px-6 py-3 pl-12 whitespace-nowrap text-sm text-gray-700 dark:text-gray-300">
                                                     <span className="text-gray-500 dark:text-gray-400">↳</span> {row.vehicleCategory}
+                                                </td>
+                                                <td className="px-6 py-3 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">
+                                                    {row.aetsNameAddress || aetsNameAddress}
                                                 </td>
                                                 <td className="px-6 py-3 whitespace-nowrap text-sm text-right text-gray-700 dark:text-gray-300">
                                                     {row.totalApplications}
@@ -351,7 +387,7 @@ const PUCC = () => {
                         })}
                     </tbody>
                 </table>
-            </ComparisonTable>
+            </ComparisonTableEnhanced>
         </div>
     );
 };

@@ -3,6 +3,14 @@
 
 const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
+const pad2 = (n) => String(n).padStart(2, '0');
+const formatISODate = (d) => `${d.getFullYear()}-${pad2(d.getMonth() + 1)}-${pad2(d.getDate())}`;
+const addDays = (date, days) => {
+  const d = new Date(date);
+  d.setDate(d.getDate() + days);
+  return d;
+};
+
 // Vehicle Registrations by type
 export const vehicleRegistrations = months.map((month, index) => {
   const seasonalFactor = index < 2 || index > 9 ? 0.85 : index < 5 ? 1.15 : 1.0;
@@ -170,7 +178,7 @@ export const revenueCollection2026 = months.map((month, index) => {
 });
 
 // List of Districts in Assam
-const assamDistricts = [
+export const assamDistricts = [
   "Bajali", "Baksa", "Barpeta", "Biswanath", "Bongaigaon", "Cachar", "Charaideo",
   "Chirang", "Darrang", "Dhemaji", "Dhubri", "Dibrugarh", "Dima Hasao", "Goalpara",
   "Golaghat", "Hailakandi", "Hojai", "Jorhat", "Kamrup", "Kamrup Metropolitan",
@@ -483,6 +491,21 @@ assamDistricts.forEach(district => {
       period1Year: period1,
       period3Year: period3,
       period5Year: period5,
+      permitIssuanceDate: (() => {
+        const d = new Date(2025, Math.floor(Math.random() * 12), Math.floor(Math.random() * 28) + 1);
+        return formatISODate(d);
+      })(),
+      validity: (() => {
+        const options = ['1 Year', '3 Year', '5 Year'];
+        return options[Math.floor(Math.random() * options.length)];
+      })(),
+      permitValidUpto: (() => {
+        const base = new Date(2025, Math.floor(Math.random() * 12), Math.floor(Math.random() * 28) + 1);
+        const years = [1, 3, 5][Math.floor(Math.random() * 3)];
+        const upto = new Date(base);
+        upto.setFullYear(upto.getFullYear() + years);
+        return formatISODate(upto);
+      })(),
       permitFeeRealised: Math.floor(Math.random() * 50000) + 10000,
       lateFeeRealised: Math.floor(Math.random() * 5000) + 500
     });
@@ -535,6 +558,7 @@ export const permitFeesData2026 = permitFeesData.map(d => ({
 const vehicleCategories = ['Two Wheeler', 'Three Wheeler', 'Four Wheeler', 'LMV', 'MMV', 'HMV'];
 
 export const puccData = assamDistricts.flatMap(district => {
+  const aetsNameAddress = `AETS ${district} - Main Road, ${district}, Assam`;
   return vehicleCategories.map(category => {
     const totalApplications = Math.floor(Math.random() * 500) + 100;
     const totalVehicles = Math.floor(totalApplications * (1.2 + Math.random() * 0.4)); // More vehicles than apps
@@ -547,6 +571,7 @@ export const puccData = assamDistricts.flatMap(district => {
     return {
       district: district,
       vehicleCategory: category,
+      aetsNameAddress,
       totalVehicles: totalVehicles,
       totalApplications: totalApplications,
       freshWithoutLateFee: freshWithoutLateFee,
@@ -653,6 +678,9 @@ export const districtWiseRevenue = assamDistricts.map(district => {
     apgt: Math.floor(110000 * factor),
     hsrp: Math.floor(140000 * factor),
     laborCess: Math.floor(80000 * factor),
+    mvArrear: Math.floor(60000 * factor),
+    socialSecurity: Math.floor(40000 * factor),
+    permitFeeCess: Math.floor(30000 * factor),
   };
 });
 
@@ -690,6 +718,9 @@ export const districtWiseRevenue2024 = assamDistricts.map(district => {
     apgt: Math.floor(110000 * factor * growth),
     hsrp: Math.floor(140000 * factor * growth),
     laborCess: Math.floor(80000 * factor * growth),
+    mvArrear: Math.floor(60000 * factor * growth),
+    socialSecurity: Math.floor(40000 * factor * growth),
+    permitFeeCess: Math.floor(30000 * factor * growth),
   };
 });
 
@@ -727,6 +758,9 @@ export const districtWiseRevenue2023 = assamDistricts.map(district => {
     apgt: Math.floor(110000 * factor * growth),
     hsrp: Math.floor(140000 * factor * growth),
     laborCess: Math.floor(80000 * factor * growth),
+    mvArrear: Math.floor(60000 * factor * growth),
+    socialSecurity: Math.floor(40000 * factor * growth),
+    permitFeeCess: Math.floor(30000 * factor * growth),
   };
 });
 
@@ -764,6 +798,9 @@ export const districtWiseRevenue2026 = assamDistricts.map(district => {
     apgt: Math.floor(110000 * factor * growth),
     hsrp: Math.floor(140000 * factor * growth),
     laborCess: Math.floor(80000 * factor * growth),
+    mvArrear: Math.floor(60000 * factor * growth),
+    socialSecurity: Math.floor(40000 * factor * growth),
+    permitFeeCess: Math.floor(30000 * factor * growth),
   };
 });
 
@@ -834,6 +871,10 @@ export const registrationApplicationsData = assamDistricts.map(district => {
   const approved = Math.floor(totalReceived * (0.75 + Math.random() * 0.2));
   const scrutiny = Math.floor((totalReceived - approved) * 0.6);
   const approvalStage = totalReceived - approved - scrutiny;
+  const baseDate = new Date(2026, 3, 1 + Math.floor(Math.random() * 60)); // Apr-May 2026
+  const scrutinyDate = addDays(baseDate, 2 + Math.floor(Math.random() * 6));
+  const approvalDate = addDays(scrutinyDate, 1 + Math.floor(Math.random() * 5));
+  const timeTakenDays = Math.max(0, Math.round((approvalDate - baseDate) / (1000 * 60 * 60 * 24)));
 
   return {
     district,
@@ -842,7 +883,11 @@ export const registrationApplicationsData = assamDistricts.map(district => {
     dtoOffice,
     scrutiny,
     approvalStage,
-    approved
+    approved,
+    applicationDate: formatISODate(baseDate),
+    scrutinyDate: formatISODate(scrutinyDate),
+    approvalDate: formatISODate(approvalDate),
+    timeTakenDays,
   };
 });
 
@@ -876,13 +921,41 @@ export const enforcementData2026 = enforcementData.map(r => { const g = 1 + (Mat
 
 // Dealer Audit Data
 export const dealerAuditData = [
-  { dealerName: 'Sri Kamakhya Motors', totalRegistrations: 450, twoWheeler: 400, threeWheeler: 0, nonTransport: 50, mobileUpdates: 120, tradeCertStatus: 'Valid', validUntil: '2027-10-15' },
-  { dealerName: 'Bimal Auto Agency', totalRegistrations: 320, twoWheeler: 150, threeWheeler: 20, nonTransport: 150, mobileUpdates: 95, tradeCertStatus: 'Valid', validUntil: '2026-11-20' },
-  { dealerName: 'Podder Car World', totalRegistrations: 680, twoWheeler: 0, threeWheeler: 0, nonTransport: 680, mobileUpdates: 420, tradeCertStatus: 'Expired', validUntil: '2025-12-31' },
-  { dealerName: 'Pallavi Motors', totalRegistrations: 290, twoWheeler: 290, threeWheeler: 0, nonTransport: 0, mobileUpdates: 110, tradeCertStatus: 'Valid', validUntil: '2026-08-05' },
-  { dealerName: 'Gargya Toyota', totalRegistrations: 180, twoWheeler: 0, threeWheeler: 0, nonTransport: 180, mobileUpdates: 140, tradeCertStatus: 'Expiring Soon', validUntil: '2026-05-15' },
-  { dealerName: 'Sethi Motors', totalRegistrations: 510, twoWheeler: 480, threeWheeler: 30, nonTransport: 0, mobileUpdates: 230, tradeCertStatus: 'Valid', validUntil: '2028-02-10' },
+  { dealerName: 'Sri Kamakhya Motors', totalRegistrations: 450, twoWheeler: 400, threeWheeler: 0, nonTransport: 50, mobileUpdates: 120, tradeCertStatus: 'Valid', validUntil: '2027-10-15', tradeRegMarksObtained: 28 },
+  { dealerName: 'Bimal Auto Agency', totalRegistrations: 320, twoWheeler: 150, threeWheeler: 20, nonTransport: 150, mobileUpdates: 95, tradeCertStatus: 'Valid', validUntil: '2026-11-20', tradeRegMarksObtained: 19 },
+  { dealerName: 'Podder Car World', totalRegistrations: 680, twoWheeler: 0, threeWheeler: 0, nonTransport: 680, mobileUpdates: 420, tradeCertStatus: 'Expired', validUntil: '2025-12-31', tradeRegMarksObtained: 35 },
+  { dealerName: 'Pallavi Motors', totalRegistrations: 290, twoWheeler: 290, threeWheeler: 0, nonTransport: 0, mobileUpdates: 110, tradeCertStatus: 'Valid', validUntil: '2026-08-05', tradeRegMarksObtained: 14 },
+  { dealerName: 'Gargya Toyota', totalRegistrations: 180, twoWheeler: 0, threeWheeler: 0, nonTransport: 180, mobileUpdates: 140, tradeCertStatus: 'Expiring Soon', validUntil: '2026-05-15', tradeRegMarksObtained: 9 },
+  { dealerName: 'Sethi Motors', totalRegistrations: 510, twoWheeler: 480, threeWheeler: 30, nonTransport: 0, mobileUpdates: 230, tradeCertStatus: 'Valid', validUntil: '2028-02-10', tradeRegMarksObtained: 31 },
 ];
+
+// District-wise enforcement manpower & equipment availability (blank/partial dummy for now)
+export const districtWiseEnforcementManpowerEquipment = assamDistricts.map((district) => ({
+  district,
+  dtoName: '',
+  enforcementInspectorName: '',
+  mvis: '',
+  aeis: '',
+  enforcementCheckers: '',
+  totalTIVsAvailable: '',
+  vehiclesForEnforcementDrive: '',
+  echallanDeviceNumber: '',
+  breathAnalyserDeviceNumber: '',
+  echallanFunctionalStatus: '',
+  breathAnalyserFunctionalStatus: '',
+  tivFunctionalStatus: '',
+  otherDeviceEquipment: '',
+  officialDrivers: '',
+  homeguardsTotal: '',
+  vehicleDetails: [
+    {
+      vehicleNumber: '',
+      speedometerReadingAsOnDate: '',
+      makeModel: '',
+      runningCondition: '',
+    },
+  ],
+}));
 
 // Service Delivery Data
 export const serviceDeliveryData = {
@@ -951,7 +1024,9 @@ export default {
   registrationApplicationsData2026,
   permitFeesData2026,
   dealerAuditData,
-  serviceDeliveryData
+  serviceDeliveryData,
+  districtWiseEnforcementManpowerEquipment,
+  assamDistricts,
 };
 
 // Future CSV import function (commented out for now)

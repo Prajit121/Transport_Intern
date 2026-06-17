@@ -16,8 +16,9 @@ import { Bar, Line, Pie } from 'react-chartjs-2';
 import dummyData from '../data/dummyData';
 import DateFilter from './DateFilter';
 import { getMonthsInRange } from '../utils/dateUtils';
-import ComparisonTable from './ComparisonTable';
-import { useComparison } from '../hooks/useComparison';
+import ComparisonTableEnhanced from './ComparisonTableEnhanced';
+import { useComparisonEnhanced } from '../hooks/useComparisonEnhanced';
+import { useClientSideValue } from '../hooks/useClientSideValue';
 
 ChartJS.register(
     CategoryScale,
@@ -32,9 +33,12 @@ ChartJS.register(
 );
 
 const Revenue = () => {
-    const [selectedMonths, setSelectedMonths] = useState(dummyData.revenueCollection.map(d => d.month));
+    const today = new Date().toISOString().split('T')[0];
+    const defaultStart = '2026-04-01';
+    const [selectedMonths, setSelectedMonths] = useState(getMonthsInRange(defaultStart, today));
     const [isDarkMode, setIsDarkMode] = useState(false);
     const [selectedStream, setSelectedStream] = useState('grandTotal');
+    const [selectedDistrict, setSelectedDistrict] = useState('All');
 
     const categories = [
         { id: 'grandTotal', label: 'Grand Total Revenue' },
@@ -45,10 +49,13 @@ const Revenue = () => {
         { id: 'compoundingFees', label: 'Compounding Fees' },
         { id: 'apgt', label: 'APGT' },
         { id: 'hsrp', label: 'HSRP' },
-        { id: 'laborCess', label: 'Labor Cess' }
+        { id: 'laborCess', label: 'Labor Cess' },
+        { id: 'mvArrear', label: 'MV Arrear' },
+        { id: 'socialSecurity', label: 'Social Security' },
+        { id: 'permitFeeCess', label: 'Permit Fee Cess' }
     ];
 
-    const comparisonProps = useComparison({
+    const comparisonProps = useComparisonEnhanced({
         initialCategory: 'grandTotal',
         getYearDataOptions: {
             '2023': dummyData.districtWiseRevenue2023,
@@ -59,11 +66,22 @@ const Revenue = () => {
     });
 
     const {
+        isComparisonEnabled,
         primaryScale,
         compareScale,
         primaryData,
         comparisonDataRaw,
-        compareCategory
+        compareCategory,
+        primaryDistrict,
+        compareDistrict,
+        primaryRange,
+        compareRange,
+        setIsComparisonEnabled,
+        setPrimaryRange,
+        setCompareRange,
+        setPrimaryDistrict,
+        setCompareDistrict,
+        setCompareCategory
     } = comparisonProps;
 
     const streams = [
@@ -78,9 +96,10 @@ const Revenue = () => {
         { id: 'totalLaborCess', name: 'Labor Cess' },
     ];
 
-    const handleFilterChange = ({ start, end }) => {
+    const handleFilterChange = ({ start, end, district }) => {
         const monthsInRange = getMonthsInRange(start, end);
         setSelectedMonths(monthsInRange);
+        if (district) setSelectedDistrict(district);
     };
 
     useEffect(() => {
@@ -89,6 +108,38 @@ const Revenue = () => {
 
     const filteredData2025 = dummyData.revenueCollection.filter(d => selectedMonths.includes(d.month));
     const filteredData2026 = dummyData.revenueCollection2026.filter(d => selectedMonths.includes(d.month));
+
+    const getDistrictStreamValue = (districtData) => {
+        if (!districtData) return 0;
+        switch (selectedStream) {
+            case 'totalMVTax':
+                return districtData.mvTax.nonTransport + districtData.mvTax.newReg + districtData.mvTax.alreadyReg;
+            case 'totalMVFees':
+                return districtData.mvFees.sarathi + districtData.mvFees.vahan + districtData.mvFees.pucc;
+            case 'totalRoadSafetyCess':
+                return districtData.roadSafetyCess.nonTransport + districtData.roadSafetyCess.transport;
+            case 'totalGreenTax':
+                return districtData.greenTax.nonTransport + districtData.greenTax.transport;
+            case 'totalCF':
+                return districtData.compoundingFees.offenceCF + districtData.compoundingFees.perDayCF + districtData.compoundingFees.fitnessCF + districtData.compoundingFees.puccLateFine + districtData.compoundingFees.otherLateFees;
+            case 'totalAPGT':
+                return districtData.apgt;
+            case 'totalHSRP':
+                return districtData.hsrp;
+            case 'totalLaborCess':
+                return districtData.laborCess;
+            case 'grandTotal':
+            default:
+                return (
+                    districtData.mvTax.nonTransport + districtData.mvTax.newReg + districtData.mvTax.alreadyReg +
+                    districtData.mvFees.sarathi + districtData.mvFees.vahan + districtData.mvFees.pucc +
+                    districtData.roadSafetyCess.nonTransport + districtData.roadSafetyCess.transport +
+                    districtData.greenTax.nonTransport + districtData.greenTax.transport +
+                    districtData.compoundingFees.offenceCF + districtData.compoundingFees.perDayCF + districtData.compoundingFees.fitnessCF + districtData.compoundingFees.puccLateFine + districtData.compoundingFees.otherLateFees +
+                    districtData.apgt + districtData.hsrp + districtData.laborCess
+                );
+        }
+    };
 
     const getStreamValue = (d) => {
         if (!d) return 0;
@@ -133,6 +184,9 @@ const Revenue = () => {
             case 'apgt': return districtData.apgt;
             case 'hsrp': return districtData.hsrp;
             case 'laborCess': return districtData.laborCess;
+            case 'mvArrear': return districtData.mvArrear;
+            case 'socialSecurity': return districtData.socialSecurity;
+            case 'permitFeeCess': return districtData.permitFeeCess;
             case 'grandTotal':
             default:
                 return (
@@ -141,7 +195,7 @@ const Revenue = () => {
                     districtData.roadSafetyCess.nonTransport + districtData.roadSafetyCess.transport +
                     districtData.greenTax.nonTransport + districtData.greenTax.transport +
                     districtData.compoundingFees.offenceCF + districtData.compoundingFees.perDayCF + districtData.compoundingFees.fitnessCF + districtData.compoundingFees.puccLateFine + districtData.compoundingFees.otherLateFees +
-                    districtData.apgt + districtData.hsrp + districtData.laborCess
+                    districtData.apgt + districtData.hsrp + districtData.laborCess + districtData.mvArrear + districtData.socialSecurity + districtData.permitFeeCess
                 );
         }
     };
@@ -158,32 +212,36 @@ const Revenue = () => {
             apgt: scale(row.apgt),
             hsrp: scale(row.hsrp),
             laborCess: scale(row.laborCess),
+            mvArrear: scale(row.mvArrear),
+            socialSecurity: scale(row.socialSecurity),
+            permitFeeCess: scale(row.permitFeeCess),
         };
     };
 
     const scaledPrimaryData = primaryData.map(row => scaleRow(row, primaryScale));
     const scaledComparisonData = comparisonDataRaw.map(row => scaleRow(row, compareScale));
 
-    // Calculate total revenue for summary cards (using 2025 as base)
+    const scaledPrimaryDataFiltered = primaryDistrict === 'All'
+        ? scaledPrimaryData
+        : scaledPrimaryData.filter((r) => r.district === primaryDistrict);
+
+    const scaledComparisonDataFiltered = compareDistrict === 'All'
+        ? scaledComparisonData
+        : scaledComparisonData.filter((r) => r.district === compareDistrict);
+
+    const sumDistrictValue = (rows, fn) => rows.reduce((sum, r) => sum + fn(r), 0);
+
+    // Calculate total revenue for summary cards (district-aware, based on district-wise dataset)
     const stats = useMemo(() => {
-        const totalMVTax = filteredData2025.reduce((sum, d) =>
-            sum + d.mvTaxNonTransport + d.mvTaxTransport + d.mvTaxNewRegistration + d.mvTaxFromRegistered, 0
-        );
-        const totalMVFees = filteredData2025.reduce((sum, d) =>
-            sum + d.mvFeesSarathi + d.mvFeesVahan + d.mvFeesPUCC, 0
-        );
-        const totalRoadSafetyCess = filteredData2025.reduce((sum, d) =>
-            sum + d.roadSafetyCessNonTransport + d.roadSafetyCessTransport, 0
-        );
-        const totalGreenTax = filteredData2025.reduce((sum, d) =>
-            sum + d.greenTaxNonTransport + d.greenTaxTransport, 0
-        );
-        const totalCF = filteredData2025.reduce((sum, d) =>
-            sum + d.cfOffence + d.cfDelayFine + d.fitnessCF + d.puccLateFine + d.otherLateFees, 0
-        );
-        const totalAPGT = filteredData2025.reduce((sum, d) => sum + d.apgt, 0);
-        const totalHSRP = filteredData2025.reduce((sum, d) => sum + d.hsrp, 0);
-        const totalLaborCess = filteredData2025.reduce((sum, d) => sum + d.laborCess, 0);
+        const rows = scaledPrimaryDataFiltered;
+        const totalMVTax = sumDistrictValue(rows, (d) => d.mvTax.nonTransport + d.mvTax.newReg + d.mvTax.alreadyReg);
+        const totalMVFees = sumDistrictValue(rows, (d) => d.mvFees.sarathi + d.mvFees.vahan + d.mvFees.pucc);
+        const totalRoadSafetyCess = sumDistrictValue(rows, (d) => d.roadSafetyCess.nonTransport + d.roadSafetyCess.transport);
+        const totalGreenTax = sumDistrictValue(rows, (d) => d.greenTax.nonTransport + d.greenTax.transport);
+        const totalCF = sumDistrictValue(rows, (d) => d.compoundingFees.offenceCF + d.compoundingFees.perDayCF + d.compoundingFees.fitnessCF + d.compoundingFees.puccLateFine + d.compoundingFees.otherLateFees);
+        const totalAPGT = sumDistrictValue(rows, (d) => d.apgt);
+        const totalHSRP = sumDistrictValue(rows, (d) => d.hsrp);
+        const totalLaborCess = sumDistrictValue(rows, (d) => d.laborCess);
         const grandTotal = totalMVTax + totalMVFees + totalRoadSafetyCess + totalGreenTax + totalCF + totalAPGT + totalHSRP + totalLaborCess;
 
         return {
@@ -197,7 +255,7 @@ const Revenue = () => {
             totalLaborCess,
             grandTotal,
         };
-    }, [filteredData2025]);
+    }, [scaledPrimaryDataFiltered]);
 
     // Revenue breakdown by category (Pie chart)
     const revenuePieData = {
@@ -239,13 +297,40 @@ const Revenue = () => {
         ],
     };
 
-    // Dual line trend chart (2025 vs 2026)
+    const buildMonthlySeriesFromAnnual = (annualTotal, baseMonthlyValues) => {
+        const base = baseMonthlyValues.map((v) => Math.max(0, v));
+        const sumBase = base.reduce((a, b) => a + b, 0);
+        const weights = sumBase > 0 ? base.map((v) => v / sumBase) : base.map(() => 1 / base.length);
+        return weights.map((w) => Math.round(annualTotal * w));
+    };
+
+    const getDistrictAnnualForYear = (year) => {
+        const data = year === 2026 ? dummyData.districtWiseRevenue2026 : dummyData.districtWiseRevenue;
+        if (selectedDistrict === 'All') return null;
+        return data.find((d) => d.district === selectedDistrict) || null;
+    };
+
+    const monthly2025 = selectedDistrict === 'All'
+        ? filteredData2025.map((d) => getStreamValue(d))
+        : buildMonthlySeriesFromAnnual(
+            getDistrictStreamValue(getDistrictAnnualForYear(2025)),
+            filteredData2025.map((d) => getStreamValue(d))
+        );
+
+    const monthly2026 = selectedDistrict === 'All'
+        ? filteredData2026.map((d) => getStreamValue(d))
+        : buildMonthlySeriesFromAnnual(
+            getDistrictStreamValue(getDistrictAnnualForYear(2026)),
+            filteredData2026.map((d) => getStreamValue(d))
+        );
+
+    // Dual line trend chart (2025 vs 2026) (district-aware synthesized when needed)
     const revenueTrendData = {
         labels: selectedMonths,
         datasets: [
             {
                 label: `2025`,
-                data: filteredData2025.map(d => getStreamValue(d)),
+                data: dummyData.revenueCollection.filter(d => selectedMonths.includes(d.month)).map((d, idx) => monthly2025[idx]),
                 borderColor: 'rgba(59, 130, 246, 1)',
                 backgroundColor: 'rgba(59, 130, 246, 0.1)',
                 tension: 0.4,
@@ -253,7 +338,7 @@ const Revenue = () => {
             },
             {
                 label: `2026`,
-                data: filteredData2026.map(d => getStreamValue(d)),
+                data: dummyData.revenueCollection2026.filter(d => selectedMonths.includes(d.month)).map((d, idx) => monthly2026[idx]),
                 borderColor: 'rgba(239, 68, 68, 1)',
                 backgroundColor: 'rgba(239, 68, 68, 0.1)',
                 tension: 0.4,
@@ -325,11 +410,13 @@ const Revenue = () => {
         },
     };
 
-    const formatCurrency = (amount) => '₹' + amount.toLocaleString('en-IN');
+    const formatCurrency = (amount) => {
+        return '₹' + amount.toLocaleString('en-IN');
+    };
 
     return (
         <div className="space-y-6">
-            <DateFilter onFilterChange={handleFilterChange} />
+            <DateFilter onFilterChange={handleFilterChange} defaultStart={defaultStart} defaultEnd={today} />
 
             {/* Top Section: Summary & Breakdown */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
@@ -365,6 +452,10 @@ const Revenue = () => {
                     <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
                         <h3 className="text-sm font-medium text-gray-500 dark:text-gray-400">HSRP</h3>
                         <p className="text-2xl font-bold text-indigo-600 dark:text-indigo-400 mt-2">{formatCurrency(stats.totalHSRP)}</p>
+                    </div>
+                    <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
+                        <h3 className="text-sm font-medium text-gray-500 dark:text-gray-400">Labor Cess</h3>
+                        <p className="text-2xl font-bold text-pink-600 dark:text-pink-400 mt-2">{formatCurrency(stats.totalLaborCess)}</p>
                     </div>
                 </div>
 
@@ -404,21 +495,26 @@ const Revenue = () => {
             </div>
 
             {/* Bottom Section: District-wise Detailed Table */}
-            <ComparisonTable
+            <ComparisonTableEnhanced
                 title="District-Wise Revenue"
-                isComparisonMode={comparisonProps.isComparisonMode}
-                setIsComparisonMode={comparisonProps.setIsComparisonMode}
-                primaryRange={comparisonProps.primaryRange}
-                setPrimaryRange={comparisonProps.setPrimaryRange}
-                compareRange={comparisonProps.compareRange}
-                setCompareRange={comparisonProps.setCompareRange}
-                compareCategory={comparisonProps.compareCategory}
-                setCompareCategory={comparisonProps.setCompareCategory}
+                isComparisonEnabled={isComparisonEnabled}
+                setIsComparisonEnabled={setIsComparisonEnabled}
+                primaryRange={primaryRange}
+                setPrimaryRange={setPrimaryRange}
+                compareRange={compareRange}
+                setCompareRange={setCompareRange}
+                primaryDistrict={primaryDistrict}
+                setPrimaryDistrict={setPrimaryDistrict}
+                compareDistrict={compareDistrict}
+                setCompareDistrict={setCompareDistrict}
+                compareCategory={compareCategory}
+                setCompareCategory={setCompareCategory}
                 categories={categories}
                 comparisonChildren={
                     <table className="min-w-full border-collapse border border-gray-200 dark:border-gray-700">
                         <thead className="bg-gray-100 dark:bg-gray-800 text-xs font-bold uppercase text-gray-700 dark:text-gray-300">
                             <tr>
+                                <th className="border border-gray-300 dark:border-gray-600 px-4 py-3 text-center w-12">Sl. No.</th>
                                 <th className="border border-gray-300 dark:border-gray-600 px-4 py-3 text-left">District</th>
                                 <th className="border border-gray-300 dark:border-gray-600 px-4 py-3 text-right">Selected Period</th>
                                 <th className="border border-gray-300 dark:border-gray-600 px-4 py-3 text-right">Comparison Period</th>
@@ -427,11 +523,11 @@ const Revenue = () => {
                             </tr>
                         </thead>
                         <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
-                            {scaledPrimaryData.map((rowPrimary, idx) => {
-                                const rowComparison = comparisonProps.comparisonDataRaw?.find(d => d.district === rowPrimary.district);
+                            {scaledPrimaryDataFiltered.map((rowPrimary, idx) => {
+                                const rowComparison = scaledComparisonDataFiltered?.find(d => d.district === rowPrimary.district);
                                 
-                                const valPrimary = getDistrictCategoryValue(rowPrimary, comparisonProps.compareCategory);
-                                const valComparison = getDistrictCategoryValue(rowComparison, comparisonProps.compareCategory);
+                                const valPrimary = getDistrictCategoryValue(rowPrimary, compareCategory);
+                                const valComparison = getDistrictCategoryValue(rowComparison, compareCategory);
                                 
                                 const variance = valComparison - valPrimary;
                                 const variancePct = valPrimary === 0 ? 0 : (variance / valPrimary) * 100;
@@ -441,6 +537,9 @@ const Revenue = () => {
                                 
                                 return (
                                     <tr key={rowPrimary.district} className={idx % 2 === 0 ? 'bg-white dark:bg-gray-800' : 'bg-gray-50 dark:bg-gray-900/40'}>
+                                        <td className="border border-gray-200 dark:border-gray-700 px-4 py-3 text-sm text-center font-medium text-gray-900 dark:text-white">
+                                            {idx + 1}
+                                        </td>
                                         <td className="border border-gray-200 dark:border-gray-700 px-4 py-3 text-sm font-medium text-gray-900 dark:text-white">
                                             {rowPrimary.district}
                                         </td>
@@ -471,6 +570,7 @@ const Revenue = () => {
                             <thead className="bg-gray-100 dark:bg-gray-800 text-xs font-bold uppercase text-gray-700 dark:text-gray-300">
                                 {/* Row 1 */}
                                 <tr>
+                                    <th rowSpan="3" className="border border-gray-300 dark:border-gray-600 px-4 py-2 text-center w-12">Sl. No.</th>
                                     <th rowSpan="3" className="border border-gray-300 dark:border-gray-600 px-4 py-2 text-center">District</th>
                                     <th colSpan="3" className="border border-gray-300 dark:border-gray-600 px-4 py-2 text-center">MV Tax</th>
                                     <th colSpan="3" className="border border-gray-300 dark:border-gray-600 px-4 py-2 text-center">MV Fees</th>
@@ -479,6 +579,10 @@ const Revenue = () => {
                                     <th colSpan="5" className="border border-gray-300 dark:border-gray-600 px-4 py-2 text-center">C.F. (Compounding Fees)</th>
                                     <th rowSpan="3" className="border border-gray-300 dark:border-gray-600 px-4 py-2 text-center">APGT</th>
                                     <th rowSpan="3" className="border border-gray-300 dark:border-gray-600 px-4 py-2 text-center">HSRP</th>
+                                    <th rowSpan="3" className="border border-gray-300 dark:border-gray-600 px-4 py-2 text-center">Labor Cess</th>
+                                    <th rowSpan="3" className="border border-gray-300 dark:border-gray-600 px-4 py-2 text-center">MV Arrear</th>
+                                    <th rowSpan="3" className="border border-gray-300 dark:border-gray-600 px-4 py-2 text-center">Social Security</th>
+                                    <th rowSpan="3" className="border border-gray-300 dark:border-gray-600 px-4 py-2 text-center">Permit Fee Cess</th>
                                 </tr>
                                 {/* Row 2 */}
                                 <tr>
@@ -504,8 +608,9 @@ const Revenue = () => {
                                 </tr>
                             </thead>
                             <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
-                                {scaledPrimaryData.map((row, idx) => (
+                                {scaledPrimaryDataFiltered.map((row, idx) => (
                                     <tr key={row.district} className={idx % 2 === 0 ? 'bg-white dark:bg-gray-800' : 'bg-gray-50 dark:bg-gray-900/40'}>
+                                        <td className="border border-gray-200 dark:border-gray-700 px-4 py-2 text-sm text-center font-medium text-gray-900 dark:text-white">{idx + 1}</td>
                                         <td className="border border-gray-200 dark:border-gray-700 px-4 py-2 text-sm font-medium text-gray-900 dark:text-white">{row.district}</td>
                                         
                                         {/* MV Tax */}
@@ -533,64 +638,18 @@ const Revenue = () => {
                                         <td className="border border-gray-200 dark:border-gray-700 px-2 py-2 text-right text-xs text-red-600 dark:text-red-400">{row.compoundingFees.puccLateFine.toLocaleString()}</td>
                                         <td className="border border-gray-200 dark:border-gray-700 px-2 py-2 text-right text-xs text-red-600 dark:text-red-400">{row.compoundingFees.otherLateFees.toLocaleString()}</td>
                                         
-                                        {/* APGT & HSRP */}
+                                        {/* APGT & HSRP & Labor Cess */}
                                         <td className="border border-gray-200 dark:border-gray-700 px-2 py-2 text-right text-xs text-purple-600 dark:text-purple-400 font-bold">{row.apgt.toLocaleString()}</td>
                                         <td className="border border-gray-200 dark:border-gray-700 px-2 py-2 text-right text-xs text-indigo-600 dark:text-indigo-400 font-bold">{row.hsrp.toLocaleString()}</td>
+                                        <td className="border border-gray-200 dark:border-gray-700 px-2 py-2 text-right text-xs text-pink-600 dark:text-pink-400 font-bold">{row.laborCess.toLocaleString()}</td>
+                                        <td className="border border-gray-200 dark:border-gray-700 px-2 py-2 text-right text-xs text-gray-600 dark:text-gray-400 font-bold">{row.mvArrear.toLocaleString()}</td>
+                                        <td className="border border-gray-200 dark:border-gray-700 px-2 py-2 text-right text-xs text-gray-600 dark:text-gray-400 font-bold">{row.socialSecurity.toLocaleString()}</td>
+                                        <td className="border border-gray-200 dark:border-gray-700 px-2 py-2 text-right text-xs text-gray-600 dark:text-gray-400 font-bold">{row.permitFeeCess.toLocaleString()}</td>
                                     </tr>
                                 ))}
                             </tbody>
                         </table>
-                    ) : (
-                        <table className="min-w-full border-collapse border border-gray-200 dark:border-gray-700">
-                            <thead className="bg-gray-100 dark:bg-gray-800 text-xs font-bold uppercase text-gray-700 dark:text-gray-300">
-                                <tr>
-                                    <th className="border border-gray-300 dark:border-gray-600 px-4 py-3 text-left">District</th>
-                                    <th className="border border-gray-300 dark:border-gray-600 px-4 py-3 text-right">Selected Period</th>
-                                    <th className="border border-gray-300 dark:border-gray-600 px-4 py-3 text-right">Comparison Period</th>
-                                    <th className="border border-gray-300 dark:border-gray-600 px-4 py-3 text-right">Variance (₹)</th>
-                                    <th className="border border-gray-300 dark:border-gray-600 px-4 py-3 text-right">Trend</th>
-                                </tr>
-                            </thead>
-                            <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
-                                {scaledPrimaryData.map((rowPrimary, idx) => {
-                                    const rowComparison = scaledComparisonData?.find(d => d.district === rowPrimary.district);
-                                    
-                                    const valPrimary = getDistrictCategoryValue(rowPrimary, compareCategory);
-                                    const valComparison = getDistrictCategoryValue(rowComparison, compareCategory);
-                                    
-                                    const variance = valComparison - valPrimary;
-                                    const variancePct = valPrimary === 0 ? 0 : (variance / valPrimary) * 100;
-                                    
-                                    const isPositive = variance > 0;
-                                    const isNegative = variance < 0;
-                                    
-                                    return (
-                                        <tr key={rowPrimary.district} className={idx % 2 === 0 ? 'bg-white dark:bg-gray-800' : 'bg-gray-50 dark:bg-gray-900/40'}>
-                                            <td className="border border-gray-200 dark:border-gray-700 px-4 py-3 text-sm font-medium text-gray-900 dark:text-white">
-                                                {rowPrimary.district}
-                                            </td>
-                                            <td className="border border-gray-200 dark:border-gray-700 px-4 py-3 text-right text-sm text-gray-600 dark:text-gray-400">
-                                                {formatCurrency(valPrimary)}
-                                            </td>
-                                            <td className="border border-gray-200 dark:border-gray-700 px-4 py-3 text-right text-sm text-gray-900 dark:text-white font-semibold">
-                                                {formatCurrency(valComparison)}
-                                            </td>
-                                            <td className={`border border-gray-200 dark:border-gray-700 px-4 py-3 text-right text-sm font-bold ${isPositive ? 'text-green-600 dark:text-green-400' : isNegative ? 'text-red-600 dark:text-red-400' : 'text-gray-600 dark:text-gray-400'}`}>
-                                                {isPositive ? '+' : ''}{formatCurrency(variance)}
-                                            </td>
-                                            <td className={`border border-gray-200 dark:border-gray-700 px-4 py-3 text-right text-sm font-bold ${isPositive ? 'text-green-600 dark:text-green-400' : isNegative ? 'text-red-600 dark:text-red-400' : 'text-gray-600 dark:text-gray-400'}`}>
-                                                <div className="flex items-center justify-end gap-1">
-                                                    {isPositive && <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>}
-                                                    {isNegative && <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 17h8m0 0v-8m0 8l-8-8-4 4-6-6"></path></svg>}
-                                                    {isPositive ? '+' : ''}{variancePct.toFixed(1)}%
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    );
-                                })}
-                            </tbody>
-                        </table>
-            </ComparisonTable>
+            </ComparisonTableEnhanced>
         </div>
     );
 };

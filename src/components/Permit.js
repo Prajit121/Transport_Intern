@@ -2,8 +2,8 @@
 import React, { useState, useEffect } from 'react';
 import dummyData from '../data/dummyData';
 import DateFilter from './DateFilter';
-import ComparisonTable from './ComparisonTable';
-import { useComparison } from '../hooks/useComparison';
+import ComparisonTableEnhanced from './ComparisonTableEnhanced';
+import { useComparisonEnhanced } from '../hooks/useComparisonEnhanced';
 
 const Permit = () => {
     const [isDarkMode, setIsDarkMode] = useState(false);
@@ -15,13 +15,11 @@ const Permit = () => {
         setIsDarkMode(document.documentElement.classList.contains('dark'));
     }, []);
 
-    // Get unique values for filters
-    const districts = ['All', ...new Set(dummyData.permitFeesData.map(d => d.district))];
     const permitTypes = ['All', ...new Set(dummyData.permitFeesData.map(d => d.permitType))];
     const vehicleClasses = ['All', ...new Set(dummyData.permitFeesData.map(d => d.vehicleClass))];
 
     // Filter permit fees data (used as the base before scaling)
-    const comparisonPropsFees = useComparison({
+    const comparisonPropsFees = useComparisonEnhanced({
         initialCategory: 'permitFeeRealised',
         getYearDataOptions: {
             '2024': dummyData.permitFeesData || dummyData.permitFeesData2026,
@@ -64,7 +62,7 @@ const Permit = () => {
     ];
 
     // Filter application data
-    const comparisonProps = useComparison({
+    const comparisonProps = useComparisonEnhanced({
         initialCategory: 'totalReceived',
         getYearDataOptions: {
             '2024': dummyData.permitApplicationsData2024,
@@ -74,12 +72,23 @@ const Permit = () => {
     });
 
     const {
+        isComparisonEnabled: isComparisonEnabledFees,
+        setIsComparisonEnabled: setIsComparisonEnabledFees,
+        primaryRange: primaryRangeFees,
+        setPrimaryRange: setPrimaryRangeFees,
+        compareRange: compareRangeFees,
+        setCompareRange: setCompareRangeFees,
+        compareCategory: compareCategoryFees,
+        setCompareCategory: setCompareCategoryFees,
+        primaryDistrict: primaryDistrictFees,
+        setPrimaryDistrict: setPrimaryDistrictFees,
+        compareDistrict: compareDistrictFees,
+        setCompareDistrict: setCompareDistrictFees,
         primaryScale,
         compareScale,
         primaryData,
-        comparisonDataRaw,
-        compareCategory
-    } = comparisonProps;
+        comparisonDataRaw
+    } = comparisonPropsFees;
 
     const scaleRow = (row, scaleFactor) => {
         if (!row) return null;
@@ -127,25 +136,11 @@ const Permit = () => {
                 <p className="text-gray-600 dark:text-gray-400">District-wise permit fee details and application status</p>
             </div>
 
-            <DateFilter onFilterChange={() => { }} />
+            <DateFilter onFilterChange={({ district }) => { if (district) setSelectedDistrict(district); }} />
 
             <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-4">
                 <h3 className="text-lg font-semibold mb-3 text-gray-900 dark:text-white">Filters</h3>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                    <div>
-                        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                            District
-                        </label>
-                        <select
-                            value={selectedDistrict}
-                            onChange={(e) => setSelectedDistrict(e.target.value)}
-                            className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500"
-                        >
-                            {districts.map(district => (
-                                <option key={district} value={district}>{district}</option>
-                            ))}
-                        </select>
-                    </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
                         <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                             Permit Type
@@ -178,23 +173,27 @@ const Permit = () => {
             </div>
 
             {/* Permit Fee Details Table */}
-            <ComparisonTable
+            <ComparisonTableEnhanced
                 title="Permit & Permit Fee Details"
-                isComparisonMode={comparisonPropsFees.isComparisonMode}
-                setIsComparisonMode={comparisonPropsFees.setIsComparisonMode}
-                primaryRange={comparisonPropsFees.primaryRange}
-                setPrimaryRange={comparisonPropsFees.setPrimaryRange}
-                compareRange={comparisonPropsFees.compareRange}
-                setCompareRange={comparisonPropsFees.setCompareRange}
-                compareCategory={comparisonPropsFees.compareCategory}
-                setCompareCategory={comparisonPropsFees.setCompareCategory}
+                isComparisonEnabled={isComparisonEnabledFees}
+                setIsComparisonEnabled={setIsComparisonEnabledFees}
+                primaryRange={primaryRangeFees}
+                setPrimaryRange={setPrimaryRangeFees}
+                compareRange={compareRangeFees}
+                setCompareRange={setCompareRangeFees}
+                compareCategory={compareCategoryFees}
+                setCompareCategory={setCompareCategoryFees}
                 categories={feesCategories}
                 comparisonChildren={
                     <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
                         <thead className="bg-gray-100 dark:bg-gray-800 text-[10px] font-bold uppercase text-gray-700 dark:text-gray-300">
                             <tr>
+                                <th className="px-6 py-4 text-left border-b border-gray-200 dark:border-gray-700">Serial No.</th>
                                 <th className="px-6 py-4 text-left border-b border-gray-200 dark:border-gray-700">District</th>
                                 <th className="px-6 py-4 text-left border-b border-gray-200 dark:border-gray-700">Type/Sub-Type/Class</th>
+                                <th className="px-6 py-4 text-left border-b border-gray-200 dark:border-gray-700">Permit Issuance Date</th>
+                                <th className="px-6 py-4 text-left border-b border-gray-200 dark:border-gray-700">Validity</th>
+                                <th className="px-6 py-4 text-left border-b border-gray-200 dark:border-gray-700">Permit Valid Upto</th>
                                 <th className="px-6 py-4 text-right border-b border-gray-200 dark:border-gray-700">Selected Period</th>
                                 <th className="px-6 py-4 text-right border-b border-gray-200 dark:border-gray-700">Comparison Period</th>
                                 <th className="px-6 py-4 text-right border-b border-gray-200 dark:border-gray-700">Variance</th>
@@ -224,10 +223,22 @@ const Permit = () => {
                                 return (
                                     <tr key={`${rowPrimary.district}-${idx}`} className={idx % 2 === 0 ? 'bg-white dark:bg-gray-800' : 'bg-gray-50 dark:bg-gray-900/40'}>
                                         <td className="px-6 py-4 text-sm font-medium text-gray-900 dark:text-white">
+                                            {idx + 1}
+                                        </td>
+                                        <td className="px-6 py-4 text-sm font-medium text-gray-900 dark:text-white">
                                             {rowPrimary.district}
                                         </td>
                                         <td className="px-6 py-4 text-sm text-gray-500 dark:text-gray-400">
                                             {rowPrimary.permitType} / {rowPrimary.subType} / {rowPrimary.vehicleClass}
+                                        </td>
+                                        <td className="px-6 py-4 text-sm text-gray-500 dark:text-gray-400">
+                                            {rowPrimary.permitIssuanceDate || ''}
+                                        </td>
+                                        <td className="px-6 py-4 text-sm text-gray-500 dark:text-gray-400">
+                                            {rowPrimary.validity || ''}
+                                        </td>
+                                        <td className="px-6 py-4 text-sm text-gray-500 dark:text-gray-400">
+                                            {rowPrimary.permitValidUpto || ''}
                                         </td>
                                         <td className="px-6 py-4 text-right text-sm text-gray-600 dark:text-gray-400">
                                             {isCurrency ? formatCurrency(valPrimary) : valPrimary.toLocaleString()}
@@ -256,6 +267,9 @@ const Permit = () => {
                     <thead className="bg-gray-50 dark:bg-gray-700">
                         <tr>
                             <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                                Serial No.
+                            </th>
+                            <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
                                 District
                             </th>
                             <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
@@ -263,6 +277,15 @@ const Permit = () => {
                             </th>
                             <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
                                 Sub Type
+                            </th>
+                            <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                                Permit Issuance Date
+                            </th>
+                            <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                                Validity
+                            </th>
+                            <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                                Permit Valid Upto
                             </th>
                             <th scope="col" className="px-6 py-3 text-right text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
                                 Total Vehicles
@@ -291,6 +314,9 @@ const Permit = () => {
                         {scaledPrimaryFeesData.map((row, idx) => (
                             <tr key={idx} className={`hover:bg-gray-50 dark:hover:bg-gray-700 ${idx % 2 === 0 ? 'bg-white dark:bg-gray-800' : 'bg-gray-50 dark:bg-gray-800/50'}`}>
                                 <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-white">
+                                    {idx + 1}
+                                </td>
+                                <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-white">
                                     {row.district}
                                 </td>
                                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">
@@ -298,6 +324,15 @@ const Permit = () => {
                                 </td>
                                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">
                                     {row.subType}
+                                </td>
+                                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">
+                                    {row.permitIssuanceDate || ''}
+                                </td>
+                                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">
+                                    {row.validity || ''}
+                                </td>
+                                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">
+                                    {row.permitValidUpto || ''}
                                 </td>
                                 <td className="px-6 py-4 whitespace-nowrap text-sm text-right text-gray-900 dark:text-gray-300">
                                     {row.totalVehicles}
@@ -324,24 +359,29 @@ const Permit = () => {
                         ))}
                     </tbody>
                 </table>
-            </ComparisonTable>
+            </ComparisonTableEnhanced>
 
             {/* Application Status Table */}
-            <ComparisonTable
+            <ComparisonTableEnhanced
                 title="Permit Application Status"
-                isComparisonMode={comparisonProps.isComparisonMode}
-                setIsComparisonMode={comparisonProps.setIsComparisonMode}
-                primaryRange={comparisonProps.primaryRange}
-                setPrimaryRange={comparisonProps.setPrimaryRange}
-                compareRange={comparisonProps.compareRange}
-                setCompareRange={comparisonProps.setCompareRange}
-                compareCategory={comparisonProps.compareCategory}
-                setCompareCategory={comparisonProps.setCompareCategory}
+                isComparisonEnabled={isComparisonEnabledFees}
+                setIsComparisonEnabled={setIsComparisonEnabledFees}
+                primaryRange={primaryRangeFees}
+                setPrimaryRange={setPrimaryRangeFees}
+                compareRange={compareRangeFees}
+                setCompareRange={setCompareRangeFees}
+                compareCategory={compareCategoryFees}
+                setCompareCategory={setCompareCategoryFees}
+                primaryDistrict={primaryDistrictFees}
+                setPrimaryDistrict={setPrimaryDistrictFees}
+                compareDistrict={compareDistrictFees}
+                setCompareDistrict={setCompareDistrictFees}
                 categories={categories}
                 comparisonChildren={
                     <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
                         <thead className="bg-gray-100 dark:bg-gray-800 text-xs font-bold uppercase text-gray-700 dark:text-gray-300">
                             <tr>
+                                <th className="px-6 py-4 text-left border-b border-gray-200 dark:border-gray-700">Serial No.</th>
                                 <th className="px-6 py-4 text-left border-b border-gray-200 dark:border-gray-700">District</th>
                                 <th className="px-6 py-4 text-right border-b border-gray-200 dark:border-gray-700">Selected Period</th>
                                 <th className="px-6 py-4 text-right border-b border-gray-200 dark:border-gray-700">Comparison Period</th>
@@ -353,8 +393,8 @@ const Permit = () => {
                             {scaledPrimaryData.map((rowPrimary, idx) => {
                                 const rowComparison = scaledComparisonData?.find(d => d.district === rowPrimary.district);
                                 
-                                const valPrimary = getDistrictCategoryValue(rowPrimary, compareCategory);
-                                const valComparison = getDistrictCategoryValue(rowComparison, compareCategory);
+                                const valPrimary = getDistrictCategoryValue(rowPrimary, compareCategoryFees);
+                                const valComparison = getDistrictCategoryValue(rowComparison, compareCategoryFees);
                                 
                                 const variance = valComparison - valPrimary;
                                 const variancePct = valPrimary === 0 ? 0 : (variance / valPrimary) * 100;
@@ -364,6 +404,9 @@ const Permit = () => {
                                 
                                 return (
                                     <tr key={rowPrimary.district} className={idx % 2 === 0 ? 'bg-white dark:bg-gray-800' : 'bg-gray-50 dark:bg-gray-900/40'}>
+                                        <td className="px-6 py-4 text-sm font-medium text-gray-900 dark:text-white">
+                                            {idx + 1}
+                                        </td>
                                         <td className="px-6 py-4 text-sm font-medium text-gray-900 dark:text-white">
                                             {rowPrimary.district}
                                         </td>
@@ -394,6 +437,9 @@ const Permit = () => {
                     <thead className="bg-gray-50 dark:bg-gray-700">
                         <tr>
                             <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                                Serial No.
+                            </th>
+                            <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
                                 District
                             </th>
                             <th scope="col" className="px-6 py-3 text-right text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
@@ -420,6 +466,9 @@ const Permit = () => {
                         {scaledPrimaryData.map((row, idx) => (
                             <tr key={row.district} className={`hover:bg-gray-50 dark:hover:bg-gray-700 ${idx % 2 === 0 ? 'bg-white dark:bg-gray-800' : 'bg-gray-50 dark:bg-gray-800/50'}`}>
                                 <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-white">
+                                    {idx + 1}
+                                </td>
+                                <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-white">
                                     {row.district}
                                 </td>
                                 <td className="px-6 py-4 whitespace-nowrap text-sm text-right text-gray-900 dark:text-gray-300 font-medium">
@@ -444,7 +493,7 @@ const Permit = () => {
                         ))}
                     </tbody>
                 </table>
-            </ComparisonTable>
+            </ComparisonTableEnhanced>
         </div>
     );
 };

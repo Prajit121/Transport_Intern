@@ -2,8 +2,10 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import dummyData from '../data/dummyData';
 import DateFilter from './DateFilter';
-import ComparisonTable from './ComparisonTable';
-import { useComparison } from '../hooks/useComparison';
+import ComparisonTableEnhanced from './ComparisonTableEnhanced';
+import { getMonthsInRange } from '../utils/dateUtils';
+import { formatCurrency, formatCurrencyForComparison } from '../utils/currencyUtils';
+import { useComparisonEnhanced } from '../hooks/useComparisonEnhanced';
 
 const AETS = () => {
     const [isDarkMode, setIsDarkMode] = useState(false);
@@ -22,10 +24,7 @@ const AETS = () => {
         };
     }, []);
 
-    // Get unique districts for filter
-    const districts = ['All', ...dummyData.aetsData.map(d => d.district)];
-
-    const comparisonProps = useComparison({
+    const comparisonProps = useComparisonEnhanced({
         initialCategory: 'feesDeposited',
         getYearDataOptions: {
             '2024': dummyData.aetsData || dummyData.aetsData2026,
@@ -35,11 +34,22 @@ const AETS = () => {
     });
 
     const {
+        isComparisonEnabled,
+        setIsComparisonEnabled,
+        primaryRange,
+        setPrimaryRange,
+        compareRange,
+        setCompareRange,
         primaryScale,
         compareScale,
         primaryData,
         comparisonDataRaw,
-        compareCategory
+        compareCategory,
+        setCompareCategory,
+        primaryDistrict,
+        setPrimaryDistrict,
+        compareDistrict,
+        setCompareDistrict
     } = comparisonProps;
 
     const scaleRow = (row, scaleFactor) => {
@@ -79,7 +89,7 @@ const AETS = () => {
                 <p className="text-gray-600 dark:text-gray-400">Automated Emission Testing Station details and fee collections</p>
             </div>
 
-            <DateFilter onFilterChange={() => { }} />
+            <DateFilter onFilterChange={({ district }) => { if (district) setSelectedDistrict(district); }} />
 
             {/* Summary Cards */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -102,40 +112,25 @@ const AETS = () => {
                 </div>
             </div>
 
-            {/* Filter */}
-            <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-4">
-                <div className="flex items-center gap-4">
-                    <label className="text-sm font-medium text-gray-700 dark:text-gray-300">
-                        Filter by District:
-                    </label>
-                    <select
-                        value={selectedDistrict}
-                        onChange={(e) => setSelectedDistrict(e.target.value)}
-                        className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500"
-                    >
-                        {districts.map(district => (
-                            <option key={district} value={district}>{district}</option>
-                        ))}
-                    </select>
-                </div>
-            </div>
-
             {/* AETS Details Table */}
-            <ComparisonTable
+            <ComparisonTableEnhanced
                 title="AETS Details District-wise"
-                isComparisonMode={comparisonProps.isComparisonMode}
-                setIsComparisonMode={comparisonProps.setIsComparisonMode}
-                primaryRange={comparisonProps.primaryRange}
-                setPrimaryRange={comparisonProps.setPrimaryRange}
-                compareRange={comparisonProps.compareRange}
-                setCompareRange={comparisonProps.setCompareRange}
-                compareCategory={comparisonProps.compareCategory}
-                setCompareCategory={comparisonProps.setCompareCategory}
+                isComparisonEnabled={isComparisonEnabled}
+                setIsComparisonEnabled={setIsComparisonEnabled}
+                primaryRange={primaryRange}
+                setPrimaryRange={setPrimaryRange}
+                compareRange={compareRange}
+                setCompareRange={setCompareRange}
+                primaryDistrict={primaryDistrict}
+                setPrimaryDistrict={setPrimaryDistrict}
+                compareDistrict={compareDistrict}
+                setCompareDistrict={setCompareDistrict}
                 categories={categories}
                 comparisonChildren={
                     <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
                         <thead className="bg-gray-100 dark:bg-gray-800 text-xs font-bold uppercase text-gray-700 dark:text-gray-300">
                             <tr>
+                                <th className="px-6 py-4 text-left border-b border-gray-200 dark:border-gray-700">Serial No.</th>
                                 <th className="px-6 py-4 text-left border-b border-gray-200 dark:border-gray-700">District</th>
                                 <th className="px-6 py-4 text-right border-b border-gray-200 dark:border-gray-700">Selected Period</th>
                                 <th className="px-6 py-4 text-right border-b border-gray-200 dark:border-gray-700">Comparison Period</th>
@@ -161,16 +156,19 @@ const AETS = () => {
                                 return (
                                     <tr key={rowPrimary.district} className={idx % 2 === 0 ? 'bg-white dark:bg-gray-800' : 'bg-gray-50 dark:bg-gray-900/40'}>
                                         <td className="px-6 py-4 text-sm font-medium text-gray-900 dark:text-white">
+                                            {idx + 1}
+                                        </td>
+                                        <td className="px-6 py-4 text-sm font-medium text-gray-900 dark:text-white">
                                             {rowPrimary.district}
                                         </td>
                                         <td className="px-6 py-4 text-right text-sm text-gray-600 dark:text-gray-400">
-                                            {isCurrency ? formatCurrency(valPrimary) : valPrimary.toLocaleString()}
+                                            {formatCurrency(valPrimary)}
                                         </td>
                                         <td className="px-6 py-4 text-right text-sm text-gray-900 dark:text-white font-semibold">
-                                            {isCurrency ? formatCurrency(valComparison) : valComparison.toLocaleString()}
+                                            {formatCurrency(valComparison)}
                                         </td>
                                         <td className={`px-6 py-4 text-right text-sm font-bold ${isPositive ? 'text-green-600 dark:text-green-400' : isNegative ? 'text-red-600 dark:text-red-400' : 'text-gray-600 dark:text-gray-400'}`}>
-                                            {isPositive ? '+' : ''}{isCurrency ? formatCurrency(variance) : variance.toLocaleString()}
+                                            {isPositive ? '+' : ''}{formatCurrency(variance)}
                                         </td>
                                         <td className={`px-6 py-4 text-right text-sm font-bold ${isPositive ? 'text-green-600 dark:text-green-400' : isNegative ? 'text-red-600 dark:text-red-400' : 'text-gray-600 dark:text-gray-400'}`}>
                                             <div className="flex items-center justify-end gap-1">
@@ -189,6 +187,9 @@ const AETS = () => {
                 <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
                     <thead className="bg-gray-50 dark:bg-gray-700">
                         <tr>
+                            <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                                Serial No.
+                            </th>
                             <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
                                 Name of District
                             </th>
@@ -211,6 +212,9 @@ const AETS = () => {
                             const calibrationPercent = ((row.calibratedCentres / row.totalCentres) * 100).toFixed(1);
                             return (
                                 <tr key={row.district} className={`hover:bg-gray-50 dark:hover:bg-gray-700 ${idx % 2 === 0 ? 'bg-white dark:bg-gray-800' : 'bg-gray-50 dark:bg-gray-800/50'}`}>
+                                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-white">
+                                        {idx + 1}
+                                    </td>
                                     <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-white">
                                         {row.district}
                                     </td>
@@ -238,7 +242,7 @@ const AETS = () => {
                         })}
                     </tbody>
                 </table>
-            </ComparisonTable>
+            </ComparisonTableEnhanced>
         </div>
     );
 };

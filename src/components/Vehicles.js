@@ -16,8 +16,9 @@ import { Bar, Line, Pie } from 'react-chartjs-2';
 import dummyData from '../data/dummyData';
 import DateFilter from './DateFilter';
 import { getMonthsInRange } from '../utils/dateUtils';
-import ComparisonTable from './ComparisonTable';
-import { useComparison } from '../hooks/useComparison';
+import { formatCurrency, formatCurrencyForComparison } from '../utils/currencyUtils';
+import ComparisonTableEnhanced from './ComparisonTableEnhanced';
+import { useComparisonEnhanced } from '../hooks/useComparisonEnhanced';
 
 ChartJS.register(
     CategoryScale,
@@ -54,7 +55,7 @@ const Vehicles = () => {
         { id: 'approved', label: 'Approved' }
     ];
 
-    const comparisonProps = useComparison({
+    const comparisonProps = useComparisonEnhanced({
         initialCategory: 'total',
         getYearDataOptions: {
             '2024': dummyData.districtWiseVehicles2024,
@@ -63,7 +64,7 @@ const Vehicles = () => {
         }
     });
 
-    const comparisonPropsApps = useComparison({
+    const comparisonPropsApps = useComparisonEnhanced({
         initialCategory: 'totalReceived',
         getYearDataOptions: {
             '2024': dummyData.registrationApplicationsData || dummyData.registrationApplicationsData2026,
@@ -73,12 +74,42 @@ const Vehicles = () => {
     });
 
     const {
+        isComparisonEnabled,
+        setIsComparisonEnabled,
+        primaryRange,
+        setPrimaryRange,
+        compareRange,
+        setCompareRange,
         primaryScale,
         compareScale,
         primaryData,
         comparisonDataRaw,
-        compareCategory
+        compareCategory,
+        setCompareCategory,
+        primaryDistrict,
+        setPrimaryDistrict,
+        compareDistrict,
+        setCompareDistrict
     } = comparisonProps;
+
+    const {
+        isComparisonEnabled: isComparisonEnabledApps,
+        setIsComparisonEnabled: setIsComparisonEnabledApps,
+        primaryRange: primaryRangeApps,
+        setPrimaryRange: setPrimaryRangeApps,
+        compareRange: compareRangeApps,
+        setCompareRange: setCompareRangeApps,
+        compareCategory: compareCategoryApps,
+        setCompareCategory: setCompareCategoryApps,
+        primaryDistrict: primaryDistrictApps,
+        setPrimaryDistrict: setPrimaryDistrictApps,
+        compareDistrict: compareDistrictApps,
+        setCompareDistrict: setCompareDistrictApps,
+        primaryScale: primaryScaleApps,
+        compareScale: compareScaleApps,
+        primaryData: primaryDataApps,
+        comparisonDataRaw: comparisonDataRawApps
+    } = comparisonPropsApps;
 
     const streams = [
         { id: 'total', name: 'Total Registrations' },
@@ -88,9 +119,10 @@ const Vehicles = () => {
         { id: 'threeWheeler', name: '3 Wheeler' },
     ];
 
-    const handleFilterChange = ({ start, end }) => {
+    const handleFilterChange = ({ start, end, district }) => {
         const monthsInRange = getMonthsInRange(start, end);
         setSelectedMonths(monthsInRange);
+        if (district) setSelectedDistrict(district);
     };
 
     useEffect(() => {
@@ -112,8 +144,16 @@ const Vehicles = () => {
         };
     };
 
-    const scaledPrimaryData = primaryData.map(row => scaleRow(row, primaryScale));
-    const scaledComparisonData = comparisonDataRaw.map(row => scaleRow(row, compareScale));
+    const scaledPrimaryDataRaw = primaryData.map(row => scaleRow(row, primaryScale));
+    const scaledComparisonDataRaw = comparisonDataRaw.map(row => scaleRow(row, compareScale));
+
+    const scaledPrimaryData = selectedDistrict === 'All'
+        ? scaledPrimaryDataRaw
+        : scaledPrimaryDataRaw.filter((r) => r.district === selectedDistrict);
+
+    const scaledComparisonData = selectedDistrict === 'All'
+        ? scaledComparisonDataRaw
+        : scaledComparisonDataRaw.filter((r) => r.district === selectedDistrict);
 
     const getDistrictCategoryValue = (districtData, category) => {
         if (!districtData) return 0;
@@ -185,7 +225,7 @@ const Vehicles = () => {
         datasets: [
             {
                 label: `2025`,
-                data: filteredData2025.map(d => getStreamValue(d)),
+                data: primaryData.map(d => getStreamValue(d)),
                 borderColor: 'rgba(59, 130, 246, 1)',
                 backgroundColor: 'rgba(59, 130, 246, 0.1)',
                 tension: 0.4,
@@ -193,7 +233,7 @@ const Vehicles = () => {
             },
             {
                 label: `2026`,
-                data: filteredData2026.map(d => getStreamValue(d)),
+                data: primaryData.map(d => getStreamValue(d)),
                 borderColor: 'rgba(239, 68, 68, 1)',
                 backgroundColor: 'rgba(239, 68, 68, 0.1)',
                 tension: 0.4,
@@ -245,10 +285,10 @@ const Vehicles = () => {
                 callbacks: {
                     label: function (context) {
                         const label = context.label || '';
-                        const value = context.parsed;
-                        const total = context.dataset.data.reduce((a, b) => a + b, 0);
+                        const value = formatCurrency(context.parsed.y);
+                        const total = context.raw.reduce((a, b) => a + b, 0);
                         const percentage = ((value / total) * 100).toFixed(1) + '%';
-                        return label + ': ' + value.toLocaleString() + ' (' + percentage + ')';
+                        return label + ': ' + formatCurrency(value) + ' (' + percentage + ')';
                     }
                 }
             },
@@ -273,12 +313,60 @@ const Vehicles = () => {
         };
     };
 
-    const scaledAppPrimaryRaw = comparisonPropsApps.primaryData.map(row => scaleAppRow(row, comparisonPropsApps.primaryScale));
-    const scaledAppComparisonRaw = comparisonPropsApps.comparisonDataRaw?.map(row => scaleAppRow(row, comparisonPropsApps.compareScale));
+    const scaledAppPrimaryRaw = primaryDataApps.map(row => scaleAppRow(row, primaryScaleApps));
+    const scaledAppComparisonRaw = comparisonDataRawApps?.map(row => scaleAppRow(row, compareScaleApps));
 
     const scaledAppPrimaryData = selectedDistrict === 'All'
         ? scaledAppPrimaryRaw
         : scaledAppPrimaryRaw.filter(d => d.district === selectedDistrict);
+
+    const top5DistrictsData = useMemo(() => {
+        const districtTotals = scaledPrimaryDataRaw.filter(r => r.district !== 'All').map(r => ({
+            district: r.district,
+            total: getDistrictCategoryValue(r, compareCategory)
+        }));
+        return districtTotals.sort((a, b) => b.total - a.total).slice(0, 5);
+    }, [scaledPrimaryDataRaw, compareCategory]);
+
+    const top5ChartData = {
+        labels: top5DistrictsData.map(d => d.district),
+        datasets: [
+            {
+                label: 'Registrations',
+                data: top5DistrictsData.map(d => d.total),
+                backgroundColor: 'rgba(59, 130, 246, 0.8)',
+                borderColor: 'rgba(59, 130, 246, 1)',
+                borderWidth: 1,
+                borderRadius: 4,
+            }
+        ]
+    };
+
+    const barOptions = {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+            legend: { display: false },
+            tooltip: {
+                callbacks: {
+                    label: function (context) {
+                        return formatCurrency(context.parsed.y);
+                    }
+                }
+            }
+        },
+        scales: {
+            y: {
+                beginAtZero: true,
+                ticks: { color: isDarkMode ? 'rgba(255, 255, 255, 0.7)' : 'rgba(0, 0, 0, 0.7)' },
+                grid: { color: isDarkMode ? 'rgba(255, 255, 255, 0.05)' : 'rgba(0, 0, 0, 0.05)' }
+            },
+            x: {
+                ticks: { color: isDarkMode ? 'rgba(255, 255, 255, 0.7)' : 'rgba(0, 0, 0, 0.7)' },
+                grid: { display: false }
+            }
+        }
+    };
 
     return (
         <div className="space-y-6">
@@ -316,49 +404,63 @@ const Vehicles = () => {
                 </div>
             </div>
 
-            <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
-                <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4">
-                    <h2 className="text-xl font-semibold text-gray-900 dark:text-white uppercase tracking-tight">Total Registration Trend (2025 vs 2026)</h2>
+            <div className="grid grid-cols-1 xl:grid-cols-2 gap-6">
+                <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-6 flex flex-col">
+                    <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4">
+                        <h2 className="text-xl font-semibold text-gray-900 dark:text-white uppercase tracking-tight">Total Registration Trend (2025 vs 2026)</h2>
+                        
+                        <div className="flex flex-wrap gap-2">
+                            {streams.map(stream => (
+                                <button
+                                    key={stream.id}
+                                    onClick={() => setSelectedStream(stream.id)}
+                                    className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
+                                        selectedStream === stream.id
+                                            ? 'bg-blue-600 text-white shadow-lg'
+                                            : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-400 hover:bg-gray-200'
+                                    }`}
+                                >
+                                    {stream.name}
+                                </button>
+                            ))}
+                        </div>
+                    </div>
                     
-                    <div className="flex flex-wrap gap-2">
-                        {streams.map(stream => (
-                            <button
-                                key={stream.id}
-                                onClick={() => setSelectedStream(stream.id)}
-                                className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
-                                    selectedStream === stream.id
-                                        ? 'bg-blue-600 text-white shadow-lg'
-                                        : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-400 hover:bg-gray-200'
-                                }`}
-                            >
-                                {stream.name}
-                            </button>
-                        ))}
+                    <div className="h-96">
+                        <Line data={registrationTrendData} options={commonOptions} />
                     </div>
                 </div>
-                
-                <div className="h-96">
-                    <Line data={registrationTrendData} options={commonOptions} />
+
+                <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-6 flex flex-col">
+                    <h2 className="text-xl font-semibold text-gray-900 dark:text-white uppercase tracking-tight mb-6">Registration in Top Five Districts</h2>
+                    <div className="h-96">
+                        <Bar data={top5ChartData} options={barOptions} />
+                    </div>
                 </div>
             </div>
 
             {/* District-wise Registration Table */}
             {/* District-wise Registration Table */}
-            <ComparisonTable
+            <ComparisonTableEnhanced
                 title="DISTRICT-WISE VEHICLE REGISTRATION"
-                isComparisonMode={comparisonProps.isComparisonMode}
-                setIsComparisonMode={comparisonProps.setIsComparisonMode}
-                primaryRange={comparisonProps.primaryRange}
-                setPrimaryRange={comparisonProps.setPrimaryRange}
-                compareRange={comparisonProps.compareRange}
-                setCompareRange={comparisonProps.setCompareRange}
-                compareCategory={comparisonProps.compareCategory}
-                setCompareCategory={comparisonProps.setCompareCategory}
+                isComparisonEnabled={isComparisonEnabled}
+                setIsComparisonEnabled={setIsComparisonEnabled}
+                primaryRange={primaryRange}
+                setPrimaryRange={setPrimaryRange}
+                compareRange={compareRange}
+                setCompareRange={setCompareRange}
+                compareCategory={compareCategory}
+                setCompareCategory={setCompareCategory}
+                primaryDistrict={primaryDistrict}
+                setPrimaryDistrict={setPrimaryDistrict}
+                compareDistrict={compareDistrict}
+                setCompareDistrict={setCompareDistrict}
                 categories={categories}
                 comparisonChildren={
                     <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
                         <thead className="bg-gray-100 dark:bg-gray-800 text-xs font-bold uppercase text-gray-700 dark:text-gray-300">
                             <tr>
+                                <th className="px-6 py-4 text-left border-b border-gray-200 dark:border-gray-700">Serial No.</th>
                                 <th className="px-6 py-4 text-left border-b border-gray-200 dark:border-gray-700">District</th>
                                 <th className="px-6 py-4 text-right border-b border-gray-200 dark:border-gray-700">Selected Period</th>
                                 <th className="px-6 py-4 text-right border-b border-gray-200 dark:border-gray-700">Comparison Period</th>
@@ -381,6 +483,9 @@ const Vehicles = () => {
                                 
                                 return (
                                     <tr key={rowPrimary.district} className={idx % 2 === 0 ? 'bg-white dark:bg-gray-800' : 'bg-gray-50 dark:bg-gray-900/40'}>
+                                        <td className="px-6 py-4 text-sm font-medium text-gray-900 dark:text-white">
+                                            {idx + 1}
+                                        </td>
                                         <td className="px-6 py-4 text-sm font-medium text-gray-900 dark:text-white">
                                             {rowPrimary.district}
                                         </td>
@@ -410,45 +515,48 @@ const Vehicles = () => {
                 <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
                     <thead className="bg-gray-100 dark:bg-gray-800 text-xs font-bold uppercase text-gray-700 dark:text-gray-300">
                         <tr>
+                            <th className="px-6 py-4 text-left border-b border-gray-200 dark:border-gray-700">Serial No.</th>
                             <th className="px-6 py-4 text-left border-b border-gray-200 dark:border-gray-700">District</th>
                             <th className="px-6 py-4 text-right border-b border-gray-200 dark:border-gray-700">Total registrations</th>
                             <th className="px-6 py-4 text-right border-b border-gray-200 dark:border-gray-700">Non Transport</th>
                             <th className="px-6 py-4 text-right border-b border-gray-200 dark:border-gray-700">Transport</th>
-                            <th className="px-6 py-4 text-right border-b border-gray-200 dark:border-gray-700">2 Wheeler</th>
-                            <th className="px-6 py-4 text-right border-b border-gray-200 dark:border-gray-700">3 Wheeler</th>
                         </tr>
                     </thead>
                     <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
                         {scaledPrimaryData.map((row, idx) => (
                             <tr key={row.district} className={idx % 2 === 0 ? 'bg-white dark:bg-gray-800' : 'bg-gray-50 dark:bg-gray-900/40'}>
+                                <td className="px-6 py-4 text-sm font-medium text-gray-900 dark:text-white">{idx + 1}</td>
                                 <td className="px-6 py-4 text-sm font-medium text-gray-900 dark:text-white">{row.district}</td>
                                 <td className="px-6 py-4 text-sm text-right text-blue-600 dark:text-blue-400 font-bold">{row.total.toLocaleString()}</td>
                                 <td className="px-6 py-4 text-sm text-right text-gray-600 dark:text-gray-400">{row.nonTransport.toLocaleString()}</td>
                                 <td className="px-6 py-4 text-sm text-right text-gray-600 dark:text-gray-400">{row.transport.toLocaleString()}</td>
-                                <td className="px-6 py-4 text-sm text-right text-gray-600 dark:text-gray-400">{row.twoWheeler.toLocaleString()}</td>
-                                <td className="px-6 py-4 text-sm text-right text-gray-600 dark:text-gray-400">{row.threeWheeler.toLocaleString()}</td>
                             </tr>
                         ))}
                     </tbody>
                 </table>
-            </ComparisonTable>
+            </ComparisonTableEnhanced>
 
             {/* Registration Application Status Table (from Image) */}
-            <ComparisonTable
+            <ComparisonTableEnhanced
                 title="Registration Application Status"
-                isComparisonMode={comparisonPropsApps.isComparisonMode}
-                setIsComparisonMode={comparisonPropsApps.setIsComparisonMode}
-                primaryRange={comparisonPropsApps.primaryRange}
-                setPrimaryRange={comparisonPropsApps.setPrimaryRange}
-                compareRange={comparisonPropsApps.compareRange}
-                setCompareRange={comparisonPropsApps.setCompareRange}
-                compareCategory={comparisonPropsApps.compareCategory}
-                setCompareCategory={comparisonPropsApps.setCompareCategory}
+                isComparisonEnabled={isComparisonEnabledApps}
+                setIsComparisonEnabled={setIsComparisonEnabledApps}
+                primaryRange={primaryRangeApps}
+                setPrimaryRange={setPrimaryRangeApps}
+                compareRange={compareRangeApps}
+                setCompareRange={setCompareRangeApps}
+                primaryDistrict={primaryDistrictApps}
+                setPrimaryDistrict={setPrimaryDistrictApps}
+                compareDistrict={compareDistrictApps}
+                setCompareDistrict={setCompareDistrictApps}
+                compareCategory={compareCategoryApps}
+                setCompareCategory={setCompareCategoryApps}
                 categories={appCategories}
                 comparisonChildren={
                     <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
                         <thead className="bg-gray-100 dark:bg-gray-800 text-xs font-bold uppercase text-gray-700 dark:text-gray-300">
                             <tr>
+                                <th className="px-6 py-4 text-left border-b border-gray-200 dark:border-gray-700">Serial No.</th>
                                 <th className="px-6 py-4 text-left border-b border-gray-200 dark:border-gray-700">District</th>
                                 <th className="px-6 py-4 text-right border-b border-gray-200 dark:border-gray-700">Selected Period</th>
                                 <th className="px-6 py-4 text-right border-b border-gray-200 dark:border-gray-700">Comparison Period</th>
@@ -460,8 +568,8 @@ const Vehicles = () => {
                             {scaledAppPrimaryData.map((rowPrimary, idx) => {
                                 const rowComparison = scaledAppComparisonRaw?.find(d => d.district === rowPrimary.district);
                                 
-                                const valPrimary = rowPrimary[comparisonPropsApps.compareCategory] || 0;
-                                const valComparison = rowComparison ? rowComparison[comparisonPropsApps.compareCategory] || 0 : 0;
+                                const valPrimary = rowPrimary[compareCategoryApps] || 0;
+                                const valComparison = rowComparison ? rowComparison[compareCategoryApps] || 0 : 0;
                                 
                                 const variance = valComparison - valPrimary;
                                 const variancePct = valPrimary === 0 ? 0 : (variance / valPrimary) * 100;
@@ -471,6 +579,9 @@ const Vehicles = () => {
                                 
                                 return (
                                     <tr key={rowPrimary.district} className={idx % 2 === 0 ? 'bg-white dark:bg-gray-800' : 'bg-gray-50 dark:bg-gray-900/40'}>
+                                        <td className="px-6 py-4 text-sm font-medium text-gray-900 dark:text-white">
+                                            {idx + 1}
+                                        </td>
                                         <td className="px-6 py-4 text-sm font-medium text-gray-900 dark:text-white">
                                             {rowPrimary.district}
                                         </td>
@@ -500,6 +611,7 @@ const Vehicles = () => {
                 <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
                     <thead className="bg-gray-100 dark:bg-gray-800 text-[10px] font-bold uppercase text-gray-700 dark:text-gray-300">
                         <tr>
+                            <th className="px-4 py-3 text-left">Serial No.</th>
                             <th className="px-4 py-3 text-left">Name of District</th>
                             <th className="px-4 py-3 text-center">Total applications received for new registration</th>
                             <th className="px-4 py-3 text-center">Total registration made from dealer-point</th>
@@ -507,11 +619,16 @@ const Vehicles = () => {
                             <th className="px-4 py-3 text-center">Total applications under scrutiny stage</th>
                             <th className="px-4 py-3 text-center">Total applications under approval stage</th>
                             <th className="px-4 py-3 text-center">Total applications approved</th>
+                            <th className="px-4 py-3 text-center">Date of application for new registration</th>
+                            <th className="px-4 py-3 text-center">Date of scrutiny</th>
+                            <th className="px-4 py-3 text-center">Date of approval</th>
+                            <th className="px-4 py-3 text-center">Time taken (days) between application and approval</th>
                         </tr>
                     </thead>
                     <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
                         {scaledAppPrimaryData.map((row, idx) => (
                             <tr key={row.district} className={idx % 2 === 0 ? 'bg-white dark:bg-gray-800' : 'bg-gray-50 dark:bg-gray-900/40'}>
+                                <td className="px-4 py-3 text-sm font-medium text-gray-900 dark:text-white">{idx + 1}</td>
                                 <td className="px-4 py-3 text-sm font-medium text-gray-900 dark:text-white">{row.district}</td>
                                 <td className="px-4 py-3 text-sm text-right text-gray-600 dark:text-gray-400">{row.totalReceived.toLocaleString()}</td>
                                 <td className="px-4 py-3 text-sm text-right text-blue-600 dark:text-blue-400 font-medium">{row.dealerPoint.toLocaleString()}</td>
@@ -519,11 +636,15 @@ const Vehicles = () => {
                                 <td className="px-4 py-3 text-sm text-right text-yellow-600 dark:text-yellow-400 font-medium">{row.scrutiny.toLocaleString()}</td>
                                 <td className="px-4 py-3 text-sm text-right text-orange-600 dark:text-orange-400 font-medium">{row.approvalStage.toLocaleString()}</td>
                                 <td className="px-4 py-3 text-sm text-right text-green-600 dark:text-green-400 font-bold">{row.approved.toLocaleString()}</td>
+                                <td className="px-4 py-3 text-sm text-center text-gray-600 dark:text-gray-400">{row.applicationDate || ''}</td>
+                                <td className="px-4 py-3 text-sm text-center text-gray-600 dark:text-gray-400">{row.scrutinyDate || ''}</td>
+                                <td className="px-4 py-3 text-sm text-center text-gray-600 dark:text-gray-400">{row.approvalDate || ''}</td>
+                                <td className="px-4 py-3 text-sm text-center text-gray-900 dark:text-white font-semibold">{(row.timeTakenDays ?? '').toString()}</td>
                             </tr>
                         ))}
                     </tbody>
                 </table>
-            </ComparisonTable>
+            </ComparisonTableEnhanced>
         </div>
     );
 };
